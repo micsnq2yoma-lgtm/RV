@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-05（America/Los_Angeles）
 - **结果**：blocked
-- **分支 / PR**：task-002-new-image-full-boot / 待创建，目标上游 handoff-protocol
+- **分支 / PR**：task-002-new-image-full-boot / [草稿 PR #2](https://github.com/micsnq2yoma-lgtm/RV/pull/2)，目标上游 handoff-protocol
 
 ## 一句话结论
 
