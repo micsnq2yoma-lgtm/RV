@@ -1,0 +1,17 @@
+[2026-11-05T05:01:04.917-08:00] Task 002 addendum step 0: created task-002-new-image-full-boot from origin/handoff-protocol 3ead0e6 and merged task-001-tf-card-boot-bringup; merge commit 1998ae5.
+[2026-11-05T05:01:04.938-08:00] Read-only identification only. No partition assignment, formatting, mounting or card write performed.
+[2026-11-05T05:01:04.947-08:00] COMMAND: Get-Disk | Where-Object { BusType SD/USB/MMC or IsBoot false } | select Number,FriendlyName,BusType,Size,PartitionStyle,IsSystem,IsBoot
+[2026-11-05T05:01:07.514-08:00] {"Number":1,"FriendlyName":"INTEL SSDPEKNW512G8","BusType":"NVMe","Size":512110190592,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false}
+[2026-11-05T05:01:07.530-08:00] {"Number":2,"FriendlyName":" ","BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false}
+[2026-11-05T05:01:07.541-08:00] COMMAND: Get-Volume | Where-Object DriveType -eq Removable
+[2026-11-05T05:01:07.747-08:00] REMOVABLE_VOLUME_COUNT=0
+[2026-11-05T05:01:07.758-08:00] COMMAND: Get-Disk -Number 2 | select safety and operational properties
+[2026-11-05T05:01:07.988-08:00] {"Number":2,"FriendlyName":" ","BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false,"IsReadOnly":false,"IsOffline":false,"OperationalStatus":"Online","HealthStatus":"Healthy"}
+[2026-11-05T05:01:07.999-08:00] COMMAND: Get-Partition -DiskNumber 2 | select partition layout without unique identifiers
+[2026-11-05T05:01:08.214-08:00] {"DiskNumber":2,"PartitionNumber":1,"DriveLetter":"\u0000","Offset":31457280,"Size":1073741824,"Type":"Unknown","GptType":"{bc13c2ff-59e6-4262-a352-b275fd6f7172}","MbrType":null,"IsBoot":false,"IsSystem":false,"IsHidden":null,"NoDefaultDriveLetter":null}
+[2026-11-05T05:01:08.231-08:00] {"DiskNumber":2,"PartitionNumber":2,"DriveLetter":"\u0000","Offset":1105199104,"Size":30486298624,"Type":"Unknown","GptType":"{0fc63daf-8483-4772-8e79-3d69d8477de4}","MbrType":null,"IsBoot":false,"IsSystem":false,"IsHidden":null,"NoDefaultDriveLetter":null}
+[2026-11-05T05:01:08.241-08:00] PARTITION_COUNT=2
+[2026-11-05T05:01:08.251-08:00] COMMAND: Get-Partition -DiskNumber 2 | Get-Volume
+[2026-11-05T05:01:08.349-08:00] DISK2_VOLUME_COUNT=0
+[2026-11-05T05:01:08.359-08:00] COMMAND: Win32_DiskDrive Index=2 (no serial numbers or instance IDs)
+[2026-11-05T05:01:08.451-08:00] {"Index":2,"Model":"SDHC Card","InterfaceType":"USB","MediaType":"Removable Media","Size":31914086400,"Partitions":2}

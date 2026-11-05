@@ -86,3 +86,11 @@ capture 不发送字符。exec 用唯一整行标记隔离回显和旧数据，�
 boot.log 仅含登录阶段；dmesg 日志是恢复的内核缓冲区，均非完整 U-Boot 日志。公开 board-info、network、loader 日志是标注范围的原始输出摘录，省略认证交换、真实 MAC、完整目录清单和带 NUL 的 model 输出；完整原始串口与命令记录未编辑，保留在本机忽略目录 .venv。公开日志不含口令。
 
 TF 卡已卸载，串口已关闭。需要维护者提供目标镜像或调整任务，确认预期核数，补齐 U-Boot 全程和网络链路验证；不进入任务 002。
+
+## 任务 002：Windows 读卡器识别（2026-11-05）
+
+已收到任务 002 授权。按补充说明第 0 步，从上游 handoff-protocol（3ead0e6）建立 task-002-new-image-full-boot，并合并任务 001 分支（合并提交 1998ae5）。
+
+只读识别结果见 logs/20261105-002-card-identify.log：Windows 磁盘 2，USB SDHC Card，Get-Disk 大小 31,914,983,424 字节，GPT，IsSystem/IsBoot 均为 False，Online/Healthy。两个分区分别为 1 GiB 和约 28.39 GiB，均显示 Unknown、无盘符；Get-Volume 没有可移动卷，该磁盘也没有可映射的 Windows 卷。
+
+目前不能认定为补充说明 A/B 类 FAT32 启动卡，按 C 分支停止，等待确认卡用途。没有分配盘符、初始化、挂载、格式化、创建备份或写入文件。因无盘符，未能读取卡根目录或验证卡上镜像，也没有把分区类型当作实际文件系统证据。本次板上信息未重新采集，以上任务 001 的板级数据仍是历史结果。
