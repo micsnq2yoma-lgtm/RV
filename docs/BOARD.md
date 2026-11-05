@@ -1,74 +1,88 @@
 # 开发板实测记录（任务 001）
 
-日期：2026-11-05。任务状态：`blocked`。COM3 / 115200 已读到 Linux 登录提示符；免口令登录实测被拒绝，人已确认不知道有效口令，等待向维护者确认登录方式。板上信息尚未采集。
+日期：2026-11-05，主机时区 America/Los_Angeles。状态：`blocked`。串口和只读命令通道已验证；TF 卡镜像不满足前置条件，U-Boot 全程和网络验证未完成。
 
-## 主机与连接
+## 主机与板级信息
 
 | 项目 | 实测结果 |
 |---|---|
-| 主机 | Windows，PowerShell，Python 3.13.13，pyserial 3.5 |
-| 连接方式 | 人确认：电脑 USB 线直连开发板调试 USB 口 |
-| 人提供的板卡信息 | CPU：`UX900 RISC-V`；USB 口标注：`USBC1`；上电后电源指示灯亮。尚未取得板级型号 |
-| 串口设备 | `COM3`，Windows 名称 `USB Serial Port (COM3)`；同次枚举有 `USB Serial Converter A/B` |
-| 串口参数 | 已证实 COM3 / 115200 / 8N1、无软/硬件流控可读到登录提示符；人也确认此配置 |
-| 电机安全条件 | 人已确认伺服驱动器动力电断开或电机未连接 |
-| TF 卡 | 人已确认插好；文件大小、分区和设备名尚未读取 |
+| 主机 | Windows、PowerShell、Python 3.13.13、pyserial 3.5 |
+| 接线 | 人报告 UX900 CPU、USBC1 USB 口；板子主电断开时 COM3 仍存在 |
+| 串口 | COM3，115200 / 8N1，无流控；板上 ttyNUC0，当前终端 /dev/console |
+| 登录 | 本次接入时已有 shell，没有再次发送或验证凭据；认证信息不公开 |
+| 内核 | 6.6.90-rt54+，SMP PREEMPT_RT，riscv64；编译时间 2026-05-11 |
+| CPU / MMU | mvendorid=0x536、marchid=0x900、mimpid=0x40000；sv39 |
+| ISA | rv64imafdc_zicbom_zicntr_zicsr_zifencei_zihpm_sscofpmf_sstc_svpbmt |
+| 在线 CPU | possible/present=0-7，online=0-1，offline=2-7 |
+| 内存 | dmesg 识别物理 2 GiB；MemTotal=2,047,968 kB |
+| compatible / model | 均为 nuclei,p0soc；原始 model 末尾 NUL 保留在私有记录 |
+| 内核参数 | earlycon=sbi console=ttyNUC0 |
+| 根文件系统 | 内存 rootfs，dmesg 确认解包 initramfs |
+| TF 卡 | /dev/mmcblk0p1，vfat，曾只读挂载 /media，现已卸载 |
+| 板上时间 | 1970-01-01，未校时；日志采用带时区的主机时间 |
 
-原始主机检查见 `logs/20261105-001-host-prep.log`。最初四种枚举方式均未发现端口；人提供 COM3 后重新检查，系统和 pyserial 都识别到 COM3。不得用最初的空枚举结果断言设备始终不存在。
+证据：`logs/20261105-001-board-info.log` 与 `logs/20261105-001-dmesg.log`。
 
-人随后确认开发板已经断电，再次枚举仍有 COM3，说明主机能够在板子主电断开时打开该串口。后续在该连接读到可读的 Linux 登录提示符。CPU 型号来自人的说明，实际运行的 ISA、内存和设备树仍待板上读取。
+## TF 卡不符合任务前置条件
 
-## 本次采集结果
+| 文件 | 任务要求（字节） | 实测（字节） | 结果 |
+|---|---:|---:|---|
+| boot.scr | 719 | 719 | 大小相同 |
+| uImage.lz4 | 4,223,577 | 4,245,866 | 不符 |
+| uInitrd.lz4 | 14,856,105 | 14,224,341 | 不符 |
+| kernel.dtb | 8,621 | 9,238 | 不符 |
 
-| 端口、波特率（均为 8N1） | 范围 | 结果 |
-|---|---|---|
-| COM3 / 115200 | 先启动 180 秒只读采集，再请人上电；人回复已上电 | 超时，0 字节 |
-| COM3 / 115200，第二轮 | 人确认断电后重新开始 180 秒采集，再请人上电；人回复已上电 | 超时（124），0 字节；主机日志 67–68 行 |
-| COM3 / 57600 | 15 秒被动侦听，未要求重新上电 | 超时，0 字节 |
-| COM3 / 921600 | 15 秒被动侦听，未要求重新上电 | 超时，0 字节 |
-| COM3 / 1500000 | 15 秒被动侦听，未要求重新上电 | 超时，0 字节 |
-| COM3 / 57600，上电重试 | 先开始采集，再请人上电 | 收到乱码，日志文件 192 字节；因 Windows cp1252 无法显示收到字符而退出（1），该脚本问题已修复 |
-| COM3 / 115200，编码修复后 | 人明确确认端口与波特率；先开始 180 秒采集，再请人断电重上电，人回复已重启 | 在约 48 秒内读到欢迎语和 `nucleisys login:`，返回 0；日志文件 257 字节，主机日志 121–122 行 |
+四个根目录文件与卡内 rpmsg/ 对应文件的 SHA-256 逐一相同（board-info 203–212 行），所以根目录实际为 rpmsg 文件副本。未修卡、更换或写入镜像。任务要求的 2026-11-05 新版尚未验证；文件一致性不能证明 U-Boot 本次实际从哪里加载。
 
-115200 的接收文件 `logs/20261105-001-boot.log` 已追加保存可读的登录提示符，但没有 U-Boot 或内核启动内容，不能用它证明 `boot.scr` 被执行或 TF 卡启动文件正确。`logs/20261105-001-boot-57600.log` 原样保存乱码；三个 `serial-probe-*.log` 仍为空。历史超时记录不代表当前串口仍无输出。尚未登录到 shell，没有执行板上命令，因此没有创建 `board-info.log`。
-
-目前读到 `Welcome to Nuclei System Technology`、`nucleisys login:`，以及一次 `Login timed out after 60 seconds`。登录程序要求密码；按人提出的方式提交一次空口令，返回 `Login incorrect`，没有继续尝试。人随后确认不知道有效口令，需要向维护者确认登录方式。登录交互仅保存在忽略目录 `.venv`，不公开认证信息。COM3 已关闭；取得有效凭据后，由人手动登录再释放串口。尚未修改卡、U-Boot 环境或网络配置，没有加载模块或运行控制程序。
-
-## 板上信息
-
-| 项目 | 结果 |
+| 文件 | 每对文件共享的 SHA-256 |
 |---|---|
-| 自动启动、登录方式 | 已到 Linux 登录界面；本地串口认证需要有效凭据，免口令方式被拒绝；TF 卡自动启动路径未确认 |
-| U-Boot `bootcmd`、是否运行 `boot.scr` | 未确认 |
-| 内核版本、启动耗时 | 未确认 |
-| CPU/ISA、内存 | 未确认 |
-| 设备树 `compatible`、`model` | 未确认 |
-| `f8b160000.xec` 和驱动绑定 | 未确认 |
-| TF 卡设备名和启动文件大小 | 未确认 |
-| 网卡、局域网 IP、SSH/SCP | 未确认 |
-| 板上可用工具、模块 `vermagic` | 未确认；仓库尚无 `.ko` 文件，不能用主机副本代查 |
-| `ecat/` 或 `ecat_newchip/` | 未确认；没有设备树和板上设备信息 |
+| boot.scr | `13bb8fa510a4d8517f2c830b809d976ae40de0700e62013602e6bee61d690ca0` |
+| uImage.lz4 | `ac207eca3af4edf66db39be5efd369f52629bcab5c9c90441c5b118ca99a9fe9` |
+| uInitrd.lz4 | `d64412c9d979d4455f457f0fc88777cbba049672589a5dd701747a3f14724ba8` |
+| kernel.dtb | `41e37ed12024407aca57e758ce3def47f373d019d0253b7483c27fce44ab8525` |
 
-## 串口脚本
+## 网络与模块
 
-依赖只包括 Python 标准库和 pyserial。Windows 本次使用仓库内隔离环境 `.venv`；它不提交到 Git。Linux 可使用已安装 pyserial 的 `python3`。
+| 网卡 | 平台设备 | 当前驱动 | 链路与地址 |
+|---|---|---|---|
+| eth0 | f9c210000.xec | nuclei-xec | NO-CARRIER，carrier=0，无业务 IP |
+| eth1 | f9cdc0000.xec | nuclei-xec | NO-CARRIER，carrier=0，无业务 IP |
 
-连接参数放在模式名前：
+另有 lo、sit0，没有业务路由。未启动 DHCP、改网络或进行 ping/SSH/SCP 验证。
 
-```powershell
-.\.venv\Scripts\python.exe scripts/serial_console.py --port COM3 --baud 115200 --log logs/20261105-001-boot.log --timeout 180 capture --until 'login:|# $|=> $'
+静态判断：ecat_newchip/ 更适合作为后续候选，其脚本指向 eth1、f9cdc0000.xec 和 ko_newchip/；旧 ecat 脚本写死的 f8b160000.xec 不存在。证据见 loader-excerpts 日志。芯片硬件修订号及驱动运行尚未验证，未执行加载脚本。
+
+无 modinfo，改用板上 strings 读取 ecat/ko、ecat_newchip/ko、ecat_newchip/ko_newchip 共九个 .ko，均含：
+
+```text
+vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
 ```
 
-只有确认已经登录到 POSIX shell 后才能用 `exec`，例如：
+内核版本字符串一致，不代表符号 ABI 或加载成功。lsmod 为空，本次未加载任何模块。
+
+存在 ssh、scp、sshd、udhcpc、ping、insmod、strings、base64、sha256sum、BusyBox 1.36.1；未找到 modinfo、dtc、tcpdump、dropbear、sftp-server、fw_printenv。存在二进制不等于服务已监听或连接成功。
+
+## 警告与尚未确认项
+
+CPU2–CPU7 均 failed to come online，最后仅上线两个 CPU（dmesg 74–80 行）。预期核数和原因未确认，未修改设备树、固件或 CPU 设置。已取到的内核缓冲区中未见 Kernel panic、Unable to mount 或 MMC error。
+
+内核时间约 8.741 秒运行 /init，完整上电到 shell 耗时未测。U-Boot bootcmd、boot.scr 是否实际执行和三个 fatload 字节数均未确认。boot.scr 静态内容不能代替启动取证。
+
+## 串口工具和日志范围
+
+scripts/serial_console.py 只依赖标准库和 pyserial，连接参数置于模式名前：
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/serial_console.py --port COM3 --log logs/20261105-001-board-info.log exec 'uname -a'
+./.venv/Scripts/python.exe scripts/serial_console.py --port COM3 --baud 115200 --log logs/20261105-001-boot.log --timeout 180 capture --until 'login:|# $|=> $'
+./.venv/Scripts/python.exe scripts/serial_console.py --port COM3 --baud 115200 --log .venv/serial-private.log exec 'uname -a'
 ```
 
-`capture` 不发送任何字节。`exec` 用随机唯一的整行开始标记和返回码标记隔开命令回显、旧数据及真实输出，再等待 shell 提示符。默认识别以 `#` 或 `$` 结尾的提示符，可用 `exec --prompt` 指定正则。命令在子 shell 中执行，`cd`、环境变量不会跨调用保留。
+capture 不发送字符。exec 用唯一整行标记隔离回显和旧数据，取得返回码后继续等待 shell 提示符；可通过 exec --prompt 改正则。命令在子 shell 中执行，cd 和环境变量不跨调用保留。超时不会停止板上命令；打开串口可能产生驱动控制线脉冲。
 
-接收到的串口文本逐行添加主机本地时间戳，追加到日志；未以换行结束的提示符也会在关闭时落盘。UTF-8 分包会合并解码，无效字节以 `\xNN` 保留。日志包括终端回显。脚本不发送 break、不清空串口输入缓冲；打开前将 DTR/RTS 置低，但 USB 驱动仍可能在打开设备时产生控制线脉冲。
+日志追加主机时间戳，UTF-8 分包合并解码，无效字节反斜杠转义；CLI 输出为 UTF-8，不转换 CRLF。正常返回远端退出码，本地超时 124，串口/日志错误 125，中断 130。
 
-正常执行返回板上命令退出码；本地超时返回 124，串口或日志错误返回 125，主机中断返回 130。超时或中断不会向板子发送停止信号，也不能证明远端命令已经停止。尚无真机 `exec` 验证，模拟测试通过不能替代板上结果。
+9 项主机测试通过（host-prep 104–120 行）。本次 35 条真机命令均取得返回码及提示符，无标记超时；31 条退出 0，4 条退出 1，来自缺少可选路径、工具或属性，不代表命令通道故障。
 
-最新 9 项主机测试通过（主机日志 104–120 行），包括 Windows 旧编码下收到 Unicode 字符及 CRLF 的回归测试，以及真实 POSIX shell 的引号、多行命令和非零返回码封装。CLI 的 stdout/stderr 固定为 UTF-8，关闭输出换行转换；日志接收路径未改。此前失败测试和修复结果均原样保留。测试不会向串口写入数据。
+boot.log 仅含登录阶段；dmesg 日志是恢复的内核缓冲区，均非完整 U-Boot 日志。公开 board-info、network、loader 日志是标注范围的原始输出摘录，省略认证交换、真实 MAC、完整目录清单和带 NUL 的 model 输出；完整原始串口与命令记录未编辑，保留在本机忽略目录 .venv。公开日志不含口令。
+
+TF 卡已卸载，串口已关闭。需要维护者提供目标镜像或调整任务，确认预期核数，补齐 U-Boot 全程和网络链路验证；不进入任务 002。
