@@ -1,0 +1,66 @@
+[2026-11-05T00:49:53.006-08:00] Host preparation for task 001; Windows; enumeration only; no serial port opened.
+[2026-11-05T00:49:53.086-08:00] COMMAND: System.IO.Ports.SerialPort.GetPortNames()
+[2026-11-05T00:49:53.128-08:00] PORT_COUNT=0
+[2026-11-05T00:49:53.151-08:00] COMMAND: Get-CimInstance Win32_SerialPort | Select-Object DeviceID,Name,Status
+[2026-11-05T00:49:53.403-08:00] CIM_PORT_COUNT=0
+[2026-11-05T00:49:53.432-08:00] COMMAND: Get-PnpDevice -PresentOnly -Class Ports
+[2026-11-05T00:49:58.812-08:00] PNP_PORT_COUNT=0
+[2026-11-05T00:49:58.836-08:00] COMMAND: pyserial list_ports.comports()
+[2026-11-05T00:49:59.559-08:00] pyserial=3.5
+[2026-11-05T00:49:59.587-08:00] PYSERIAL_PORT_COUNT=0
+[2026-11-05T00:49:59.614-08:00] COMMAND: python -m unittest discover -s scripts -p test_serial_console.py -v
+[2026-11-05T00:50:00.569-08:00] test_capture_empty_is_timeout (test_serial_console.SerialConsoleTests.test_capture_empty_is_timeout) ... ok
+[2026-11-05T00:50:00.598-08:00] test_capture_split_utf8_and_prompt_without_transmitting (test_serial_console.SerialConsoleTests.test_capture_split_utf8_and_prompt_without_transmitting) ... ok
+[2026-11-05T00:50:00.627-08:00] test_exec_echo_alone_is_not_success (test_serial_console.SerialConsoleTests.test_exec_echo_alone_is_not_success) ... ok
+[2026-11-05T00:50:00.663-08:00] test_exec_ignores_echo_old_markers_and_returns_nonzero (test_serial_console.SerialConsoleTests.test_exec_ignores_echo_old_markers_and_returns_nonzero) ... ok
+[2026-11-05T00:50:00.696-08:00] test_exec_marker_without_prompt_times_out (test_serial_console.SerialConsoleTests.test_exec_marker_without_prompt_times_out) ... ok
+[2026-11-05T00:50:00.723-08:00] test_exec_without_output_newline (test_serial_console.SerialConsoleTests.test_exec_without_output_newline) ... ok
+[2026-11-05T00:50:00.758-08:00] test_log_appends_and_preserves_partial_lines_and_invalid_bytes (test_serial_console.SerialConsoleTests.test_log_appends_and_preserves_partial_lines_and_invalid_bytes) ... ok
+[2026-11-05T00:50:00.801-08:00] 
+[2026-11-05T00:50:00.831-08:00] ----------------------------------------------------------------------
+[2026-11-05T00:50:00.863-08:00] Ran 7 tests in 0.116s
+[2026-11-05T00:50:00.892-08:00] 
+[2026-11-05T00:50:00.924-08:00] OK
+[2026-11-05T00:50:00.953-08:00] TEST_EXIT_CODE=0
+[2026-11-05T00:51:36.124-08:00] USER supplied port COM3; rechecking current devices.
+[2026-11-05T00:51:36.142-08:00] COMMAND: System.IO.Ports.SerialPort.GetPortNames()
+[2026-11-05T00:51:36.180-08:00] COM3
+[2026-11-05T00:51:36.192-08:00] PORT_COUNT=1
+[2026-11-05T00:51:36.203-08:00] COMMAND: pyserial list_ports.comports()
+[2026-11-05T00:51:36.408-08:00] COM3 USB Serial Port (COM3)
+[2026-11-05T00:51:36.420-08:00] PYSERIAL_PORT_COUNT=1
+[2026-11-05T00:51:36.433-08:00] COMMAND: present Ports and FTDI/debug interface descriptions (unique IDs omitted)
+[2026-11-05T00:51:38.210-08:00] {"Status":"OK","Class":"Ports","FriendlyName":"USB Serial Port (COM3)"}
+[2026-11-05T00:51:38.225-08:00] {"Status":"OK","Class":"USB","FriendlyName":"USB Composite Device"}
+[2026-11-05T00:51:38.251-08:00] {"Status":"OK","Class":"USB","FriendlyName":"USB Serial Converter A"}
+[2026-11-05T00:51:38.266-08:00] {"Status":"OK","Class":"USB","FriendlyName":"USB Serial Converter B"}
+[2026-11-05T00:55:55.392-08:00] 115200 capture ended: capture timed out before the requested pattern appeared.
+[2026-11-05T00:55:55.434-08:00] BOOT_LOG_BYTES=0
+[2026-11-05T00:55:55.445-08:00] No serial bytes received; no board commands sent. This is not evidence of a boot success or a kernel failure.
+[2026-11-05T00:55:55.455-08:00] COMMAND: python -m unittest discover -s scripts -p test_serial_console.py -v (Git POSIX sh available for shell-framing integration test)
+[2026-11-05T00:55:56.047-08:00] test_capture_empty_is_timeout (test_serial_console.SerialConsoleTests.test_capture_empty_is_timeout) ... ok
+[2026-11-05T00:55:56.058-08:00] test_capture_split_utf8_and_prompt_without_transmitting (test_serial_console.SerialConsoleTests.test_capture_split_utf8_and_prompt_without_transmitting) ... ok
+[2026-11-05T00:55:56.069-08:00] test_exec_echo_alone_is_not_success (test_serial_console.SerialConsoleTests.test_exec_echo_alone_is_not_success) ... ok
+[2026-11-05T00:55:56.080-08:00] test_exec_ignores_echo_old_markers_and_returns_nonzero (test_serial_console.SerialConsoleTests.test_exec_ignores_echo_old_markers_and_returns_nonzero) ... ok
+[2026-11-05T00:55:56.093-08:00] test_exec_marker_without_prompt_times_out (test_serial_console.SerialConsoleTests.test_exec_marker_without_prompt_times_out) ... ok
+[2026-11-05T00:55:56.106-08:00] test_exec_without_output_newline (test_serial_console.SerialConsoleTests.test_exec_without_output_newline) ... ok
+[2026-11-05T00:55:56.117-08:00] test_log_appends_and_preserves_partial_lines_and_invalid_bytes (test_serial_console.SerialConsoleTests.test_log_appends_and_preserves_partial_lines_and_invalid_bytes) ... ok
+[2026-11-05T00:55:56.128-08:00] test_wire_runs_in_real_posix_shell (test_serial_console.SerialConsoleTests.test_wire_runs_in_real_posix_shell) ... ok
+[2026-11-05T00:55:56.139-08:00] 
+[2026-11-05T00:55:56.150-08:00] ----------------------------------------------------------------------
+[2026-11-05T00:55:56.160-08:00] Ran 8 tests in 0.345s
+[2026-11-05T00:55:56.171-08:00] 
+[2026-11-05T00:55:56.182-08:00] OK
+[2026-11-05T00:55:56.194-08:00] TEST_EXIT_CODE=0
+[2026-11-05T00:56:26.071-08:00] PASSIVE PROBE: COM3 57600 8N1, 15 seconds, no transmission; no fresh power-on requested for this probe.
+[2026-11-05T00:56:26.287-08:00] serial ready: COM3 57600 8N1; mode=capture
+[2026-11-05T00:56:41.449-08:00] capture timed out before the requested pattern appeared
+[2026-11-05T00:56:41.488-08:00] PROBE_RESULT baud=57600 exit=124 log_bytes=0
+[2026-11-05T00:56:41.505-08:00] PASSIVE PROBE: COM3 921600 8N1, 15 seconds, no transmission; no fresh power-on requested for this probe.
+[2026-11-05T00:56:41.694-08:00] serial ready: COM3 921600 8N1; mode=capture
+[2026-11-05T00:56:56.860-08:00] capture timed out before the requested pattern appeared
+[2026-11-05T00:56:56.876-08:00] PROBE_RESULT baud=921600 exit=124 log_bytes=0
+[2026-11-05T00:56:56.888-08:00] PASSIVE PROBE: COM3 1500000 8N1, 15 seconds, no transmission; no fresh power-on requested for this probe.
+[2026-11-05T00:56:57.082-08:00] serial ready: COM3 1500000 8N1; mode=capture
+[2026-11-05T00:57:12.226-08:00] capture timed out before the requested pattern appeared
+[2026-11-05T00:57:12.238-08:00] PROBE_RESULT baud=1500000 exit=124 log_bytes=0
