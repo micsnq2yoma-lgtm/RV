@@ -27,7 +27,7 @@
 | 10 版本判断 | ecat_newchip 为静态候选，硬件修订号和运行未验证 | loader-excerpts 2–9 行；board-info 102–107 行 |
 | 11 网络 | 两个网口无链路和业务 IP，不能测试 ping/SSH；未改配置或运行 DHCP | network；board-info 108–120 行 |
 | 12 卸载卡 | 完成，TF_CARD_UNMOUNTED | board-info 230–232 行 |
-| 13–15 整理 | 已本地更新 BOARD、AGENTS、报告和状态表；现有草稿 PR #1 的本轮诊断同步等待确认，任务保持 blocked | docs/BOARD.md、handoff/STATUS.md |
+| 13–15 整理 | 已更新 BOARD、AGENTS、报告和状态表；本轮新增诊断公开同步已获用户明确同意，提交至现有草稿 PR #1，任务保持 blocked | docs/BOARD.md、handoff/STATUS.md |
 
 ## 需要回答的问题
 
