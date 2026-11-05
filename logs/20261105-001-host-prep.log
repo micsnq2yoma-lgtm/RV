@@ -64,3 +64,60 @@
 [2026-11-05T00:56:57.082-08:00] serial ready: COM3 1500000 8N1; mode=capture
 [2026-11-05T00:57:12.226-08:00] capture timed out before the requested pattern appeared
 [2026-11-05T00:57:12.238-08:00] PROBE_RESULT baud=1500000 exit=124 log_bytes=0
+[2026-11-05T01:18:24.121-08:00] RETRY: user reports UX900 CPU, USB label USBC1, power indicator was lit, board now powered off. COM3 is present while board power is off. Starting 115200 8N1 receive-only capture for 180 seconds before requesting power-on.
+[2026-11-05T01:21:24.602-08:00] RETRY_RESULT baud=115200 exit=124 boot_log_bytes=0
+[2026-11-05T01:22:27.266-08:00] FRESH_CAPTURE: user confirmed board powered off; COM3 present. Starting 57600 8N1 receive-only capture for 180 seconds before requesting power-on.
+[2026-11-05T01:23:42.543-08:00] FRESH_CAPTURE_RESULT baud=57600 exit=1 boot_log_bytes=192
+[2026-11-05T01:25:14.913-08:00] 57600 received garbled data; capture aborted with UnicodeEncodeError: cp1252 stdout could not encode U+0106. Raw received-text log preserved (192 bytes); no serial transmission.
+[2026-11-05T01:25:14.928-08:00] FIX: configure stdout and stderr as UTF-8 with backslashreplace before CLI output.
+[2026-11-05T01:25:14.941-08:00] COMMAND: python -m unittest discover -s scripts -p test_serial_console.py -v (includes legacy Windows stdout regression and real POSIX sh integration)
+[2026-11-05T01:25:15.525-08:00] test_capture_empty_is_timeout (test_serial_console.SerialConsoleTests.test_capture_empty_is_timeout) ... ok
+[2026-11-05T01:25:15.536-08:00] test_capture_split_utf8_and_prompt_without_transmitting (test_serial_console.SerialConsoleTests.test_capture_split_utf8_and_prompt_without_transmitting) ... ok
+[2026-11-05T01:25:15.547-08:00] test_capture_with_legacy_windows_stdout_encoding (test_serial_console.SerialConsoleTests.test_capture_with_legacy_windows_stdout_encoding) ... FAIL
+[2026-11-05T01:25:15.557-08:00] test_exec_echo_alone_is_not_success (test_serial_console.SerialConsoleTests.test_exec_echo_alone_is_not_success) ... ok
+[2026-11-05T01:25:15.568-08:00] test_exec_ignores_echo_old_markers_and_returns_nonzero (test_serial_console.SerialConsoleTests.test_exec_ignores_echo_old_markers_and_returns_nonzero) ... ok
+[2026-11-05T01:25:15.580-08:00] test_exec_marker_without_prompt_times_out (test_serial_console.SerialConsoleTests.test_exec_marker_without_prompt_times_out) ... ok
+[2026-11-05T01:25:15.592-08:00] test_exec_without_output_newline (test_serial_console.SerialConsoleTests.test_exec_without_output_newline) ... ok
+[2026-11-05T01:25:15.603-08:00] test_log_appends_and_preserves_partial_lines_and_invalid_bytes (test_serial_console.SerialConsoleTests.test_log_appends_and_preserves_partial_lines_and_invalid_bytes) ... ok
+[2026-11-05T01:25:15.616-08:00] test_wire_runs_in_real_posix_shell (test_serial_console.SerialConsoleTests.test_wire_runs_in_real_posix_shell) ... ok
+[2026-11-05T01:25:15.628-08:00] 
+[2026-11-05T01:25:15.642-08:00] ======================================================================
+[2026-11-05T01:25:15.656-08:00] FAIL: test_capture_with_legacy_windows_stdout_encoding (test_serial_console.SerialConsoleTests.test_capture_with_legacy_windows_stdout_encoding)
+[2026-11-05T01:25:15.668-08:00] ----------------------------------------------------------------------
+[2026-11-05T01:25:15.680-08:00] Traceback (most recent call last):
+[2026-11-05T01:25:15.692-08:00]   File "C:\Users\jielu\Desktop\RV\scripts\test_serial_console.py", line 42, in test_capture_with_legacy_windows_stdout_encoding
+[2026-11-05T01:25:15.705-08:00]     self.assertEqual(raw.getvalue().decode("utf-8"), "\u0106 \u6b63\u5e38\n# ")
+[2026-11-05T01:25:15.716-08:00]     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-11-05T01:25:15.728-08:00] AssertionError: '\u0106 \u6b63\u5e38\r\n# ' != '\u0106 \u6b63\u5e38\n# '
+[2026-11-05T01:25:15.741-08:00] - \u0106 \u6b63\u5e38
+[2026-11-05T01:25:15.753-08:00] 
+[2026-11-05T01:25:15.764-08:00] ?     -
+[2026-11-05T01:25:15.775-08:00] + \u0106 \u6b63\u5e38
+[2026-11-05T01:25:15.786-08:00]   # 
+[2026-11-05T01:25:15.797-08:00] 
+[2026-11-05T01:25:15.809-08:00] 
+[2026-11-05T01:25:15.820-08:00] ----------------------------------------------------------------------
+[2026-11-05T01:25:15.831-08:00] Ran 9 tests in 0.336s
+[2026-11-05T01:25:15.842-08:00] 
+[2026-11-05T01:25:15.852-08:00] FAILED (failures=1)
+[2026-11-05T01:25:15.865-08:00] TEST_EXIT_CODE=1
+[2026-11-05T01:25:44.890-08:00] Regression initially found Windows stdout newline translation. FIX: configure UTF-8 output with newline conversion disabled to preserve received CRLF.
+[2026-11-05T01:25:44.917-08:00] COMMAND: python -m unittest discover -s scripts -p test_serial_console.py -v
+[2026-11-05T01:25:45.426-08:00] test_capture_empty_is_timeout (test_serial_console.SerialConsoleTests.test_capture_empty_is_timeout) ... ok
+[2026-11-05T01:25:45.445-08:00] test_capture_split_utf8_and_prompt_without_transmitting (test_serial_console.SerialConsoleTests.test_capture_split_utf8_and_prompt_without_transmitting) ... ok
+[2026-11-05T01:25:45.456-08:00] test_capture_with_legacy_windows_stdout_encoding (test_serial_console.SerialConsoleTests.test_capture_with_legacy_windows_stdout_encoding) ... ok
+[2026-11-05T01:25:45.468-08:00] test_exec_echo_alone_is_not_success (test_serial_console.SerialConsoleTests.test_exec_echo_alone_is_not_success) ... ok
+[2026-11-05T01:25:45.479-08:00] test_exec_ignores_echo_old_markers_and_returns_nonzero (test_serial_console.SerialConsoleTests.test_exec_ignores_echo_old_markers_and_returns_nonzero) ... ok
+[2026-11-05T01:25:45.491-08:00] test_exec_marker_without_prompt_times_out (test_serial_console.SerialConsoleTests.test_exec_marker_without_prompt_times_out) ... ok
+[2026-11-05T01:25:45.502-08:00] test_exec_without_output_newline (test_serial_console.SerialConsoleTests.test_exec_without_output_newline) ... ok
+[2026-11-05T01:25:45.514-08:00] test_log_appends_and_preserves_partial_lines_and_invalid_bytes (test_serial_console.SerialConsoleTests.test_log_appends_and_preserves_partial_lines_and_invalid_bytes) ... ok
+[2026-11-05T01:25:45.526-08:00] test_wire_runs_in_real_posix_shell (test_serial_console.SerialConsoleTests.test_wire_runs_in_real_posix_shell) ... ok
+[2026-11-05T01:25:45.541-08:00] 
+[2026-11-05T01:25:45.553-08:00] ----------------------------------------------------------------------
+[2026-11-05T01:25:45.566-08:00] Ran 9 tests in 0.268s
+[2026-11-05T01:25:45.578-08:00] 
+[2026-11-05T01:25:45.589-08:00] OK
+[2026-11-05T01:25:45.602-08:00] TEST_EXIT_CODE=0
+[2026-11-05T01:26:17.270-08:00] USER confirmed baud=115200 and port=COM3; retry after UTF-8 stdout/CRLF fix. Starting receive-only capture for 180 seconds before requesting a board power cycle.
+[2026-11-05T01:27:05.523-08:00] CONFIRMED_BAUD_RETRY_RESULT baud=115200 exit=0 boot_log_bytes=257
+[2026-11-05T01:31:56.580-08:00] LOGIN_RESULT: COM3/115200 produced readable vendor banner and login prompt. The user-proposed passwordless login was rejected with Login incorrect. Authentication exchange kept in ignored local .venv only; awaiting human manual login. No board shell commands executed.

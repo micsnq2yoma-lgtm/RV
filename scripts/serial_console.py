@@ -153,7 +153,15 @@ def regex(value):
         raise argparse.ArgumentTypeError(str(exc)) from exc
 
 
+def configure_output(stream):
+    """Keep received Unicode printable even under legacy Windows pipe encodings."""
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8", errors="backslashreplace", newline="")
+
+
 def main(argv=None):
+    configure_output(sys.stdout)
+    configure_output(sys.stderr)
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--port", required=True, help="COM3 or /dev/ttyUSB0")

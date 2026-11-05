@@ -32,6 +32,16 @@ class FakeSerial:
 
 
 class SerialConsoleTests(unittest.TestCase):
+    def test_capture_with_legacy_windows_stdout_encoding(self):
+        raw = io.BytesIO()
+        stream = io.TextIOWrapper(raw, encoding="cp1252")
+        console.configure_output(stream)
+        port = FakeSerial("Ć 正常\r\n# ".encode("utf-8"))
+        console.capture(port, io.BytesIO(), re.compile(r"# $"), 1, stream.write)
+        stream.flush()
+        self.assertEqual(raw.getvalue().decode("utf-8"), "Ć 正常\r\n# ")
+        stream.detach()
+
     def test_capture_split_utf8_and_prompt_without_transmitting(self):
         port = FakeSerial("Linux 正常\r\nroot@board:~# ".encode())
         output = io.StringIO()
