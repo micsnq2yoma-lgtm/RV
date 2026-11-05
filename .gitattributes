@@ -1,0 +1,9 @@
+*.lz4   binary
+*.dtb   binary
+*.scr   binary
+*.zip   binary
+*.ko    binary
+*.so    binary
+*.so.*  binary
+*.a     binary
+*.sh    text eol=lf
