@@ -2,4 +2,4 @@
 
 | 编号 | 任务 | 对应阶段 | 状态 | 任务单 | 报告 | PR |
 |---|---|---|---|---|---|---|
-| 001 | 插卡上电：启动、登录、摸清板子 | 第 0 阶段 | ready | [tasks/001-tf-card-boot-bringup.md](tasks/001-tf-card-boot-bringup.md) | – | – |
+| 001 | 插卡上电：启动、登录、摸清板子 | 第 0 阶段 | blocked（主机找不到串口） | [tasks/001-tf-card-boot-bringup.md](tasks/001-tf-card-boot-bringup.md)，补充：[001-addendum-1](tasks/001-addendum-1-windows-serial.md) | – | – |
