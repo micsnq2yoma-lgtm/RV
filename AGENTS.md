@@ -1,6 +1,8 @@
 # AGENTS.md：给 Codex 的工作规则
 
-你（Codex）负责在这块 RISC-V 开发板上做开发和调试。动手前先读 `README.md`、`docs/BOOT.md`，再按 `docs/PLAN.md` 一个阶段一个阶段地推进。
+你（Codex）负责在这块 RISC-V 开发板上做开发和调试。动手前先读 `README.md`、`docs/BOOT.md` 和 `handoff/README.md`。
+
+**你只执行 `handoff/tasks/` 里的任务单**：人会告诉你执行哪一个。执行完按 `handoff/templates/report.md` 写报告。任务单之间的规划由 Claude 负责（总体路线见 `docs/PLAN.md`），不要越过当前任务单自行推进到下一阶段。
 
 ## 环境假设（第 0 阶段核实后改写本节）
 
@@ -19,8 +21,8 @@
 
 ## 工作方式
 
-- 每个阶段在独立分支上做（`phase-N-简述`），完成后发 PR。PR 描述里写清楚做了什么、板子上的实际输出、哪些没做成。
-- 板子上的原始输出（串口日志、`dmesg`、`ethercat` 命令输出）保存到 `logs/YYYYMMDD-主题.log` 并提交。结论写进 `docs/`。
+- 每个任务在独立分支上做（`task-NNN-简述`），完成后发 PR。PR 描述里链接报告，并写清楚做了什么、板子上的实际输出、哪些没做成。
+- 板子上的原始输出（串口日志、`dmesg`、`ethercat` 命令输出）保存到 `logs/YYYYMMDD-NNN-主题.log` 并提交。结论写进 `docs/`。
 - 结果如实汇报。命令失败就贴出错误输出，不要猜测或编造板子的输出。
 - 遇到无法从板子或仓库中确定的问题（硬件接线、电机型号、`Trajectory_main` 的预期行为等），停下来问人。
 - 新增的脚本放在 `scripts/`，用 POSIX `sh` 编写，板子上可能没有 bash。

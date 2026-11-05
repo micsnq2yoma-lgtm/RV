@@ -3,7 +3,7 @@
 RISC-V 开发板（Nuclei 平台）的 TF 卡启动镜像、EtherCAT 主站和机械臂轨迹控制程序。
 文件来自 Dropbox `/Workspace/RV`，其中 `TF卡镜像/` 改名为 `tf-card/`，换成纯 ASCII 路径，方便在板子的 shell 里使用。
 
-后续的开发和调试交给 Codex 在开发板上执行。规则见 [`AGENTS.md`](AGENTS.md)，分阶段计划见 [`docs/PLAN.md`](docs/PLAN.md)。
+后续的开发和调试交给 Codex 在开发板上执行，由 Claude 写任务单、审阅结果。规则见 [`AGENTS.md`](AGENTS.md)，分阶段计划见 [`docs/PLAN.md`](docs/PLAN.md)，双方的交互协议和任务进度见 [`handoff/`](handoff/README.md)。
 
 ## 目录结构
 
