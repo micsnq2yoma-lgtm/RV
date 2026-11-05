@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-05
 - **结果**：blocked
-- **分支 / PR**：`task-001-tf-card-boot-bringup` / 待创建；PR 目标为 `handoff-protocol`
+- **分支 / PR**：`task-001-tf-card-boot-bringup` / [草稿 PR #1](https://github.com/micsnq2yoma-lgtm/RV/pull/1)；PR 目标为 `handoff-protocol`
 
 ## 一句话结论
 
