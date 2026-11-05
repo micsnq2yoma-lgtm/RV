@@ -1,6 +1,6 @@
 # 开发板实测记录（任务 001）
 
-日期：2026-11-05。任务状态：`blocked`。COM3 / 115200 已读到 Linux 登录提示符；免口令登录实测被拒绝，等待人手动登录，板上信息尚未采集。
+日期：2026-11-05。任务状态：`blocked`。COM3 / 115200 已读到 Linux 登录提示符；免口令登录实测被拒绝，人已确认不知道有效口令，等待向维护者确认登录方式。板上信息尚未采集。
 
 ## 主机与连接
 
@@ -32,7 +32,7 @@
 
 115200 的接收文件 `logs/20261105-001-boot.log` 已追加保存可读的登录提示符，但没有 U-Boot 或内核启动内容，不能用它证明 `boot.scr` 被执行或 TF 卡启动文件正确。`logs/20261105-001-boot-57600.log` 原样保存乱码；三个 `serial-probe-*.log` 仍为空。历史超时记录不代表当前串口仍无输出。尚未登录到 shell，没有执行板上命令，因此没有创建 `board-info.log`。
 
-目前读到 `Welcome to Nuclei System Technology`、`nucleisys login:`，以及一次 `Login timed out after 60 seconds`。登录程序要求密码；按人提出的方式提交一次空口令，返回 `Login incorrect`，没有继续尝试。登录交互仅保存在忽略目录 `.venv`，不公开认证信息。COM3 已关闭，供人手动登录后释放串口。尚未修改卡、U-Boot 环境或网络配置，没有加载模块或运行控制程序。
+目前读到 `Welcome to Nuclei System Technology`、`nucleisys login:`，以及一次 `Login timed out after 60 seconds`。登录程序要求密码；按人提出的方式提交一次空口令，返回 `Login incorrect`，没有继续尝试。人随后确认不知道有效口令，需要向维护者确认登录方式。登录交互仅保存在忽略目录 `.venv`，不公开认证信息。COM3 已关闭；取得有效凭据后，由人手动登录再释放串口。尚未修改卡、U-Boot 环境或网络配置，没有加载模块或运行控制程序。
 
 ## 板上信息
 
