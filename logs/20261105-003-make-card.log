@@ -1,0 +1,31 @@
+[2026-11-05T05:49:48.437-08:00] Task 003 preflight. Task branch task-002-new-image-full-boot; upstream task 003 merged as b303b67. No destructive card operations yet.
+[2026-11-05T05:49:48.459-08:00] COMMAND: read-only disk and partition safety checks
+[2026-11-05T05:49:51.286-08:00] {"Number":2,"BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false,"OperationalStatus":"Online"}
+[2026-11-05T05:49:51.294-08:00] MODEL=SDHC Card
+[2026-11-05T05:49:51.318-08:00] {"DiskNumber":2,"PartitionNumber":1,"Size":1073741824,"GptType":"{bc13c2ff-59e6-4262-a352-b275fd6f7172}"}
+[2026-11-05T05:49:51.328-08:00] {"DiskNumber":2,"PartitionNumber":2,"Size":30486298624,"GptType":"{0fc63daf-8483-4772-8e79-3d69d8477de4}"}
+[2026-11-05T05:49:51.408-08:00] SOURCE=Dropbox Workspace/RV/TF-card tree; file_count=152 total_bytes=320009161 offline_or_recall=0
+[2026-11-05T05:49:51.416-08:00] COMMAND: scripts/verify_card.ps1 on source tree, before any card formatting
+[2026-11-05T05:49:51.783-08:00] checked=152 missing=0 size_mismatch=0
+[2026-11-05T05:49:51.792-08:00] SOURCE_MANIFEST_EXIT=0
+[2026-11-05T05:49:51.801-08:00] AWAITING_LIVE_CONFIRMATION disk=2; no formatting authorized by this log entry.
+[2026-11-05T06:02:46.474-08:00] LIVE_USER_CONFIRMATION: 确认格式化磁盘2
+[2026-11-05T18:51:24.052-08:00] ADMIN_HELPER_STARTED pid=44156
+[2026-11-05T18:51:30.194-08:00] ADMIN_RECHECK {"Number":2,"BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false}
+[2026-11-05T18:51:30.237-08:00] ADMIN_RECHECK_MODEL=SDHC Card
+[2026-11-05T18:51:30.255-08:00] COMMAND: Clear-Disk -Number 2 -RemoveData -RemoveOEM -Confirm:$false
+[2026-11-05T18:51:33.070-08:00] COMMAND: Initialize-Disk -Number 2 -PartitionStyle MBR
+[2026-11-05T18:51:33.511-08:00] FAILED_PHASE=Initialize-Disk
+[2026-11-05T18:51:33.523-08:00] Initialize-Disk: C:\Users\jielu\Desktop\RV\scripts\make_boot_card.ps1:70
+[2026-11-05T18:51:33.531-08:00] Line |
+[2026-11-05T18:51:33.539-08:00]   70 |      Initialize-Disk -Number $ConfirmedDiskNumber -PartitionStyle MBR  …
+[2026-11-05T18:51:33.547-08:00]      |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2026-11-05T18:51:33.556-08:00]      | The disk has already been initialized. Activity ID: {670b95c6-6cca-0006-6aae-0b67ca6cdd01}
+[2026-11-05T18:51:33.779-08:00] CURRENT_DISK {"Number":2,"Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false}
+[2026-11-05T18:53:03.039-08:00] USER CONFIRMED MANUAL UAC APPROVAL. Administrator helper stopped at Initialize-Disk. No fallback, second clear or other partitioning method attempted.
+[2026-11-05T18:53:03.055-08:00] POST-FAILURE READ-ONLY: Get-Disk -Number 2
+[2026-11-05T18:53:05.658-08:00] {"Number":2,"BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false,"OperationalStatus":"Online"}
+[2026-11-05T18:53:05.667-08:00] POST-FAILURE READ-ONLY: Get-Partition -DiskNumber 2
+[2026-11-05T18:53:05.866-08:00] No MSFT_Partition objects found with property 'DiskNumber' equal to '2'.  Verify the value of the property and retry.
+[2026-11-05T18:53:05.875-08:00] No partition was returned; no volume or drive letter created by this task.
+[2026-11-05T18:53:05.885-08:00] STOP per task 003 failure rule. New-Partition, Format-Volume, copy, eject, and task 002 B-E were not executed.

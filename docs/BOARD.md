@@ -103,3 +103,9 @@ TF 卡已卸载，串口已关闭。需要维护者提供目标镜像或调整�
 | uImage.lz4 | 4,223,577 | `b3f0662be615a73fa1d821b1c3aa1b3c068eaf6668c009982795626fa5437d92` |
 | uInitrd.lz4 | 14,856,105 | `e4cf190f117d84ed7f8fe613ed5334165c267e5410b8f5c3228b613c502358b7` |
 | kernel.dtb | 8,621 | `3b84109ee3c19c9aa546602bb1ee33f925d7cec7dee1cd14868adaeaaaa60edd` |
+
+## 任务 003：新卡制卡失败（2026-11-05）
+
+本轮重新核对并经人当场确认的目标是磁盘 2（USB / SDHC Card，31,914,983,424 字节，非系统或启动盘），不是约 7.5 GiB 的原板卡。人手动批准了 UAC；管理员脚本再次确认目标及原 GPT 两分区布局后执行 Clear-Disk。旧分区已消失，但 Initialize-Disk -PartitionStyle MBR 报 `The disk has already been initialized.`。只读复核显示磁盘 2 仍为 GPT、无分区及盘符。
+
+按任务 003 失败规则停止；未执行 New-Partition、Format-Volume、16 GiB 方案、复制、弹出或上板。源目录清单检查通过（checked=152、missing=0、size_mismatch=0），这不是卡上校验结果。原约 7.5 GiB 卡未操作；未获取新镜像的运行信息。详见 `logs/20261105-003-make-card.log` 与 `handoff/reports/003-make-new-boot-card.md`。
