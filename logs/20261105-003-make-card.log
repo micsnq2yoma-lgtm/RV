@@ -29,3 +29,26 @@
 [2026-11-05T18:53:05.866-08:00] No MSFT_Partition objects found with property 'DiskNumber' equal to '2'.  Verify the value of the property and retry.
 [2026-11-05T18:53:05.875-08:00] No partition was returned; no volume or drive letter created by this task.
 [2026-11-05T18:53:05.885-08:00] STOP per task 003 failure rule. New-Partition, Format-Volume, copy, eject, and task 002 B-E were not executed.
+[2026-11-05T19:01:52.710-08:00] ADDENDUM 1 preflight: disk 2 USB / SDHC Card, 31914983424 bytes, not system or boot, GPT, zero partitions. Source checked=152 missing=0 size_mismatch=0; offline=0. Updated helper syntax checked; no write operation run.
+[2026-11-05T19:10:50.2998688-08:00] ADDENDUM 1 LIVE_USER_CONFIRMATION: 确认继续制卡磁盘 2
+[2026-11-05T19:23:03.3493096-08:00] Prior elevation request cancelled. Empty GPT disk rechecked. Requesting UAC via Windows PowerShell for the confirmed target.
+[2026-11-05T19:23:13.275-08:00] ADMIN_RECHECK {"Number":2,"BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false}
+[2026-11-05T19:23:13.346-08:00] ADMIN_RECHECK_MODEL=SDHC Card partition_count=0
+[2026-11-05T19:23:13.357-08:00] COMMAND: Set-Disk -Number 2 -PartitionStyle MBR
+[2026-11-05T19:23:13.836-08:00] CONVERTED {"Number":2,"PartitionStyle":"MBR","Size":31914983424,"NumberOfPartitions":0}
+[2026-11-05T19:23:13.840-08:00] COMMAND: New-Partition -DiskNumber 2 -UseMaximumSize -MbrType FAT32 -AssignDriveLetter
+[2026-11-05T19:23:15.181-08:00] PARTITION {"DiskNumber":2,"PartitionNumber":1,"DriveLetter":"F","Offset":1048576,"Size":31913410560,"MbrType":12}
+[2026-11-05T19:23:15.183-08:00] COMMAND: Format-Volume -Partition <new partition on confirmed disk> -FileSystem FAT32 -NewFileSystemLabel RVBOOT -Confirm:$false
+[2026-11-05T19:23:18.363-08:00] VOLUME {"DriveLetter":"F","FileSystemLabel":"RVBOOT","FileSystem":"FAT32","Size":31896633344,"HealthStatus":"Healthy"}
+[2026-11-05T19:23:18.378-08:00] FORMAT_COMPLETED fallback_16_gib=False
+[2026-11-05T19:23:43.3256689-08:00] COPY_TARGET disk=2 drive=F:\ MBR/FAT32/RVBOOT; source_files=152 offline=0
+[2026-11-05T19:24:02.8428702-08:00] ROBOCOPY_EXIT=3
+[2026-11-05T19:24:03.6848794-08:00] size	sha256	dropbox_content_hash	path
+[2026-11-05T19:24:03.6943041-08:00] 719	06203ccf2ed48380c99efbd9d449a9d2792805556105c57677cdc8ed09ce30f9	4e6d99cfe01c1c2b4f3f4bdee2d8acf90c00854ad915478ad5b366cf6c7f24da	boot.scr
+[2026-11-05T19:24:03.7034208-08:00] 4223577	b3f0662be615a73fa1d821b1c3aa1b3c068eaf6668c009982795626fa5437d92	8ba0c95464d0507cb92ff57e8f949d10f0803d34b2f99855c0fe0fa145e59fdf	uImage.lz4
+[2026-11-05T19:24:03.7135318-08:00] 14856105	e4cf190f117d84ed7f8fe613ed5334165c267e5410b8f5c3228b613c502358b7	66c8ab497246147fbbed00cdb8956cf56415203061fd5dd5a591af1e009d0d28	uInitrd.lz4
+[2026-11-05T19:24:03.7232200-08:00] 8621	3b84109ee3c19c9aa546602bb1ee33f925d7cec7dee1cd14868adaeaaaa60edd	8abd45134a73698081794bf7b69b12833f6b9710955f6035ac67f5f14b93b502	kernel.dtb
+[2026-11-05T19:24:03.7507573-08:00] BOOT_HASH_READBACK=4/4 size, SHA-256 and Dropbox content_hash match
+[2026-11-05T19:24:04.7639180-08:00] checked=152 missing=0 size_mismatch=0
+[2026-11-05T19:24:04.7740094-08:00] CARD_VERIFIED
+[2026-11-05T19:24:36.7072637-08:00] EJECT_VERIFIED F: disappeared after Explorer Eject.

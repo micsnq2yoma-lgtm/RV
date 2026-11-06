@@ -104,8 +104,25 @@ TF 卡已卸载，串口已关闭。需要维护者提供目标镜像或调整�
 | uInitrd.lz4 | 14,856,105 | `e4cf190f117d84ed7f8fe613ed5334165c267e5410b8f5c3228b613c502358b7` |
 | kernel.dtb | 8,621 | `3b84109ee3c19c9aa546602bb1ee33f925d7cec7dee1cd14868adaeaaaa60edd` |
 
-## 任务 003：新卡制卡失败（2026-11-05）
+## 任务 003：新卡制卡与回读（2026-11-05）
 
 本轮重新核对并经人当场确认的目标是磁盘 2（USB / SDHC Card，31,914,983,424 字节，非系统或启动盘），不是约 7.5 GiB 的原板卡。人手动批准了 UAC；管理员脚本再次确认目标及原 GPT 两分区布局后执行 Clear-Disk。旧分区已消失，但 Initialize-Disk -PartitionStyle MBR 报 `The disk has already been initialized.`。只读复核显示磁盘 2 仍为 GPT、无分区及盘符。
 
 按任务 003 失败规则停止；未执行 New-Partition、Format-Volume、16 GiB 方案、复制、弹出或上板。源目录清单检查通过（checked=152、missing=0、size_mismatch=0），这不是卡上校验结果。原约 7.5 GiB 卡未操作；未获取新镜像的运行信息。详见 `logs/20261105-003-make-card.log` 与 `handoff/reports/003-make-new-boot-card.md`。
+
+补充 1 经人工再次确认磁盘 2 后使用 Set-Disk 转为 MBR。最终为单个 31,913,410,560 字节分区，FAT32 卷 RVBOOT，弹出前盘符 F:。复制后回读四个启动文件的哈希全部匹配，清单 checked=152、missing=0、size_mismatch=0。Windows 已确认安全弹出，用户随后断电换卡。
+
+## 任务 002：新版镜像实测（2026-11-05）
+
+| 项目 | 旧版（任务 001） | 新版（任务 002） |
+|---|---|---|
+| 内核 | 6.6.90-rt54+，#1，2026-05-11 19:34:25 PDT | 6.6.90-rt54+，#6，2026-11-05 09:57:02 CST |
+| CPU | 0–1 在线，CPU2–7 上线失败 | 0–1 在线，CPU2–7 上线失败。设备树 8 个 CPU 均为 okay |
+| XEC | eth0 f9c210000.xec，eth1 f9cdc0000.xec，nuclei-xec | 地址和驱动相同。两个接口 carrier 均为 0 |
+| 存储 | 7.50 GiB SD，mmcblk0 | 29.7 GiB SD，mmcblk0。另枚举 59.6 GiB eMMC，mmcblk1 |
+
+COM3 / 115200 第二轮采集覆盖 OpenSBI v1.3（8 hart，启动 hart 1）、U-Boot 2024.01-00012-gc0a14d778e 和 Linux。U-Boot 的 bootcmd 为 `run distro_bootcmd`，扫描 mmc 0:1 并执行 boot.scr。三个 fatload 读入 4,223,577、14,856,105、8,621 字节。第三轮截停并记录五条只读命令，随后执行 boot。
+
+Linux 从 /dev/mmcblk0p1 只读回读四个 SHA-256，全部与 Windows 回读匹配，随后确认卸载。新版启动日志显示 init 自动运行 udhcpc、启动 sshd，并记录 /lib/modules 目录缺失的 modprobe 提示。完整记录见 002 报告及 boot-full、uboot、board-info 三份日志。
+
+用户选择跳过 D 节可选网络验证。连通性未测。
