@@ -1,0 +1,109 @@
+# U-Boot commands from the third cold start. Unneeded environment values, MACs and serial numbers are masked. Raw data retained locally.
+[2026-11-05T19:30:44.931-08:00] [host] U-Boot prompt verified. Begin read-only command transcript.
+[2026-11-05T19:30:44.931-08:00] [host] U-Boot command: version
+[2026-11-05T19:30:44.947-08:00] version
+[2026-11-05T19:30:44.947-08:00] U-Boot 2024.01-00012-gc0a14d778e (Mar 03 2026 - 22:43:19 -0800)
+[2026-11-05T19:30:44.947-08:00] 
+[2026-11-05T19:30:44.947-08:00] riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816
+[2026-11-05T19:30:44.947-08:00] GNU ld (GNU Binutils) 2.44
+[2026-11-05T19:30:44.947-08:00] => [host] U-Boot command: printenv
+[2026-11-05T19:30:44.963-08:00] printenv
+[2026-11-05T19:30:44.963-08:00] arch=[redacted environment value]
+[2026-11-05T19:30:44.963-08:00] baudrate=[redacted environment value]
+[2026-11-05T19:30:44.963-08:00] board=[redacted environment value]
+[2026-11-05T19:30:44.963-08:00] board_name=[redacted environment value]
+[2026-11-05T19:30:44.963-08:00] boot_a_script=[redacted environment value]
+[2026-11-05T19:30:44.979-08:00] boot_extlinux=[redacted environment value]
+[2026-11-05T19:30:44.979-08:00] boot_prefixes=[redacted environment value]
+[2026-11-05T19:30:44.979-08:00] boot_script_dhcp=[redacted environment value]
+[2026-11-05T19:30:44.979-08:00] boot_scripts=[redacted environment value]
+[2026-11-05T19:30:44.995-08:00] boot_syslinux_conf=[redacted environment value]
+[2026-11-05T19:30:44.995-08:00] boot_targets=mmc0 
+[2026-11-05T19:30:44.995-08:00] bootcmd=run distro_bootcmd
+[2026-11-05T19:30:44.995-08:00] bootcmd_mmc0=[redacted environment value]
+[2026-11-05T19:30:44.995-08:00] bootdelay=5
+[2026-11-05T19:30:44.995-08:00] cpu=[redacted environment value]
+[2026-11-05T19:30:44.995-08:00] distro_bootcmd=for target in ${boot_targets}; do run bootcmd_${target}; done
+[2026-11-05T19:30:45.011-08:00] fdt_addr_r=[redacted environment value]
+[2026-11-05T19:30:45.011-08:00] fdt_high=[redacted environment value]
+[2026-11-05T19:30:45.011-08:00] fdtcontroladdr=[redacted environment value]
+[2026-11-05T19:30:45.011-08:00] initrd_high=[redacted environment value]
+[2026-11-05T19:30:45.011-08:00] kernel_addr_r=[redacted environment value]
+[2026-11-05T19:30:45.011-08:00] loadaddr=[redacted environment value]
+[2026-11-05T19:30:45.027-08:00] mmc_boot=[redacted environment value]
+[2026-11-05T19:30:45.027-08:00] ramdisk_addr_r=[redacted environment value]
+[2026-11-05T19:30:45.027-08:00] scan_dev_for_boot=[redacted environment value]
+[2026-11-05T19:30:45.043-08:00] scan_dev_for_boot_part=[redacted environment value]
+[2026-11-05T19:30:45.075-08:00] scan_dev_for_extlinux=[redacted environment value]
+[2026-11-05T19:30:45.091-08:00] scan_dev_for_scripts=[redacted environment value]
+[2026-11-05T19:30:45.107-08:00] scriptaddr=[redacted environment value]
+[2026-11-05T19:30:45.107-08:00] stderr=[redacted environment value]
+[2026-11-05T19:30:45.107-08:00] stdin=[redacted environment value]
+[2026-11-05T19:30:45.107-08:00] stdout=[redacted environment value]
+[2026-11-05T19:30:45.124-08:00] vendor=[redacted environment value]
+[2026-11-05T19:30:45.124-08:00] 
+[2026-11-05T19:30:45.124-08:00] Environment size: 1918/131068 bytes
+[2026-11-05T19:30:45.124-08:00] => [host] U-Boot command: mmc info
+[2026-11-05T19:30:45.139-08:00] mmc info
+[2026-11-05T19:30:45.139-08:00] clk_div:1f4-bebc200-61a80
+[2026-11-05T19:30:45.155-08:00] clk_div:1f4-bebc200-61a80
+[2026-11-05T19:30:45.155-08:00] clk_div:4-bebc200-2faf080
+[2026-11-05T19:30:45.155-08:00] Device: nuclei_mmc
+[2026-11-05T19:30:45.171-08:00] Manufacturer ID: 3
+[2026-11-05T19:30:45.171-08:00] OEM: 5344
+[2026-11-05T19:30:45.171-08:00] Name: SD32G 
+[2026-11-05T19:30:45.171-08:00] Bus Speed: 50000000
+[2026-11-05T19:30:45.171-08:00] Mode: SD High Speed (50MHz)
+[2026-11-05T19:30:45.171-08:00] Rd Block Len: 512
+[2026-11-05T19:30:45.171-08:00] SD version 3.0
+[2026-11-05T19:30:45.171-08:00] High Capacity: Yes
+[2026-11-05T19:30:45.171-08:00] Capacity: 29.7 GiB
+[2026-11-05T19:30:45.171-08:00] Bus Width: 4-bit
+[2026-11-05T19:30:45.171-08:00] Erase Group Size: 512 Bytes
+[2026-11-05T19:30:45.187-08:00] => [host] U-Boot command: fatls mmc 0
+[2026-11-05T19:30:45.203-08:00] fatls mmc 0
+[2026-11-05T19:30:45.203-08:00]             System Volume Information/
+[2026-11-05T19:30:45.203-08:00]        56   .dropbox.device
+[2026-11-05T19:30:45.203-08:00]       719   boot.scr
+[2026-11-05T19:30:45.203-08:00]  61718228   ecat_newchip.zip
+[2026-11-05T19:30:45.219-08:00]      8621   kernel.dtb
+[2026-11-05T19:30:45.219-08:00]   4223577   uImage.lz4
+[2026-11-05T19:30:45.219-08:00]  14856105   uInitrd.lz4
+[2026-11-05T19:30:45.219-08:00]             ecat/
+[2026-11-05T19:30:45.219-08:00]             ecat_newchip/
+[2026-11-05T19:30:45.219-08:00]             img/
+[2026-11-05T19:30:45.219-08:00]             jhkdl/
+[2026-11-05T19:30:45.219-08:00]             jhkdl0911/
+[2026-11-05T19:30:45.219-08:00]             old/
+[2026-11-05T19:30:45.235-08:00]             rpmsg/
+[2026-11-05T19:30:45.235-08:00]             test/
+[2026-11-05T19:30:45.235-08:00]             test_play/
+[2026-11-05T19:30:45.235-08:00] 
+[2026-11-05T19:30:45.235-08:00] 6 file(s), 10 dir(s)
+[2026-11-05T19:30:45.235-08:00] 
+[2026-11-05T19:30:45.235-08:00] => [host] U-Boot command: bdinfo
+[2026-11-05T19:30:45.251-08:00] bdinfo
+[2026-11-05T19:30:45.251-08:00] boot_params = 0x0000000000000000
+[2026-11-05T19:30:45.251-08:00] DRAM bank   = 0x0000000000000000
+[2026-11-05T19:30:45.251-08:00] -> start    = 0x0000000000000000
+[2026-11-05T19:30:45.251-08:00] -> size     = 0x0000000080000000
+[2026-11-05T19:30:45.251-08:00] flashstart  = 0x0000000000000000
+[2026-11-05T19:30:45.251-08:00] flashsize   = 0x0000000000000000
+[2026-11-05T19:30:45.267-08:00] flashoffset = 0x0000000000000000
+[2026-11-05T19:30:45.267-08:00] baudrate    = 115200 bps
+[2026-11-05T19:30:45.267-08:00] relocaddr   = 0x000000007ff8e000
+[2026-11-05T19:30:45.267-08:00] reloc off   = 0x000000007fd8e000
+[2026-11-05T19:30:45.267-08:00] Build       = 64-bit
+[2026-11-05T19:30:45.267-08:00] fdt_blob    = 0x000000007f76b5a0
+[2026-11-05T19:30:45.283-08:00] new_fdt     = 0x000000007f76b5a0
+[2026-11-05T19:30:45.283-08:00] fdt_size    = 0x0000000000002840
+[2026-11-05T19:30:45.283-08:00] lmb_dump_all:
+[2026-11-05T19:30:45.283-08:00]  memory.cnt = 0x1 / max = 0x10
+[2026-11-05T19:30:45.299-08:00]  memory[0]	[0x0-0x7fffffff], 0x80000000 bytes flags: 0
+[2026-11-05T19:30:45.299-08:00]  reserved.cnt = 0x3 / max = 0x10
+[2026-11-05T19:30:45.299-08:00]  reserved[0]	[0x0-0x7ffff], 0x00080000 bytes flags: 4
+[2026-11-05T19:30:45.299-08:00]  reserved[1]	[0x7e000000-0x7e1fffff], 0x00200000 bytes flags: 4
+[2026-11-05T19:30:45.315-08:00]  reserved[2]	[0x7f769f70-0x7fffffff], 0x00896090 bytes flags: 0
+[2026-11-05T19:30:45.315-08:00] devicetree  = board
+[2026-11-05T19:30:45.315-08:00] => 
+[2026-11-05T19:30:45.316-08:00] [host] U-Boot command: boot
