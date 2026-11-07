@@ -1,0 +1,248 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Thursday, November 5, 2026 7:23:43 PM
+   Source : C:\Users\jielu\Dropbox\Workspace\RV\TF???\
+     Dest = F:\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /DCOPY:D /COPY:DT /NP /R:2 /W:2 
+
+------------------------------------------------------------------------------
+
+	                   5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\
+	*EXTRA Dir        -1	F:\System Volume Information\
+	  *EXTRA File 		      56	.dropbox.device
+	    New File  		     719	boot.scr
+	    New File  		  58.8 m	ecat_newchip.zip
+	    New File  		    8621	kernel.dtb
+	    New File  		   4.0 m	uImage.lz4
+	    New File  		  14.1 m	uInitrd.lz4
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\
+	    New File  		  181384	libecatmain.so_12
+	    New File  		  181384	libecatmain.so_4
+	    New File  		  181384	libecatmain.so_8
+	    New File  		     195	load_ec_modules.sh
+	    New File  		     346	load_ec_module_master.sh
+	  New Dir          7	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\bin\
+	    New File  		      52	ecat_sl.sh
+	    New File  		  179888	ec_dc_user_example_1656
+	    New File  		  179832	ec_dc_user_example_1704
+	    New File  		  179944	ec_dc_user_example_GSD600
+	    New File  		   35240	ec_user_example
+	    New File  		  424512	ethercat
+	    New File  		   43288	ethercat_mbg
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\demo\
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\demo\200\
+	    New File  		  181440	libecatmain.so
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\demo\GSD600\
+	    New File  		  181440	libecatmain.so
+	    New File  		   1.9 m	maxVelocity.txt
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\etc\
+	    New File  		    3956	ethercat.conf
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\etc\init.d\
+	    New File  		    7800	ethercat
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\etc\sysconfig\
+	    New File  		    3926	ethercat
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\include\
+	    New File  		   99090	ecrt.h
+	    New File  		    3780	ectty.h
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\ko\
+	    New File  		   14656	ec_generic.ko
+	    New File  		  743472	ec_master.ko
+	    New File  		   29960	ec_nuclei_xec.ko
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\lib\
+	    New File  		  897782	libethercat.a
+	    New File  		     920	libethercat.la
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\lib\systemd\
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\lib\systemd\system\
+	    New File  		     828	ethercat.service
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\noenable\
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\noenable\200\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\noenable\GSD600\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\noenable-notrajectory\
+	    New File  		  181384	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\noenable-notrajectory\200\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\noenable-notrajectory\GSD600\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\noenable-notrajectory-4\
+	    New File  		  181384	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\robot\
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\robot\6\
+	    New File  		  181920	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\robot\6_4ms\
+	    New File  		  181920	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	    New File  		   3.6 m	Trajectory_main_log
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\robot\6_new\
+	    New File  		  183432	libecatmain.so
+	    New File  		  514895	maxVelocity.txt
+	    New File  		       0	Position-Velocity.txt
+	    New File  		       0	trajectory.txt
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\robot\6_run\
+	    New File  		  183432	libecatmain.so
+	    New File  		   2.1 m	maxVelocity.txt
+	    New File  		  443792	Position-Velocity.txt
+	    New File  		  249835	trajectory.txt
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat\sbin\
+	    New File  		    6678	ethercatctl
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\
+	    New File  		  181384	libecatmain.so_12
+	    New File  		  181384	libecatmain.so_4
+	    New File  		  181384	libecatmain.so_8
+	    New File  		     203	load_ec_modules.sh
+	    New File  		     361	load_ec_module_master.sh
+	  New Dir          7	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\bin\
+	    New File  		      52	ecat_sl.sh
+	    New File  		  179888	ec_dc_user_example_1656
+	    New File  		  179832	ec_dc_user_example_1704
+	    New File  		  179944	ec_dc_user_example_GSD600
+	    New File  		   35240	ec_user_example
+	    New File  		  424512	ethercat
+	    New File  		   43288	ethercat_mbg
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\demo\
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\demo\200\
+	    New File  		  181440	libecatmain.so
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\demo\GSD600\
+	    New File  		  181440	libecatmain.so
+	    New File  		   1.9 m	maxVelocity.txt
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\etc\
+	    New File  		    3956	ethercat.conf
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\etc\init.d\
+	    New File  		    7800	ethercat
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\etc\sysconfig\
+	    New File  		    3926	ethercat
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\include\
+	    New File  		   99090	ecrt.h
+	    New File  		    3780	ectty.h
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\ko\
+	    New File  		   14656	ec_generic.ko
+	    New File  		  743472	ec_master.ko
+	    New File  		   29960	ec_nuclei_xec.ko
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\ko_newchip\
+	    New File  		   14656	ec_generic.ko
+	    New File  		  743472	ec_master.ko
+	    New File  		   29960	ec_nuclei_xec.ko
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\lib\
+	    New File  		  897782	libethercat.a
+	    New File  		     920	libethercat.la
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\lib\systemd\
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\lib\systemd\system\
+	    New File  		     828	ethercat.service
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\noenable\
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\noenable\200\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\noenable\GSD600\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\noenable-notrajectory\
+	    New File  		  181384	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\noenable-notrajectory\200\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\noenable-notrajectory\GSD600\
+	    New File  		  181328	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\noenable-notrajectory-4\
+	    New File  		  181384	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\robot\
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\robot\6\
+	    New File  		  181920	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\robot\6_4ms\
+	    New File  		  181920	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	    New File  		   3.6 m	Trajectory_main_log
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\robot\6_new\
+	    New File  		  183432	libecatmain.so
+	    New File  		  514895	maxVelocity.txt
+	    New File  		       0	Position-Velocity.txt
+	    New File  		       0	trajectory.txt
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\robot\6_run\
+	    New File  		  183432	libecatmain.so
+	    New File  		   2.1 m	maxVelocity.txt
+	    New File  		  443792	Position-Velocity.txt
+	    New File  		  249835	trajectory.txt
+	    New File  		   3.6 m	Trajectory_main
+	  New Dir          1	C:\Users\jielu\Dropbox\Workspace\RV\TF???\ecat_newchip\sbin\
+	    New File  		    6678	ethercatctl
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\img\
+	    New File  		     719	boot.scr
+	    New File  		  15.3 m	boot.zip
+	    New File  		    8212	kernel.dtb
+	    New File  		   4.0 m	uImage.lz4
+	    New File  		  13.3 m	uInitrd.lz4
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\jhkdl\
+	    New File  		  804128	libjhkdl.so.1
+	    New File  		   42840	test_ur10
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\jhkdl0911\
+	    New File  		   1.4 m	libjhkdl.so.1
+	    New File  		   1.4 m	libjhkdl.so.1.0.0
+	    New File  		  140448	test_operators
+	  New Dir          5	C:\Users\jielu\Dropbox\Workspace\RV\TF???\old\
+	    New File  		     719	boot.scr
+	    New File  		  10.5 m	boot.zip
+	    New File  		    8212	kernel.dtb
+	    New File  		   4.0 m	uImage.lz4
+	    New File  		   7.8 m	uInitrd.lz4
+	  New Dir          6	C:\Users\jielu\Dropbox\Workspace\RV\TF???\rpmsg\
+	    New File  		     719	boot.scr
+	    New File  		  15.5 m	boot.zip
+	    New File  		    9238	kernel.dtb
+	    New File  		   13064	test_rpmsg
+	    New File  		   4.0 m	uImage.lz4
+	    New File  		  13.5 m	uInitrd.lz4
+	  New Dir          0	C:\Users\jielu\Dropbox\Workspace\RV\TF???\test\
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\test\0.5\
+	    New File  		  183544	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\test\1\
+	    New File  		  183544	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\test\2\
+	    New File  		  183544	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          2	C:\Users\jielu\Dropbox\Workspace\RV\TF???\test\4\
+	    New File  		  183544	libecatmain.so
+	    New File  		   3.5 m	Trajectory_main
+	  New Dir          3	C:\Users\jielu\Dropbox\Workspace\RV\TF???\test_play\
+	    New File  		  179448	libecatmain.so
+	    New File  		   1.5 m	trajectory_full_log.csv
+	    New File  		   3.7 m	Trajectory_main
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :        65        64         1         0         0         1
+   Files :       152       152         0         0         0         1
+   Bytes :  305.18 m  305.18 m         0         0         0        56
+   Times :   0:00:19   0:00:18                       0:00:00   0:00:01
+
+
+   Speed :           17,364,434 Bytes/sec.
+   Speed :              993.601 MegaBytes/min.
+   Ended : Thursday, November 5, 2026 7:24:02 PM
+

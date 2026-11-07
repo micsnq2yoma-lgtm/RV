@@ -1,0 +1,310 @@
+# Board command transcript after human login. Authentication excluded. Build account/host and MAC addresses masked. Raw retained locally.
+[2026-11-07T00:26:51.783-08:00] 
+[2026-11-07T00:26:51.783-08:00] [host] command: cat /proc/version
+[2026-11-07T00:26:51.811-08:00] printf '\n__RV_BEGIN_e5e1a0d5f2684a09e9035170__\n'; sh -c 'cat /proc/version'; 
+ __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e5e1a0d5f2684a09e9035170
+[2026-11-07T00:26:51.827-08:00] 
+[2026-11-07T00:26:51.827-08:00] __RV_BEGIN_e5e1a0d5f2684a09e9035170__
+[2026-11-07T00:26:51.891-08:00] Linux version 6.6.90-rt54+ ([redacted build host]) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026
+[2026-11-07T00:26:51.907-08:00] 
+[2026-11-07T00:26:51.907-08:00] __RC=0__e5e1a0d5f2684a09e9035170
+[2026-11-07T00:26:51.907-08:00] # 
+[2026-11-07T00:26:51.907-08:00] [host] rc=0
+[2026-11-07T00:26:51.907-08:00] 
+[2026-11-07T00:26:51.907-08:00] [host] command: cat /etc/os-release 2>/dev/null; cat /etc/*-release 2>/dev/null | head -20
+[2026-11-07T00:26:51.955-08:00] printf '\n__RV_BEGIN_22778da018b7ce5c37c01e30__\n'; sh -c 'cat /etc/os-release 
+ 2>/dev/null; cat /etc/*-release 2>/dev/null | head -20'; __rv_rc=$?; printf '\n'
+'; echo __RC=${__rv_rc}__22778da018b7ce5c37c01e30
+[2026-11-07T00:26:51.971-08:00] 
+[2026-11-07T00:26:51.971-08:00] __RV_BEGIN_22778da018b7ce5c37c01e30__
+[2026-11-07T00:26:52.019-08:00] NAME=Buildroot
+[2026-11-07T00:26:52.019-08:00] VERSION=2024.08
+[2026-11-07T00:26:52.019-08:00] ID=buildroot
+[2026-11-07T00:26:52.035-08:00] VERSION_ID=2024.08
+[2026-11-07T00:26:52.035-08:00] PRETTY_NAME="Buildroot 2024.08"
+[2026-11-07T00:26:52.051-08:00] NAME=Buildroot
+[2026-11-07T00:26:52.051-08:00] VERSION=2024.08
+[2026-11-07T00:26:52.051-08:00] ID=buildroot
+[2026-11-07T00:26:52.051-08:00] VERSION_ID=2024.08
+[2026-11-07T00:26:52.051-08:00] PRETTY_NAME="Buildroot 2024.08"
+[2026-11-07T00:26:52.067-08:00] 
+[2026-11-07T00:26:52.067-08:00] __RC=0__22778da018b7ce5c37c01e30
+[2026-11-07T00:26:52.067-08:00] # 
+[2026-11-07T00:26:52.068-08:00] [host] rc=0
+[2026-11-07T00:26:52.068-08:00] 
+[2026-11-07T00:26:52.068-08:00] [host] command: cat /sys/devices/system/cpu/online
+[2026-11-07T00:26:52.099-08:00] printf '\n__RV_BEGIN_84eab74fa95cc3bbc266bb7b__\n'; sh -c 'cat /sys/devices/sys
+stem/cpu/online'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__84eab74fa95cc3bb
+bc266bb7b
+[2026-11-07T00:26:52.115-08:00] 
+[2026-11-07T00:26:52.115-08:00] __RV_BEGIN_84eab74fa95cc3bbc266bb7b__
+[2026-11-07T00:26:52.179-08:00] 0-1
+[2026-11-07T00:26:52.179-08:00] 
+[2026-11-07T00:26:52.179-08:00] __RC=0__84eab74fa95cc3bbc266bb7b
+[2026-11-07T00:26:52.179-08:00] # 
+[2026-11-07T00:26:52.179-08:00] [host] rc=0
+[2026-11-07T00:26:52.179-08:00] 
+[2026-11-07T00:26:52.179-08:00] [host] command: ls -la /lib/modules 2>&1 | head
+[2026-11-07T00:26:52.211-08:00] printf '\n__RV_BEGIN_e67310411fe03a6139793a93__\n'; sh -c 'ls -la /lib/modules 
+ 2>&1 | head'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e67310411fe03a61397
+793a93
+[2026-11-07T00:26:52.227-08:00] 
+[2026-11-07T00:26:52.227-08:00] __RV_BEGIN_e67310411fe03a6139793a93__
+[2026-11-07T00:26:52.291-08:00] ls: /lib/modules: No such file or directory
+[2026-11-07T00:26:52.307-08:00] 
+[2026-11-07T00:26:52.307-08:00] __RC=0__e67310411fe03a6139793a93
+[2026-11-07T00:26:52.307-08:00] # 
+[2026-11-07T00:26:52.308-08:00] [host] rc=0
+[2026-11-07T00:26:52.308-08:00] 
+[2026-11-07T00:26:52.308-08:00] [host] command: ps
+[2026-11-07T00:26:52.339-08:00] printf '\n__RV_BEGIN_9efb7a5e4cd1f1b1fa01d45e__\n'; sh -c ps; __rv_rc=$?; print
+tf '\n'; echo __RC=${__rv_rc}__9efb7a5e4cd1f1b1fa01d45e
+[2026-11-07T00:26:52.355-08:00] 
+[2026-11-07T00:26:52.355-08:00] __RV_BEGIN_9efb7a5e4cd1f1b1fa01d45e__
+[2026-11-07T00:26:52.403-08:00] PID   USER     COMMAND
+[2026-11-07T00:26:52.403-08:00]     1 root     init
+[2026-11-07T00:26:52.419-08:00]     2 root     [kthreadd]
+[2026-11-07T00:26:52.419-08:00]     3 root     [pool_workqueue_]
+[2026-11-07T00:26:52.419-08:00]     4 root     [kworker/R-rcu_g]
+[2026-11-07T00:26:52.419-08:00]     5 root     [kworker/R-rcu_p]
+[2026-11-07T00:26:52.420-08:00]     6 root     [kworker/R-slub_]
+[2026-11-07T00:26:52.420-08:00]     7 root     [kworker/R-netns]
+[2026-11-07T00:26:52.435-08:00]     8 root     [kworker/0:0-rcu]
+[2026-11-07T00:26:52.435-08:00]     9 root     [kworker/0:0H-ev]
+[2026-11-07T00:26:52.435-08:00]    10 root     [kworker/0:1-eve]
+[2026-11-07T00:26:52.435-08:00]    11 root     [kworker/u16:0]
+[2026-11-07T00:26:52.435-08:00]    12 root     [kworker/R-mm_pe]
+[2026-11-07T00:26:52.435-08:00]    13 root     [ksoftirqd/0]
+[2026-11-07T00:26:52.451-08:00]    14 root     [ktimers/0]
+[2026-11-07T00:26:52.452-08:00]    15 root     [pr/legacy]
+[2026-11-07T00:26:52.452-08:00]    16 root     [rcu_preempt]
+[2026-11-07T00:26:52.452-08:00]    17 root     [rcub/0]
+[2026-11-07T00:26:52.452-08:00]    18 root     [rcuc/0]
+[2026-11-07T00:26:52.452-08:00]    19 root     [migration/0]
+[2026-11-07T00:26:52.452-08:00]    20 root     [irq_work/0]
+[2026-11-07T00:26:52.467-08:00]    21 root     [cpuhp/0]
+[2026-11-07T00:26:52.467-08:00]    22 root     [cpuhp/1]
+[2026-11-07T00:26:52.467-08:00]    23 root     [irq_work/1]
+[2026-11-07T00:26:52.467-08:00]    24 root     [migration/1]
+[2026-11-07T00:26:52.467-08:00]    25 root     [rcuc/1]
+[2026-11-07T00:26:52.467-08:00]    26 root     [ktimers/1]
+[2026-11-07T00:26:52.467-08:00]    27 root     [ksoftirqd/1]
+[2026-11-07T00:26:52.483-08:00]    28 root     [kworker/1:0-eve]
+[2026-11-07T00:26:52.483-08:00]    29 root     [kworker/1:0H-ev]
+[2026-11-07T00:26:52.483-08:00]    30 root     [cpuhp/2]
+[2026-11-07T00:26:52.483-08:00]    31 root     [irq_work/2]
+[2026-11-07T00:26:52.483-08:00]    32 root     [migration/2]
+[2026-11-07T00:26:52.483-08:00]    33 root     [rcuc/2]
+[2026-11-07T00:26:52.499-08:00]    34 root     [ktimers/2]
+[2026-11-07T00:26:52.499-08:00]    35 root     [ksoftirqd/2]
+[2026-11-07T00:26:52.499-08:00]    36 root     [kworker/2:0]
+[2026-11-07T00:26:52.499-08:00]    37 root     [kworker/2:0H]
+[2026-11-07T00:26:52.499-08:00]    38 root     [cpuhp/3]
+[2026-11-07T00:26:52.499-08:00]    39 root     [irq_work/3]
+[2026-11-07T00:26:52.499-08:00]    40 root     [migration/3]
+[2026-11-07T00:26:52.515-08:00]    41 root     [rcuc/3]
+[2026-11-07T00:26:52.515-08:00]    42 root     [ktimers/3]
+[2026-11-07T00:26:52.515-08:00]    43 root     [ksoftirqd/3]
+[2026-11-07T00:26:52.515-08:00]    44 root     [kworker/3:0]
+[2026-11-07T00:26:52.515-08:00]    45 root     [kworker/3:0H]
+[2026-11-07T00:26:52.515-08:00]    46 root     [cpuhp/4]
+[2026-11-07T00:26:52.515-08:00]    47 root     [irq_work/4]
+[2026-11-07T00:26:52.531-08:00]    48 root     [migration/4]
+[2026-11-07T00:26:52.531-08:00]    49 root     [rcuc/4]
+[2026-11-07T00:26:52.531-08:00]    50 root     [ktimers/4]
+[2026-11-07T00:26:52.531-08:00]    51 root     [ksoftirqd/4]
+[2026-11-07T00:26:52.531-08:00]    52 root     [kworker/4:0]
+[2026-11-07T00:26:52.531-08:00]    53 root     [kworker/4:0H]
+[2026-11-07T00:26:52.547-08:00]    54 root     [cpuhp/5]
+[2026-11-07T00:26:52.547-08:00]    55 root     [irq_work/5]
+[2026-11-07T00:26:52.547-08:00]    56 root     [migration/5]
+[2026-11-07T00:26:52.547-08:00]    57 root     [rcuc/5]
+[2026-11-07T00:26:52.547-08:00]    58 root     [ktimers/5]
+[2026-11-07T00:26:52.547-08:00]    59 root     [ksoftirqd/5]
+[2026-11-07T00:26:52.547-08:00]    60 root     [kworker/5:0]
+[2026-11-07T00:26:52.563-08:00]    61 root     [kworker/5:0H]
+[2026-11-07T00:26:52.563-08:00]    62 root     [cpuhp/6]
+[2026-11-07T00:26:52.563-08:00]    63 root     [irq_work/6]
+[2026-11-07T00:26:52.563-08:00]    64 root     [migration/6]
+[2026-11-07T00:26:52.563-08:00]    65 root     [rcuc/6]
+[2026-11-07T00:26:52.563-08:00]    66 root     [ktimers/6]
+[2026-11-07T00:26:52.563-08:00]    67 root     [ksoftirqd/6]
+[2026-11-07T00:26:52.579-08:00]    68 root     [kworker/6:0]
+[2026-11-07T00:26:52.579-08:00]    69 root     [kworker/6:0H]
+[2026-11-07T00:26:52.579-08:00]    70 root     [cpuhp/7]
+[2026-11-07T00:26:52.579-08:00]    71 root     [irq_work/7]
+[2026-11-07T00:26:52.579-08:00]    72 root     [migration/7]
+[2026-11-07T00:26:52.579-08:00]    73 root     [rcuc/7]
+[2026-11-07T00:26:52.579-08:00]    74 root     [ktimers/7]
+[2026-11-07T00:26:52.595-08:00]    75 root     [ksoftirqd/7]
+[2026-11-07T00:26:52.595-08:00]    76 root     [kworker/7:0]
+[2026-11-07T00:26:52.595-08:00]    77 root     [kworker/7:0H]
+[2026-11-07T00:26:52.595-08:00]    78 root     [kworker/u17:0-e]
+[2026-11-07T00:26:52.595-08:00]    79 root     [kworker/u18:0-e]
+[2026-11-07T00:26:52.595-08:00]    80 root     [kdevtmpfs]
+[2026-11-07T00:26:52.611-08:00]    81 root     [kworker/R-inet_]
+[2026-11-07T00:26:52.611-08:00]    82 root     [oom_reaper]
+[2026-11-07T00:26:52.611-08:00]    83 root     [kworker/R-write]
+[2026-11-07T00:26:52.611-08:00]    84 root     [kworker/R-kbloc]
+[2026-11-07T00:26:52.611-08:00]    85 root     [kworker/1:1-mm_]
+[2026-11-07T00:26:52.611-08:00]    86 root     [kworker/1:1H-kb]
+[2026-11-07T00:26:52.627-08:00]    87 root     [kworker/u18:1-e]
+[2026-11-07T00:26:52.627-08:00]    88 root     [kswapd0]
+[2026-11-07T00:26:52.627-08:00]    89 root     [khvcd]
+[2026-11-07T00:26:52.627-08:00]    90 root     [irq/12-f9c25000]
+[2026-11-07T00:26:52.627-08:00]    91 root     [irq/13-eth%d]
+[2026-11-07T00:26:52.627-08:00]    92 root     [kworker/u18:2]
+[2026-11-07T00:26:52.643-08:00]    94 root     [irq/14-eth%d]
+[2026-11-07T00:26:52.643-08:00]    96 root     [irq/15-f99f0400]
+[2026-11-07T00:26:52.643-08:00]    97 root     [irq/16-f9cda100]
+[2026-11-07T00:26:52.643-08:00]    98 root     [kworker/1:2]
+[2026-11-07T00:26:52.643-08:00]    99 root     [kworker/R-tls-s]
+[2026-11-07T00:26:52.643-08:00]   100 root     [kworker/R-mld]
+[2026-11-07T00:26:52.659-08:00]   101 root     [kworker/0:1H-mm]
+[2026-11-07T00:26:52.659-08:00]   102 root     [kworker/R-ipv6_]
+[2026-11-07T00:26:52.659-08:00]   103 root     [kworker/R-kstrp]
+[2026-11-07T00:26:52.659-08:00]   104 root     [kworker/R-mmc_c]
+[2026-11-07T00:26:52.659-08:00]   105 root     [kworker/R-mmc_c]
+[2026-11-07T00:26:52.659-08:00]   106 root     [kworker/u17:1-e]
+[2026-11-07T00:26:52.675-08:00]   124 root     /sbin/syslogd -n
+[2026-11-07T00:26:52.675-08:00]   128 root     /sbin/klogd -n
+[2026-11-07T00:26:52.675-08:00]   150 root     /sbin/mdev -df
+[2026-11-07T00:26:52.675-08:00]   173 root     /usr/sbin/haveged -w 1024 -r 0
+[2026-11-07T00:26:52.675-08:00]   174 root     /usr/sbin/haveged -w 1024 -r 0
+[2026-11-07T00:26:52.691-08:00]   178 root     /usr/sbin/crond -f
+[2026-11-07T00:26:52.691-08:00]   182 root     sshd: /usr/sbin/sshd [listener] 0 of 10-100 startups
+[2026-11-07T00:26:52.691-08:00]   183 root     -bash
+[2026-11-07T00:26:52.691-08:00]   184 root     [kworker/0:2-eve]
+[2026-11-07T00:26:52.691-08:00]   186 root     udhcpc -i eth0 -b -R
+[2026-11-07T00:26:52.707-08:00]   188 root     udhcpc -i eth1 -b -R
+[2026-11-07T00:26:52.707-08:00]   197 root     [kworker/u17:2-e]
+[2026-11-07T00:26:52.707-08:00]   207 root     ps
+[2026-11-07T00:26:52.707-08:00] 
+[2026-11-07T00:26:52.707-08:00] __RC=0__9efb7a5e4cd1f1b1fa01d45e
+[2026-11-07T00:26:52.707-08:00] # 
+[2026-11-07T00:26:52.708-08:00] [host] rc=0
+[2026-11-07T00:26:52.708-08:00] 
+[2026-11-07T00:26:52.708-08:00] [host] command: ls /etc/init.d/
+[2026-11-07T00:26:52.739-08:00] printf '\n__RV_BEGIN_84c70e06343ccb31c7d1dc6f__\n'; sh -c 'ls /etc/init.d/'; __
+_rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__84c70e06343ccb31c7d1dc6f
+[2026-11-07T00:26:52.755-08:00] 
+[2026-11-07T00:26:52.755-08:00] __RV_BEGIN_84c70e06343ccb31c7d1dc6f__
+[2026-11-07T00:26:52.803-08:00] [1;32mS01seedrng[m  [1;32mS02klogd[m    [1;32mS03net[m      [1;32mS21haveged[m  [1;32mS50sshd[m     [1;32mrcS[m
+[2026-11-07T00:26:52.819-08:00] [1;32mS01syslogd[m  [1;32mS02sysctl[m   [1;32mS10mdev[m     [1;32mS50crond[m    [1;32mrcK[m
+[2026-11-07T00:26:52.835-08:00] 
+[2026-11-07T00:26:52.835-08:00] __RC=0__84c70e06343ccb31c7d1dc6f
+[2026-11-07T00:26:52.835-08:00] # 
+[2026-11-07T00:26:52.835-08:00] [host] rc=0
+[2026-11-07T00:26:52.836-08:00] 
+[2026-11-07T00:26:52.836-08:00] [host] command: ip link show
+[2026-11-07T00:26:52.883-08:00] printf '\n__RV_BEGIN_d2a892e710e69bfa4052a0a8__\n'; sh -c 'ip link show'; __rv_
+_rc=$?; printf '\n'; echo __RC=${__rv_rc}__d2a892e710e69bfa4052a0a8
+[2026-11-07T00:26:52.883-08:00] 
+[2026-11-07T00:26:52.883-08:00] __RV_BEGIN_d2a892e710e69bfa4052a0a8__
+[2026-11-07T00:26:52.947-08:00] 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
+[2026-11-07T00:26:52.947-08:00]     link/loopback [redacted MAC] brd [redacted MAC]
+[2026-11-07T00:26:52.947-08:00] 2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T00:26:52.963-08:00]     link/ether [redacted MAC] brd [redacted MAC]
+[2026-11-07T00:26:52.963-08:00] 3: eth1: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T00:26:52.963-08:00]     link/ether [redacted MAC] brd [redacted MAC]
+[2026-11-07T00:26:52.979-08:00] 4: sit0@NONE: <NOARP> mtu 1480 qdisc noop qlen 1000
+[2026-11-07T00:26:52.979-08:00]     link/sit 0.0.0.0 brd 0.0.0.0
+[2026-11-07T00:26:52.979-08:00] 
+[2026-11-07T00:26:52.979-08:00] __RC=0__d2a892e710e69bfa4052a0a8
+[2026-11-07T00:26:52.979-08:00] # 
+[2026-11-07T00:26:52.980-08:00] [host] rc=0
+[2026-11-07T00:26:52.980-08:00] 
+[2026-11-07T00:26:52.980-08:00] [host] command: dmesg | grep -iE "error|fail|warn" | head -50
+[2026-11-07T00:26:53.027-08:00] printf '\n__RV_BEGIN_61c9f0189cb06b917b5b3b1f__\n'; sh -c 'dmesg | grep -iE "er
+rror|fail|warn" | head -50'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__61c9f
+f0189cb06b917b5b3b1f
+[2026-11-07T00:26:53.027-08:00] 
+[2026-11-07T00:26:53.027-08:00] __RV_BEGIN_61c9f0189cb06b917b5b3b1f__
+[2026-11-07T00:26:53.107-08:00] [    1.487340] CPU2: failed to come online
+[2026-11-07T00:26:53.123-08:00] [    2.517459] CPU3: failed to come online
+[2026-11-07T00:26:53.123-08:00] [    3.547660] CPU4: failed to come online
+[2026-11-07T00:26:53.123-08:00] [    4.577507] CPU5: failed to come online
+[2026-11-07T00:26:53.123-08:00] [    5.607585] CPU6: failed to come online
+[2026-11-07T00:26:53.139-08:00] [    6.637812] CPU7: failed to come online
+[2026-11-07T00:26:53.139-08:00] 
+[2026-11-07T00:26:53.139-08:00] __RC=0__61c9f0189cb06b917b5b3b1f
+[2026-11-07T00:26:53.139-08:00] # 
+[2026-11-07T00:26:53.139-08:00] [host] rc=0
+[2026-11-07T00:26:53.140-08:00] 
+[2026-11-07T00:26:53.140-08:00] [host] command: ls -l /mount_emmc.sh; sha256sum /mount_emmc.sh /etc/ssh/sshd_config; stat -c '%a %n' /etc /etc/ssh; grep '^PermitRootLogin' /etc/ssh/sshd_config
+[2026-11-07T00:26:53.203-08:00] printf '\n__RV_BEGIN_a408c651f2791ea7e34bcdf1__\n'; sh -c 'ls -l /mount_emmc.sh
+h; sha256sum /mount_emmc.sh /etc/ssh/sshd_config; stat -c '"'"'%a %n'"'"' /etc /e
+etc/ssh; grep '"'"'^PermitRootLogin'"'"' /etc/ssh/sshd_config'; __rv_rc=$?; print
+tf '\n'; echo __RC=${__rv_rc}__a408c651f2791ea7e34bcdf1
+[2026-11-07T00:26:53.219-08:00] 
+[2026-11-07T00:26:53.220-08:00] __RV_BEGIN_a408c651f2791ea7e34bcdf1__
+[2026-11-07T00:26:53.283-08:00] -rwxr-xr-x    1 root     root          4420 Nov  6  2026 [1;32m/mount_emmc.sh[m
+[2026-11-07T00:26:53.315-08:00] d31e23ca801f024d30f1b9210651017f224dc7b5298b328661b53e69379cfcad  /mount_emmc.sh
+[2026-11-07T00:26:53.315-08:00] 6ad3b8d4098d897d1c4d5594dfe8846ead0e999711e61f51095387660b1bc004  /etc/ssh/sshd_config
+[2026-11-07T00:26:53.315-08:00] sh: line 1: stat: command not found
+[2026-11-07T00:26:53.347-08:00] PermitRootLogin yes
+[2026-11-07T00:26:53.347-08:00] 
+[2026-11-07T00:26:53.347-08:00] __RC=0__a408c651f2791ea7e34bcdf1
+[2026-11-07T00:26:53.347-08:00] # 
+[2026-11-07T00:26:53.347-08:00] [host] rc=0
+[2026-11-07T00:26:53.348-08:00] 
+[2026-11-07T00:26:53.348-08:00] [host] command: ls /dev/mmcblk*; cat /sys/block/mmcblk0/device/type /sys/block/mmcblk0/size
+[2026-11-07T00:26:53.395-08:00] printf '\n__RV_BEGIN_f8e17ed038e3d185dc4ba7b6__\n'; sh -c 'ls /dev/mmcblk*; cat
+t /sys/block/mmcblk0/device/type /sys/block/mmcblk0/size'; __rv_rc=$?; printf '\n
+n'; echo __RC=${__rv_rc}__f8e17ed038e3d185dc4ba7b6
+[2026-11-07T00:26:53.411-08:00] 
+[2026-11-07T00:26:53.411-08:00] __RV_BEGIN_f8e17ed038e3d185dc4ba7b6__
+[2026-11-07T00:26:53.475-08:00] [1;35m/dev/mmcblk0[m       [1;35m/dev/mmcblk1[m       [1;35m/dev/mmcblk1boot1[m
+[2026-11-07T00:26:53.475-08:00] [1;35m/dev/mmcblk0p1[m     [1;35m/dev/mmcblk1boot0[m  [1;35m/dev/mmcblk1p1[m
+[2026-11-07T00:26:53.491-08:00] SD
+[2026-11-07T00:26:53.491-08:00] 62333952
+[2026-11-07T00:26:53.507-08:00] 
+[2026-11-07T00:26:53.507-08:00] __RC=0__f8e17ed038e3d185dc4ba7b6
+[2026-11-07T00:26:53.507-08:00] # 
+[2026-11-07T00:26:53.507-08:00] [host] rc=0
+[2026-11-07T00:26:53.508-08:00] 
+[2026-11-07T00:26:53.508-08:00] [host] command: if grep -q ' /media ' /proc/mounts; then echo MEDIA_ALREADY_MOUNTED; exit 1; fi
+[2026-11-07T00:26:53.508-08:00] test -d /media || exit 1
+[2026-11-07T00:26:53.508-08:00] mount -o ro /dev/mmcblk0p1 /media || exit $?
+[2026-11-07T00:26:53.508-08:00] trap 'umount /media' 0
+[2026-11-07T00:26:53.508-08:00] awk '$1=="/dev/mmcblk0p1" && $2=="/media" && $4 ~ /(^|,)ro(,|$)/ {print; ok=1} END {exit !ok}' /proc/mounts || exit 1
+[2026-11-07T00:26:53.508-08:00] sha256sum /media/boot.scr /media/uImage.lz4 /media/uInitrd.lz4 /media/kernel.dtb || exit $?
+[2026-11-07T00:26:53.508-08:00] umount /media || exit $?
+[2026-11-07T00:26:53.508-08:00] trap - 0
+[2026-11-07T00:26:53.508-08:00] if grep -q ' /media ' /proc/mounts; then exit 1; fi
+[2026-11-07T00:26:53.508-08:00] echo TF_CARD_UNMOUNTED
+[2026-11-07T00:26:53.571-08:00] printf '\n__RV_BEGIN_7cbe8c7915cdc92591292627__\n'; sh -c 'if grep -q '"'"' /me
+edia '"'"' /proc/mounts; then echo MEDIA_ALREADY_MOUNTED; exit 1; fi
+[2026-11-07T00:26:53.571-08:00] > test -d /media || exit 1
+[2026-11-07T00:26:53.587-08:00] > mount -o ro /dev/mmcblk0p1 /media || exit $?
+[2026-11-07T00:26:53.587-08:00] > trap '"'"'umount /media'"'"' 0
+[2026-11-07T00:26:53.603-08:00] > awk '"'"'$1=="/dev/mmcblk0p1" && $2=="/media" && $4 ~ /(^|,)ro(,|$)/ {print; ok
+k=1} END {exit !ok}'"'"' /proc/mounts || exit 1
+[2026-11-07T00:26:53.620-08:00] > sha256sum /media/boot.scr /media/uImage.lz4 /media/uInitrd.lz4 /media/kernel.dt
+tb || exit $?
+[2026-11-07T00:26:53.651-08:00] > umount /media || exit $?
+[2026-11-07T00:26:53.651-08:00] > trap - 0
+[2026-11-07T00:26:53.651-08:00] > if grep -q '"'"' /media '"'"' /proc/mounts; then exit 1; fi
+[2026-11-07T00:26:53.667-08:00] > echo TF_CARD_UNMOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__7cbe8c7
+7915cdc92591292627
+[2026-11-07T00:26:53.683-08:00] 
+[2026-11-07T00:26:53.683-08:00] __RV_BEGIN_7cbe8c7915cdc92591292627__
+[2026-11-07T00:26:53.827-08:00] /dev/mmcblk0p1 /media vfat ro,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0
+[2026-11-07T00:26:53.843-08:00] 06203ccf2ed48380c99efbd9d449a9d2792805556105c57677cdc8ed09ce30f9  /media/boot.scr
+[2026-11-07T00:26:54.435-08:00] b3f0662be615a73fa1d821b1c3aa1b3c068eaf6668c009982795626fa5437d92  /media/uImage.lz4
+[2026-11-07T00:26:56.259-08:00] 82a45be4f417110b532bd785f1d49353025ad0b62046754e74ceb1ee2c84181b  /media/uInitrd.lz4
+[2026-11-07T00:26:56.275-08:00] 3b84109ee3c19c9aa546602bb1ee33f925d7cec7dee1cd14868adaeaaaa60edd  /media/kernel.dtb
+[2026-11-07T00:26:56.371-08:00] TF_CARD_UNMOUNTED
+[2026-11-07T00:26:56.371-08:00] 
+[2026-11-07T00:26:56.371-08:00] __RC=0__7cbe8c7915cdc92591292627
+[2026-11-07T00:26:56.371-08:00] # 
+[2026-11-07T00:26:56.371-08:00] [host] rc=0
+[2026-11-07T00:27:05.173-08:00] printf '\n__RV_BEGIN_04f81344c209c204d21591f9__\n'; sh -c 'ls -ld /etc /etc/ssh
+h'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__04f81344c209c204d21591f9
+[2026-11-07T00:27:05.189-08:00] 
+[2026-11-07T00:27:05.189-08:00] __RV_BEGIN_04f81344c209c204d21591f9__
+[2026-11-07T00:27:05.253-08:00] drwxrwxr-x    8 root     root           560 Nov  6  2026 [1;34m/etc[m
+[2026-11-07T00:27:05.253-08:00] drwxrwxr-x    2 root     root           220 Jan  1 00:00 [1;34m/etc/ssh[m
+[2026-11-07T00:27:05.253-08:00] 
+[2026-11-07T00:27:05.253-08:00] __RC=0__04f81344c209c204d21591f9
+[2026-11-07T00:27:05.269-08:00] # 
