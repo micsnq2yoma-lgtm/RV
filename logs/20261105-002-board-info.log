@@ -1,0 +1,201 @@
+# Linux command transcript. Build account/host and network identifiers are masked. The authentication exchange was excluded.
+[2026-11-05T19:31:45.765-08:00] 
+[2026-11-05T19:31:45.765-08:00] [host] command: cat /proc/version
+[2026-11-05T19:31:45.766-08:00]  printf '\n__RV_BEGIN_3a7e562ba786c52231660453__\n'; sh -c 'cat /proc/version';  __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__3a7e562ba786c52231660453
+[2026-11-05T19:31:45.812-08:00] 
+[2026-11-05T19:31:45.812-08:00] __RV_BEGIN_3a7e562ba786c52231660453__
+[2026-11-05T19:31:45.876-08:00] Linux version 6.6.90-rt54+ ([redacted build host]) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026
+[2026-11-05T19:31:45.892-08:00] 
+[2026-11-05T19:31:45.892-08:00] __RC=0__3a7e562ba786c52231660453
+[2026-11-05T19:31:45.892-08:00] # 
+[2026-11-05T19:31:45.892-08:00] [host] rc=0
+[2026-11-05T19:31:45.892-08:00] 
+[2026-11-05T19:31:45.892-08:00] [host] command: uname -r
+[2026-11-05T19:31:45.923-08:00] printf '\n__RV_BEGIN_ac0e704bade5b0543a7d5460__\n'; sh -c 'uname -r'; __rv_rc=$$?; printf '\n'; echo __RC=${__rv_rc}__ac0e704bade5b0543a7d5460
+[2026-11-05T19:31:45.940-08:00] 
+[2026-11-05T19:31:45.940-08:00] __RV_BEGIN_ac0e704bade5b0543a7d5460__
+[2026-11-05T19:31:45.987-08:00] 6.6.90-rt54+
+[2026-11-05T19:31:45.988-08:00] 
+[2026-11-05T19:31:45.988-08:00] __RC=0__ac0e704bade5b0543a7d5460
+[2026-11-05T19:31:45.988-08:00] # 
+[2026-11-05T19:31:45.988-08:00] [host] rc=0
+[2026-11-05T19:31:45.988-08:00] 
+[2026-11-05T19:31:45.988-08:00] [host] command: cat /sys/devices/system/cpu/possible /sys/devices/system/cpu/online
+[2026-11-05T19:31:46.035-08:00] printf '\n__RV_BEGIN_d57d83bdede15b072a8fa66d__\n'; sh -c 'cat /sys/devices/sysstem/cpu/possible /sys/devices/system/cpu/online'; __rv_rc=$?; printf '\n'; echo  __RC=${__rv_rc}__d57d83bdede15b072a8fa66d
+[2026-11-05T19:31:46.052-08:00] 
+[2026-11-05T19:31:46.052-08:00] __RV_BEGIN_d57d83bdede15b072a8fa66d__
+[2026-11-05T19:31:46.099-08:00] 0-7
+[2026-11-05T19:31:46.115-08:00] 0-1
+[2026-11-05T19:31:46.116-08:00] 
+[2026-11-05T19:31:46.116-08:00] __RC=0__d57d83bdede15b072a8fa66d
+[2026-11-05T19:31:46.116-08:00] # 
+[2026-11-05T19:31:46.116-08:00] [host] rc=0
+[2026-11-05T19:31:46.116-08:00] 
+[2026-11-05T19:31:46.116-08:00] [host] command: dmesg | grep -iE "smp|CPU[0-9]+|hart|failed" | head -40
+[2026-11-05T19:31:46.163-08:00] printf '\n__RV_BEGIN_2c1688677e6726fb24b9d5eb__\n'; sh -c 'dmesg | grep -iE "smmp|CPU[0-9]+|hart|failed" | head -40'; __rv_rc=$?; printf '\n'; echo __RC=${__rv__rc}__2c1688677e6726fb24b9d5eb
+[2026-11-05T19:31:46.180-08:00] 
+[2026-11-05T19:31:46.180-08:00] __RV_BEGIN_2c1688677e6726fb24b9d5eb__
+[2026-11-05T19:31:46.259-08:00] [    0.000000] Linux version 6.6.90-rt54+ ([redacted build host]) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026
+[2026-11-05T19:31:46.276-08:00] [    0.442810] smp: Bringing up secondary CPUs ...
+[2026-11-05T19:31:46.276-08:00] [    1.487084] CPU2: failed to come online
+[2026-11-05T19:31:46.292-08:00] [    2.517157] CPU3: failed to come online
+[2026-11-05T19:31:46.292-08:00] [    3.547508] CPU4: failed to come online
+[2026-11-05T19:31:46.292-08:00] [    4.577464] CPU5: failed to come online
+[2026-11-05T19:31:46.292-08:00] [    5.607886] CPU6: failed to come online
+[2026-11-05T19:31:46.292-08:00] [    6.638038] CPU7: failed to come online
+[2026-11-05T19:31:46.308-08:00] [    6.638309] smp: Brought up 1 node, 2 CPUs
+[2026-11-05T19:31:46.308-08:00] [    6.715538] cpu1: Ratio of byte access time to unaligned word access is 0.16, unaligned accesses are slow
+[2026-11-05T19:31:46.324-08:00] [    6.748046] cpu0: Ratio of byte access time to unaligned word access is 0.16, unaligned accesses are slow
+[2026-11-05T19:31:46.324-08:00] 
+[2026-11-05T19:31:46.324-08:00] __RC=0__2c1688677e6726fb24b9d5eb
+[2026-11-05T19:31:46.324-08:00] # 
+[2026-11-05T19:31:46.324-08:00] [host] rc=0
+[2026-11-05T19:31:46.324-08:00] 
+[2026-11-05T19:31:46.324-08:00] [host] command: for c in /proc/device-tree/cpus/cpu@*; do
+[2026-11-05T19:31:46.324-08:00]   [ -d "$c" ] || continue
+[2026-11-05T19:31:46.324-08:00]   status=$(tr -d '\000' < "$c/status" 2>/dev/null) || status='(absent)'
+[2026-11-05T19:31:46.324-08:00]   isa=$(tr -d '\000' < "$c/riscv,isa" 2>/dev/null) || isa='(absent)'
+[2026-11-05T19:31:46.324-08:00]   printf '%s status=%s isa=%s\n' "$c" "$status" "$isa"
+[2026-11-05T19:31:46.324-08:00] done
+[2026-11-05T19:31:46.355-08:00] printf '\n__RV_BEGIN_68c7fa1bd96495b0baf19b8e__\n'; sh -c 'for c in /proc/devicce-tree/cpus/cpu@*; do
+[2026-11-05T19:31:46.372-08:00] >   [ -d "$c" ] || continue
+[2026-11-05T19:31:46.372-08:00] >   status=$(tr -d '"'"'\000'"'"' < "$c/status" 2>/dev/null) || status='"'"'(abseent)'"'"'
+[2026-11-05T19:31:46.404-08:00] >   isa=$(tr -d '"'"'\000'"'"' < "$c/riscv,isa" 2>/dev/null) || isa='"'"'(absent))'"'"'
+[2026-11-05T19:31:46.420-08:00] >   printf '"'"'%s status=%s isa=%s\n'"'"' "$c" "$status" "$isa"
+[2026-11-05T19:31:46.435-08:00] > done'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__68c7fa1bd96495b0baf19b8e [A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> done'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__68c7fa1bd96495b0baf19b8[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00e
+[2026-11-05T19:31:46.452-08:00] 
+[2026-11-05T19:31:46.452-08:00] __RV_BEGIN_68c7fa1bd96495b0baf19b8e__
+[2026-11-05T19:31:46.563-08:00] /proc/device-tree/cpus/cpu@0 status=okay isa=rv64imafdc_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:46.643-08:00] /proc/device-tree/cpus/cpu@1 status=okay isa=rv64imafdcv_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:46.707-08:00] /proc/device-tree/cpus/cpu@2 status=okay isa=rv64imafdcv_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:46.771-08:00] /proc/device-tree/cpus/cpu@3 status=okay isa=rv64imafdcv_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:46.851-08:00] /proc/device-tree/cpus/cpu@4 status=okay isa=rv64imafdcv_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:46.915-08:00] /proc/device-tree/cpus/cpu@5 status=okay isa=rv64imafdcv_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:46.979-08:00] /proc/device-tree/cpus/cpu@6 status=okay isa=rv64imafdcv_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:47.043-08:00] /proc/device-tree/cpus/cpu@7 status=okay isa=rv64imafdcv_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:31:47.060-08:00] 
+[2026-11-05T19:31:47.060-08:00] __RC=0__68c7fa1bd96495b0baf19b8e
+[2026-11-05T19:31:47.060-08:00] # 
+[2026-11-05T19:31:47.060-08:00] [host] rc=0
+[2026-11-05T19:31:47.060-08:00] 
+[2026-11-05T19:31:47.060-08:00] [host] command: ls /sys/bus/platform/devices/ | grep -i xec
+[2026-11-05T19:31:47.107-08:00] printf '\n__RV_BEGIN_8bd5b0bd380d3312b6e865eb__\n'; sh -c 'ls /sys/bus/platformm/devices/ | grep -i xec'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__8bd5b0bbd380d3312b6e865eb
+[2026-11-05T19:31:47.108-08:00] 
+[2026-11-05T19:31:47.108-08:00] __RV_BEGIN_8bd5b0bd380d3312b6e865eb__
+[2026-11-05T19:31:47.171-08:00] f9c210000.xec
+[2026-11-05T19:31:47.188-08:00] f9cdc0000.xec
+[2026-11-05T19:31:47.188-08:00] 
+[2026-11-05T19:31:47.188-08:00] __RC=0__8bd5b0bd380d3312b6e865eb
+[2026-11-05T19:31:47.188-08:00] # 
+[2026-11-05T19:31:47.188-08:00] [host] rc=0
+[2026-11-05T19:31:47.188-08:00] 
+[2026-11-05T19:31:47.188-08:00] [host] command: ls /sys/bus/platform/drivers/ | grep -i xec
+[2026-11-05T19:31:47.219-08:00] printf '\n__RV_BEGIN_3bae523cc4ed0132e6d8ee43__\n'; sh -c 'ls /sys/bus/platformm/drivers/ | grep -i xec'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__3bae5233cc4ed0132e6d8ee43
+[2026-11-05T19:31:47.236-08:00] 
+[2026-11-05T19:31:47.236-08:00] __RV_BEGIN_3bae523cc4ed0132e6d8ee43__
+[2026-11-05T19:31:47.299-08:00] nuclei-xec
+[2026-11-05T19:31:47.316-08:00] 
+[2026-11-05T19:31:47.316-08:00] __RC=0__3bae523cc4ed0132e6d8ee43
+[2026-11-05T19:31:47.316-08:00] # 
+[2026-11-05T19:31:47.316-08:00] [host] rc=0
+[2026-11-05T19:31:47.316-08:00] 
+[2026-11-05T19:31:47.316-08:00] [host] command: ip -br link
+[2026-11-05T19:31:47.347-08:00] printf '\n__RV_BEGIN_7817f2eb0f987c3e2304657e__\n'; sh -c 'ip -br link'; __rv_rrc=$?; printf '\n'; echo __RC=${__rv_rc}__7817f2eb0f987c3e2304657e
+[2026-11-05T19:31:47.364-08:00] 
+[2026-11-05T19:31:47.364-08:00] __RV_BEGIN_7817f2eb0f987c3e2304657e__
+[2026-11-05T19:31:47.427-08:00] BusyBox v1.36.1 (2026-11-04 14:20:08 CST) multi-call binary.
+[2026-11-05T19:31:47.428-08:00] 
+[2026-11-05T19:31:47.428-08:00] Usage: ip [OPTIONS] address|route|link|tunnel|neigh|rule [ARGS]
+[2026-11-05T19:31:47.428-08:00] 
+[2026-11-05T19:31:47.428-08:00] OPTIONS := -f[amily] inet|inet6|link | -o[neline]
+[2026-11-05T19:31:47.444-08:00] 
+[2026-11-05T19:31:47.444-08:00] ip addr add|del IFADDR dev IFACE | show|flush [dev IFACE] [to PREFIX]
+[2026-11-05T19:31:47.444-08:00] ip route list|flush|add|del|change|append|replace|test ROUTE
+[2026-11-05T19:31:47.444-08:00] ip link set IFACE [up|down] [arp on|off] [multicast on|off]
+[2026-11-05T19:31:47.459-08:00] 	[promisc on|off] [mtu NUM] [name NAME] [qlen NUM] [address MAC]
+[2026-11-05T19:31:47.460-08:00] 	[master IFACE | nomaster] [netns PID]
+[2026-11-05T19:31:47.460-08:00] ip tunnel add|change|del|show [NAME]
+[2026-11-05T19:31:47.460-08:00] 	[mode ipip|gre|sit] [remote ADDR] [local ADDR] [ttl TTL]
+[2026-11-05T19:31:47.476-08:00] ip neigh show|flush [to PREFIX] [dev DEV] [nud STATE]
+[2026-11-05T19:31:47.476-08:00] ip rule [list] | add|del SELECTOR ACTION
+[2026-11-05T19:31:47.476-08:00] 
+[2026-11-05T19:31:47.476-08:00] __RC=1__7817f2eb0f987c3e2304657e
+[2026-11-05T19:31:47.476-08:00] # 
+[2026-11-05T19:31:47.476-08:00] [host] rc=1
+[2026-11-05T19:31:47.476-08:00] 
+[2026-11-05T19:31:47.476-08:00] [host] command: dmesg | grep -iE "error|fail|warn" | head -50
+[2026-11-05T19:31:47.523-08:00] printf '\n__RV_BEGIN_212f9f217f6bfdee0ddf28d7__\n'; sh -c 'dmesg | grep -iE "errror|fail|warn" | head -50'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__212f99f217f6bfdee0ddf28d7
+[2026-11-05T19:31:47.540-08:00] 
+[2026-11-05T19:31:47.540-08:00] __RV_BEGIN_212f9f217f6bfdee0ddf28d7__
+[2026-11-05T19:31:47.619-08:00] [    1.487084] CPU2: failed to come online
+[2026-11-05T19:31:47.620-08:00] [    2.517157] CPU3: failed to come online
+[2026-11-05T19:31:47.636-08:00] [    3.547508] CPU4: failed to come online
+[2026-11-05T19:31:47.636-08:00] [    4.577464] CPU5: failed to come online
+[2026-11-05T19:31:47.636-08:00] [    5.607886] CPU6: failed to come online
+[2026-11-05T19:31:47.636-08:00] [    6.638038] CPU7: failed to come online
+[2026-11-05T19:31:47.652-08:00] 
+[2026-11-05T19:31:47.652-08:00] __RC=0__212f9f217f6bfdee0ddf28d7
+[2026-11-05T19:31:47.652-08:00] # 
+[2026-11-05T19:31:47.652-08:00] [host] rc=0
+[2026-11-05T19:31:47.652-08:00] 
+[2026-11-05T19:31:47.652-08:00] [host] command: ls /dev/mmcblk*; cat /sys/block/mmcblk0/device/type /sys/block/mmcblk0/size
+[2026-11-05T19:31:47.699-08:00] printf '\n__RV_BEGIN_1699943d61a7d21024d3c47e__\n'; sh -c 'ls /dev/mmcblk*; catt /sys/block/mmcblk0/device/type /sys/block/mmcblk0/size'; __rv_rc=$?; printf '\nn'; echo __RC=${__rv_rc}__1699943d61a7d21024d3c47e
+[2026-11-05T19:31:47.716-08:00] 
+[2026-11-05T19:31:47.716-08:00] __RV_BEGIN_1699943d61a7d21024d3c47e__
+[2026-11-05T19:31:47.779-08:00] [1;35m/dev/mmcblk0[m       [1;35m/dev/mmcblk1[m       [1;35m/dev/mmcblk1boot1[m
+[2026-11-05T19:31:47.796-08:00] [1;35m/dev/mmcblk0p1[m     [1;35m/dev/mmcblk1boot0[m  [1;35m/dev/mmcblk1p1[m
+[2026-11-05T19:31:47.796-08:00] SD
+[2026-11-05T19:31:47.796-08:00] 62333952
+[2026-11-05T19:31:47.812-08:00] 
+[2026-11-05T19:31:47.812-08:00] __RC=0__1699943d61a7d21024d3c47e
+[2026-11-05T19:31:47.812-08:00] # 
+[2026-11-05T19:31:47.812-08:00] [host] rc=0
+[2026-11-05T19:31:47.812-08:00] 
+[2026-11-05T19:31:47.812-08:00] [host] command: if grep -q ' /media ' /proc/mounts; then echo MEDIA_ALREADY_MOUNTED; exit 1; fi
+[2026-11-05T19:31:47.812-08:00] test -d /media || exit 1
+[2026-11-05T19:31:47.812-08:00] mount -o ro /dev/mmcblk0p1 /media || exit $?
+[2026-11-05T19:31:47.812-08:00] trap 'umount /media' 0
+[2026-11-05T19:31:47.812-08:00] awk '$1=="/dev/mmcblk0p1" && $2=="/media" && $4 ~ /(^|,)ro(,|$)/ {print; ok=1} END {exit !ok}' /proc/mounts || exit 1
+[2026-11-05T19:31:47.812-08:00] sha256sum /media/boot.scr /media/uImage.lz4 /media/uInitrd.lz4 /media/kernel.dtb || exit $?
+[2026-11-05T19:31:47.812-08:00] umount /media || exit $?
+[2026-11-05T19:31:47.812-08:00] trap - 0
+[2026-11-05T19:31:47.812-08:00] if grep -q ' /media ' /proc/mounts; then exit 1; fi
+[2026-11-05T19:31:47.812-08:00] echo TF_CARD_UNMOUNTED
+[2026-11-05T19:31:47.859-08:00] printf '\n__RV_BEGIN_d353592929b05982ec86d9ff__\n'; sh -c 'if grep -q '"'"' /meedia '"'"' /proc/mounts; then echo MEDIA_ALREADY_MOUNTED; exit 1; fi
+[2026-11-05T19:31:47.876-08:00] TED'; __rv_rc=$?; printf '\n'; ech> test -d /media || exit 1
+[2026-11-05T19:31:47.891-08:00] > mount -o ro /dev/mmcblk0p1 /media || exit $?
+[2026-11-05T19:31:47.892-08:00] > trap '"'"'umount /media'"'"' 0
+[2026-11-05T19:31:47.908-08:00] > awk '"'"'$1=="/dev/mmcblk0p1" && $2=="/media" && $4 ~ /(^|,)ro(,|$)/ {print; okk=1} END {exit !ok}'"'"' /proc/mounts || exit 1
+[2026-11-05T19:31:47.924-08:00] > sha256sum /media/boot.scr /media/uImage.lz4 /media/uInitrd.lz4 /media/kernel.dttb || exit $?
+[2026-11-05T19:31:47.940-08:00] > umount /media || exit $?
+[2026-11-05T19:31:47.956-08:00] > trap - 0
+[2026-11-05T19:31:47.956-08:00] > if grep -q '"'"' /media '"'"' /proc/mounts; then exit 1; fi
+[2026-11-05T19:31:47.972-08:00] > echo TF_CARD_UNMOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__d3535922929b05982ec86d9ff
+[2026-11-05T19:31:47.988-08:00] 
+[2026-11-05T19:31:47.988-08:00] __RV_BEGIN_d353592929b05982ec86d9ff__
+[2026-11-05T19:31:48.131-08:00] /dev/mmcblk0p1 /media vfat ro,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0
+[2026-11-05T19:31:48.148-08:00] 06203ccf2ed48380c99efbd9d449a9d2792805556105c57677cdc8ed09ce30f9  /media/boot.scr
+[2026-11-05T19:31:48.787-08:00] b3f0662be615a73fa1d821b1c3aa1b3c068eaf6668c009982795626fa5437d92  /media/uImage.lz4
+[2026-11-05T19:31:50.643-08:00] e4cf190f117d84ed7f8fe613ed5334165c267e5410b8f5c3228b613c502358b7  /media/uInitrd.lz4
+[2026-11-05T19:31:50.659-08:00] 3b84109ee3c19c9aa546602bb1ee33f925d7cec7dee1cd14868adaeaaaa60edd  /media/kernel.dtb
+[2026-11-05T19:31:50.755-08:00] TF_CARD_UNMOUNTED
+[2026-11-05T19:31:50.771-08:00] 
+[2026-11-05T19:31:50.772-08:00] __RC=0__d353592929b05982ec86d9ff
+[2026-11-05T19:31:50.772-08:00] # 
+[2026-11-05T19:31:50.772-08:00] [host] rc=0
+[2026-11-05T19:32:13.347-08:00] printf '\n__RV_BEGIN_beb04ef65917847be3d63de0__\n'; sh -c 'ip link show; for p  in eth0 eth1; do printf "%s " "$p"; cat "/sys/class/net/$p/carrier"; done'; __rvv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__beb04ef65917847be3d63de0
+[2026-11-05T19:32:13.363-08:00] 
+[2026-11-05T19:32:13.363-08:00] __RV_BEGIN_beb04ef65917847be3d63de0__
+[2026-11-05T19:32:13.427-08:00] 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
+[2026-11-05T19:32:13.427-08:00]     link/loopback [redacted MAC] brd [redacted MAC]
+[2026-11-05T19:32:13.427-08:00] 2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-05T19:32:13.443-08:00]     link/ether [redacted MAC] brd [redacted MAC]
+[2026-11-05T19:32:13.443-08:00] 3: eth1: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-05T19:32:13.459-08:00]     link/ether [redacted MAC] brd [redacted MAC]
+[2026-11-05T19:32:13.459-08:00] 4: sit0@NONE: <NOARP> mtu 1480 qdisc noop qlen 1000
+[2026-11-05T19:32:13.459-08:00]     link/sit 0.0.0.0 brd 0.0.0.0
+[2026-11-05T19:32:13.459-08:00] eth0 0
+[2026-11-05T19:32:13.459-08:00] eth1 0
+[2026-11-05T19:32:13.491-08:00] 
+[2026-11-05T19:32:13.491-08:00] __RC=0__beb04ef65917847be3d63de0
+[2026-11-05T19:32:13.491-08:00] # 
