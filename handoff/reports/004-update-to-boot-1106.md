@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-07
 - **结果**：failed
-- **分支 / PR**：task-004-boot-1106 / 待创建
+- **分支 / PR**：task-004-boot-1106 / [草稿 #3](https://github.com/micsnq2yoma-lgtm/RV/pull/3)
 
 ## 一句话结论
 
