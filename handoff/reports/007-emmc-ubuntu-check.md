@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-07
 - **结果**：done
-- **分支 / PR**：task-007-emmc-ubuntu / 待创建
+- **分支 / PR**：task-007-emmc-ubuntu / [PR #4](https://github.com/micsnq2yoma-lgtm/RV/pull/4)
 
 ## 一句话结论
 
