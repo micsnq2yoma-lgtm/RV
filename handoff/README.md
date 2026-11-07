@@ -33,7 +33,7 @@
 ## 人在中间传话的模板
 
 **给 Codex：**
-> 读 `AGENTS.md` 和 `handoff/README.md`，然后执行 `handoff/tasks/NNN-xxx.md`。
+> 读 `AGENTS.md`、`handoff/README.md` 和 `handoff/DECISIONS.md`，然后执行 `handoff/tasks/NNN-xxx.md`。
 
 **给 Claude：**
 > Codex 完成了任务 NNN，报告在 `handoff/reports/NNN-xxx.md`，PR：<链接>。请审阅并给出下一个任务。
@@ -44,6 +44,7 @@
 handoff/
 ├── README.md        本协议
 ├── STATUS.md        任务状态总览
+├── DECISIONS.md     维护者确认的事实与决定（每次执行前必读）
 ├── templates/       任务单和报告的模板
 ├── tasks/           Claude 写的任务单
 └── reports/         Codex 写的报告
