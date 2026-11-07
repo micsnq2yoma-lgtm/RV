@@ -126,3 +126,22 @@ COM3 / 115200 第二轮采集覆盖 OpenSBI v1.3（8 hart，启动 hart 1）、U
 Linux 从 /dev/mmcblk0p1 只读回读四个 SHA-256，全部与 Windows 回读匹配，随后确认卸载。新版启动日志显示 init 自动运行 udhcpc、启动 sshd，并记录 /lib/modules 目录缺失的 modprobe 提示。完整记录见 002 报告及 boot-full、uboot、board-info 三份日志。
 
 用户选择跳过 D 节可选网络验证。连通性未测。
+
+## 任务 004：boot_1106 验证与回退（2026-11-07）
+
+当前 RVBOOT 卡已按任务失败规则恢复为任务 002 的 11-05 版。新版 boot_1106 的 Windows 备份与换卡回读、板上只读回读均通过，复位启动后成功人工登录。完全断电后启动未通过，因此保留旧版。旧版回退后按 RESET 已恢复到登录，U-Boot ramdisk 读取 14,856,105 字节。旧版完全断电启动也出现了相同的 OpenSBI hart 状态错误。
+
+| 文件 | boot_1106 测试版本 SHA-256 | 回退后当前卡 SHA-256 |
+|---|---|---|
+| boot.scr | `06203ccf2ed48380c99efbd9d449a9d2792805556105c57677cdc8ed09ce30f9` | 同左 |
+| uImage.lz4 | `b3f0662be615a73fa1d821b1c3aa1b3c068eaf6668c009982795626fa5437d92` | 同左 |
+| uInitrd.lz4 | `82a45be4f417110b532bd785f1d49353025ad0b62046754e74ceb1ee2c84181b` | `e4cf190f117d84ed7f8fe613ed5334165c267e5410b8f5c3228b613c502358b7` |
+| kernel.dtb | `3b84109ee3c19c9aa546602bb1ee33f925d7cec7dee1cd14868adaeaaaa60edd` | 同左 |
+
+boot_1106 仅 uInitrd.lz4 变化，14,857,818 字节。initramfs 从 616 条目变为 617，新增 1、删除 0、修改 3。新增 `/mount_emmc.sh`，4420 字节、0755，提供挂载 eMMC Ubuntu 并进入 chroot 的脚本。sshd_config 启用 `PermitRootLogin yes`。`/etc`、`/etc/ssh` 权限由 0755 改为 0775。三处变化已在新版运行时通过文件哈希、有效配置行及目录权限核实。主机差异见 `logs/20261107-004-initrd-diff.log`。
+
+新版复位启动的 ramdisk 读取量为 14,857,818 字节，kernel 4,223,577 字节，dtb 8,621 字节。Linux 仍是 6.6.90-rt54+ #6 SMP PREEMPT_RT，Buildroot 2024.08，CPU0–1 在线，CPU2–7 上线失败，`/lib/modules` 缺失提示仍在。人工登录成功，用户确认凭据与任务 002 相同。只读网口查询显示两个接口均 NO-CARRIER。
+
+仅切主电后串口零输出，但回车仍为原 root shell，uptime=510.68 秒。人随后确认主电、调试 USB 均断开且电源灯全灭，再连接上电。新旧两次完全断电启动均在 OpenSBI 出现 `sbi_hsm_hart_start_finish: ERR: The hart is in invalid state [0]`，未到 U-Boot。早期 USB 重连输出有乱码，后续错误可读，不能将该故障归因于尚未加载的 initramfs。固件、复位和供电方面的原因未确认。
+
+备份仍在卡上 `backup-20261107/`，回退只恢复其中 uInitrd.lz4，四文件哈希与任务 002 均匹配。详情见 `handoff/reports/004-update-to-boot-1106.md` 和 `logs/20261107-004-*.log`。
