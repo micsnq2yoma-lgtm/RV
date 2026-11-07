@@ -7,6 +7,8 @@
 | 2026-11-07 | 预期 CPU 核数 | **这块板子只有 2 个核** | CPU0–1 在线是正常的。CPU2–7 报 `failed to come online` 不是故障，而是设备树和 OpenSBI 按 8 核配置造成的，与硬件不符。以后报告里这一项只需记录“与预期一致（2 核）” |
 | 2026-11-07 | 冷启动 | 临时办法：接通主电后按一次 RESET | 见报告 005。根因属于固件或硬件，交给维护者处理 |
 | 2026-11-07 | 系统镜像 | 使用 boot_1106 | 见报告 004、005 |
+| 2026-11-07 | 联网方式 | **eth0 用网线直连 Windows 电脑，由电脑共享网络（ICS）上网**；eth1 留给 EtherCAT | 见任务 008 |
+| 2026-11-07 | 参考资料 | 芯来官方 Linux SDK：https://github.com/Nuclei-Software/nuclei-linux-sdk | 本板的 Buildroot、OpenSBI、U-Boot 都基于它，遇到问题先查它的 README 和 FAQ |
 
 ## 由此带来的待办（尚未安排成任务）
 
