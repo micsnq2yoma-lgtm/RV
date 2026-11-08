@@ -1,5 +1,8 @@
 """Model-exported Panda kinematics; numpy only, no copied DH table."""
 import math
+import ctypes
+import os
+from pathlib import Path
 import numpy as np
 
 HOME = np.array([0, 0, 0, -1.57079, 0, 1.57079, -0.7853])
@@ -44,23 +47,48 @@ class Kinematics:
         self.limits = np.array([j['range'] for b in self.chain for j in b['joints']])
         if self.limits.shape != (7, 2): raise ValueError('expected seven hinge joints')
         self.frames = [(np.array(b['pos']), quat_matrix(b['quat']), b['joints']) for b in self.chain]
+        self.tcp_pos=np.asarray(self.tcp['pos']);self.tcp_rot=quat_matrix(self.tcp['quat'])
+        self.prepared=[]
+        for offset,orient,joints in self.frames:
+            prepared=[]
+            for joint in joints:
+                axis=np.asarray(joint['axis'],dtype=float);axis/=np.linalg.norm(axis)
+                x,y,z=axis;k=np.array([[0,-z,y],[z,0,-x],[-y,x,0]])
+                prepared.append((np.asarray(joint['pos']),axis,k,k@k,joint.get('qpos0',0)))
+            self.prepared.append((offset,orient,prepared))
+        self.native=None
+        library=Path(__file__).with_name('libkin_native.so')
+        if library.exists() and os.environ.get('RV_IK_BACKEND')!='python':
+            rows=[];index=0
+            for offset,orient,joints in self.prepared:
+                if len(joints)>1:raise ValueError('native backend expects at most one hinge per body')
+                if joints:
+                    anchor,axis,_,_,q0=joints[0];joint_index=index;index+=1
+                else:anchor=axis=np.zeros(3);q0=0.;joint_index=-1
+                rows.append(np.r_[offset,orient.ravel(),anchor,axis,q0,joint_index])
+            self.native_frames=np.ascontiguousarray(rows,dtype=np.float64)
+            self.native_tcp=np.r_[self.tcp_pos,self.tcp_rot.ravel()]
+            self.native=ctypes.CDLL(str(library)).rv_ik
+            pointer=np.ctypeslib.ndpointer(dtype=np.float64,flags='C_CONTIGUOUS')
+            self.native.argtypes=[pointer,ctypes.c_int,pointer,pointer,pointer,pointer,pointer,pointer]
+            self.native.restype=ctypes.c_int
 
     def _forward(self, q, jacobian=False):
         q = np.asarray(q, dtype=float)
         if q.shape != (7,) or not np.all(np.isfinite(q)): raise ValueError('invalid q')
         p, r, axes, origins, i = np.zeros(3), np.eye(3), [], [], 0
-        for offset, orient, joints in self.frames:
+        for offset, orient, joints in self.prepared:
             p = p+r@offset; r = r@orient
-            for joint in joints:
-                anchor = np.array(joint['pos'])
+            for anchor,axis,k,k2,q0 in joints:
                 origin = p+r@anchor
-                axes.append(r@joint['axis']); origins.append(origin)
-                r = r@rotation(joint['axis'], q[i]-joint.get('qpos0', 0))
+                if jacobian:axes.append(r@axis); origins.append(origin)
+                angle=q[i]-q0
+                r = r@(np.eye(3)+math.sin(angle)*k+(1-math.cos(angle))*k2)
                 p = origin-r@anchor
                 i += 1
-        p = p+r@self.tcp['pos']; r = r@quat_matrix(self.tcp['quat'])
+        p = p+r@self.tcp_pos; r = r@self.tcp_rot
         if not jacobian: return p, r
-        j = np.array([np.r_[np.cross(a, p-o), a] for a, o in zip(axes, origins)]).T
+        j = np.concatenate((np.cross(np.asarray(axes),p-np.asarray(origins)),axes),axis=1).T
         return p, r, j
 
     def fk(self, q):
@@ -72,7 +100,13 @@ class Kinematics:
             raise ValueError('invalid target pose')
         if not np.allclose(target.T@target, np.eye(3), atol=1e-6) or np.linalg.det(target)<.99:
             raise ValueError('target is not a rotation')
-        q = np.clip(np.asarray(q_seed, dtype=float), self.limits[:,0], self.limits[:,1])
+        seed=np.asarray(q_seed,dtype=float)
+        if seed.shape!=(7,) or not np.all(np.isfinite(seed)):raise ValueError('invalid q seed')
+        q = np.clip(seed, self.limits[:,0], self.limits[:,1])
+        if self.native is not None:
+            result=self.native(self.native_frames,len(self.native_frames),self.native_tcp,self.limits,np.ascontiguousarray(pos),np.ascontiguousarray(target),np.ascontiguousarray(seed),q)
+            if result>0:self.last_iterations=result;return q
+            raise RuntimeError('IK did not converge in 200 iterations (native backend)')
         for iteration in range(200):
             p, r, j = self._forward(q, True)
             pe, re = pos-p, rotation_error(target, r)
@@ -81,8 +115,10 @@ class Kinematics:
                 return q
             e = np.r_[pe, re*.4]; j = j.copy(); j[3:] *= .4
             damping = .01
-            inv = j.T@np.linalg.solve(j@j.T+damping*damping*np.eye(6), np.eye(6))
-            dq = inv@e + (np.eye(7)-inv@j)@(.015*(HOME-q))
+            bias=.015*(HOME-q)
+            solved=np.linalg.solve(j@j.T+damping*damping*np.eye(6),np.column_stack((e,j@bias)))
+            task=j.T@solved[:,0]
+            dq = task+bias-j.T@solved[:,1]
             dq *= min(1., .18/max(1e-12, np.max(np.abs(dq))))
             score = np.linalg.norm(e)
             accepted = False
@@ -93,7 +129,7 @@ class Kinematics:
                     q = candidate; accepted = True; break
             if not accepted:
                 # Task error takes precedence over the weak home null-space bias.
-                q = np.clip(q+.25*(inv@e), self.limits[:,0]+1e-5, self.limits[:,1]-1e-5)
+                q = np.clip(q+.25*task, self.limits[:,0]+1e-5, self.limits[:,1]-1e-5)
         p, r = self.fk(q)
         raise RuntimeError('IK did not converge in 200 iterations: position=%.6fm rotation=%.4fdeg' %
                            (np.linalg.norm(pos-p), np.linalg.norm(rotation_error(target,r))*180/math.pi))

@@ -1,0 +1,17 @@
+{
+  "start_host_utc": 1794135622.6957183,
+  "end_host_utc": 1794136263.3860276,
+  "seconds": 640.6903092861176,
+  "frame_rate": 3.8271220345631813,
+  "rt": {
+    "rx": 20776,
+    "lost": 0,
+    "processing_us_mean": 187.292,
+    "processing_us_max": 1071.194,
+    "interval_ms_mean": 4.020875,
+    "interval_ms_max": 10.145216,
+    "interval_ms_std": 0.59527,
+    "lifetime_processing_us_max": 1256.226,
+    "lifetime_interval_ms_max": 14.357467
+  }
+}

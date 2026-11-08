@@ -1,5 +1,6 @@
 """PC initiates UDP and TCP; no inbound Windows listening ports."""
 import argparse
+from contextlib import ExitStack
 import base64
 import io
 import json
@@ -122,7 +123,7 @@ class Simulator:
         if op=='reset' and request.get('seed') is not None and (type(request['seed']) is not int or request['seed']<0):
             raise ValueError('seed must be a nonnegative integer or null')
         if op == 'hello':
-            return dict(sim='mujoco', version=mujoco.__version__, robot='panda', cameras=['top', 'wrist'], table_z=0.0)
+            return dict(sim='mujoco', version=mujoco.__version__, protocol='1.2', robot='panda', cameras=['top', 'front', 'side', 'wrist'], table_z=0.0)
         if op == 'ping':
             return {'t': time.time()}
         if op == 'kinematics':
@@ -155,18 +156,23 @@ class Simulator:
         if op == 'objects':
             return {'objects': [dict(name=n, pos=snapshot.body(n).xpos.tolist(),
                                     quat=snapshot.body(n).xquat.tolist()) for n in OBJECTS]}
-        if op == 'render':
-            camera = request.get('camera', 'top')
-            if camera not in ('top', 'wrist') or request.get('w', 640) != 640 or request.get('h', 480) != 480:
-                raise ValueError('render requires top/wrist and 640x480')
-            renderer.update_scene(snapshot, camera=camera)
-            pixels = renderer.render()
-            encoded = io.BytesIO()
-            Image.fromarray(pixels).save(encoded, format='JPEG', quality=80)
-            cam = self.model.camera(camera)
-            return dict(jpeg_b64=base64.b64encode(encoded.getvalue()).decode(), w=640, h=480,
-                        fovy=float(cam.fovy[0]), cam_pos=snapshot.cam_xpos[cam.id].tolist(),
-                        cam_xmat=snapshot.cam_xmat[cam.id].tolist())
+        if op in ('render', 'render_multi'):
+            w,h=request.get('w',640),request.get('h',480)
+            cameras=request.get('cameras') if op=='render_multi' else [request.get('camera','top')]
+            if (w,h) not in ((320,240),(640,480)) or not isinstance(cameras,list) or not 1<=len(cameras)<=4:
+                raise ValueError('requires 1..4 cameras and 320x240 or 640x480')
+            if any(c not in ('top','front','side','wrist') for c in cameras) or len(set(cameras))!=len(cameras):
+                raise ValueError('unknown or duplicate camera')
+            active=renderer[(w,h)] if isinstance(renderer,dict) else renderer
+            images={}
+            for camera in cameras:
+                active.update_scene(snapshot,camera=camera)
+                pixels=active.render();encoded=io.BytesIO()
+                Image.fromarray(pixels).save(encoded,format='JPEG',quality=80)
+                cam=self.model.camera(camera)
+                images[camera]=dict(jpeg_b64=base64.b64encode(encoded.getvalue()).decode(),w=w,h=h,
+                    fovy=float(cam.fovy[0]),cam_pos=snapshot.cam_xpos[cam.id].tolist(),cam_xmat=snapshot.cam_xmat[cam.id].tolist())
+            return {'images':images} if op=='render_multi' else images[cameras[0]]
         raise ValueError('unknown op')
 
     def request_reply(self, line, renderer, snapshot):
@@ -189,7 +195,8 @@ class Simulator:
     def tcp_worker(self):
         # Context is created and destroyed on this rendering thread.
         try:
-            with mujoco.Renderer(self.model, height=480, width=640) as renderer:
+            with ExitStack() as contexts:
+                renderer={size:contexts.enter_context(mujoco.Renderer(self.model,height=size[1],width=size[0])) for size in ((320,240),(640,480))}
                 snapshot = mujoco.MjData(self.model)
                 if self.render_ready is not None:
                     print(json.dumps({'graphics_stage':'renderer_ready'}),flush=True)

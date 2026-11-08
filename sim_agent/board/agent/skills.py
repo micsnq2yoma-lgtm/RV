@@ -41,8 +41,8 @@ class Skills:
         self.yaw=yaw
         return self.joints(q)
 
-    def pick(self,x,y,yaw=0):
-        z=self.table_z+.023
+    def pick(self,x,y,yaw=0,z=None):
+        z=self.table_z+.023 if z is None else z
         self.gripper(True)
         self.move_to(x,y,z+.10,yaw)
         self.move_to(x,y,z,yaw)

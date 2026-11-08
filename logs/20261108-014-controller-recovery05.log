@@ -1,0 +1,182 @@
+fastapi 0.101.0 uvicorn 0.27.1
+SCHED_FIFO=80 mlockall=ok cpu=1 sine=0
+{"rx":251,"lost":0,"processing_us_mean":177.251,"processing_us_max":404.020,"interval_ms_mean":3.619996,"interval_ms_max":4.760450,"interval_ms_std":1.176063,"lifetime_processing_us_max":404.020,"lifetime_interval_ms_max":4.760450}
+{"rx":500,"lost":0,"processing_us_mean":180.264,"processing_us_max":488.344,"interval_ms_mean":3.820915,"interval_ms_max":4.760450,"interval_ms_std":0.876121,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":4.760450}
+{"rx":749,"lost":0,"processing_us_mean":181.370,"processing_us_max":488.344,"interval_ms_mean":3.886533,"interval_ms_max":4.930990,"interval_ms_std":0.739089,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":4.930990}
+{"rx":993,"lost":0,"processing_us_mean":182.756,"processing_us_max":488.344,"interval_ms_mean":3.937718,"interval_ms_max":22.182912,"interval_ms_std":0.877106,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":1242,"lost":0,"processing_us_mean":184.081,"processing_us_max":488.344,"interval_ms_mean":3.954220,"interval_ms_max":22.182912,"interval_ms_std":0.793172,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":1491,"lost":0,"processing_us_mean":185.077,"processing_us_max":488.344,"interval_ms_mean":3.965445,"interval_ms_max":22.182912,"interval_ms_std":0.732823,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":1740,"lost":0,"processing_us_mean":185.393,"processing_us_max":488.344,"interval_ms_mean":3.973350,"interval_ms_max":22.182912,"interval_ms_std":0.686810,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":1989,"lost":0,"processing_us_mean":185.532,"processing_us_max":488.344,"interval_ms_mean":3.979153,"interval_ms_max":22.182912,"interval_ms_std":0.651390,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":2238,"lost":0,"processing_us_mean":185.419,"processing_us_max":488.344,"interval_ms_mean":3.983662,"interval_ms_max":22.182912,"interval_ms_std":0.622116,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":2487,"lost":0,"processing_us_mean":186.039,"processing_us_max":488.344,"interval_ms_mean":3.987519,"interval_ms_max":22.182912,"interval_ms_std":0.595499,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":2736,"lost":0,"processing_us_mean":185.250,"processing_us_max":488.344,"interval_ms_mean":3.990373,"interval_ms_max":22.182912,"interval_ms_std":0.573356,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":2985,"lost":0,"processing_us_mean":184.245,"processing_us_max":488.344,"interval_ms_mean":3.992828,"interval_ms_max":22.182912,"interval_ms_std":0.553341,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":3234,"lost":0,"processing_us_mean":183.657,"processing_us_max":488.344,"interval_ms_mean":3.994962,"interval_ms_max":22.182912,"interval_ms_std":0.536915,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":3483,"lost":0,"processing_us_mean":183.317,"processing_us_max":488.344,"interval_ms_mean":3.996830,"interval_ms_max":22.182912,"interval_ms_std":0.522844,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":3731,"lost":0,"processing_us_mean":182.607,"processing_us_max":488.344,"interval_ms_mean":3.998321,"interval_ms_max":22.182912,"interval_ms_std":0.510952,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":3981,"lost":0,"processing_us_mean":182.522,"processing_us_max":488.344,"interval_ms_mean":3.999789,"interval_ms_max":22.182912,"interval_ms_std":0.500168,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":4229,"lost":0,"processing_us_mean":182.458,"processing_us_max":488.344,"interval_ms_mean":4.000984,"interval_ms_max":22.182912,"interval_ms_std":0.491054,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":4479,"lost":0,"processing_us_mean":182.463,"processing_us_max":488.344,"interval_ms_mean":4.002031,"interval_ms_max":22.182912,"interval_ms_std":0.481943,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":4728,"lost":0,"processing_us_mean":182.129,"processing_us_max":488.344,"interval_ms_mean":4.002988,"interval_ms_max":22.182912,"interval_ms_std":0.473289,"lifetime_processing_us_max":488.344,"lifetime_interval_ms_max":22.182912}
+{"rx":4976,"lost":0,"processing_us_mean":182.303,"processing_us_max":633.410,"interval_ms_mean":4.003902,"interval_ms_max":22.182912,"interval_ms_std":0.674560,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+{"rx":5226,"lost":0,"processing_us_mean":182.420,"processing_us_max":633.410,"interval_ms_mean":4.004682,"interval_ms_max":22.182912,"interval_ms_std":0.661634,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+{"rx":5475,"lost":0,"processing_us_mean":182.100,"processing_us_max":633.410,"interval_ms_mean":4.005363,"interval_ms_max":22.182912,"interval_ms_std":0.649253,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+INFO:     Started server process [351]
+INFO:     Waiting for application startup.
+{"tcp_listening": 15002}
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://192.168.50.2:8080 (Press CTRL+C to quit)
+{"rx":5724,"lost":0,"processing_us_mean":181.950,"processing_us_max":633.410,"interval_ms_mean":4.006100,"interval_ms_max":22.182912,"interval_ms_std":0.637976,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+INFO:     ('192.168.50.1', 60661) - "WebSocket /video" [accepted]
+{"rx":5973,"lost":0,"processing_us_mean":181.936,"processing_us_max":633.410,"interval_ms_mean":4.006646,"interval_ms_max":22.182912,"interval_ms_std":0.640439,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+{"rx":6222,"lost":0,"processing_us_mean":182.237,"processing_us_max":633.410,"interval_ms_mean":4.007217,"interval_ms_max":22.182912,"interval_ms_std":0.631304,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+{"rx":6471,"lost":0,"processing_us_mean":182.017,"processing_us_max":633.410,"interval_ms_mean":4.007707,"interval_ms_max":22.182912,"interval_ms_std":0.629019,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 6% | mem 117/2000M | rt proc 0.18/0.63ms gap 22.2ms loss 0 | eth0 rx 209k tx 197k | irq eth0 555/s mmc 0/s | agent: idle
+{"rx":6720,"lost":0,"processing_us_mean":181.543,"processing_us_max":633.410,"interval_ms_mean":4.008168,"interval_ms_max":22.182912,"interval_ms_std":0.626236,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+CPU0 44% CPU1 12% | mem 117/2000M | rt proc 0.18/0.63ms gap 22.2ms loss 0 | eth0 rx 210k tx 196k | irq eth0 548/s mmc 0/s | agent: idle
+{"rx":6969,"lost":0,"processing_us_mean":181.232,"processing_us_max":633.410,"interval_ms_mean":4.008589,"interval_ms_max":22.182912,"interval_ms_std":0.623561,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+CPU0 59% CPU1 9% | mem 117/2000M | rt proc 0.18/0.63ms gap 22.2ms loss 0 | eth0 rx 209k tx 198k | irq eth0 563/s mmc 0/s | agent: idle
+{"rx":7218,"lost":0,"processing_us_mean":181.214,"processing_us_max":633.410,"interval_ms_mean":4.008982,"interval_ms_max":22.182912,"interval_ms_std":0.622265,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+CPU0 46% CPU1 10% | mem 117/2000M | rt proc 0.18/0.63ms gap 22.2ms loss 0 | eth0 rx 208k tx 194k | irq eth0 532/s mmc 0/s | agent: idle
+{"rx":7467,"lost":0,"processing_us_mean":180.918,"processing_us_max":633.410,"interval_ms_mean":4.009370,"interval_ms_max":22.182912,"interval_ms_std":0.616086,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+CPU0 49% CPU1 14% | mem 117/2000M | rt proc 0.18/0.63ms gap 22.2ms loss 0 | eth0 rx 210k tx 199k | irq eth0 539/s mmc 0/s | agent: idle
+{"rx":7716,"lost":0,"processing_us_mean":180.900,"processing_us_max":633.410,"interval_ms_mean":4.009724,"interval_ms_max":22.182912,"interval_ms_std":0.616805,"lifetime_processing_us_max":633.410,"lifetime_interval_ms_max":22.182912}
+CPU0 50% CPU1 20% | mem 117/2000M | rt proc 0.18/0.63ms gap 22.2ms loss 0 | eth0 rx 207k tx 192k | irq eth0 533/s mmc 0/s | agent: idle
+{"rx":7965,"lost":0,"processing_us_mean":181.196,"processing_us_max":1008.644,"interval_ms_mean":4.010117,"interval_ms_max":22.182912,"interval_ms_std":0.615809,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 56% CPU1 16% | mem 117/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 211k tx 200k | irq eth0 553/s mmc 0/s | agent: idle
+{"rx":8214,"lost":0,"processing_us_mean":181.358,"processing_us_max":1008.644,"interval_ms_mean":4.010381,"interval_ms_max":22.182912,"interval_ms_std":0.617097,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 15% | mem 117/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 209k tx 156k | irq eth0 537/s mmc 0/s | agent: idle
+{"rx":8463,"lost":0,"processing_us_mean":181.360,"processing_us_max":1008.644,"interval_ms_mean":4.010625,"interval_ms_max":22.182912,"interval_ms_std":0.619735,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 61% CPU1 22% | mem 117/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 211k tx 200k | irq eth0 556/s mmc 0/s | agent: idle
+{"rx":8712,"lost":0,"processing_us_mean":181.250,"processing_us_max":1008.644,"interval_ms_mean":4.010925,"interval_ms_max":22.182912,"interval_ms_std":0.622682,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 12% | mem 117/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 208k tx 195k | irq eth0 534/s mmc 0/s | agent: idle
+{"rx":8960,"lost":0,"processing_us_mean":181.336,"processing_us_max":1008.644,"interval_ms_mean":4.011248,"interval_ms_max":22.182912,"interval_ms_std":0.623480,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 59% CPU1 7% | mem 118/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 170k tx 197k | irq eth0 540/s mmc 0/s | agent: idle
+{"rx":9210,"lost":0,"processing_us_mean":181.248,"processing_us_max":1008.644,"interval_ms_mean":4.011466,"interval_ms_max":22.182912,"interval_ms_std":0.622392,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 47% CPU1 10% | mem 118/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 209k tx 195k | irq eth0 542/s mmc 0/s | agent: idle
+{"rx":9459,"lost":0,"processing_us_mean":181.187,"processing_us_max":1008.644,"interval_ms_mean":4.011701,"interval_ms_max":22.182912,"interval_ms_std":0.623792,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 54% CPU1 24% | mem 119/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 209k tx 198k | irq eth0 527/s mmc 0/s | agent: idle
+{"rx":9708,"lost":0,"processing_us_mean":181.263,"processing_us_max":1008.644,"interval_ms_mean":4.011913,"interval_ms_max":22.182912,"interval_ms_std":0.626201,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 54% CPU1 13% | mem 119/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 209k tx 195k | irq eth0 527/s mmc 0/s | agent: idle
+{"rx":9957,"lost":0,"processing_us_mean":181.430,"processing_us_max":1008.644,"interval_ms_mean":4.012127,"interval_ms_max":22.182912,"interval_ms_std":0.625024,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 66% CPU1 26% | mem 120/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 211k tx 198k | irq eth0 540/s mmc 0/s | agent: idle
+{"rx":10206,"lost":0,"processing_us_mean":181.328,"processing_us_max":1008.644,"interval_ms_mean":4.012330,"interval_ms_max":22.182912,"interval_ms_std":0.621638,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 44% CPU1 8% | mem 120/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 208k tx 194k | irq eth0 545/s mmc 0/s | agent: idle
+{"rx":10455,"lost":0,"processing_us_mean":181.138,"processing_us_max":1008.644,"interval_ms_mean":4.012520,"interval_ms_max":22.182912,"interval_ms_std":0.616678,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 49% CPU1 14% | mem 121/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 210k tx 198k | irq eth0 563/s mmc 0/s | agent: idle
+{"rx":10704,"lost":0,"processing_us_mean":180.902,"processing_us_max":1008.644,"interval_ms_mean":4.012711,"interval_ms_max":22.182912,"interval_ms_std":0.615443,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 43% CPU1 10% | mem 121/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 209k tx 196k | irq eth0 541/s mmc 0/s | agent: idle
+{"rx":10953,"lost":0,"processing_us_mean":181.019,"processing_us_max":1008.644,"interval_ms_mean":4.012838,"interval_ms_max":22.182912,"interval_ms_std":0.613586,"lifetime_processing_us_max":1008.644,"lifetime_interval_ms_max":22.182912}
+CPU0 49% CPU1 9% | mem 118/2000M | rt proc 0.18/1.01ms gap 22.2ms loss 0 | eth0 rx 209k tx 197k | irq eth0 543/s mmc 0/s | agent: idle
+{"rx":11202,"lost":0,"processing_us_mean":181.049,"processing_us_max":1333.613,"interval_ms_mean":4.013035,"interval_ms_max":22.182912,"interval_ms_std":0.608848,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 57% CPU1 13% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 210k tx 197k | irq eth0 546/s mmc 0/s | agent: idle
+{"rx":11451,"lost":0,"processing_us_mean":180.854,"processing_us_max":1333.613,"interval_ms_mean":4.013175,"interval_ms_max":22.182912,"interval_ms_std":0.608225,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 11% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 208k tx 197k | irq eth0 553/s mmc 0/s | agent: idle
+{"rx":11699,"lost":0,"processing_us_mean":180.733,"processing_us_max":1333.613,"interval_ms_mean":4.013337,"interval_ms_max":22.182912,"interval_ms_std":0.604470,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 50% CPU1 9% | mem 119/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 209k tx 197k | irq eth0 549/s mmc 0/s | agent: idle
+{"rx":11949,"lost":0,"processing_us_mean":180.750,"processing_us_max":1333.613,"interval_ms_mean":4.013475,"interval_ms_max":22.182912,"interval_ms_std":0.601754,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 9% | mem 119/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 208k tx 197k | irq eth0 550/s mmc 0/s | agent: idle
+{"rx":12197,"lost":0,"processing_us_mean":180.563,"processing_us_max":1333.613,"interval_ms_mean":4.013606,"interval_ms_max":22.182912,"interval_ms_std":0.601131,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 47% CPU1 15% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 210k tx 157k | irq eth0 544/s mmc 0/s | agent: idle
+{"rx":12447,"lost":0,"processing_us_mean":180.446,"processing_us_max":1333.613,"interval_ms_mean":4.013768,"interval_ms_max":22.182912,"interval_ms_std":0.600841,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 49% CPU1 8% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 208k tx 196k | irq eth0 546/s mmc 0/s | agent: idle
+{"rx":12696,"lost":0,"processing_us_mean":180.426,"processing_us_max":1333.613,"interval_ms_mean":4.013903,"interval_ms_max":22.182912,"interval_ms_std":0.598708,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 50% CPU1 9% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 209k tx 197k | irq eth0 536/s mmc 0/s | agent: idle
+{"rx":12945,"lost":0,"processing_us_mean":180.302,"processing_us_max":1333.613,"interval_ms_mean":4.014031,"interval_ms_max":22.182912,"interval_ms_std":0.600318,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 10% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 211k tx 199k | irq eth0 563/s mmc 0/s | agent: idle
+{"rx":13194,"lost":0,"processing_us_mean":180.077,"processing_us_max":1333.613,"interval_ms_mean":4.014130,"interval_ms_max":22.182912,"interval_ms_std":0.598209,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 53% CPU1 14% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 167k tx 129k | irq eth0 534/s mmc 0/s | agent: idle
+INFO:     ('192.168.50.1', 58840) - "WebSocket /video" [accepted]
+{"rx":13442,"lost":0,"processing_us_mean":180.074,"processing_us_max":1333.613,"interval_ms_mean":4.014269,"interval_ms_max":22.182912,"interval_ms_std":0.595585,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 70% CPU1 12% | mem 117/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 171k tx 159k | irq eth0 554/s mmc 0/s | agent: idle
+{"rx":13691,"lost":0,"processing_us_mean":180.199,"processing_us_max":1333.613,"interval_ms_mean":4.014354,"interval_ms_max":22.182912,"interval_ms_std":0.592772,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 44% CPU1 10% | mem 117/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 539/s mmc 0/s | agent: idle
+{"rx":13941,"lost":0,"processing_us_mean":180.108,"processing_us_max":1333.613,"interval_ms_mean":4.014464,"interval_ms_max":22.182912,"interval_ms_std":0.590942,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 46% CPU1 12% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 130k tx 116k | irq eth0 545/s mmc 0/s | agent: idle
+{"rx":14189,"lost":0,"processing_us_mean":179.931,"processing_us_max":1333.613,"interval_ms_mean":4.014579,"interval_ms_max":22.182912,"interval_ms_std":0.587104,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 46% CPU1 12% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 130k tx 116k | irq eth0 542/s mmc 0/s | agent: idle
+{"rx":14438,"lost":0,"processing_us_mean":179.787,"processing_us_max":1333.613,"interval_ms_mean":4.014668,"interval_ms_max":22.182912,"interval_ms_std":0.584190,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 46% CPU1 6% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 130k tx 116k | irq eth0 535/s mmc 0/s | agent: idle
+{"rx":14687,"lost":0,"processing_us_mean":179.772,"processing_us_max":1333.613,"interval_ms_mean":4.014769,"interval_ms_max":22.182912,"interval_ms_std":0.583639,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 8% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 541/s mmc 0/s | agent: idle
+{"rx":14936,"lost":0,"processing_us_mean":179.664,"processing_us_max":1333.613,"interval_ms_mean":4.014872,"interval_ms_max":22.182912,"interval_ms_std":0.581583,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 48% CPU1 18% | mem 117/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 541/s mmc 0/s | agent: idle
+{"rx":15185,"lost":0,"processing_us_mean":179.607,"processing_us_max":1333.613,"interval_ms_mean":4.014938,"interval_ms_max":22.182912,"interval_ms_std":0.581135,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 48% CPU1 14% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 115k | irq eth0 528/s mmc 0/s | agent: idle
+{"rx":15434,"lost":0,"processing_us_mean":179.705,"processing_us_max":1333.613,"interval_ms_mean":4.015072,"interval_ms_max":22.182912,"interval_ms_std":0.580083,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 56% CPU1 8% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 531/s mmc 0/s | agent: idle
+{"rx":15683,"lost":0,"processing_us_mean":179.764,"processing_us_max":1333.613,"interval_ms_mean":4.015109,"interval_ms_max":22.182912,"interval_ms_std":0.579683,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 16% | mem 117/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 530/s mmc 0/s | agent: idle
+{"rx":15932,"lost":0,"processing_us_mean":179.818,"processing_us_max":1333.613,"interval_ms_mean":4.015241,"interval_ms_max":22.182912,"interval_ms_std":0.579324,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 57% CPU1 22% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 131k tx 117k | irq eth0 542/s mmc 0/s | agent: idle
+{"rx":16181,"lost":0,"processing_us_mean":179.876,"processing_us_max":1333.613,"interval_ms_mean":4.015290,"interval_ms_max":22.182912,"interval_ms_std":0.577455,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 53% CPU1 11% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 531/s mmc 0/s | agent: idle
+{"rx":16430,"lost":0,"processing_us_mean":179.962,"processing_us_max":1333.613,"interval_ms_mean":4.015399,"interval_ms_max":22.182912,"interval_ms_std":0.576723,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 49% CPU1 10% | mem 117/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 536/s mmc 0/s | agent: idle
+{"rx":16679,"lost":0,"processing_us_mean":180.010,"processing_us_max":1333.613,"interval_ms_mean":4.015440,"interval_ms_max":22.182912,"interval_ms_std":0.576478,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 54% CPU1 16% | mem 117/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 540/s mmc 0/s | agent: idle
+{"rx":16927,"lost":0,"processing_us_mean":180.102,"processing_us_max":1333.613,"interval_ms_mean":4.015649,"interval_ms_max":22.182912,"interval_ms_std":0.574235,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 52% CPU1 25% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 539/s mmc 0/s | agent: idle
+{"rx":17176,"lost":0,"processing_us_mean":180.164,"processing_us_max":1333.613,"interval_ms_mean":4.015710,"interval_ms_max":22.182912,"interval_ms_std":0.573761,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 63% CPU1 22% | mem 119/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 527/s mmc 0/s | agent: idle
+{"rx":17425,"lost":0,"processing_us_mean":180.038,"processing_us_max":1333.613,"interval_ms_mean":4.015779,"interval_ms_max":22.182912,"interval_ms_std":0.572675,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 43% CPU1 14% | mem 119/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 535/s mmc 0/s | agent: idle
+{"rx":17674,"lost":0,"processing_us_mean":179.933,"processing_us_max":1333.613,"interval_ms_mean":4.015840,"interval_ms_max":22.182912,"interval_ms_std":0.570131,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 42% CPU1 8% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 115k | irq eth0 544/s mmc 0/s | agent: idle
+{"rx":17923,"lost":0,"processing_us_mean":179.961,"processing_us_max":1333.613,"interval_ms_mean":4.015903,"interval_ms_max":22.182912,"interval_ms_std":0.568115,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 42% CPU1 10% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 529/s mmc 0/s | agent: idle
+{"rx":18172,"lost":0,"processing_us_mean":179.812,"processing_us_max":1333.613,"interval_ms_mean":4.015963,"interval_ms_max":22.182912,"interval_ms_std":0.567036,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 41% CPU1 11% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 550/s mmc 0/s | agent: idle
+{"rx":18421,"lost":0,"processing_us_mean":179.686,"processing_us_max":1333.613,"interval_ms_mean":4.016015,"interval_ms_max":22.182912,"interval_ms_std":0.566424,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 49% CPU1 9% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 533/s mmc 0/s | agent: idle
+{"rx":18670,"lost":0,"processing_us_mean":179.616,"processing_us_max":1333.613,"interval_ms_mean":4.016079,"interval_ms_max":22.182912,"interval_ms_std":0.564578,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 46% CPU1 7% | mem 122/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 534/s mmc 0/s | agent: idle
+{"rx":18918,"lost":0,"processing_us_mean":179.572,"processing_us_max":1333.613,"interval_ms_mean":4.016134,"interval_ms_max":22.182912,"interval_ms_std":0.562155,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 43% CPU1 8% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 116k | irq eth0 539/s mmc 0/s | agent: idle
+{"rx":19167,"lost":0,"processing_us_mean":179.398,"processing_us_max":1333.613,"interval_ms_mean":4.016180,"interval_ms_max":22.182912,"interval_ms_std":0.559521,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 42% CPU1 12% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 116k | irq eth0 544/s mmc 0/s | agent: idle
+{"rx":19416,"lost":0,"processing_us_mean":179.311,"processing_us_max":1333.613,"interval_ms_mean":4.016235,"interval_ms_max":22.182912,"interval_ms_std":0.558113,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 47% CPU1 10% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 527/s mmc 0/s | agent: idle
+{"rx":19666,"lost":0,"processing_us_mean":179.317,"processing_us_max":1333.613,"interval_ms_mean":4.016319,"interval_ms_max":22.182912,"interval_ms_std":0.556272,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 49% CPU1 5% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 131k tx 117k | irq eth0 554/s mmc 0/s | agent: idle
+{"rx":19915,"lost":0,"processing_us_mean":179.269,"processing_us_max":1333.613,"interval_ms_mean":4.016335,"interval_ms_max":22.182912,"interval_ms_std":0.554266,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 47% CPU1 9% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 535/s mmc 0/s | agent: idle
+{"rx":20164,"lost":0,"processing_us_mean":179.189,"processing_us_max":1333.613,"interval_ms_mean":4.016403,"interval_ms_max":22.182912,"interval_ms_std":0.552672,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 43% CPU1 14% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 528/s mmc 0/s | agent: idle
+{"rx":20412,"lost":0,"processing_us_mean":179.096,"processing_us_max":1333.613,"interval_ms_mean":4.016431,"interval_ms_max":22.182912,"interval_ms_std":0.552764,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 45% CPU1 8% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 117k | irq eth0 540/s mmc 0/s | agent: idle
+{"rx":20662,"lost":0,"processing_us_mean":179.124,"processing_us_max":1333.613,"interval_ms_mean":4.016499,"interval_ms_max":22.182912,"interval_ms_std":0.550981,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 42% CPU1 9% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 115k | irq eth0 546/s mmc 0/s | agent: idle
+{"rx":20910,"lost":0,"processing_us_mean":179.028,"processing_us_max":1333.613,"interval_ms_mean":4.016528,"interval_ms_max":22.182912,"interval_ms_std":0.549323,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 39% CPU1 11% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 127k tx 116k | irq eth0 528/s mmc 0/s | agent: idle
+{"rx":21159,"lost":0,"processing_us_mean":178.917,"processing_us_max":1333.613,"interval_ms_mean":4.016598,"interval_ms_max":22.182912,"interval_ms_std":0.549108,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 54% CPU1 12% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 551/s mmc 0/s | agent: idle
+{"rx":21409,"lost":0,"processing_us_mean":178.828,"processing_us_max":1333.613,"interval_ms_mean":4.016632,"interval_ms_max":22.182912,"interval_ms_std":0.547964,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 45% CPU1 5% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 545/s mmc 0/s | agent: idle
+{"rx":21658,"lost":0,"processing_us_mean":178.795,"processing_us_max":1333.613,"interval_ms_mean":4.016679,"interval_ms_max":22.182912,"interval_ms_std":0.547627,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 44% CPU1 8% | mem 118/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 535/s mmc 0/s | agent: idle
+{"rx":21907,"lost":0,"processing_us_mean":178.690,"processing_us_max":1333.613,"interval_ms_mean":4.016723,"interval_ms_max":22.182912,"interval_ms_std":0.547895,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 44% CPU1 11% | mem 119/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 116k | irq eth0 547/s mmc 0/s | agent: idle
+{"rx":22156,"lost":0,"processing_us_mean":178.608,"processing_us_max":1333.613,"interval_ms_mean":4.016764,"interval_ms_max":22.182912,"interval_ms_std":0.546207,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 53% CPU1 12% | mem 119/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 535/s mmc 0/s | agent: idle
+{"rx":22405,"lost":0,"processing_us_mean":178.763,"processing_us_max":1333.613,"interval_ms_mean":4.016791,"interval_ms_max":22.182912,"interval_ms_std":0.546843,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 59% CPU1 20% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 536/s mmc 0/s | agent: idle
+{"rx":22654,"lost":0,"processing_us_mean":178.781,"processing_us_max":1333.613,"interval_ms_mean":4.016828,"interval_ms_max":22.182912,"interval_ms_std":0.545374,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 51% CPU1 13% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 526/s mmc 0/s | agent: idle
+{"rx":22902,"lost":0,"processing_us_mean":178.802,"processing_us_max":1333.613,"interval_ms_mean":4.016868,"interval_ms_max":22.182912,"interval_ms_std":0.544887,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 54% CPU1 21% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 532/s mmc 0/s | agent: idle
+{"rx":23151,"lost":0,"processing_us_mean":178.804,"processing_us_max":1333.613,"interval_ms_mean":4.016903,"interval_ms_max":22.182912,"interval_ms_std":0.543536,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 56% CPU1 11% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 536/s mmc 0/s | agent: idle
+{"rx":23400,"lost":0,"processing_us_mean":178.920,"processing_us_max":1333.613,"interval_ms_mean":4.016928,"interval_ms_max":22.182912,"interval_ms_std":0.543936,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 47% CPU1 14% | mem 120/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 115k | irq eth0 547/s mmc 0/s | agent: idle
+{"rx":23650,"lost":0,"processing_us_mean":178.961,"processing_us_max":1333.613,"interval_ms_mean":4.016970,"interval_ms_max":22.182912,"interval_ms_std":0.543739,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 52% CPU1 17% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 117k | irq eth0 530/s mmc 0/s | agent: idle
+{"rx":23899,"lost":0,"processing_us_mean":178.972,"processing_us_max":1333.613,"interval_ms_mean":4.017032,"interval_ms_max":22.182912,"interval_ms_std":0.543887,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 55% CPU1 17% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 537/s mmc 0/s | agent: idle
+{"rx":24148,"lost":0,"processing_us_mean":178.982,"processing_us_max":1333.613,"interval_ms_mean":4.017048,"interval_ms_max":22.182912,"interval_ms_std":0.543730,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 55% CPU1 9% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 117k | irq eth0 542/s mmc 0/s | agent: idle
+{"rx":24397,"lost":0,"processing_us_mean":179.029,"processing_us_max":1333.613,"interval_ms_mean":4.017097,"interval_ms_max":22.182912,"interval_ms_std":0.543598,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 52% CPU1 17% | mem 121/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 128k tx 116k | irq eth0 530/s mmc 0/s | agent: idle
+{"rx":24645,"lost":0,"processing_us_mean":179.040,"processing_us_max":1333.613,"interval_ms_mean":4.017221,"interval_ms_max":22.182912,"interval_ms_std":0.544790,"lifetime_processing_us_max":1333.613,"lifetime_interval_ms_max":22.182912}
+CPU0 50% CPU1 16% | mem 122/2000M | rt proc 0.18/1.33ms gap 22.2ms loss 0 | eth0 rx 129k tx 116k | irq eth0 535/s mmc 0/s | agent: idle

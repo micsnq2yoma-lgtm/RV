@@ -1,0 +1,305 @@
+{
+  "trials": [
+    {
+      "run": "20261108T190106-776787136",
+      "seed": 14099,
+      "group": "preliminary",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 62.067248821258545,
+      "active_seconds": 28.06125638000003,
+      "tokens": 4601,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "红色方块已放入左侧托盘"
+      },
+      "cpu0_mean": 92.51565664381143,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 14.047647986803465,
+      "cpu1_peak": 27.551020408163268,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T190243-284244208",
+      "seed": 14100,
+      "group": "T1",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 62.366061210632324,
+      "active_seconds": 28.366594990000067,
+      "tokens": 4591,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "红色方块已放入左侧托盘"
+      },
+      "cpu0_mean": 99.39463151597272,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 14.232606833605951,
+      "cpu1_peak": 31.372549019607845,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T190407-205617178",
+      "seed": 14101,
+      "group": "T1",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 62.69959235191345,
+      "active_seconds": 27.89248406999991,
+      "tokens": 4598,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "红色方块已放入左侧托盘"
+      },
+      "cpu0_mean": 99.42564482170862,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 15.098597196407194,
+      "cpu1_peak": 32.29166666666667,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T190535-776845611",
+      "seed": 14102,
+      "group": "T1",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 61.7653374671936,
+      "active_seconds": 27.671277473000146,
+      "tokens": 4595,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "红色方块已放入左侧托盘"
+      },
+      "cpu0_mean": 99.70895500275142,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 14.755469375519704,
+      "cpu1_peak": 32.29166666666667,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T190654-545604079",
+      "seed": 14103,
+      "group": "T1",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 65.14058256149292,
+      "active_seconds": 28.854702866000025,
+      "tokens": 4601,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "红色方块已放入左侧托盘"
+      },
+      "cpu0_mean": 99.58091306510693,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 15.632445882800884,
+      "cpu1_peak": 30.303030303030297,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T190823-697993513",
+      "seed": 14104,
+      "group": "T1",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 64.12865400314331,
+      "active_seconds": 29.369349480999972,
+      "tokens": 4601,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "红色方块已放入左侧托盘"
+      },
+      "cpu0_mean": 99.61102089137799,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 15.607934228623131,
+      "cpu1_peak": 30.303030303030297,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T190945-888066262",
+      "seed": 14200,
+      "group": "T2",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 62.289311170578,
+      "active_seconds": 27.479537787000027,
+      "tokens": 4613,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "已将蓝色方块叠到绿色方块上"
+      },
+      "cpu0_mean": 99.52488367769557,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 15.487623402191778,
+      "cpu1_peak": 33.673469387755105,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T191116-541126200",
+      "seed": 14201,
+      "group": "T2",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 61.303566217422485,
+      "active_seconds": 27.75325250500009,
+      "tokens": 4611,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "已将蓝色方块叠到绿色方块上"
+      },
+      "cpu0_mean": 99.29506615686658,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 15.49810520701437,
+      "cpu1_peak": 34.95145631067962,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T191233-621700871",
+      "seed": 14202,
+      "group": "T2",
+      "status": "finished",
+      "success": false,
+      "rounds": 3,
+      "total_seconds": 61.54295873641968,
+      "active_seconds": 27.52924791999999,
+      "tokens": 4609,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "已将蓝色方块叠到绿色方块上"
+      },
+      "cpu0_mean": 99.62212127454532,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 14.366115160542865,
+      "cpu1_peak": 33.66336633663366,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T191404-926078929",
+      "seed": 14203,
+      "group": "T2",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 60.75603723526001,
+      "active_seconds": 27.990957176000165,
+      "tokens": 4612,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "已将蓝色方块叠到绿色方块上"
+      },
+      "cpu0_mean": 99.42396426668193,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 14.0643974612936,
+      "cpu1_peak": 31.182795698924735,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T191518-6023246",
+      "seed": 14204,
+      "group": "T2",
+      "status": "finished",
+      "success": true,
+      "rounds": 3,
+      "total_seconds": 64.02922916412354,
+      "active_seconds": 30.58541299500007,
+      "tokens": 4616,
+      "result": {
+        "ok": true,
+        "success": true,
+        "summary": "已将蓝色方块叠到绿色方块上"
+      },
+      "cpu0_mean": 99.52161036999222,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 14.555460947975568,
+      "cpu1_peak": 35.294117647058826,
+      "elapsed_is_lower_bound": false
+    },
+    {
+      "run": "20261108T191714-492047781",
+      "seed": 14300,
+      "group": "T3",
+      "status": "connection_lost",
+      "success": false,
+      "rounds": 4,
+      "total_seconds": 65.3869297504425,
+      "active_seconds": 32.52446385999997,
+      "tokens": 6913,
+      "result": {
+        "error": "board connection lost during step 4 place_in"
+      },
+      "cpu0_mean": 99.40397840031375,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 14.592933839646053,
+      "cpu1_peak": 29.702970297029708,
+      "elapsed_is_lower_bound": true
+    },
+    {
+      "run": "20261108T204209-240194014",
+      "seed": 14301,
+      "group": "T3",
+      "status": "connection_lost",
+      "success": false,
+      "rounds": 0,
+      "total_seconds": 35.03849720954895,
+      "active_seconds": 0.0005061109999928703,
+      "tokens": 0,
+      "result": {
+        "error": "board connection lost at initial perception before API call"
+      },
+      "cpu0_mean": 100.0,
+      "cpu0_peak": 100.0,
+      "cpu1_mean": 13.604946133901286,
+      "cpu1_peak": 28.865979381443296,
+      "elapsed_is_lower_bound": true
+    }
+  ],
+  "groups": {
+    "T1": {
+      "n": 5,
+      "passed": 5,
+      "rounds": 3,
+      "total_seconds": 63.220045518875125,
+      "active_seconds": 28.430881776000025,
+      "tokens": 4597.2,
+      "cpu0_mean": 99.54423305938353,
+      "cpu1_mean": 15.065410703391374
+    },
+    "T2": {
+      "n": 5,
+      "passed": 4,
+      "rounds": 3,
+      "total_seconds": 61.98422050476074,
+      "active_seconds": 28.26768167660007,
+      "tokens": 4612.2,
+      "cpu0_mean": 99.47752914915633,
+      "cpu1_mean": 14.794340435803637
+    },
+    "T3": {
+      "n": 2,
+      "passed": 0,
+      "rounds": 2,
+      "total_seconds": 50.21271347999573,
+      "active_seconds": 16.26248498549998,
+      "tokens": 3456.5,
+      "cpu0_mean": 99.70198920015687,
+      "cpu1_mean": 14.098939986773669
+    }
+  }
+}
