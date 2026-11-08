@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-08
 - **结果**：blocked（按用户要求暂停，推送当前进度）
-- **分支 / PR**：task-014-agent-dashboard / 草稿 PR 待创建
+- **分支 / PR**：task-014-agent-dashboard / [草稿 PR #10](https://github.com/micsnq2yoma-lgtm/RV/pull/10)
 
 ## 当前已验证结果
 
