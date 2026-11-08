@@ -1,0 +1,9 @@
+[HOST NOTE] Selected verbatim lines from read-only cat output; none of these loader commands was executed. Other lines, including MAC configuration, omitted; complete original remains unchanged in ignored .venv/.
+[2026-11-05T02:04:09.652-08:00] [HOST SOURCE] cat /media/ecat/load_ec_module_master.sh 2>/dev/null
+[2026-11-05T02:04:09.652-08:00] cd /media/ecat/ko
+[2026-11-05T02:04:09.652-08:00] echo "f8b160000.xec" > /sys/bus/platform/drivers/nuclei-xec/unbind
+[2026-11-05T02:04:09.652-08:00] echo "f8b160000.xec" > /sys/bus/platform/drivers/nuclei-xec-ecat/bind
+[2026-11-05T02:05:20.757-08:00] [HOST SOURCE] cat /media/ecat_newchip/load_ec_module_master.sh
+[2026-11-05T02:05:20.757-08:00] cd /media/ecat_newchip/ko_newchip
+[2026-11-05T02:05:20.757-08:00] echo "f9cdc0000.xec" > /sys/bus/platform/drivers/nuclei-xec/unbind
+[2026-11-05T02:05:20.757-08:00] echo "f9cdc0000.xec" > /sys/bus/platform/drivers/nuclei-xec-ecat/bind

@@ -1,0 +1,180 @@
+# Local source prefix replaced with <Dropbox Workspace/RV>. Raw retained locally.
+# <Dropbox Workspace/RV>\boot\uInitrd.lz4: U-Boot header, name='Initrd', comp=5
+# <Dropbox Workspace/RV>\boot_1106\uInitrd.lz4: U-Boot header, name='Initrd', comp=5
+old_entries=616 new_entries=617 added=1 removed=0 changed=3
++ file	0o755	4420	mount_emmc.sh
+~ dir	0o755->0o775	0->0	etc
+~ dir	0o755->0o775	0->0	etc/ssh
+~ file	0o644->0o644	3116->3101	etc/ssh/sshd_config
+# <Dropbox Workspace/RV>\boot\uInitrd.lz4: U-Boot header, name='Initrd', comp=5
+# <Dropbox Workspace/RV>\boot_1106\uInitrd.lz4: U-Boot header, name='Initrd', comp=5
+--- old/mount_emmc.sh
++++ new/mount_emmc.sh
+@@ -0,0 +1,154 @@
++#!/bin/sh
++# Buildroot: mount the Ubuntu root filesystem on eMMC and enter chroot.
++# Usage: sh mount.sh [start|stop|status]
++
++DEVICE="/dev/mmcblk1p1"
++ROOT="/mnt/ubuntu"
++NEW_MOUNTS=""
++
++mounted_source() {
++    awk -v target="$1" '$2 == target { print $1; exit }' /proc/mounts
++}
++
++is_mounted() {
++    [ -n "$(mounted_source "$1")" ]
++}
++
++require_root() {
++    if [ "$(id -u)" != "0" ]; then
++        echo "Please run as root." >&2
++        return 1
++    fi
++}
++
++check_root_mount() {
++    current_source="$(mounted_source "$ROOT")"
++    if [ -n "$current_source" ] && [ "$current_source" != "$DEVICE" ]; then
++        echo "$ROOT is already mounted from $current_source, not $DEVICE." >&2
++        echo "Leave that chroot and unmount it with its original script first." >&2
++        return 1
++    fi
++}
++
++status() {
++    echo "=== Ubuntu eMMC mount status ==="
++    echo "Device: $DEVICE"
++    echo "Root:   $ROOT"
++    awk -v root="$ROOT" '$2 == root || index($2, root "/") == 1' /proc/mounts
++    if ! is_mounted "$ROOT"; then
++        echo "Ubuntu root is not mounted."
++    fi
++}
++
++# Track only mounts created by this start, so failures preserve existing mounts.
++mount_new() {
++    mount_target="$1"
++    shift
++    if is_mounted "$mount_target"; then
++        return 0
++    fi
++    mount "$@" "$mount_target" || return 1
++    NEW_MOUNTS="$mount_target $NEW_MOUNTS"
++}
++
++rollback_mounts() {
++    # ROOT is a fixed path without spaces. The list is in reverse mount order.
++    for rollback_target in $NEW_MOUNTS; do
++        umount "$rollback_target" ||
++            echo "Could not roll back $rollback_target; inspect '$0 status'." >&2
++    done
++}
++
++prepare_mounts() {
++    mkdir -p "$ROOT" || return 1
++    mount_new "$ROOT" -t ext4 -o rw "$DEVICE" || return 1
++
++    if [ ! -x "$ROOT/bin/bash" ]; then
++        echo "$ROOT/bin/bash is missing or not executable." >&2
++        echo "Check that the complete Ubuntu filesystem was written to $DEVICE." >&2
++        return 1
++    fi
++
++    mkdir -p "$ROOT/proc" "$ROOT/sys" "$ROOT/dev" "$ROOT/run" || return 1
++    mount_new "$ROOT/proc" -t proc proc || return 1
++    mount_new "$ROOT/sys" -t sysfs sysfs || return 1
++    mount_new "$ROOT/dev" --bind /dev || return 1
++    mkdir -p "$ROOT/dev/pts" || return 1
++    mount_new "$ROOT/dev/pts" -t devpts devpts || return 1
++    mount_new "$ROOT/run" -t tmpfs tmpfs || return 1
++}
++
++start_ubuntu() {
++    require_root || return 1
++
++    if [ ! -b "$DEVICE" ]; then
++        echo "eMMC partition not found: $DEVICE" >&2
++        return 1
++    fi
++    check_root_mount || return 1
++    other_mount="$(awk -v dev="$DEVICE" -v root="$ROOT" \
++        '$1 == dev && $2 != root { print $2; exit }' /proc/mounts)"
++    if [ -n "$other_mount" ]; then
++        echo "$DEVICE is already mounted at $other_mount; unmount it first." >&2
++        return 1
++    fi
++
++    NEW_MOUNTS=""
++    if ! prepare_mounts; then
++        echo "Ubuntu mount preparation failed; chroot was not started." >&2
++        rollback_mounts
++        return 1
++    fi
++
++    # Do not follow an Ubuntu resolv.conf symlink into the host's filesystem.
++    if [ -s /etc/resolv.conf ]; then
++        if [ -L "$ROOT/etc/resolv.conf" ]; then
++            rm -f "$ROOT/etc/resolv.conf" || {
++                rollback_mounts
++                return 1
++            }
++        fi
++        cp /etc/resolv.conf "$ROOT/etc/resolv.conf" ||
++            echo "Warning: could not copy DNS configuration." >&2
++    fi
++
++    echo "Entering Ubuntu chroot on $DEVICE..."
++    chroot "$ROOT" /bin/bash -i
++    chroot_result=$?
++
++    echo "Exited Ubuntu (status $chroot_result). Mounts are kept."
++    echo "To unmount, run from Buildroot: sh $0 stop"
++    return "$chroot_result"
++}
++
++stop_ubuntu() {
++    require_root || return 1
++    check_root_mount || return 1
++    echo "Stopping Ubuntu mounts; leave all chroot sessions first."
++
++    for child in dev/pts dev proc sys run; do
++        if is_mounted "$ROOT/$child"; then
++            umount "$ROOT/$child" || {
++                echo "Cannot unmount $ROOT/$child; check active processes." >&2
++                return 1
++            }
++        fi
++    done
++    if is_mounted "$ROOT"; then
++        umount "$ROOT" || {
++            echo "Cannot unmount $ROOT; check active processes." >&2
++            return 1
++        }
++    fi
++    echo "Ubuntu unmounted."
++}
++
++case "${1:-start}" in
++    start)  start_ubuntu ;;
++    stop)   stop_ubuntu ;;
++    status) status ;;
++    *)
++        echo "Usage: sh $0 [start|stop|status]" >&2
++        exit 2
++        ;;
++esac
+# <Dropbox Workspace/RV>\boot\uInitrd.lz4: U-Boot header, name='Initrd', comp=5
+# <Dropbox Workspace/RV>\boot_1106\uInitrd.lz4: U-Boot header, name='Initrd', comp=5
+--- old/etc/ssh/sshd_config
++++ new/etc/ssh/sshd_config
+@@ -29,7 +29,7 @@
+ # Authentication:
+ 
+ #LoginGraceTime 2m
+-#PermitRootLogin prohibit-password
++PermitRootLogin yes
+ #StrictModes yes
+ #MaxAuthTries 6
+ #MaxSessions 10

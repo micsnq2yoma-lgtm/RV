@@ -1,0 +1,31 @@
+[2026-11-05T05:01:04.917-08:00] Task 002 addendum step 0: created task-002-new-image-full-boot from origin/handoff-protocol 3ead0e6 and merged task-001-tf-card-boot-bringup; merge commit 1998ae5.
+[2026-11-05T05:01:04.938-08:00] Read-only identification only. No partition assignment, formatting, mounting or card write performed.
+[2026-11-05T05:01:04.947-08:00] COMMAND: Get-Disk | Where-Object { BusType SD/USB/MMC or IsBoot false } | select Number,FriendlyName,BusType,Size,PartitionStyle,IsSystem,IsBoot
+[2026-11-05T05:01:07.514-08:00] {"Number":1,"FriendlyName":"INTEL SSDPEKNW512G8","BusType":"NVMe","Size":512110190592,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false}
+[2026-11-05T05:01:07.530-08:00] {"Number":2,"FriendlyName":" ","BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false}
+[2026-11-05T05:01:07.541-08:00] COMMAND: Get-Volume | Where-Object DriveType -eq Removable
+[2026-11-05T05:01:07.747-08:00] REMOVABLE_VOLUME_COUNT=0
+[2026-11-05T05:01:07.758-08:00] COMMAND: Get-Disk -Number 2 | select safety and operational properties
+[2026-11-05T05:01:07.988-08:00] {"Number":2,"FriendlyName":" ","BusType":"USB","Size":31914983424,"PartitionStyle":"GPT","IsSystem":false,"IsBoot":false,"IsReadOnly":false,"IsOffline":false,"OperationalStatus":"Online","HealthStatus":"Healthy"}
+[2026-11-05T05:01:07.999-08:00] COMMAND: Get-Partition -DiskNumber 2 | select partition layout without unique identifiers
+[2026-11-05T05:01:08.214-08:00] {"DiskNumber":2,"PartitionNumber":1,"DriveLetter":"\u0000","Offset":31457280,"Size":1073741824,"Type":"Unknown","GptType":"{bc13c2ff-59e6-4262-a352-b275fd6f7172}","MbrType":null,"IsBoot":false,"IsSystem":false,"IsHidden":null,"NoDefaultDriveLetter":null}
+[2026-11-05T05:01:08.231-08:00] {"DiskNumber":2,"PartitionNumber":2,"DriveLetter":"\u0000","Offset":1105199104,"Size":30486298624,"Type":"Unknown","GptType":"{0fc63daf-8483-4772-8e79-3d69d8477de4}","MbrType":null,"IsBoot":false,"IsSystem":false,"IsHidden":null,"NoDefaultDriveLetter":null}
+[2026-11-05T05:01:08.241-08:00] PARTITION_COUNT=2
+[2026-11-05T05:01:08.251-08:00] COMMAND: Get-Partition -DiskNumber 2 | Get-Volume
+[2026-11-05T05:01:08.349-08:00] DISK2_VOLUME_COUNT=0
+[2026-11-05T05:01:08.359-08:00] COMMAND: Win32_DiskDrive Index=2 (no serial numbers or instance IDs)
+[2026-11-05T05:01:08.451-08:00] {"Index":2,"Model":"SDHC Card","InterfaceType":"USB","MediaType":"Removable Media","Size":31914086400,"Partitions":2}
+[2026-11-05T05:10:06.645-08:00] USER CONFIRMED: the approximately 32 GB card is a new card requiring a separate card-creation task. No card operations will be performed under task 002.
+[2026-11-05T05:10:06.700-08:00] SOURCE: user-provided Dropbox Workspace/RV; first usable candidate is boot/. No source files copied into repository.
+[2026-11-05T05:10:06.718-08:00] COMMAND (working directory source boot/): python -X utf8 scripts/dropbox_content_hash.py boot.scr uImage.lz4 uInitrd.lz4 kernel.dtb
+[2026-11-05T05:10:06.883-08:00] size	sha256	dropbox_content_hash	path
+[2026-11-05T05:10:06.894-08:00] 719	06203ccf2ed48380c99efbd9d449a9d2792805556105c57677cdc8ed09ce30f9	4e6d99cfe01c1c2b4f3f4bdee2d8acf90c00854ad915478ad5b366cf6c7f24da	boot.scr
+[2026-11-05T05:10:06.905-08:00] 4223577	b3f0662be615a73fa1d821b1c3aa1b3c068eaf6668c009982795626fa5437d92	8ba0c95464d0507cb92ff57e8f949d10f0803d34b2f99855c0fe0fa145e59fdf	uImage.lz4
+[2026-11-05T05:10:06.916-08:00] 14856105	e4cf190f117d84ed7f8fe613ed5334165c267e5410b8f5c3228b613c502358b7	66c8ab497246147fbbed00cdb8956cf56415203061fd5dd5a591af1e009d0d28	uInitrd.lz4
+[2026-11-05T05:10:06.928-08:00] 8621	3b84109ee3c19c9aa546602bb1ee33f925d7cec7dee1cd14868adaeaaaa60edd	8abd45134a73698081794bf7b69b12833f6b9710955f6035ac67f5f14b93b502	kernel.dtb
+[2026-11-05T05:10:06.939-08:00] HASH_SCRIPT_EXIT=0
+[2026-11-05T05:10:06.971-08:00] MATCH boot.scr=True
+[2026-11-05T05:10:06.982-08:00] MATCH uImage.lz4=True
+[2026-11-05T05:10:06.993-08:00] MATCH uInitrd.lz4=True
+[2026-11-05T05:10:07.004-08:00] MATCH kernel.dtb=True
+[2026-11-05T05:10:07.016-08:00] VALIDATION checked=4 mismatch=0
