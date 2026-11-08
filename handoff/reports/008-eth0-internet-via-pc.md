@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-07（America/Los_Angeles；最终同步测试 UTC 为 11 月 8 日）
 - **结果**：blocked
-- **分支 / PR**：`task-008-eth0-network` / 待创建草稿 PR
+- **分支 / PR**：`task-008-eth0-network` / [草稿 PR #5](https://github.com/micsnq2yoma-lgtm/RV/pull/5)
 
 ## 一句话结论
 
@@ -26,7 +26,7 @@
 | D9 | 完成回退校时 | 板子日志第 356–394 行：ntpd 缺失，两次 RC=127；用主机当前 UTC 设置板上日期，读回 `2026-11-08 03:05:29 UTC`，RC=0 |
 | E10–12 | 阻塞，未执行 | 共享回滚后不再具备网络前提；未进入 Ubuntu、未运行 apt update、未询问或执行包安装，也未更换软件源 |
 | E13 | 干净状态确认 | 板子日志第 396–422 行：Ubuntu root is not mounted，全部相关挂载检查返回 EMMC_ALL_UNMOUNTED；最终无 ping/ntpd 残留进程 |
-| F14–15 | 文档与报告完成 | [NETWORK.md](../../docs/NETWORK.md)、本报告、STATUS；提交后创建草稿 PR |
+| F14–15 | 文档与报告完成 | [NETWORK.md](../../docs/NETWORK.md)、本报告、STATUS；已创建草稿 PR #5 |
 
 ## 需要回答的问题
 

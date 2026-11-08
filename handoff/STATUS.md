@@ -8,7 +8,7 @@
 | 004 | 启动卡更新为 boot_1106 | 第 2 阶段 | done（冷启动故障与镜像无关，见 005） | [任务](tasks/004-update-to-boot-1106.md) | [报告](reports/004-update-to-boot-1106.md) | [草稿 #3](https://github.com/micsnq2yoma-lgtm/RV/pull/3) |
 | 005 | 重上 boot_1106 并统计冷启动 | 第 2 阶段收尾 | done | [任务](tasks/005-reapply-boot-1106-coldboot-stats.md) | [报告](reports/005-reapply-boot-1106-coldboot-stats.md) | [沿用草稿 #3](https://github.com/micsnq2yoma-lgtm/RV/pull/3) |
 | 007 | 检查 eMMC Ubuntu 并进入 chroot | 使用 eMMC 系统 | done | [任务](tasks/007-emmc-ubuntu-check.md) | [报告](reports/007-emmc-ubuntu-check.md) | [PR #4](https://github.com/micsnq2yoma-lgtm/RV/pull/4) |
-| 008 | eth0 经 Windows ICS 上网与 SSH/SCP | 第 1 阶段 | blocked | [任务](tasks/008-eth0-internet-via-pc.md) | [报告](reports/008-eth0-internet-via-pc.md) | 待创建草稿 PR |
+| 008 | eth0 经 Windows ICS 上网与 SSH/SCP | 第 1 阶段 | blocked | [任务](tasks/008-eth0-internet-via-pc.md) | [报告](reports/008-eth0-internet-via-pc.md) | [草稿 PR #5](https://github.com/micsnq2yoma-lgtm/RV/pull/5) |
 
 001 当前阻塞：串口和只读板级采集已完成，但卡根目录实际为 rpmsg 文件副本，不符合目标新版前置条件；U-Boot 全程与网络验证尚未完成。未写卡或推进任务 002。
 
