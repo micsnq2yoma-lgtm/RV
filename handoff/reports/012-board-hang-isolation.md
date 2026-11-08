@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-08（America/Los_Angeles）
 - **结果**：failed（隔离实验完成，准备阶段再次整板失联，根因未确认）
-- **分支 / PR**：`task-012-hang-isolation` / 待填写
+- **分支 / PR**：`task-012-hang-isolation` / [草稿 PR #9](https://github.com/micsnq2yoma-lgtm/RV/pull/9)
 
 ## 一句话结论
 
