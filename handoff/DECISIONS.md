@@ -11,6 +11,7 @@
 | 2026-11-08 | 联网方式（修订） | **不用 ICS**：它和电脑上 Clash 的 TUN 模式冲突（报告 008）。用固定 IP（电脑 `192.168.50.1`，开发板 `192.168.50.2`）跑 SSH/SCP。外网访问**通过 SSH 反向隧道**借用电脑 Clash 的 `127.0.0.1:7897` 代理；**不开 Allow LAN，不碰 Clash 的设置和防火墙规则**（r2 停用 Clash 自带的规则后，电脑断网） | 见任务 008-r3 |
 | 2026-11-07 | 参考资料 | 芯来官方 Linux SDK：https://github.com/Nuclei-Software/nuclei-linux-sdk | 本板的 Buildroot、OpenSBI、U-Boot 都基于它，遇到问题先查它的 README 和 FAQ |
 | 2026-11-08 | 新方向：仿真机器人 Agent Demo | 大模型用 **DeepSeek-V4.1-Flash-1017** API，机械臂用 **Franka Panda**（MuJoCo Menagerie）。电脑跑仿真，RV 板子跑感知、Agent、运动学和实时控制 | 见 `docs/SIM_AGENT_DESIGN.md`、任务 009、010 |
+| 2026-11-08 | DeepSeek 模型 ID | 人选定 **`deepseek-flash`**（API 里没有 `DeepSeek-V4.1-Flash-1017`）。不依赖它的图片理解，见报告 009 | 见 `docs/SIM_AGENT_DESIGN.md` |
 
 ## 由此带来的待办（尚未安排成任务）
 
