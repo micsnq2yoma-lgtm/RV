@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-07（America/Los_Angeles；任务日志名使用 20261108）
 - **结果**：blocked
-- **分支 / PR**：`task-009-deepseek-probe` / 待创建草稿 PR
+- **分支 / PR**：`task-009-deepseek-probe` / [草稿 PR #7](https://github.com/micsnq2yoma-lgtm/RV/pull/7)
 
 ## 一句话结论
 

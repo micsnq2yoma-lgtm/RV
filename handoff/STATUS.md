@@ -9,7 +9,7 @@
 | 005 | 重上 boot_1106 并统计冷启动 | 第 2 阶段收尾 | done | [任务](tasks/005-reapply-boot-1106-coldboot-stats.md) | [报告](reports/005-reapply-boot-1106-coldboot-stats.md) | [沿用草稿 #3](https://github.com/micsnq2yoma-lgtm/RV/pull/3) |
 | 007 | 检查 eMMC Ubuntu 并进入 chroot | 使用 eMMC 系统 | done | [任务](tasks/007-emmc-ubuntu-check.md) | [报告](reports/007-emmc-ubuntu-check.md) | [PR #4](https://github.com/micsnq2yoma-lgtm/RV/pull/4) |
 | 008 | eth0 固定 IP、SSH 反向代理隧道与 SSH/SCP | 第 1 阶段 | done（r3） | [原任务](tasks/008-eth0-internet-via-pc.md)、[r2](tasks/008-eth0-internet-via-pc-r2.md)、[r3](tasks/008-eth0-internet-via-pc-r3.md) | [报告](reports/008-eth0-internet-via-pc.md) | [草稿 PR #5](https://github.com/micsnq2yoma-lgtm/RV/pull/5) |
-| 009 | DeepSeek API 摸底 | S0 | blocked（待 Key 与本轮现场确认） | [任务](tasks/009-deepseek-api-probe.md) | [报告](reports/009-deepseek-api-probe.md) | 待创建 PR |
+| 009 | DeepSeek API 摸底 | S0 | blocked（待 Key 与本轮现场确认） | [任务](tasks/009-deepseek-api-probe.md) | [报告](reports/009-deepseek-api-probe.md) | [草稿 PR #7](https://github.com/micsnq2yoma-lgtm/RV/pull/7) |
 
 001 当前阻塞：串口和只读板级采集已完成，但卡根目录实际为 rpmsg 文件副本，不符合目标新版前置条件；U-Boot 全程与网络验证尚未完成。未写卡或推进任务 002。
 
