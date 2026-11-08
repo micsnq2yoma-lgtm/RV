@@ -45,6 +45,7 @@ handoff/
 ├── README.md        本协议
 ├── STATUS.md        任务状态总览
 ├── DECISIONS.md     维护者确认的事实与决定（每次执行前必读）
+├── CLAUDE_ONBOARDING.md  新 Claude 会话的交接说明
 ├── templates/       任务单和报告的模板
 ├── tasks/           Claude 写的任务单
 └── reports/         Codex 写的报告
