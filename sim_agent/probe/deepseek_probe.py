@@ -81,7 +81,11 @@ def run(client, key, model, location):
                        "messages": [{"role": "user", "content": content}], **extra})
 
     status, body, _ = chat("chat", "Reply with exactly PROBE_OK.")
-    emit({"test": "chat_check", "http_ok": status == 200, "expected": "PROBE_OK"})
+    try:
+        correct = body["choices"][0]["message"]["content"].strip() == "PROBE_OK"
+    except (KeyError, TypeError, IndexError, AttributeError):
+        correct = False
+    emit({"test": "chat_check", "http_ok": status == 200, "correct": correct, "expected": "PROBE_OK"})
     scene = ("Scene: red, green, blue blocks on the table. Left and right trays are empty. "
              "Gripper is empty. Put the red block in the left tray. "
              "Call ONLY the next single tool; use English lowercase argument values.")

@@ -1,0 +1,14 @@
+Task 009: LIVE API NOT RUN.
+No credential supplied/confirmed; waiting for current board readiness confirmation.
+Actual API requests: 0. No model IDs, capability or latency claims.
+
+Offline MockTransport tests (not live results):
+test_auth_stops_and_redacts (test_deepseek_probe.ProbeTests.test_auth_stops_and_redacts) ... ok
+test_budget_and_success (test_deepseek_probe.ProbeTests.test_budget_and_success) ... ok
+test_invalid_arguments_rejected (test_deepseek_probe.ProbeTests.test_invalid_arguments_rejected) ... ok
+test_missing_model_no_substitution (test_deepseek_probe.ProbeTests.test_missing_model_no_substitution) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+OK
