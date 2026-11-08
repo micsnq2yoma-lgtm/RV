@@ -1,131 +1,120 @@
-# eth0 经 Windows 共享网络
+# 开发板网络：固定 IP 与 Clash HTTP 代理
 
-## 当前结果（任务 008，2026-11-07）
+## 当前状态
 
-任务 **blocked**，Windows ICS 当前已关闭并恢复原配置。启用共享时板子能 ping 通 `8.8.8.8`，但同一时段主机 HTTPS 检查失败，独立 Chrome 报 `ERR_NETWORK_CHANGED`。不能据此认为已经打通部署通道；SSH、SCP、Ubuntu apt 尚未验证。证据和全部限制见[报告 008](../handoff/reports/008-eth0-internet-via-pc.md)。
+任务 008-r2 **blocked**。固定 IP、原生 SSH、SSH 脚本退出码和 SCP 往返哈希已验证；之后收紧现有 Clash 防火墙放行范围时，主机 HTTPS 检查失败，已按任务要求回滚。当前电脑有线口恢复 DHCP/APIPA，三条原规则恢复，新规则删除，代理仍只监听 `127.0.0.1:7897`。Allow LAN 未打开，wget、apt、git 外网测试未执行。
 
-## 接线与地址
+下面记录 r2 的目标方案和核心指令。**当前电脑没有 192.168.50.1，需维护者处理防火墙兼容性问题后才能恢复部署通道。** 原 ICS 试验完整保留在[报告 008](../handoff/reports/008-eth0-internet-via-pc.md)中，不再采用。
 
-| 项目 | 实测结果 |
+## 接线与目标地址
+
+| 位置 | 接口 / 地址 |
 |---|---|
-| 板上 eth0 接口 | **J1**；从 RJ1 移到 J1 后 eth0 carrier 从 0 变为 1 |
-| RJ1 | 插线时 eth0 carrier 为 0；本任务没有操作 eth1，也没有确认 RJ1 的驱动映射 |
-| 电脑上游 | 有默认网关的无线网卡；公开日志别名 `<WAN-WIFI>` |
-| 电脑下游 | 直连 J1 的有线网卡；公开日志别名 `<BOARD-ETHERNET>`；本轮链路 100 Mbps |
-| ICS 活跃时电脑下游地址 | `192.168.137.1/24` |
-| 板子本轮 DHCP 地址 | `192.168.137.178/24`，网关和 DNS 均为 `192.168.137.1` |
-| 较早启动的 DHCP 地址 | `192.168.137.26/24`；不能继续当作当前地址 |
-| 回滚后电脑下游地址 | `169.254.205.202/16`，DHCP/DNS 原配置恢复 |
+| 板上网口 | J1 已确认为 eth0；eth1 留给 EtherCAT |
+| 电脑网口 | 有线网卡直连 J1；目标 `192.168.50.1/24`，无网关、无 DNS |
+| 板上 eth0 | `192.168.50.2/24` |
+| HTTP/mixed 代理 | 目标 `http://192.168.50.1:7897` |
 
-板子可能在 ICS 关闭后仍显示旧租约。地址还在不代表网络可用。每次启动重新执行 `ip addr show eth0` 确认，不把本轮地址固定写入脚本。
+本轮核查 192.168.50.0/24 与主机已有地址和直连路由不重叠。旧 ICS 地址 192.168.137.178 仍留在板子 RAM 中，指向 192.168.137.1 的旧默认路由已删除。
 
-## Windows ICS 的操作范围
+## 电脑端设置及撤销
 
-先识别上、下游网卡，备份精确状态，启动独立回滚进程并确认心跳递增，再取得当次授权。保留主机当前代理、TUN、DNS、路由与防火墙。发现已有其他共享时停止，不替换它。
+每次涉及主机网络变更，都先备份精确状态并启动独立回滚守护，确认心跳递增，获得当次授权后操作。无线网卡、TUN、DNS、规则、订阅和防火墙总体开关保持原状。
 
-图形界面入口：控制面板 → 网络连接 → 上游无线网卡属性 → 共享 → 允许其他网络用户连接 → 家庭网络连接选择直连开发板的有线网卡。管理员 API 的对应角色是上游 `EnableSharing(0)`、下游 `EnableSharing(1)`。
-
-本轮人在管理员 PowerShell 中启动本地备份/守护程序；核实心跳后才启用上述两项共享。连续三轮主机联网检查失败会自动关闭本轮共享并恢复下游配置。当前故障尚未解决，**不要直接按上述入口再次启用共享**；应由维护者确定后续排查任务。
-
-只读检查命令：
+1. **固定 IP**：管理员在直连板子的网卡关闭 IPv4 DHCP，添加 `192.168.50.1/24`，不设网关和 DNS。配置后立即检查主机多个 HTTPS 站点。本轮这一阶段正常，随后已因防火墙阶段失败而撤销。撤销时删除本次静态地址，并恢复原 DHCP/DNS、路由及 metric 配置；本机原状态为 DHCP 开启。
+2. **Allow LAN**：只有人在 Clash 界面打开并确认代理端口。撤销时由人关闭。本轮没有打开，监听仍为 127.0.0.1:7897。若弹出防火墙提示，不选择向所有网络开放。
+3. **防火墙**：目标规则显示名为 `RV board to Clash proxy`，内部 Name 为 `RV-Board-Clash-Proxy-008r2`，仅允许 TCP 7897、远端 192.168.50.2、本地 192.168.50.1。撤销新规则可用：
 
 ```powershell
-Get-NetAdapter
-Get-NetIPConfiguration
-Get-NetIPAddress -InterfaceAlias '<接板子的有线网卡名称>' -AddressFamily IPv4
+Remove-NetFirewallRule -Name RV-Board-Clash-Proxy-008r2
 ```
 
-## Buildroot 中的检查与 DHCP
+本机原有三条覆盖 Clash 核心的宽放行规则。新增窄规则不能抵消旧规则的宽权限。人在确认无其他设备使用后，额外批准停用这三条旧规则；但该组合变更后主机 HTTPS 超时，已恢复旧规则并删除新规则。具体哪条旧规则与主机联网有关未隔离确认，后续不得直接照抄这一失败组合。
+
+## 每次开机后的板上操作
+
+接主电后按维护者确认的方法短按 RESET；先通过串口登录 Buildroot，退出终端程序释放 COM3。若电脑端已按后续批准的方案就绪，在仓库根目录运行一条命令：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/board_bootstrap.ps1 -Port COM3
+```
+
+脚本默认使用仓库 `.venv/Scripts/python.exe`（需 pyserial），可用 `-Python` 指定解释器。它读取同目录 `board_net_up.sh`，通过串口执行同一份 POSIX sh 代码，并传入电脑 UTC。默认日志在忽略目录 `.venv/board-bootstrap.log`，可用 `-LogPath` 指定。脚本要求已有登录 shell，不自动发送凭据；串口名每次重新枚举。
+
+本轮实际返回码为 0，eth0 地址、carrier=1、旧默认路由移除和 UTC 均已核实。脚本只配置板子内存状态，不能替代电脑端 IP 或代理设置。
+
+也可以将脚本传到板上后执行：
 
 ```sh
-ip link show eth0
-cat /sys/class/net/eth0/carrier
+sh /tmp/board_net_up.sh '2026-11-08 03:36:41'
+# 时间参数仅为格式示例，须换成电脑当前 UTC；也可不传时间
 ip addr show eth0
 ip route
-cat /etc/resolv.conf
-ps | grep -E 'udhcpc|sshd' | grep -v grep
+date -u
 ```
 
-本镜像已有 eth0 的后台 `udhcpc` 和 `sshd`。本轮使用自动 DHCP，没有添加静态地址或另起 DHCP 客户端。若后续确认原客户端已经退出，可按任务单使用 `udhcpc -i eth0 -n -q`。
+脚本仅删除已知失效的 `default via 192.168.137.1 dev eth0`，不删除其他接口或其他网关的路由。配置不依赖重启保留；本轮旧 DHCP 客户端仍在运行，后续也应重新核对路由。
 
-共享活跃的同步测试结果：
+## SSH 与 SCP
 
-| 目标 | 结果 |
-|---|---|
-| `192.168.137.1` | 3 发 0 收；主机等待 8 秒后中断，板上报告退出码 1 |
-| `8.8.8.8` | 3 发 3 收，0% 丢包，平均 55.472 ms |
-| `github.com` | 解析到了 `198.18.1.137`，3 发 0 收；等待 8 秒后中断，退出码 1 |
-
-域名返回的是 Fake-IP 范围地址，只能说明本次查询返回了地址，不能证明域名业务连通或 DNS 路径完整。网关不回应 ICMP 的原因未确认；本轮没有关闭防火墙或增加放行规则。
-
-## SSH / SCP 脚本（实机验证待完成）
-
-网络恢复后先在串口读取主机公钥指纹，再核对 SSH 首次连接提示；本轮已通过可信串口读取主机公钥，但没有完成 SSH 登录。不要跳过主机身份核验或关闭验证。
+第一次连接前，通过可信串口读取并核对指纹：
 
 ```sh
-# 在板子串口中读取，供首次 SSH 提示核对
 ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub
 ```
 
-```powershell
-# 在仓库根目录执行；替换为当次实际 DHCP 地址
-$boardIp = '192.168.137.178'
-./scripts/board_ssh.ps1 -BoardIP $boardIp -Command 'uname -a'
-$LASTEXITCODE
+电脑端示例（仅在电脑固定地址已恢复后使用）：
 
-./scripts/board_scp.ps1 -BoardIP $boardIp -LocalPath ./example.txt -RemotePath /tmp/example.txt
-./scripts/board_scp.ps1 -BoardIP $boardIp -LocalPath ./received.txt -RemotePath /tmp/example.txt -Download
+```powershell
+ssh root@192.168.50.2 "uname -a"
+./scripts/board_ssh.ps1 192.168.50.2 'uname -a'
+./scripts/board_ssh.ps1 192.168.50.2 'false'
+$LASTEXITCODE
+./scripts/board_scp.ps1 192.168.50.2 ./example.txt /tmp/example.txt
+./scripts/board_scp.ps1 192.168.50.2 ./received.txt /tmp/example.txt -Download
+Get-FileHash ./example.txt, ./received.txt -Algorithm SHA256
 ```
 
-两个脚本调用 Windows 原生 OpenSSH，交互输入口令，返回原生退出码。可选 `-KnownHostsFile` 必须指向已有的可信 known_hosts 文件，此模式强制核验。SCP 使用 `-O` 兼容旧 SCP 协议；串口已确认板上有 `scp`，SFTP 子系统未验证。脚本仅完成 PowerShell 5.1/7 语法和参数拒绝检查，文件传输及远端退出码传递的实机结果仍未确认。
+两个脚本不包含密码，使用原生 OpenSSH 交互认证，返回原生退出码。可选 `-KnownHostsFile` 指向预先通过可信渠道核实的 known_hosts 文件，强制主机核验。没有生成或部署客户端认证密钥。
 
-本轮没有生成或部署客户端认证密钥，也没有修改 sshd 配置。密码、认证交互和主机公钥未写入仓库。
+本轮原生 SSH 成功；脚本 `uname -a` 返回 0、`false` 返回 1。SCP 使用 `-O` 兼容板上旧协议；修复下载路径整体引号导致的 `filename does not match request` 后，59 字节测试文件往返 SHA-256 一致。保持严格文件名检查，没有使用 `-T`。当前已测试普通绝对远端路径，包含特殊字符的路径未实机覆盖。
 
 ## 校时
 
-本轮两次 `ntpd` 均返回 `command not found`（127），采用任务单允许的电脑 UTC 回退方式：
+镜像没有 ntpd。串口 bootstrap 会传入电脑 UTC；已有 SSH 时也可：
 
 ```powershell
-(Get-Date).ToUniversalTime().ToString('yyyy-MM-dd HH:mm:ss')
+$utc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd HH:mm:ss')
+./scripts/board_ssh.ps1 192.168.50.2 "date -u -s '$utc'; date -u"
 ```
 
-在板上替换为刚取到的时间：
+本轮串口和 SSH 两种路径均成功。若交互输入密码等待较久，传入时间会产生相应延迟；不要把这当作精密时钟同步。未设置 RTC，重启后重新检查。
+
+## 代理、Ubuntu apt 与 git（待验证）
+
+防火墙问题解决且由人开启 Allow LAN 后，先在 Buildroot 检查 HTTP 代理：
 
 ```sh
-date -u -s '<电脑当前 UTC 时间>'
-date -u
+export http_proxy=http://192.168.50.1:7897
+wget -q -O - http://ports.ubuntu.com/ubuntu-ports/dists/noble/Release 2>&1 | head -5
+unset http_proxy
 ```
 
-实测从 1970 年设为 `2026-11-08 03:05:29 UTC`，该时刻对应本机 11 月 7 日晚间。没有设置 RTC；重启后是否保时未验证，每次启动都应检查。
-
-## Ubuntu 软件源与 apt（本轮未执行）
-
-当前共享已回滚，板子没有可用的电脑网关；本轮未进入 Ubuntu、未运行 `apt-get update`，也未安装软件。实际软件源内容未确认，不推断为默认源。
-
-后续网络和时间验证通过后，按任务单继续：
+通过后进入 Ubuntu，再逐项执行：
 
 ```sh
 sh /mount_emmc.sh start
-# 以下在 Ubuntu chroot 中
 date -u
-cat /etc/resolv.conf
-ping -c 3 ports.ubuntu.com
 cat /etc/apt/sources.list.d/*.sources /etc/apt/sources.list 2>/dev/null
-apt-get update
-# 获得当次安装批准后才执行：apt-get install -y git ca-certificates
+P=http://192.168.50.1:7897
+apt-get -o Acquire::http::Proxy=$P -o Acquire::https::Proxy=$P update
+# 以下安装必须先获得当次明确批准：
+# apt-get -o Acquire::http::Proxy=$P -o Acquire::https::Proxy=$P install -y git ca-certificates
 # git --version
+# git -c http.proxy=$P ls-remote https://github.com/Nuclei-Software/nuclei-linux-sdk HEAD
 exit
-# 回到 Buildroot
 sh /mount_emmc.sh stop
 sh /mount_emmc.sh status
 ```
 
-不执行 apt upgrade，不擅自更换源。Ubuntu chroot 使用正在运行的 Buildroot 内核、网络和时钟；进入 chroot 本身不能修复 ICS 故障。本轮最终检查为 `Ubuntu root is not mounted`，并确认 `/mnt/ubuntu`、`/mnt/emmc_ro` 及其子挂载全部不存在。
-
-## 重启后检查清单
-
-1. 维持伺服动力电断开，接主电后按维护者确认的临时方法短按 RESET；J1 接电脑有线口。
-2. 重新枚举串口并登录 Buildroot，检查 eth0 carrier、DHCP 地址、路由和 DNS。
-3. 重新核对主机共享状态；本轮收尾时 ICS 关闭，不应假设 Windows 仍在共享。
-4. 校验主机与板子联网、SSH 主机身份及板上时钟。本轮没有部署认证公钥；以后若在内存 rootfs 中部署，重启后需重新安装公钥。
-5. 使用 Ubuntu 时重新 start；使用结束后 exit、stop，并核对全部卸载。
+代理只作为命令参数使用，不写进 Ubuntu 配置；不执行 apt upgrade、不更换源。本轮未进入 Ubuntu、未安装包，软件源和 git 版本未重新确认。最终确认 eMMC 全部未挂载。

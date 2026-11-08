@@ -172,13 +172,22 @@ def main(argv=None):
     capture_parser = modes.add_parser("capture", help="read only, without sending any bytes")
     capture_parser.add_argument("--until", type=regex, default=regex(r"login:|# $|=> $"))
     exec_parser = modes.add_parser("exec", help="execute in an already logged-in POSIX shell")
-    exec_parser.add_argument("command")
+    commands = exec_parser.add_mutually_exclusive_group(required=True)
+    commands.add_argument("command", nargs="?")
+    commands.add_argument("--command-file", type=Path,
+                          help="read a UTF-8 shell command file (avoids host shell quoting)")
     exec_parser.add_argument("--prompt", type=regex, default=regex(DEFAULT_PROMPT))
     args = parser.parse_args(argv)
     if args.baud <= 0:
         parser.error("--baud must be positive")
-    if args.mode == "exec" and "\x00" in args.command:
-        parser.error("command cannot contain NUL")
+    if args.mode == "exec":
+        if args.command_file:
+            try:
+                args.command = args.command_file.read_text(encoding="utf-8-sig")
+            except (OSError, UnicodeError) as exc:
+                parser.error(f"cannot read command file: {exc}")
+        if "\x00" in args.command:
+            parser.error("command cannot contain NUL")
     try:
         import serial
     except ImportError:

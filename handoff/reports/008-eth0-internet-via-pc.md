@@ -7,6 +7,8 @@
 
 ## 一句话结论
 
+**最新 r2：固定 IP 和 SSH/SCP 已验证；收紧现有 Clash 防火墙规则后主机 HTTPS 失败，按任务要求完整回滚，仍为 blocked。** Allow LAN 未开启，代理与 apt 未执行。详见文末“r2 执行记录”。下方原 ICS 记录保留作为历史证据。
+
 确认 **J1=eth0**，Windows ICS 可自动为板子分配 `192.168.137.178`，板子到 `8.8.8.8` 的 ping 成功；但启用共享时主机 HTTPS 在两种独立客户端中失败，守护已自动回滚，当前 ICS 关闭。SSH/SCP 和 Ubuntu apt 尚未验证，不能把部署通道标为完成。
 
 ## 逐步执行记录
@@ -58,3 +60,47 @@
 
 - 维护者审阅同步证据，决定后续单独的主机共享兼容性排查范围；本轮不再反复启用 ICS。
 - 故障解决后继续任务 008 的 PC ping、SSH/SCP 实机检查及 Ubuntu apt。安装 git、ca-certificates 仍须按任务单取得当次明确批准。
+
+## r2 执行记录
+
+- **任务**：[008-r2](../tasks/008-eth0-internet-via-pc-r2.md)，合并上游 `5b780be` 后在原分支继续，仍更新 PR #5。
+- **日期**：本机 2026-11-07 晚间，UTC 2026-11-08；日志按任务指定名称使用 20261108。
+- **结果**：blocked；停止条件为“加防火墙规则后主机上不了网”。没有再次启用 ICS。
+- **证据**：[主机日志](../../logs/20261108-008r2-host.log)、[板子日志](../../logs/20261108-008r2-board.log)。认证、公钥、MAC、电脑名、真实外网地址和私有路径未公开。原件留忽略目录；串口控制字符作可见转义。SSH/SCP 结果文件曾混用 PowerShell 5 文本编码，公开副本只规范化 ASCII 记录中的交错 NUL，未改结果。
+
+### 步骤与输出
+
+| r2 步骤 | 执行结果与证据 |
+|---|---|
+| A1 | 用户重新确认 J1/USB/主电及伺服断电。管理员确认全部 ICS 关闭，直连有线 Up；当前地址和直连路由均不与 192.168.50.0/24 重叠，无需改用 .77 网段。主机日志 Host baseline / Existing 192.168 routes |
+| A2 | 用户明确批准固定 IP、成功后保留；精确备份和独立守护心跳确认后设电脑 192.168.50.1/24，无网关/DNS。主机三个 HTTPS 站点正常，连续守护检查正常，阶段结果 kept。主机日志 run-20261107-193229 |
+| A3 | 只读确认当前 mixed-port=7897、Allow LAN=false、监听 127.0.0.1。发现已有宽防火墙规则后，暂缓人工开启 Allow LAN；本轮最终未开启 |
+| A4 准备 | 三条既有 Clash 核心入站规则均允许 Any 来源/本地地址/端口。用户确认无其他局域网设备使用，并额外明确批准停用三条旧规则、仅新增 192.168.50.2→192.168.50.1 TCP 7897。原规则及过滤器完整备份，新的独立守护心跳已核实 |
+| B5 | 先完成不依赖代理的板上配置：新增 eth0 192.168.50.2/24，删除旧 default via 192.168.137.1 dev eth0；旧 .137.178 地址保留，carrier=1。实际执行新 board_bootstrap.ps1，RC=0。板子日志 Serial bootstrap |
+| C6 | 通过串口读取并核对 ED25519 指纹，专用 known_hosts 强制验证；原生 SSH 成功，uname 返回 6.6.90-rt54+ / riscv64 |
+| C7 | board_ssh.ps1 执行 uname 返回 0；执行 false 返回 1。板子日志 SSH exit codes |
+| C8 | 上传 59 字节唯一临时文件成功。第一次下载报 `protocol error: filename does not match request`；修复下载路径引用后重试成功，前后 SHA-256 均为 `75F6AD8568A8E66A25FB4C88600469C405BE8F48F446708418CC2AA7BD4AA82B`。未关闭文件名检查；上传路径保持已实测的原引用方式。随后删除本次测试文件 |
+| D9 | 串口 bootstrap 传入电脑 UTC，随后又通过 board_ssh.ps1 执行 date -u -s 并读回。SSH 读回 2026-11-08 03:40:26 UTC；交互认证等待会带来秒级时间延迟，不代表精密同步 |
+| A4 执行/失败 | 停用三条旧规则并创建目标窄规则后，03:44:21Z 与 03:44:27Z 对 Microsoft/GitHub 的 HTTPS HEAD 各超时约 6 秒。变更子进程返回 FAILED，独立守护立即进入恢复路径。主机日志 firewall-20261107-194323 |
+| A4 回滚 | 恢复三条旧规则，删除新规则；按 r2 失败处理同时移除电脑 192.168.50.1、恢复原有线 DHCP/DNS。守护 rolled-back，随后独立复核 PrivateConfigRestored=true、ProtectedDifferences=[]、TaskRuleExists=false；三个 HTTPS 新请求均 200 |
+| E10–12 | 未执行：Allow LAN 未开，代理仍只监听本机；没有 wget 外网、Ubuntu apt update、安装包或 git ls-remote。未更改源或写代理配置 |
+| E13 | 本轮未进入 Ubuntu；最终串口确认 Ubuntu root is not mounted、EMMC_ALL_UNMOUNTED，RC=0。没有挂载遗留 |
+| F14–16 | NETWORK.md 改为固定 IP + HTTP 代理方案及各项撤销说明；新增 board_net_up.sh、board_bootstrap.ps1；本报告保留旧记录并追加 r2；STATUS 标 blocked，更新原 PR #5 |
+
+### 回答 r2 的问题
+
+1. **电脑有线网卡和开发板分别用了什么 IP？配置之后，电脑自己的网络是否正常？** 固定 IP 阶段分别为 192.168.50.1/24、192.168.50.2/24，主机 HTTPS 正常，SSH 实际可用。后续防火墙阶段失败，当前电脑已恢复 169.254.205.202/16 的 APIPA；板子的 .50.2 与旧 .137.178 仍留 RAM 中，无默认路由。因此当前不能直接继续 SSH。
+2. **Clash 的代理端口是多少？防火墙规则叫什么名字？** 当前 mixed-port 7897，仍仅监听 127.0.0.1；目标规则显示名 `RV board to Clash proxy`，内部 Name `RV-Board-Clash-Proxy-008r2`，本轮回滚后已删除。三条原 Clash 宽规则已恢复启用。Allow LAN 从未打开。
+3. **SSH、board_ssh.ps1（包括退出码）、board_scp.ps1（包括哈希比较）是否都正常？** 固定 IP 存续期间已验证原生 SSH、脚本退出码 0/1，以及修复下载后的文件往返 SHA-256 一致。当前主机地址已回滚，这些是本轮有效阶段的测试结果，不表示收尾网络仍可用。仅实测普通绝对远端路径，特殊字符路径未覆盖。
+4. **通过代理，wget、apt-get update、git ls-remote 的结果分别是什么？** 三项均未执行；防火墙变更已触发任务规定的停止条件，没有放宽规则或继续开启 Allow LAN。
+5. **git 装上了吗？版本是多少？** 本轮没有安装或查询，未确认；未请求包安装批准，因为代理前提尚未满足。
+6. **每次开机后，执行哪一条命令能让开发板网络就绪？** 在已通过串口登录 Buildroot、释放串口、电脑端配置正常的前提下，在仓库根目录执行 `powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/board_bootstrap.ps1 -Port COM3`。实机验证 RC=0；它只负责板上内存地址/旧路由清理/UTC，不会配置主机、登录或开启代理。当前主机前提已因回滚失效。
+
+### r2 的偏差、验证与后续
+
+- 为落实“仅开发板可访问”，在用户额外批准后停用了三条既有宽规则；这超出了原任务仅新增一条规则的步骤，已取得具体授权。用户先确认无其他设备使用，不能据此推断这些规则不被主机自身网络路径需要。本次是三条停用与一条新增的组合操作，**未隔离确认哪条规则导致主机 HTTPS 失败**。
+- Allow LAN 的人工步骤延后到防火墙保护就绪后；最终没有到达该步骤。没有把代理改为监听其他地址，也没有修改 TUN、DNS、订阅、规则或无线网卡。
+- B5 未重新执行 ICMP ping，采用实际 SSH/TCP 作为连通性验证；原任务已提示 Windows ICMP 可能被阻止。主机回滚后没有为补测 ICMP 再配置网络。
+- 为避免 Windows 多行命令引号损坏，在原 serial_console.py 增加互斥的 `exec --command-file` UTF-8 文件入口，原位置参数命令仍兼容。bootstrap 直接读取 board_net_up.sh，配置逻辑只有一份。
+- 串口工具回归共 9 项，8 通过、1 项 POSIX-shell 测试因 Windows 跳过；首次运行因受限临时目录写入失败，将测试临时目录改到工作区后通过。新 command-file 路径已由真实 bootstrap 和最终只读检查覆盖。PowerShell bootstrap 已在 Windows PowerShell 5.1 实机执行成功。
+- 维护者下一步需要决定如何在保留主机网络所需流量的同时限制代理入站来源；本任务按失败处理到此停止，不自动重复失败组合。待新方案明确后，再恢复主机地址、完成 Allow LAN/代理测试和经当次批准的 apt 安装。

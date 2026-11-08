@@ -33,10 +33,14 @@ if (-not $Download) {
     $LocalPath = (Resolve-Path -LiteralPath $LocalPath).ProviderPath
 }
 
-# Quote the path for the remote shell used by legacy SCP, including apostrophes.
-$singleQuote = "'"
-$escapedSingleQuote = $singleQuote + '"' + $singleQuote + '"' + $singleQuote
-$quotedRemotePath = $singleQuote + $RemotePath.Replace($singleQuote, $escapedSingleQuote) + $singleQuote
+if ($Download) {
+    # Preserve legacy SCP's strict returned-filename matching on downloads.
+    $quotedRemotePath = [regex]::Replace($RemotePath, '([^a-zA-Z0-9_./-])', '\$1')
+} else {
+    $singleQuote = "'"
+    $escapedSingleQuote = $singleQuote + '"' + $singleQuote + '"' + $singleQuote
+    $quotedRemotePath = $singleQuote + $RemotePath.Replace($singleQuote, $escapedSingleQuote) + $singleQuote
+}
 $remoteHost = $boardAddress.ToString()
 if ($boardAddress.AddressFamily -eq [System.Net.Sockets.AddressFamily]::InterNetworkV6) {
     $remoteHost = '[' + $remoteHost + ']'
