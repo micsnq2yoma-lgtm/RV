@@ -1,7 +1,16 @@
 # Task 009: bounded API capability probe
 
-**Live probe has not run yet.** Awaiting user provisioning of the DeepSeek key and
-this run's board readiness confirmation. Mock responses are not model evidence.
+**Live board probe completed** (2026-11-07 local / 2026-11-08 UTC).
+The requested `DeepSeek-V4.1-Flash-1017` was absent from `/models`. After stopping,
+the user explicitly selected `deepseek-flash`; the other returned ID was
+`deepseek-v4-pro`. The script preserves the task's original default, so use the
+explicit approved model flag below.
+
+Chat, `pick(color="red")` tool calls and JSON passed. The image request returned
+HTTP 200 but answered **White** for the verified pure-red PNG. Five correct tool
+calls averaged **1.213157 s**, p95 **1.582559 s**, mean **464 tokens**. There were
+11 requests total (1 before model selection, 10 afterwards), all from Ubuntu on
+the board. See the [report and evidence](../../handoff/reports/009-deepseek-api-probe.md).
 
 Use the task 008 network procedure (`board_bootstrap.ps1`, verified SSH host key,
 `board_proxy_tunnel.ps1`) and enter Ubuntu using `sh /mount_emmc.sh start`.
@@ -25,7 +34,7 @@ temporary key file is needed. Do not send keys through chat, command arguments,
 shell `echo`, transcripts or Git. Only the probe's sanitized stdout may be logged.
 
 ```sh
-HTTPS_PROXY=http://127.0.0.1:7897 python3 deepseek_probe.py
+HTTPS_PROXY=http://127.0.0.1:7897 python3 deepseek_probe.py --model deepseek-flash
 ```
 
 Per run: one models request, one chat, one tools, one JSON, one image, five timing
@@ -44,7 +53,7 @@ If board transport fails, first test Buildroot HTTP through the tunnel, then use
 the task's PC comparison with a **temporary process environment variable**:
 
 ```powershell
-python sim_agent/probe/deepseek_probe.py --key-env --location pc
+python sim_agent/probe/deepseek_probe.py --model deepseek-flash --key-env --location pc
 ```
 
 `DEEPSEEK_API_KEY` must already be securely supplied to that process; do not put
