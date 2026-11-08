@@ -1,0 +1,792 @@
+Task 012 actual hardware evidence, 2026-11-08 America/Los_Angeles.
+Raw source text preserved except redaction of MACs, identifiers, host paths and build host.
+Authentication, SSH public keys and private known_hosts files excluded. Full originals stay in ignored .venv/012.
+Host annotations and derived interrupt deltas are explicitly labelled.
+
+===== pre-reset.log =====
+[2026-11-08T00:21:39.560-08:00] printf '\n__RV_BEGIN_5d4971ba35c0cc09d9662b5d__\n'; sh -c 'uptime; sh /mount_em\rmmc.sh status; ps | grep -E "[r]t_ctl|[d]emo_s3|[t]iming_client"; true'; __rv_rc=\r=$?; printf '\n'; echo __RC=${__rv_rc}__5d4971ba35c0cc09d9662b5d
+[2026-11-08T00:21:39.592-08:00] 
+[2026-11-08T00:21:39.592-08:00] __RV_BEGIN_5d4971ba35c0cc09d9662b5d__
+[2026-11-08T00:21:39.656-08:00]  08:21:42 up 25 min,  load average: 0.02, 0.06, 0.07
+[2026-11-08T00:21:39.704-08:00] === Ubuntu eMMC mount status ===
+[2026-11-08T00:21:39.704-08:00] Device: /dev/mmcblk1p1
+[2026-11-08T00:21:39.704-08:00] Root:   /mnt/ubuntu
+[2026-11-08T00:21:39.768-08:00] Ubuntu root is not mounted.
+[2026-11-08T00:21:39.880-08:00] 
+[2026-11-08T00:21:39.880-08:00] __RC=0__5d4971ba35c0cc09d9662b5d
+[2026-11-08T00:21:39.896-08:00] # 
+
+===== bootstrap-01.log =====
+[2026-11-08T00:23:50.837-08:00] printf '\n__RV_BEGIN_6b3b6688cc4e3aa1804d08d5__\n'; sh -c 'set -- '"'"'2026-11-\r-08 08:23:50'"'"'
+[2026-11-08T00:23:50.853-08:00]  ro> #!/bin/sh
+[2026-11-08T00:23:50.853-08:00] .168.137.1 dev eth0'"'"'; the> # Task 008-r2: temporary eth0 configuration; run as root in Buildroot.
+[2026-11-08T00:23:50.885-08:00] > set -eu
+[2026-11-08T00:23:50.885-08:00] > 
+[2026-11-08T00:23:50.885-08:00] > if [ "$#" -gt 1 ]; then
+[2026-11-08T00:23:50.885-08:00] >     echo "Usage: sh board_net_up.sh [UTC-time: YYYY-MM-DD HH:MM:SS]" >&2
+[2026-11-08T00:23:50.901-08:00] >     exit 2
+[2026-11-08T00:23:50.901-08:00] > fi
+[2026-11-08T00:23:50.917-08:00] > if [ "$(id -u)" != 0 ]; then
+[2026-11-08T00:23:50.917-08:00] >     echo "Run as root." >&2
+[2026-11-08T00:23:50.917-08:00] >     exit 1
+[2026-11-08T00:23:50.933-08:00] > fi
+[2026-11-08T00:23:50.933-08:00] > 
+[2026-11-08T00:23:50.933-08:00] > ip link set eth0 up
+[2026-11-08T00:23:50.933-08:00] > if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-08T00:23:50.965-08:00] >     ip addr add 192.168.50.2/24 dev eth0
+[2026-11-08T00:23:50.965-08:00] > fi
+[2026-11-08T00:23:50.981-08:00] > # Remove only the known obsolete ICS route; preserve unrelated routing.
+[2026-11-08T00:23:50.997-08:00] > if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-08T00:23:51.013-08:00] >     ip route del default via 192.168.137.1 dev eth0
+[2026-11-08T00:23:51.029-08:00] > fi
+[2026-11-08T00:23:51.029-08:00] > if [ "$#" -eq 1 ]; then
+[2026-11-08T00:23:51.029-08:00] >     date -u -s "$1"
+[2026-11-08T00:23:51.045-08:00] > fi
+[2026-11-08T00:23:51.045-08:00] > ip addr show eth0
+[2026-11-08T00:23:51.045-08:00] > ip route
+[2026-11-08T00:23:51.045-08:00] > date -u
+[2026-11-08T00:23:51.061-08:00] > cat /sys/class/net/eth0/carrier
+[2026-11-08T00:23:51.061-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__6b3b6688cc4e3aa1804d08d5
+[2026-11-08T00:23:51.077-08:00] 
+[2026-11-08T00:23:51.077-08:00] __RV_BEGIN_6b3b6688cc4e3aa1804d08d5__
+[2026-11-08T00:23:51.253-08:00] Sun Nov  8 08:23:50 UTC 2026
+[2026-11-08T00:23:51.285-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-08T00:23:51.285-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-08T00:23:51.301-08:00]     inet 192.168.50.2/24 scope global eth0
+[2026-11-08T00:23:51.301-08:00]        valid_lft forever preferred_lft forever
+[2026-11-08T00:23:51.301-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-08T00:23:51.317-08:00]        valid_lft forever preferred_lft forever
+[2026-11-08T00:23:51.317-08:00] 192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+[2026-11-08T00:23:51.333-08:00] Sun Nov  8 08:23:50 UTC 2026
+[2026-11-08T00:23:51.349-08:00] 1
+[2026-11-08T00:23:51.365-08:00] 
+[2026-11-08T00:23:51.365-08:00] __RC=0__6b3b6688cc4e3aa1804d08d5
+[2026-11-08T00:23:51.365-08:00] # 
+
+===== baseline-01.log =====
+[2026-11-08T00:23:51.749-08:00] printf '\n__RV_BEGIN_aa4523125c04ea033bc6a374__\n'; sh -c '#!/bin/sh
+[2026-11-08T00:23:51.765-08:00]    fil> # Task 012: transient diagnostics only; execute after each boot in Buildroot.
+[2026-11-08T00:23:51.797-08:00] > set -eu
+[2026-11-08T00:23:51.797-08:00] finity_list; do
+[2026-11-08T00:23:51.797-08:00]         [ ! -r "$> dmesg -n 8
+[2026-11-08T00:23:51.813-08:00] > if [ -w /proc/sys/kernel/sysrq ]; then echo 1 > /proc/sys/kernel/sysrq; fi
+[2026-11-08T00:23:51.829-08:00] rv_rc}__aa452> for name in sysrq sched_rt_runtime_us sched_rt_period_us watchdog softlockup_pa\ranic hung_task_timeout_secs panic; do
+[2026-11-08T00:23:51.861-08:00] >     file=/proc/sys/kernel/$name
+[2026-11-08T00:23:51.861-08:00] >     if [ -f "$file" ]; then printf '"'"'%s='"'"' "$file"; cat "$file"; fi
+[2026-11-08T00:23:51.877-08:00] > done
+[2026-11-08T00:23:51.877-08:00] > ls /proc/sys/kernel/ | grep -iE '"'"'watchdog|lockup|hung|panic'"'"' || true
+[2026-11-08T00:23:51.893-08:00] > cat /proc/interrupts
+[2026-11-08T00:23:51.909-08:00] > ps -o pid,comm 2>/dev/null | head -80
+[2026-11-08T00:23:51.909-08:00] > for dir in /proc/irq/[0-9]*; do
+[2026-11-08T00:23:51.925-08:00] >     [ -d "$dir" ] || continue
+[2026-11-08T00:23:51.925-08:00] >     for name in smp_affinity_list effective_affinity_list; do
+[2026-11-08T00:23:51.941-08:00] >         [ ! -r "$dir/$name" ] || { printf '"'"'%s='"'"' "$dir/$name"; cat "$dir\rr/$name"; }
+[2026-11-08T00:23:51.957-08:00] >     done
+[2026-11-08T00:23:51.957-08:00] > done
+[2026-11-08T00:23:51.973-08:00] > for file in /sys/class/thermal/thermal_zone*/temp; do
+[2026-11-08T00:23:51.973-08:00] >     [ ! -r "$file" ] || { printf '"'"'%s='"'"' "$file"; cat "$file"; }
+[2026-11-08T00:23:51.989-08:00] > done
+[2026-11-08T00:23:51.989-08:00] > if [ -r /proc/config.gz ]; then
+[2026-11-08T00:23:52.005-08:00] >     zcat /proc/config.gz | grep -E '"'"'CONFIG_(MAGIC_SYSRQ|DETECT_HUNG_TASK|SO\rOFTLOCKUP_DETECTOR|HARDLOCKUP_DETECTOR|LOCKUP_DETECTOR)='"'"' || true
+[2026-11-08T00:23:52.037-08:00] > fi
+[2026-11-08T00:23:52.037-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__aa4523125c04ea033bc6a374
+[2026-11-08T00:23:52.053-08:00] 
+[2026-11-08T00:23:52.053-08:00] __RV_BEGIN_aa4523125c04ea033bc6a374__
+[2026-11-08T00:23:52.117-08:00] /proc/sys/kernel/sched_rt_runtime_us=950000
+[2026-11-08T00:23:52.133-08:00] /proc/sys/kernel/sched_rt_period_us=1000000
+[2026-11-08T00:23:52.165-08:00] /proc/sys/kernel/panic=0
+[2026-11-08T00:23:52.213-08:00] max_rcu_stall_to_panic
+[2026-11-08T00:23:52.213-08:00] panic
+[2026-11-08T00:23:52.213-08:00] panic_on_oops
+[2026-11-08T00:23:52.213-08:00] panic_on_rcu_stall
+[2026-11-08T00:23:52.213-08:00] panic_on_warn
+[2026-11-08T00:23:52.229-08:00] panic_print
+[2026-11-08T00:23:52.245-08:00]            CPU0       CPU1       
+[2026-11-08T00:23:52.245-08:00]  11:       4190       6249  RISC-V INTC   5 Edge      riscv-timer
+[2026-11-08T00:23:52.246-08:00]  12:       4865          0  SiFive PLIC   5 Edge      f9c250000.serial
+[2026-11-08T00:23:52.246-08:00]  13:         58          0  SiFive PLIC  67 Edge      eth0
+[2026-11-08T00:23:52.261-08:00]  14:          0          0  SiFive PLIC  68 Edge      eth1
+[2026-11-08T00:23:52.261-08:00]  15:         51          0  SiFive PLIC  95 Edge      f99f04000.mmc
+[2026-11-08T00:23:52.261-08:00]  16:         35          0  SiFive PLIC  97 Edge      f9cda1000.mmc
+[2026-11-08T00:23:52.277-08:00] IPI0:       526        892  Rescheduling interrupts
+[2026-11-08T00:23:52.277-08:00] IPI1:       699        293  Function call interrupts
+[2026-11-08T00:23:52.277-08:00] IPI2:         0          0  CPU stop interrupts
+[2026-11-08T00:23:52.293-08:00] IPI3:         0          0  CPU stop (for crash dump) interrupts
+[2026-11-08T00:23:52.293-08:00] IPI4:       201          9  IRQ work interrupts
+[2026-11-08T00:23:52.293-08:00] IPI5:         0          0  Timer broadcast interrupts
+[2026-11-08T00:23:52.341-08:00] PID   COMMAND
+[2026-11-08T00:23:52.341-08:00]     1 init
+[2026-11-08T00:23:52.341-08:00]     2 kthreadd
+[2026-11-08T00:23:52.341-08:00]     3 pool_workqueue_
+[2026-11-08T00:23:52.341-08:00]     4 kworker/R-rcu_g
+[2026-11-08T00:23:52.341-08:00]     5 kworker/R-rcu_p
+[2026-11-08T00:23:52.341-08:00]     6 kworker/R-slub_
+[2026-11-08T00:23:52.341-08:00]     7 kworker/R-netns
+[2026-11-08T00:23:52.357-08:00]     8 kworker/0:0-eve
+[2026-11-08T00:23:52.357-08:00]     9 kworker/0:0H-ev
+[2026-11-08T00:23:52.357-08:00]    10 kworker/0:1-eve
+[2026-11-08T00:23:52.357-08:00]    11 kworker/u16:0
+[2026-11-08T00:23:52.357-08:00]    12 kworker/R-mm_pe
+[2026-11-08T00:23:52.357-08:00]    13 ksoftirqd/0
+[2026-11-08T00:23:52.357-08:00]    14 ktimers/0
+[2026-11-08T00:23:52.357-08:00]    15 pr/legacy
+[2026-11-08T00:23:52.357-08:00]    16 rcu_preempt
+[2026-11-08T00:23:52.373-08:00]    17 rcub/0
+[2026-11-08T00:23:52.373-08:00]    18 rcuc/0
+[2026-11-08T00:23:52.373-08:00]    19 migration/0
+[2026-11-08T00:23:52.373-08:00]    20 irq_work/0
+[2026-11-08T00:23:52.373-08:00]    21 cpuhp/0
+[2026-11-08T00:23:52.373-08:00]    22 cpuhp/1
+[2026-11-08T00:23:52.373-08:00]    23 irq_work/1
+[2026-11-08T00:23:52.373-08:00]    24 migration/1
+[2026-11-08T00:23:52.373-08:00]    25 rcuc/1
+[2026-11-08T00:23:52.373-08:00]    26 ktimers/1
+[2026-11-08T00:23:52.373-08:00]    27 ksoftirqd/1
+[2026-11-08T00:23:52.373-08:00]    28 kworker/1:0-eve
+[2026-11-08T00:23:52.389-08:00]    29 kworker/1:0H-ev
+[2026-11-08T00:23:52.389-08:00]    30 cpuhp/2
+[2026-11-08T00:23:52.389-08:00]    31 irq_work/2
+[2026-11-08T00:23:52.389-08:00]    32 migration/2
+[2026-11-08T00:23:52.389-08:00]    33 rcuc/2
+[2026-11-08T00:23:52.389-08:00]    34 ktimers/2
+[2026-11-08T00:23:52.389-08:00]    35 ksoftirqd/2
+[2026-11-08T00:23:52.389-08:00]    36 kworker/2:0
+[2026-11-08T00:23:52.389-08:00]    37 kworker/2:0H
+[2026-11-08T00:23:52.389-08:00]    38 cpuhp/3
+[2026-11-08T00:23:52.405-08:00]    39 irq_work/3
+[2026-11-08T00:23:52.405-08:00]    40 migration/3
+[2026-11-08T00:23:52.405-08:00]    41 rcuc/3
+[2026-11-08T00:23:52.405-08:00]    42 ktimers/3
+[2026-11-08T00:23:52.405-08:00]    43 ksoftirqd/3
+[2026-11-08T00:23:52.405-08:00]    44 kworker/3:0
+[2026-11-08T00:23:52.405-08:00]    45 kworker/3:0H
+[2026-11-08T00:23:52.405-08:00]    46 cpuhp/4
+[2026-11-08T00:23:52.405-08:00]    47 irq_work/4
+[2026-11-08T00:23:52.405-08:00]    48 migration/4
+[2026-11-08T00:23:52.405-08:00]    49 rcuc/4
+[2026-11-08T00:23:52.405-08:00]    50 ktimers/4
+[2026-11-08T00:23:52.421-08:00]    51 ksoftirqd/4
+[2026-11-08T00:23:52.421-08:00]    52 kworker/4:0
+[2026-11-08T00:23:52.421-08:00]    53 kworker/4:0H
+[2026-11-08T00:23:52.421-08:00]    54 cpuhp/5
+[2026-11-08T00:23:52.421-08:00]    55 irq_work/5
+[2026-11-08T00:23:52.421-08:00]    56 migration/5
+[2026-11-08T00:23:52.421-08:00]    57 rcuc/5
+[2026-11-08T00:23:52.421-08:00]    58 ktimers/5
+[2026-11-08T00:23:52.421-08:00]    59 ksoftirqd/5
+[2026-11-08T00:23:52.421-08:00]    60 kworker/5:0
+[2026-11-08T00:23:52.437-08:00]    61 kworker/5:0H
+[2026-11-08T00:23:52.437-08:00]    62 cpuhp/6
+[2026-11-08T00:23:52.437-08:00]    63 irq_work/6
+[2026-11-08T00:23:52.437-08:00]    64 migration/6
+[2026-11-08T00:23:52.437-08:00]    65 rcuc/6
+[2026-11-08T00:23:52.437-08:00]    66 ktimers/6
+[2026-11-08T00:23:52.437-08:00]    67 ksoftirqd/6
+[2026-11-08T00:23:52.437-08:00]    68 kworker/6:0
+[2026-11-08T00:23:52.437-08:00]    69 kworker/6:0H
+[2026-11-08T00:23:52.437-08:00]    70 cpuhp/7
+[2026-11-08T00:23:52.437-08:00]    71 irq_work/7
+[2026-11-08T00:23:52.453-08:00]    72 migration/7
+[2026-11-08T00:23:52.453-08:00]    73 rcuc/7
+[2026-11-08T00:23:52.453-08:00]    74 ktimers/7
+[2026-11-08T00:23:52.453-08:00]    75 ksoftirqd/7
+[2026-11-08T00:23:52.453-08:00]    76 kworker/7:0
+[2026-11-08T00:23:52.453-08:00]    77 kworker/7:0H
+[2026-11-08T00:23:52.453-08:00]    78 kworker/u17:0-e
+[2026-11-08T00:23:52.453-08:00]    79 kworker/u18:0-e
+[2026-11-08T00:23:52.453-08:00] /proc/irq/1/smp_affinity_list=0-7
+[2026-11-08T00:23:52.453-08:00] /proc/irq/1/effective_affinity_list=
+[2026-11-08T00:23:52.469-08:00] /proc/irq/10/smp_affinity_list=0-7
+[2026-11-08T00:23:52.469-08:00] /proc/irq/10/effective_affinity_list=
+[2026-11-08T00:23:52.469-08:00] /proc/irq/11/smp_affinity_list=0-7
+[2026-11-08T00:23:52.485-08:00] /proc/irq/11/effective_affinity_list=
+[2026-11-08T00:23:52.517-08:00] /proc/irq/12/smp_affinity_list=0-1
+[2026-11-08T00:23:52.533-08:00] /proc/irq/12/effective_affinity_list=0
+[2026-11-08T00:23:52.565-08:00] /proc/irq/13/smp_affinity_list=0-1
+[2026-11-08T00:23:52.581-08:00] /proc/irq/13/effective_affinity_list=0
+[2026-11-08T00:23:52.613-08:00] /proc/irq/14/smp_affinity_list=0-1
+[2026-11-08T00:23:52.629-08:00] /proc/irq/14/effective_affinity_list=0
+[2026-11-08T00:23:52.661-08:00] /proc/irq/15/smp_affinity_list=0-1
+[2026-11-08T00:23:52.677-08:00] /proc/irq/15/effective_affinity_list=0
+[2026-11-08T00:23:52.709-08:00] /proc/irq/16/smp_affinity_list=0-1
+[2026-11-08T00:23:52.725-08:00] /proc/irq/16/effective_affinity_list=0
+[2026-11-08T00:23:52.757-08:00] /proc/irq/2/smp_affinity_list=0-7
+[2026-11-08T00:23:52.773-08:00] /proc/irq/2/effective_affinity_list=
+[2026-11-08T00:23:52.805-08:00] /proc/irq/3/smp_affinity_list=0-7
+[2026-11-08T00:23:52.821-08:00] /proc/irq/3/effective_affinity_list=
+[2026-11-08T00:23:52.853-08:00] /proc/irq/4/smp_affinity_list=0-7
+[2026-11-08T00:23:52.869-08:00] /proc/irq/4/effective_affinity_list=
+[2026-11-08T00:23:52.901-08:00] /proc/irq/5/smp_affinity_list=0-7
+[2026-11-08T00:23:52.917-08:00] /proc/irq/5/effective_affinity_list=
+[2026-11-08T00:23:52.949-08:00] /proc/irq/6/smp_affinity_list=0-7
+[2026-11-08T00:23:52.965-08:00] /proc/irq/6/effective_affinity_list=
+[2026-11-08T00:23:52.997-08:00] /proc/irq/7/smp_affinity_list=0-7
+[2026-11-08T00:23:53.013-08:00] /proc/irq/7/effective_affinity_list=
+[2026-11-08T00:23:53.045-08:00] /proc/irq/8/smp_affinity_list=0-7
+[2026-11-08T00:23:53.061-08:00] /proc/irq/8/effective_affinity_list=
+[2026-11-08T00:23:53.093-08:00] /proc/irq/9/smp_affinity_list=0-7
+[2026-11-08T00:23:53.109-08:00] /proc/irq/9/effective_affinity_list=
+[2026-11-08T00:23:53.141-08:00] 
+[2026-11-08T00:23:53.141-08:00] __RC=0__aa4523125c04ea033bc6a374
+[2026-11-08T00:23:53.141-08:00] # 
+
+===== prepare-01.log =====
+
+[host] exit_status=1
+Entering Ubuntu chroot on /dev/mmcblk1p1...
+bash: cannot set terminal process group (265): Inappropriate ioctl for device
+bash: no job control in this shell
+root@nucleisys:/# exit
+exit
+Exited Ubuntu (status 0). Mounts are kept.
+To unmount, run from Buildroot: sh /mount_emmc.sh stop
+  PID   TID CLS RTPRIO PSR COMMAND
+   19    19  FF     99   0 migration/0
+   24    24  FF     99   1 migration/1
+   32    32  FF     99   0 migration/2
+   40    40  FF     99   0 migration/3
+   48    48  FF     99   0 migration/4
+   56    56  FF     99   0 migration/5
+   64    64  FF     99   0 migration/6
+   72    72  FF     99   0 migration/7
+   90    90  FF     50   0 irq/12-f9c250000.serial
+   91    91  FF     50   0 irq/13-eth%d
+   94    94  FF     50   0 irq/14-eth%d
+   96    96  FF     50   0 irq/15-f99f04000.mmc
+   97    97  FF     50   0 irq/16-f9cda1000.mmc
+   14    14  FF      1   0 ktimers/0
+   16    16  FF      1   0 rcu_preempt
+   17    17  FF      1   0 rcub/0
+   18    18  FF      1   0 rcuc/0
+   20    20  FF      1   0 irq_work/0
+   23    23  FF      1   1 irq_work/1
+   25    25  FF      1   1 rcuc/1
+   26    26  FF      1   1 ktimers/1
+    1     1  TS      -   0 init
+    2     2  TS      -   0 kthreadd
+    3     3  TS      -   1 pool_workqueue_release
+    4     4  TS      -   0 kworker/R-rcu_g
+    5     5  TS      -   0 kworker/R-rcu_p
+    6     6  TS      -   0 kworker/R-slub_
+    7     7  TS      -   0 kworker/R-netns
+    8     8  TS      -   0 kworker/0:0-events_power_efficient
+    9     9  TS      -   0 kworker/0:0H-events_highpri
+   10    10  TS      -   0 kworker/0:1-events_power_efficient
+   11    11  TS      -   0 kworker/u16:0
+   12    12  TS      -   0 kworker/R-mm_pe
+   13    13  TS      -   0 ksoftirqd/0
+   15    15  TS      -   1 pr/legacy
+   21    21  TS      -   0 cpuhp/0
+   22    22  TS      -   1 cpuhp/1
+   27    27  TS      -   1 ksoftirqd/1
+   28    28  TS      -   1 kworker/1:0-events_power_efficient
+   29    29  TS      -   1 kworker/1:0H-events_highpri
+   30    30  TS      -   0 cpuhp/2
+   31    31  TS      -   0 irq_work/2
+   33    33  TS      -   0 rcuc/2
+   34    34  TS      -   0 ktimers/2
+   35    35  TS      -   0 ksoftirqd/2
+   36    36  TS      -   0 kworker/2:0
+   37    37  TS      -   0 kworker/2:0H
+   38    38  TS      -   0 cpuhp/3
+   39    39  TS      -   0 irq_work/3
+   41    41  TS      -   0 rcuc/3
+   42    42  TS      -   0 ktimers/3
+   43    43  TS      -   0 ksoftirqd/3
+   44    44  TS      -   0 kworker/3:0
+   45    45  TS      -   0 kworker/3:0H
+   46    46  TS      -   0 cpuhp/4
+   47    47  TS      -   0 irq_work/4
+   49    49  TS      -   0 rcuc/4
+   50    50  TS      -   0 ktimers/4
+   51    51  TS      -   0 ksoftirqd/4
+irq/12-f9c250000.serial
+Cpus_allowed_list:	0
+irq/13-eth%d
+Cpus_allowed_list:	0
+irq/14-eth%d
+Cpus_allowed_list:	0
+irq/15-f99f04000.mmc
+Cpus_allowed_list:	0
+irq/16-f9cda1000.mmc
+Cpus_allowed_list:	0
+ls: /proc/sys/kernel/sysrq: No such file or directory
+ls: /proc/sysrq-trigger: No such file or directory
+ls: /proc/config.gz: No such file or directory
+[    0.000000] Linux version 6.6.90-rt54+ (<BUILD_ID>) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026
+[    0.000000] Machine model: nuclei,p0soc
+[    0.000000] SBI specification v1.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10003
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: legacy bootconsole [sbi0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] OF: reserved mem: 0x0000000000000000..0x000000000003ffff (256 KiB) nomap non-reusable mmode_resv0@0
+[    0.000000] OF: reserved mem: 0x0000000000040000..0x000000000007ffff (256 KiB) nomap non-reusable mmode_resv1@40000
+[    0.000000] OF: reserved mem: 0x000000007e000000..0x000000007e037fff (224 KiB) nomap non-reusable region@7e000000
+[    0.000000] OF: reserved mem: 0x000000007e038000..0x000000007e06ffff (224 KiB) nomap non-reusable region@7e038000
+[    0.000000] OF: reserved mem: 0x000000007e070000..0x000000007e077fff (32 KiB) nomap non-reusable region@7e070000
+[    0.000000] OF: reserved mem: 0x000000007e078000..0x000000007e07ffff (32 KiB) nomap non-reusable region@7e078000
+[    0.000000] OF: reserved mem: 0x000000007e080000..0x000000007e0fffff (512 KiB) nomap non-reusable region@7e080000
+[    0.000000] OF: reserved mem: 0x000000007e100000..0x000000007e10ffff (64 KiB) nomap non-reusable rpmsg@7e100000
+[    0.000000] OF: reserved mem: 0x000000007e110000..0x000000007e1fffff (960 KiB) nomap non-reusable rpmsg_dma@7e110000
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000000000000-0x000000007fffffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x000000000007ffff]
+[    0.000000]   node   0: [mem 0x0000000000080000-0x000000007dffffff]
+[    0.000000]   node   0: [mem 0x000000007e000000-0x000000007e1fffff]
+[    0.000000]   node   0: [mem 0x000000007e200000-0x000000007fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x000000007fffffff]
+[    0.000000] SBI HSM extension detected
+[    0.000000] Falling back to deprecated "riscv,isa"
+[    0.000000] riscv: base ISA extensions acdfim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 17 pages/cpu s31744 r8192 d29696 u69632
+[    0.000000] pcpu-alloc: s31744 r8192 d29696 u69632 alloc=17*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 [0] 4 [0] 5 [0] 6 [0] 7 
+[    0.000000] Kernel command line: earlycon=sbi console=ttyNUC0
+[    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 517120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] Memory: 2031324K/2097152K available (4859K kernel code, 4738K rwdata, 2048K rodata, 2140K init, 329K bss, 65828K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=8.
+[    0.000000] rcu: 	RCU priority boosting: priority 1 delay 500 ms.
+[    0.000000] rcu: 	RCU_SOFTIRQ processing moved to rcuc kthreads.
+[    0.000000] 	No expedited grace period (rcu_normal_after_boot).
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    8.762424] mmc1: new DDR MMC card at address 0001
+[    8.772697] mmcblk1: mmc1:0001 CJUD4R 59.6 GiB
+[    8.805817]  mmcblk1: p1
+[    8.807495] clk: Disabling unused clocks
+[    8.814942] mmcblk1boot0: mmc1:0001 CJUD4R 31.9 MiB
+[    8.818297] Freeing unused kernel image (initmem) memory: 2140K
+[    8.818535] Run /init as init process
+[    8.818570]   with arguments:
+[    8.818583]     /init
+[    8.818598]   with environment:
+[    8.818610]     HOME=/
+[    8.818623]     TERM=linux
+[    8.827553] mmcblk1boot1: mmc1:0001 CJUD4R 31.9 MiB
+[   14.684093] random: crng init done
+[  104.324937] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+Stopping Ubuntu mounts; leave all chroot sessions first.
+Ubuntu unmounted.
+
+[host] exit_status=0
+
+===== compile.log =====
+Entering Ubuntu chroot on /dev/mmcblk1p1...
+Exited Ubuntu (status 0). Mounts are kept.
+To unmount, run from Buildroot: sh /mount_emmc.sh stop
+gcc -O2 -Wall -Wextra -std=c11 rt_ctl.c -o rt_ctl -lm -pthread
+	linux-vdso.so.1 (0x0000003fb1588000)
+	libm.so.6 => /lib/riscv64-linux-gnu/libm.so.6 (0x0000003fb14fc000)
+	libc.so.6 => /lib/riscv64-linux-gnu/libc.so.6 (0x0000003fb137c000)
+	/lib/ld-linux-riscv64-lp64d.so.1 (0x0000003fb158a000)
+Stopping Ubuntu mounts; leave all chroot sessions first.
+Ubuntu unmounted.
+bash: cannot set terminal process group (344): Inappropriate ioctl for device
+bash: no job control in this shell
+root@nucleisys:/# exit
+exit
+
+===== bootstrap-02.log =====
+[2026-11-08T01:18:41.788-08:00] printf '\n__RV_BEGIN_48dfe200b1e6edd5b3fab6da__\n'; sh -c 'set -- '"'"'2026-11-\r-08 09:18:41'"'"'
+[2026-11-08T01:18:41.788-08:00] ute del default via 1> #!/bin/sh
+[2026-11-08T01:18:41.804-08:00]  [ "$#" -eq 1 ]; then> # Task 008-r2: temporary eth0 configuration; run as root in Buildroot.
+[2026-11-08T01:18:41.820-08:00] > set -eu
+[2026-11-08T01:18:41.820-08:00] > 
+[2026-11-08T01:18:41.836-08:00] > if [ "$#" -gt 1 ]; then
+[2026-11-08T01:18:41.836-08:00] >     echo "Usage: sh board_net_up.sh [UTC-time: YYYY-MM-DD HH:MM:SS]" >&2
+[2026-11-08T01:18:41.852-08:00] >     exit 2
+[2026-11-08T01:18:41.852-08:00] > fi
+[2026-11-08T01:18:41.852-08:00] > if [ "$(id -u)" != 0 ]; then
+[2026-11-08T01:18:41.868-08:00] >     echo "Run as root." >&2
+[2026-11-08T01:18:41.868-08:00] >     exit 1
+[2026-11-08T01:18:41.868-08:00] > fi
+[2026-11-08T01:18:41.868-08:00] > 
+[2026-11-08T01:18:41.868-08:00] > ip link set eth0 up
+[2026-11-08T01:18:41.884-08:00] > if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-08T01:18:41.916-08:00] >     ip addr add 192.168.50.2/24 dev eth0
+[2026-11-08T01:18:41.916-08:00] > fi
+[2026-11-08T01:18:41.916-08:00] > # Remove only the known obsolete ICS route; preserve unrelated routing.
+[2026-11-08T01:18:41.932-08:00] > if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-08T01:18:41.964-08:00] >     ip route del default via 192.168.137.1 dev eth0
+[2026-11-08T01:18:41.980-08:00] > fi
+[2026-11-08T01:18:41.980-08:00] > if [ "$#" -eq 1 ]; then
+[2026-11-08T01:18:41.980-08:00] >     date -u -s "$1"
+[2026-11-08T01:18:41.996-08:00] > fi
+[2026-11-08T01:18:41.996-08:00] > ip addr show eth0
+[2026-11-08T01:18:41.996-08:00] > ip route
+[2026-11-08T01:18:41.996-08:00] > date -u
+[2026-11-08T01:18:41.996-08:00] > cat /sys/class/net/eth0/carrier
+[2026-11-08T01:18:42.012-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__48dfe200b1e6edd5b3fab6da
+[2026-11-08T01:18:42.028-08:00] 
+[2026-11-08T01:18:42.028-08:00] __RV_BEGIN_48dfe200b1e6edd5b3fab6da__
+[2026-11-08T01:18:42.204-08:00] Sun Nov  8 09:18:41 UTC 2026
+[2026-11-08T01:18:42.236-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-08T01:18:42.236-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-08T01:18:42.252-08:00]     inet 192.168.50.2/24 scope global eth0
+[2026-11-08T01:18:42.252-08:00]        valid_lft forever preferred_lft forever
+[2026-11-08T01:18:42.252-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-08T01:18:42.252-08:00]        valid_lft forever preferred_lft forever
+[2026-11-08T01:18:42.268-08:00] 192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+[2026-11-08T01:18:42.284-08:00] Sun Nov  8 09:18:41 UTC 2026
+[2026-11-08T01:18:42.316-08:00] 1
+[2026-11-08T01:18:42.316-08:00] 
+[2026-11-08T01:18:42.316-08:00] __RC=0__48dfe200b1e6edd5b3fab6da
+[2026-11-08T01:18:42.316-08:00] # 
+
+===== baseline-02.log =====
+[2026-11-08T01:18:42.656-08:00] printf '\n__RV_BEGIN_ea8a29138ff1d6bb2a52247a__\n'; sh -c '#!/bin/sh
+[2026-11-08T01:18:42.656-08:00] d_rt_runtim> # Task 012: transient diagnostics only; execute after each boot in Buildroot.
+[2026-11-08T01:18:42.688-08:00] c'"'"' || true
+[2026-11-08T01:18:42.688-08:00] cat /proc/> set -eu
+[2026-11-08T01:18:42.688-08:00] null | head -80
+[2026-11-08T01:18:42.688-08:00] for dir i> dmesg -n 8
+[2026-11-08T01:18:42.704-08:00] or name in smp_affinity_l> if [ -w /proc/sys/kernel/sysrq ]; then echo 1 > /proc/sys/kernel/sysrq; fi
+[2026-11-08T01:18:42.720-08:00] ; }
+[2026-11-08T01:18:42.720-08:00] done
+[2026-11-08T01:18:42.720-08:00] if> for name in sysrq sched_rt_runtime_us sched_rt_period_us watchdog softlockup_pa\ranic hung_task_timeout_secs panic; do
+[2026-11-08T01:18:42.752-08:00] >     file=/proc/sys/kernel/$name
+[2026-11-08T01:18:42.768-08:00] >     if [ -f "$file" ]; then printf '"'"'%s='"'"' "$file"; cat "$file"; else ech\rho "$file: absent"; fi
+[2026-11-08T01:18:42.784-08:00] > done
+[2026-11-08T01:18:42.784-08:00] > ls /proc/sys/kernel/ | grep -iE '"'"'watchdog|lockup|hung|panic'"'"' || true
+[2026-11-08T01:18:42.800-08:00] > cat /proc/interrupts
+[2026-11-08T01:18:42.816-08:00] > ps -o pid,comm 2>/dev/null | head -80
+[2026-11-08T01:18:42.816-08:00] > for dir in /proc/irq/[0-9]*; do
+[2026-11-08T01:18:42.832-08:00] >     [ -d "$dir" ] || continue
+[2026-11-08T01:18:42.832-08:00] >     for name in smp_affinity_list effective_affinity_list; do
+[2026-11-08T01:18:42.848-08:00] >         [ ! -r "$dir/$name" ] || { printf '"'"'%s='"'"' "$dir/$name"; cat "$dir\rr/$name"; }
+[2026-11-08T01:18:42.864-08:00] >     done
+[2026-11-08T01:18:42.864-08:00] > done
+[2026-11-08T01:18:42.864-08:00] > for file in /sys/class/thermal/thermal_zone*/temp; do
+[2026-11-08T01:18:42.880-08:00] >     [ ! -r "$file" ] || { printf '"'"'%s='"'"' "$file"; cat "$file"; }
+[2026-11-08T01:18:42.896-08:00] > done
+[2026-11-08T01:18:42.896-08:00] > if [ -r /proc/config.gz ]; then
+[2026-11-08T01:18:42.912-08:00] >     zcat /proc/config.gz | grep -E '"'"'CONFIG_(MAGIC_SYSRQ|DETECT_HUNG_TASK|SO\rOFTLOCKUP_DETECTOR|HARDLOCKUP_DETECTOR|LOCKUP_DETECTOR)='"'"' || true
+[2026-11-08T01:18:42.944-08:00] > fi
+[2026-11-08T01:18:42.944-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__ea8a29138ff1d6bb2a52247a
+[2026-11-08T01:18:42.960-08:00] 
+[2026-11-08T01:18:42.960-08:00] __RV_BEGIN_ea8a29138ff1d6bb2a52247a__
+[2026-11-08T01:18:43.024-08:00] /proc/sys/kernel/sysrq: absent
+[2026-11-08T01:18:43.024-08:00] /proc/sys/kernel/sched_rt_runtime_us=950000
+[2026-11-08T01:18:43.040-08:00] /proc/sys/kernel/sched_rt_period_us=1000000
+[2026-11-08T01:18:43.072-08:00] /proc/sys/kernel/watchdog: absent
+[2026-11-08T01:18:43.072-08:00] /proc/sys/kernel/softlockup_panic: absent
+[2026-11-08T01:18:43.072-08:00] /proc/sys/kernel/hung_task_timeout_secs: absent
+[2026-11-08T01:18:43.072-08:00] /proc/sys/kernel/panic=0
+[2026-11-08T01:18:43.136-08:00] max_rcu_stall_to_panic
+[2026-11-08T01:18:43.136-08:00] panic
+[2026-11-08T01:18:43.136-08:00] panic_on_oops
+[2026-11-08T01:18:43.136-08:00] panic_on_rcu_stall
+[2026-11-08T01:18:43.136-08:00] panic_on_warn
+[2026-11-08T01:18:43.136-08:00] panic_print
+[2026-11-08T01:18:43.152-08:00]            CPU0       CPU1       
+[2026-11-08T01:18:43.168-08:00]  11:       5052       4090  RISC-V INTC   5 Edge      riscv-timer
+[2026-11-08T01:18:43.168-08:00]  12:       4972          0  SiFive PLIC   5 Edge      f9c250000.serial
+[2026-11-08T01:18:43.168-08:00]  13:         44          0  SiFive PLIC  67 Edge      eth0
+[2026-11-08T01:18:43.184-08:00]  14:          0          0  SiFive PLIC  68 Edge      eth1
+[2026-11-08T01:18:43.184-08:00]  15:         51          0  SiFive PLIC  95 Edge      f99f04000.mmc
+[2026-11-08T01:18:43.184-08:00]  16:         35          0  SiFive PLIC  97 Edge      f9cda1000.mmc
+[2026-11-08T01:18:43.200-08:00] IPI0:       523        908  Rescheduling interrupts
+[2026-11-08T01:18:43.200-08:00] IPI1:       427        401  Function call interrupts
+[2026-11-08T01:18:43.200-08:00] IPI2:         0          0  CPU stop interrupts
+[2026-11-08T01:18:43.216-08:00] IPI3:         0          0  CPU stop (for crash dump) interrupts
+[2026-11-08T01:18:43.216-08:00] IPI4:       190          6  IRQ work interrupts
+[2026-11-08T01:18:43.216-08:00] IPI5:         0          0  Timer broadcast interrupts
+[2026-11-08T01:18:43.280-08:00] PID   COMMAND
+[2026-11-08T01:18:43.280-08:00]     1 init
+[2026-11-08T01:18:43.280-08:00]     2 kthreadd
+[2026-11-08T01:18:43.280-08:00]     3 pool_workqueue_
+[2026-11-08T01:18:43.280-08:00]     4 kworker/R-rcu_g
+[2026-11-08T01:18:43.280-08:00]     5 kworker/R-rcu_p
+[2026-11-08T01:18:43.280-08:00]     6 kworker/R-slub_
+[2026-11-08T01:18:43.280-08:00]     7 kworker/R-netns
+[2026-11-08T01:18:43.296-08:00]     8 kworker/0:0-rcu
+[2026-11-08T01:18:43.296-08:00]     9 kworker/0:0H-mm
+[2026-11-08T01:18:43.296-08:00]    10 kworker/0:1-mm_
+[2026-11-08T01:18:43.296-08:00]    11 kworker/u16:0
+[2026-11-08T01:18:43.296-08:00]    12 kworker/R-mm_pe
+[2026-11-08T01:18:43.296-08:00]    13 ksoftirqd/0
+[2026-11-08T01:18:43.296-08:00]    14 ktimers/0
+[2026-11-08T01:18:43.296-08:00]    15 pr/legacy
+[2026-11-08T01:18:43.296-08:00]    16 rcu_preempt
+[2026-11-08T01:18:43.296-08:00]    17 rcub/0
+[2026-11-08T01:18:43.312-08:00]    18 rcuc/0
+[2026-11-08T01:18:43.312-08:00]    19 migration/0
+[2026-11-08T01:18:43.312-08:00]    20 irq_work/0
+[2026-11-08T01:18:43.312-08:00]    21 cpuhp/0
+[2026-11-08T01:18:43.312-08:00]    22 cpuhp/1
+[2026-11-08T01:18:43.312-08:00]    23 irq_work/1
+[2026-11-08T01:18:43.312-08:00]    24 migration/1
+[2026-11-08T01:18:43.312-08:00]    25 rcuc/1
+[2026-11-08T01:18:43.312-08:00]    26 ktimers/1
+[2026-11-08T01:18:43.312-08:00]    27 ksoftirqd/1
+[2026-11-08T01:18:43.312-08:00]    28 kworker/1:0-eve
+[2026-11-08T01:18:43.328-08:00]    29 kworker/1:0H-ev
+[2026-11-08T01:18:43.328-08:00]    30 cpuhp/2
+[2026-11-08T01:18:43.328-08:00]    31 irq_work/2
+[2026-11-08T01:18:43.328-08:00]    32 migration/2
+[2026-11-08T01:18:43.328-08:00]    33 rcuc/2
+[2026-11-08T01:18:43.328-08:00]    34 ktimers/2
+[2026-11-08T01:18:43.328-08:00]    35 ksoftirqd/2
+[2026-11-08T01:18:43.328-08:00]    36 kworker/2:0
+[2026-11-08T01:18:43.328-08:00]    37 kworker/2:0H
+[2026-11-08T01:18:43.328-08:00]    38 cpuhp/3
+[2026-11-08T01:18:43.328-08:00]    39 irq_work/3
+[2026-11-08T01:18:43.344-08:00]    40 migration/3
+[2026-11-08T01:18:43.344-08:00]    41 rcuc/3
+[2026-11-08T01:18:43.344-08:00]    42 ktimers/3
+[2026-11-08T01:18:43.344-08:00]    43 ksoftirqd/3
+[2026-11-08T01:18:43.344-08:00]    44 kworker/3:0
+[2026-11-08T01:18:43.344-08:00]    45 kworker/3:0H
+[2026-11-08T01:18:43.344-08:00]    46 cpuhp/4
+[2026-11-08T01:18:43.344-08:00]    47 irq_work/4
+[2026-11-08T01:18:43.344-08:00]    48 migration/4
+[2026-11-08T01:18:43.344-08:00]    49 rcuc/4
+[2026-11-08T01:18:43.344-08:00]    50 ktimers/4
+[2026-11-08T01:18:43.360-08:00]    51 ksoftirqd/4
+[2026-11-08T01:18:43.360-08:00]    52 kworker/4:0
+[2026-11-08T01:18:43.360-08:00]    53 kworker/4:0H
+[2026-11-08T01:18:43.360-08:00]    54 cpuhp/5
+[2026-11-08T01:18:43.360-08:00]    55 irq_work/5
+[2026-11-08T01:18:43.360-08:00]    56 migration/5
+[2026-11-08T01:18:43.360-08:00]    57 rcuc/5
+[2026-11-08T01:18:43.360-08:00]    58 ktimers/5
+[2026-11-08T01:18:43.360-08:00]    59 ksoftirqd/5
+[2026-11-08T01:18:43.360-08:00]    60 kworker/5:0
+[2026-11-08T01:18:43.360-08:00]    61 kworker/5:0H
+[2026-11-08T01:18:43.376-08:00]    62 cpuhp/6
+[2026-11-08T01:18:43.376-08:00]    63 irq_work/6
+[2026-11-08T01:18:43.376-08:00]    64 migration/6
+[2026-11-08T01:18:43.376-08:00]    65 rcuc/6
+[2026-11-08T01:18:43.376-08:00]    66 ktimers/6
+[2026-11-08T01:18:43.376-08:00]    67 ksoftirqd/6
+[2026-11-08T01:18:43.376-08:00]    68 kworker/6:0
+[2026-11-08T01:18:43.376-08:00]    69 kworker/6:0H
+[2026-11-08T01:18:43.376-08:00]    70 cpuhp/7
+[2026-11-08T01:18:43.376-08:00]    71 irq_work/7
+[2026-11-08T01:18:43.376-08:00]    72 migration/7
+[2026-11-08T01:18:43.392-08:00]    73 rcuc/7
+[2026-11-08T01:18:43.392-08:00]    74 ktimers/7
+[2026-11-08T01:18:43.392-08:00]    75 ksoftirqd/7
+[2026-11-08T01:18:43.392-08:00]    76 kworker/7:0
+[2026-11-08T01:18:43.392-08:00]    77 kworker/7:0H
+[2026-11-08T01:18:43.392-08:00]    78 kworker/u17:0-e
+[2026-11-08T01:18:43.392-08:00]    79 kworker/u18:0-e
+[2026-11-08T01:18:43.392-08:00] /proc/irq/1/smp_affinity_list=0-7
+[2026-11-08T01:18:43.392-08:00] /proc/irq/1/effective_affinity_list=
+[2026-11-08T01:18:43.408-08:00] /proc/irq/10/smp_affinity_list=0-7
+[2026-11-08T01:18:43.408-08:00] /proc/irq/10/effective_affinity_list=
+[2026-11-08T01:18:43.408-08:00] /proc/irq/11/smp_affinity_list=0-7
+[2026-11-08T01:18:43.424-08:00] /proc/irq/11/effective_affinity_list=
+[2026-11-08T01:18:43.440-08:00] /proc/irq/12/smp_affinity_list=0-1
+[2026-11-08T01:18:43.472-08:00] /proc/irq/12/effective_affinity_list=0
+[2026-11-08T01:18:43.488-08:00] /proc/irq/13/smp_affinity_list=0-1
+[2026-11-08T01:18:43.520-08:00] /proc/irq/13/effective_affinity_list=0
+[2026-11-08T01:18:43.552-08:00] /proc/irq/14/smp_affinity_list=0-1
+[2026-11-08T01:18:43.568-08:00] /proc/irq/14/effective_affinity_list=0
+[2026-11-08T01:18:43.600-08:00] /proc/irq/15/smp_affinity_list=0-1
+[2026-11-08T01:18:43.616-08:00] /proc/irq/15/effective_affinity_list=0
+[2026-11-08T01:18:43.648-08:00] /proc/irq/16/smp_affinity_list=0-1
+[2026-11-08T01:18:43.664-08:00] /proc/irq/16/effective_affinity_list=0
+[2026-11-08T01:18:43.680-08:00] /proc/irq/2/smp_affinity_list=0-7
+[2026-11-08T01:18:43.712-08:00] /proc/irq/2/effective_affinity_list=
+[2026-11-08T01:18:43.728-08:00] /proc/irq/3/smp_affinity_list=0-7
+[2026-11-08T01:18:43.760-08:00] /proc/irq/3/effective_affinity_list=
+[2026-11-08T01:18:43.776-08:00] /proc/irq/4/smp_affinity_list=0-7
+[2026-11-08T01:18:43.808-08:00] /proc/irq/4/effective_affinity_list=
+[2026-11-08T01:18:43.824-08:00] /proc/irq/5/smp_affinity_list=0-7
+[2026-11-08T01:18:43.856-08:00] /proc/irq/5/effective_affinity_list=
+[2026-11-08T01:18:43.872-08:00] /proc/irq/6/smp_affinity_list=0-7
+[2026-11-08T01:18:43.904-08:00] /proc/irq/6/effective_affinity_list=
+[2026-11-08T01:18:43.920-08:00] /proc/irq/7/smp_affinity_list=0-7
+[2026-11-08T01:18:43.952-08:00] /proc/irq/7/effective_affinity_list=
+[2026-11-08T01:18:43.968-08:00] /proc/irq/8/smp_affinity_list=0-7
+[2026-11-08T01:18:44.000-08:00] /proc/irq/8/effective_affinity_list=
+[2026-11-08T01:18:44.016-08:00] /proc/irq/9/smp_affinity_list=0-7
+[2026-11-08T01:18:44.048-08:00] /proc/irq/9/effective_affinity_list=
+[2026-11-08T01:18:44.080-08:00] 
+[2026-11-08T01:18:44.080-08:00] __RC=0__ea8a29138ff1d6bb2a52247a
+[2026-11-08T01:18:44.080-08:00] # 
+
+===== prepare-02.log =====
+Entering Ubuntu chroot on /dev/mmcblk1p1...
+bash: cannot set terminal process group (260): Inappropriate ioctl for device
+bash: no job control in this shell
+root@nucleisys:/# exit
+exit
+Exited Ubuntu (status 0). Mounts are kept.
+To unmount, run from Buildroot: sh /mount_emmc.sh stop
+  PID   TID CLS RTPRIO PSR COMMAND
+   19    19  FF     99   0 migration/0
+   24    24  FF     99   1 migration/1
+   32    32  FF     99   0 migration/2
+   40    40  FF     99   0 migration/3
+   48    48  FF     99   0 migration/4
+   56    56  FF     99   0 migration/5
+   64    64  FF     99   0 migration/6
+   72    72  FF     99   0 migration/7
+   90    90  FF     50   0 irq/12-f9c250000.serial
+   91    91  FF     50   0 irq/13-eth%d
+   94    94  FF     50   0 irq/14-eth%d
+   96    96  FF     50   0 irq/15-f99f04000.mmc
+   97    97  FF     50   0 irq/16-f9cda1000.mmc
+   14    14  FF      1   0 ktimers/0
+   16    16  FF      1   1 rcu_preempt
+   17    17  FF      1   0 rcub/0
+   18    18  FF      1   0 rcuc/0
+   20    20  FF      1   0 irq_work/0
+   23    23  FF      1   1 irq_work/1
+   25    25  FF      1   1 rcuc/1
+   26    26  FF      1   1 ktimers/1
+    1     1  TS      -   1 init
+    2     2  TS      -   1 kthreadd
+    3     3  TS      -   1 pool_workqueue_release
+    4     4  TS      -   0 kworker/R-rcu_g
+    5     5  TS      -   0 kworker/R-rcu_p
+    6     6  TS      -   0 kworker/R-slub_
+    7     7  TS      -   0 kworker/R-netns
+    8     8  TS      -   0 kworker/0:0-rcu_gp
+    9     9  TS      -   0 kworker/0:0H-mmc_complete
+   10    10  TS      -   0 kworker/0:1-events
+   11    11  TS      -   0 kworker/u16:0
+   12    12  TS      -   0 kworker/R-mm_pe
+   13    13  TS      -   0 ksoftirqd/0
+   15    15  TS      -   1 pr/legacy
+   21    21  TS      -   0 cpuhp/0
+   22    22  TS      -   1 cpuhp/1
+   27    27  TS      -   1 ksoftirqd/1
+   28    28  TS      -   1 kworker/1:0-mm_percpu_wq
+   29    29  TS      -   1 kworker/1:0H-events_highpri
+   30    30  TS      -   0 cpuhp/2
+   31    31  TS      -   0 irq_work/2
+   33    33  TS      -   0 rcuc/2
+   34    34  TS      -   0 ktimers/2
+   35    35  TS      -   0 ksoftirqd/2
+   36    36  TS      -   0 kworker/2:0
+   37    37  TS      -   0 kworker/2:0H
+   38    38  TS      -   0 cpuhp/3
+   39    39  TS      -   0 irq_work/3
+   41    41  TS      -   0 rcuc/3
+   42    42  TS      -   0 ktimers/3
+   43    43  TS      -   0 ksoftirqd/3
+   44    44  TS      -   0 kworker/3:0
+   45    45  TS      -   0 kworker/3:0H
+   46    46  TS      -   0 cpuhp/4
+   47    47  TS      -   0 irq_work/4
+   49    49  TS      -   0 rcuc/4
+   50    50  TS      -   0 ktimers/4
+   51    51  TS      -   0 ksoftirqd/4
+numpy 1.26.4
+irq/12-f9c250000.serial
+Cpus_allowed_list:	0
+irq/13-eth%d
+Cpus_allowed_list:	0
+irq/14-eth%d
+Cpus_allowed_list:	0
+irq/15-f99f04000.mmc
+Cpus_allowed_list:	0
+irq/16-f9cda1000.mmc
+Cpus_allowed_list:	0
+ls: /proc/sys/kernel/sysrq: No such file or directory
+ls: /proc/sysrq-trigger: No such file or directory
+ls: /proc/config.gz: No such file or directory
+[    0.000000] Linux version 6.6.90-rt54+ (<BUILD_ID>) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026
+[    0.000000] Machine model: nuclei,p0soc
+[    0.000000] SBI specification v1.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10003
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: legacy bootconsole [sbi0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] OF: reserved mem: 0x0000000000000000..0x000000000003ffff (256 KiB) nomap non-reusable mmode_resv0@0
+[    0.000000] OF: reserved mem: 0x0000000000040000..0x000000000007ffff (256 KiB) nomap non-reusable mmode_resv1@40000
+[    0.000000] OF: reserved mem: 0x000000007e000000..0x000000007e037fff (224 KiB) nomap non-reusable region@7e000000
+[    0.000000] OF: reserved mem: 0x000000007e038000..0x000000007e06ffff (224 KiB) nomap non-reusable region@7e038000
+[    0.000000] OF: reserved mem: 0x000000007e070000..0x000000007e077fff (32 KiB) nomap non-reusable region@7e070000
+[    0.000000] OF: reserved mem: 0x000000007e078000..0x000000007e07ffff (32 KiB) nomap non-reusable region@7e078000
+[    0.000000] OF: reserved mem: 0x000000007e080000..0x000000007e0fffff (512 KiB) nomap non-reusable region@7e080000
+[    0.000000] OF: reserved mem: 0x000000007e100000..0x000000007e10ffff (64 KiB) nomap non-reusable rpmsg@7e100000
+[    0.000000] OF: reserved mem: 0x000000007e110000..0x000000007e1fffff (960 KiB) nomap non-reusable rpmsg_dma@7e110000
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000000000000-0x000000007fffffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x000000000007ffff]
+[    0.000000]   node   0: [mem 0x0000000000080000-0x000000007dffffff]
+[    0.000000]   node   0: [mem 0x000000007e000000-0x000000007e1fffff]
+[    0.000000]   node   0: [mem 0x000000007e200000-0x000000007fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x000000007fffffff]
+[    0.000000] SBI HSM extension detected
+[    0.000000] Falling back to deprecated "riscv,isa"
+[    0.000000] riscv: base ISA extensions acdfim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 17 pages/cpu s31744 r8192 d29696 u69632
+[    0.000000] pcpu-alloc: s31744 r8192 d29696 u69632 alloc=17*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 [0] 4 [0] 5 [0] 6 [0] 7 
+[    0.000000] Kernel command line: earlycon=sbi console=ttyNUC0
+[    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 517120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] Memory: 2031324K/2097152K available (4859K kernel code, 4738K rwdata, 2048K rodata, 2140K init, 329K bss, 65828K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=8.
+[    0.000000] rcu: 	RCU priority boosting: priority 1 delay 500 ms.
+[    0.000000] rcu: 	RCU_SOFTIRQ processing moved to rcuc kthreads.
+[    0.000000] 	No expedited grace period (rcu_normal_after_boot).
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    8.802528] Freeing unused kernel image (initmem) memory: 2140K
+[    8.802750] Run /init as init process
+[    8.802782]   with arguments:
+[    8.802795]     /init
+[    8.802808]   with environment:
+[    8.802818]     HOME=/
+[    8.802830]     TERM=linux
+[    8.804818] mmc1: new DDR MMC card at address 0001
+[    8.809387] mmcblk1: mmc1:0001 CJUD4R 59.6 GiB
+[    8.824691]  mmcblk1: p1
+[    8.828642] mmcblk1boot0: mmc1:0001 CJUD4R 31.9 MiB
+[    8.842063] mmcblk1boot1: mmc1:0001 CJUD4R 31.9 MiB
+[   14.655846] random: crng init done
+[   79.557719] EXT4-fs (mmcblk1p1): recovery complete
+[   79.568759] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+Stopping Ubuntu mounts; leave all chroot sessions first.
+Ubuntu unmounted.
+
+[host] exit_status=0
+
+===== compile-lifetime-retry.log =====
+Entering Ubuntu chroot on /dev/mmcblk1p1...
+bash: cannot set terminal process group (334): Inappropriate ioctl for device
+bash: no job control in this shell
+root@nucleisys:/# exit
+exit
+Exited Ubuntu (status 0). Mounts are kept.
+To unmount, run from Buildroot: sh /mount_emmc.sh stop
+STAGE_mount_ok
+STAGE_bind_ok
+gcc -O2 -Wall -Wextra -std=c11 rt_ctl.c -o rt_ctl -lm -pthread
+	linux-vdso.so.1 (0x0000003fbd1e3000)
+	libm.so.6 => /lib/riscv64-linux-gnu/libm.so.6 (0x0000003fbd157000)
+	libc.so.6 => /lib/riscv64-linux-gnu/libc.so.6 (0x0000003fbcfd7000)
+	/lib/ld-linux-riscv64-lp64d.so.1 (0x0000003fbd1e5000)
+STAGE_compile_ok
+Stopping Ubuntu mounts; leave all chroot sessions first.
+Ubuntu unmounted.
