@@ -1,0 +1,659 @@
+Task 008-r3 redacted evidence. Filename date per task: 20261108.
+Execution: 2026-11-07 America/Los_Angeles / 2026-11-08 UTC.
+Authentication and SSH public keys excluded; identifiers, MAC and local paths masked.
+
+===== board-raw.log =====
+[2026-11-07T20:31:47.228-08:00] 
+[2026-11-07T20:31:47.228-08:00] [host] command: cat /etc/os-release
+[2026-11-07T20:31:47.258-08:00] printf '\n__RV_BEGIN_5510b2681077521943b82d51__\n'; sh -c 'cat /etc/os-release'\r'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__5510b2681077521943b82d51
+[2026-11-07T20:31:47.274-08:00] 
+[2026-11-07T20:31:47.274-08:00] __RV_BEGIN_5510b2681077521943b82d51__
+[2026-11-07T20:31:47.322-08:00] NAME=Buildroot
+[2026-11-07T20:31:47.338-08:00] VERSION=2024.08
+[2026-11-07T20:31:47.338-08:00] ID=buildroot
+[2026-11-07T20:31:47.338-08:00] VERSION_ID=2024.08
+[2026-11-07T20:31:47.338-08:00] PRETTY_NAME="Buildroot 2024.08"
+[2026-11-07T20:31:47.338-08:00] 
+[2026-11-07T20:31:47.338-08:00] __RC=0__5510b2681077521943b82d51
+[2026-11-07T20:31:47.338-08:00] # 
+[2026-11-07T20:31:47.339-08:00] [host] rc=0
+[2026-11-07T20:31:47.339-08:00] 
+[2026-11-07T20:31:47.339-08:00] [host] command: ip link show eth0; cat /sys/class/net/eth0/carrier
+[2026-11-07T20:31:47.386-08:00] printf '\n__RV_BEGIN_5e7e3f6b1eebccf0a0f53c21__\n'; sh -c 'ip link show eth0; c\rcat /sys/class/net/eth0/carrier'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__\r_5e7e3f6b1eebccf0a0f53c21
+[2026-11-07T20:31:47.402-08:00] 
+[2026-11-07T20:31:47.402-08:00] __RV_BEGIN_5e7e3f6b1eebccf0a0f53c21__
+[2026-11-07T20:31:47.450-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T20:31:47.466-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T20:31:47.482-08:00] 1
+[2026-11-07T20:31:47.482-08:00] 
+[2026-11-07T20:31:47.482-08:00] __RC=0__5e7e3f6b1eebccf0a0f53c21
+[2026-11-07T20:31:47.482-08:00] # 
+[2026-11-07T20:31:47.483-08:00] [host] rc=0
+[2026-11-07T20:31:47.483-08:00] 
+[2026-11-07T20:31:47.483-08:00] [host] command: ip addr show eth0; ip route
+[2026-11-07T20:31:47.514-08:00] printf '\n__RV_BEGIN_876797e1ca199daf145cb68__\n'; sh -c 'ip addr show eth0; ip\rp route'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__8786797e1ca199daf145cb68\r8
+[2026-11-07T20:31:47.531-08:00] 
+[2026-11-07T20:31:47.531-08:00] __RV_BEGIN_876797e1ca199daf145cb68__
+[2026-11-07T20:31:47.594-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T20:31:47.594-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T20:31:47.610-08:00]     inet 192.168.137.178/24 brd 192.168.137.255 scope global eth0
+[2026-11-07T20:31:47.610-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:31:47.610-08:00]     inet 192.168.50.2/24 scope global eth0
+[2026-11-07T20:31:47.626-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:31:47.626-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-07T20:31:47.626-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:31:47.626-08:00] 192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+[2026-11-07T20:31:47.642-08:00] 192.168.137.0/24 dev eth0 scope link  src 192.168.137.178 
+[2026-11-07T20:31:47.642-08:00] 
+[2026-11-07T20:31:47.642-08:00] __RC=0__8786797e1ca199daf145cb68
+[2026-11-07T20:31:47.642-08:00] # 
+
+===== bootstrap-raw.log =====
+[2026-11-07T20:32:34.675-08:00] printf '\n__RV_BEGIN_b036635c5bc66b092f771fa3__\n'; sh -c 'set -- '"'"'2026-11-\r-08 04:32:34'"'"'
+[2026-11-07T20:32:34.675-08:00] 2/> #!/bin/sh
+[2026-11-07T20:32:34.691-08:00] only the > # Task 008-r2: temporary eth0 configuration; run as root in Buildroot.
+[2026-11-07T20:32:34.707-08:00] > set -eu
+[2026-11-07T20:32:34.723-08:00] rc=$?; printf '\n'; echo __RC=${_> 
+[2026-11-07T20:32:34.723-08:00] > if [ "$#" -gt 1 ]; then
+[2026-11-07T20:32:34.723-08:00] >     echo "Usage: sh board_net_up.sh [UTC-time: YYYY-MM-DD HH:MM:SS]" >&2
+[2026-11-07T20:32:34.739-08:00] >     exit 2
+[2026-11-07T20:32:34.739-08:00] > fi
+[2026-11-07T20:32:34.755-08:00] > if [ "$(id -u)" != 0 ]; then
+[2026-11-07T20:32:34.755-08:00] >     echo "Run as root." >&2
+[2026-11-07T20:32:34.755-08:00] >     exit 1
+[2026-11-07T20:32:34.755-08:00] > fi
+[2026-11-07T20:32:34.771-08:00] > 
+[2026-11-07T20:32:34.771-08:00] > ip link set eth0 up
+[2026-11-07T20:32:34.771-08:00] > if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-07T20:32:34.803-08:00] >     ip addr add 192.168.50.2/24 dev eth0
+[2026-11-07T20:32:34.803-08:00] > fi
+[2026-11-07T20:32:34.803-08:00] > # Remove only the known obsolete ICS route; preserve unrelated routing.
+[2026-11-07T20:32:34.819-08:00] > if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-07T20:32:34.851-08:00] >     ip route del default via 192.168.137.1 dev eth0
+[2026-11-07T20:32:34.867-08:00] > fi
+[2026-11-07T20:32:34.867-08:00] > if [ "$#" -eq 1 ]; then
+[2026-11-07T20:32:34.867-08:00] >     date -u -s "$1"
+[2026-11-07T20:32:34.867-08:00] > fi
+[2026-11-07T20:32:34.883-08:00] > ip addr show eth0
+[2026-11-07T20:32:34.883-08:00] > ip route
+[2026-11-07T20:32:34.883-08:00] > date -u
+[2026-11-07T20:32:34.883-08:00] > cat /sys/class/net/eth0/carrier
+[2026-11-07T20:32:34.899-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__b036635c5bc66b092f771fa3
+[2026-11-07T20:32:34.915-08:00] 
+[2026-11-07T20:32:34.915-08:00] __RV_BEGIN_b036635c5bc66b092f771fa3__
+[2026-11-07T20:32:35.075-08:00] Sun Nov  8 04:32:34 UTC 2026
+[2026-11-07T20:32:35.091-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T20:32:35.107-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T20:32:35.107-08:00]     inet 192.168.137.178/24 brd 192.168.137.255 scope global eth0
+[2026-11-07T20:32:35.107-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:32:35.123-08:00]     inet 192.168.50.2/24 scope global eth0
+[2026-11-07T20:32:35.123-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:32:35.123-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-07T20:32:35.123-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:32:35.139-08:00] 192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+[2026-11-07T20:32:35.139-08:00] 192.168.137.0/24 dev eth0 scope link  src 192.168.137.178 
+[2026-11-07T20:32:35.155-08:00] Sun Nov  8 04:32:34 UTC 2026
+[2026-11-07T20:32:35.171-08:00] 1
+[2026-11-07T20:32:35.187-08:00] 
+[2026-11-07T20:32:35.187-08:00] __RC=0__b036635c5bc66b092f771fa3
+[2026-11-07T20:32:35.187-08:00] # 
+
+===== ssh-preflight.log =====
+Linux nucleisys 6.6.90-rt54+ #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026 riscv64 GNU/Linux
+Sun Nov  8 04:33:19 UTC 2026
+using defaults
+gatewayports no
+allowtcpforwarding yes
+disableforwarding no
+permitopen any
+permitlisten any
+No existing 7897 listener
+
+===== tunnel-board-raw.log =====
+[2026-11-07T20:34:17.414-08:00] printf '\n__RV_BEGIN_7771fab8f2b7671c8cea3580__\n'; sh -c 'netstat -tln 2>/dev/\r/null | grep 7897; wget --help 2>&1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_r\rrc}__7771fab8f2b7671c8cea3580
+[2026-11-07T20:34:17.430-08:00] 
+[2026-11-07T20:34:17.430-08:00] __RV_BEGIN_7771fab8f2b7671c8cea3580__
+[2026-11-07T20:34:17.494-08:00] tcp        0      0 127.0.0.1:7897          0.0.0.0:*               LISTEN      
+[2026-11-07T20:34:17.526-08:00] BusyBox v1.36.1 (2026-11-04 14:20:08 CST) multi-call binary.
+[2026-11-07T20:34:17.526-08:00] 
+[2026-11-07T20:34:17.526-08:00] Usage: wget [-cqS] [--spider] [-O FILE] [-o LOGFILE] [--header STR]
+[2026-11-07T20:34:17.526-08:00] 	[--post-data STR | --post-file FILE] [-Y on/off]
+[2026-11-07T20:34:17.542-08:00] 	[-P DIR] [-U AGENT] [-T SEC] URL...
+[2026-11-07T20:34:17.542-08:00] 
+[2026-11-07T20:34:17.542-08:00] Retrieve files via HTTP or FTP
+[2026-11-07T20:34:17.542-08:00] 
+[2026-11-07T20:34:17.542-08:00] 	--spider	Only check URL existence: $? is 0 if exists
+[2026-11-07T20:34:17.542-08:00] 	--header STR	Add STR (of form 'header: value') to headers
+[2026-11-07T20:34:17.558-08:00] 	--post-data STR	Send STR using POST method
+[2026-11-07T20:34:17.558-08:00] 	--post-file FILE	Send FILE using POST method
+[2026-11-07T20:34:17.558-08:00] 	-c		Continue retrieval of aborted transfer
+[2026-11-07T20:34:17.558-08:00] 	-q		Quiet
+[2026-11-07T20:34:17.558-08:00] 	-P DIR		Save to DIR (default .)
+[2026-11-07T20:34:17.558-08:00] 	-S    		Show server response
+[2026-11-07T20:34:17.574-08:00] 	-T SEC		Network read timeout is SEC seconds
+[2026-11-07T20:34:17.574-08:00] 	-O FILE		Save to FILE ('-' for stdout)
+[2026-11-07T20:34:17.574-08:00] 	-o LOGFILE	Log messages to FILE
+[2026-11-07T20:34:17.574-08:00] 	-U STR		Use STR for User-Agent header
+[2026-11-07T20:34:17.574-08:00] 	-Y on/off	Use proxy
+[2026-11-07T20:34:17.590-08:00] 
+[2026-11-07T20:34:17.590-08:00] __RC=0__7771fab8f2b7671c8cea3580
+[2026-11-07T20:34:17.590-08:00] # 
+[2026-11-07T20:34:49.976-08:00] printf '\n__RV_BEGIN_b037d34d33048498849994bf__\n'; sh -c 'file=/tmp/rv008r3-re\release-$$
+[2026-11-07T20:34:49.992-08:00] > http_proxy=http://127.0.0.1:7897 wget -T 20 -q -O "$file" http://ports.ubuntu.c\rcom/ubuntu-ports/dists/noble/Release 2>&1
+[2026-11-07T20:34:50.008-08:00] > result=$?
+[2026-11-07T20:34:50.008-08:00] > if [ "$result" -eq 0 ]; then head -5 "$file"; fi
+[2026-11-07T20:34:50.024-08:00] > rm -f "$file"
+[2026-11-07T20:34:50.024-08:00] > exit "$result"
+[2026-11-07T20:34:50.024-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__b037d34d33048498849994bf
+[2026-11-07T20:34:50.040-08:00] 
+[2026-11-07T20:34:50.040-08:00] __RV_BEGIN_b037d34d33048498849994bf__
+[2026-11-07T20:34:51.656-08:00] Origin: Ubuntu
+[2026-11-07T20:34:51.656-08:00] Label: Ubuntu
+[2026-11-07T20:34:51.656-08:00] Suite: noble
+[2026-11-07T20:34:51.656-08:00] Version: 24.04
+[2026-11-07T20:34:51.656-08:00] Codename: noble
+[2026-11-07T20:34:51.688-08:00] 
+[2026-11-07T20:34:51.688-08:00] __RC=0__b037d34d33048498849994bf
+[2026-11-07T20:34:51.688-08:00] # 
+
+===== ubuntu-raw.log =====
+[2026-11-07T20:35:27.296-08:00] 
+[2026-11-07T20:35:27.296-08:00] [host] command: sha256sum /mount_emmc.sh; sh /mount_emmc.sh status
+[2026-11-07T20:35:27.341-08:00] printf '\n__RV_BEGIN_7e1af5be9946632209e23458__\n'; sh -c 'sha256sum /mount_emm\rmc.sh; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__\r_7e1af5be9946632209e23458
+[2026-11-07T20:35:27.357-08:00] 
+[2026-11-07T20:35:27.357-08:00] __RV_BEGIN_7e1af5be9946632209e23458__
+[2026-11-07T20:35:27.404-08:00] d31e23ca801f024d30f1b9210651017f224dc7b5298b328661b53e69379cfcad  /mount_emmc.sh
+[2026-11-07T20:35:27.468-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T20:35:27.469-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T20:35:27.469-08:00] Root:   /mnt/ubuntu
+[2026-11-07T20:35:27.517-08:00] Ubuntu root is not mounted.
+[2026-11-07T20:35:27.517-08:00] 
+[2026-11-07T20:35:27.517-08:00] __RC=0__7e1af5be9946632209e23458
+[2026-11-07T20:35:27.517-08:00] # 
+[2026-11-07T20:35:27.517-08:00] [host] rc=0
+[2026-11-07T20:35:27.517-08:00] 
+[2026-11-07T20:35:27.517-08:00] [host] interactive start; inherited HISTFILE=/dev/null to avoid persistent command history
+[2026-11-07T20:35:27.548-08:00] HISTFILE=/dev/null sh /mount_emmc.sh start; __rv007_rc=$?; printf '\n__RV008R3_\r_START_DONE_14a2e184a05d28e7f12f_%s__\n' "$__rv007_rc"
+[2026-11-07T20:35:28.524-08:00] [ 7042.263558] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+[2026-11-07T20:35:28.925-08:00] Entering Ubuntu chroot on /dev/mmcblk1p1...
+[2026-11-07T20:35:29.564-08:00] \x1b[?2004hroot@nucleisys:/# HISTFILE=/dev/null; set +o history; printf '\n__RV008R3_HISTORY\rY_OFF__\n'
+[2026-11-07T20:35:29.597-08:00] \x1b[?2004l\r
+[2026-11-07T20:35:29.597-08:00] __RV008R3_HISTORY_OFF__
+[2026-11-07T20:35:29.597-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:35:29.597-08:00] [host] command: date -u
+[2026-11-07T20:35:29.628-08:00] printf '\n__RV_BEGIN_7b0d621ec3c5c93e4a407bcc__\n'; sh -c 'date\re -u'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__7b0d621ec3c5c93e4a407bcc
+[2026-11-07T20:35:29.645-08:00] \x1b[?2004l\r
+[2026-11-07T20:35:29.645-08:00] __RV_BEGIN_7b0d621ec3c5c93e4a407bcc__
+[2026-11-07T20:35:29.724-08:00] Sun Nov  8 04:35:29 UTC 2026
+[2026-11-07T20:35:29.725-08:00] 
+[2026-11-07T20:35:29.725-08:00] __RC=0__7b0d621ec3c5c93e4a407bcc
+[2026-11-07T20:35:29.725-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:35:29.725-08:00] [host] rc=0
+[2026-11-07T20:35:29.725-08:00] 
+[2026-11-07T20:35:29.725-08:00] [host] command: cat /etc/os-release
+[2026-11-07T20:35:29.756-08:00] printf '\n__RV_BEGIN_af00fb70c48c598a2ac987a3__\n'; sh -c 'cat \r /etc/os-release'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__af00fb70c48c598\r8a2ac987a3
+[2026-11-07T20:35:29.773-08:00] \x1b[?2004l\r
+[2026-11-07T20:35:29.773-08:00] __RV_BEGIN_af00fb70c48c598a2ac987a3__
+[2026-11-07T20:35:29.804-08:00] PRETTY_NAME="Ubuntu 24.04.3 LTS"
+[2026-11-07T20:35:29.821-08:00] NAME="Ubuntu"
+[2026-11-07T20:35:29.821-08:00] VERSION_ID="24.04"
+[2026-11-07T20:35:29.821-08:00] VERSION="24.04.3 LTS (Noble Numbat)"
+[2026-11-07T20:35:29.821-08:00] VERSION_CODENAME=noble
+[2026-11-07T20:35:29.821-08:00] ID=ubuntu
+[2026-11-07T20:35:29.821-08:00] ID_LIKE=debian
+[2026-11-07T20:35:29.821-08:00] HOME_URL="https://www.ubuntu.com/"
+[2026-11-07T20:35:29.821-08:00] SUPPORT_URL="https://help.ubuntu.com/"
+[2026-11-07T20:35:29.837-08:00] BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+[2026-11-07T20:35:29.837-08:00] PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+[2026-11-07T20:35:29.837-08:00] UBUNTU_CODENAME=noble
+[2026-11-07T20:35:29.837-08:00] LOGO=ubuntu-logo
+[2026-11-07T20:35:29.837-08:00] 
+[2026-11-07T20:35:29.852-08:00] __RC=0__af00fb70c48c598a2ac987a3
+[2026-11-07T20:35:29.853-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:35:29.853-08:00] [host] rc=0
+[2026-11-07T20:35:29.853-08:00] 
+[2026-11-07T20:35:29.853-08:00] [host] command: cat /etc/apt/sources.list.d/*.sources /etc/apt/sources.list 2>/dev/null
+[2026-11-07T20:35:29.900-08:00] printf '\n__RV_BEGIN_a6fdd732ab810eb06302b5da__\n'; sh -c 'cat \r /etc/apt/sources.list.d/*.sources /etc/apt/sources.list 2>/dev/null'; __rv_rc=$?\r?; printf '\n'; echo __RC=${__rv_rc}__a6fdd732ab810eb06302b5da
+[2026-11-07T20:35:29.917-08:00] \x1b[?2004l\r
+[2026-11-07T20:35:29.917-08:00] __RV_BEGIN_a6fdd732ab810eb06302b5da__
+[2026-11-07T20:35:29.948-08:00] # See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
+[2026-11-07T20:35:29.965-08:00] # newer versions of the distribution.
+[2026-11-07T20:35:29.965-08:00] 
+[2026-11-07T20:35:29.965-08:00] ## Ubuntu distribution repository
+[2026-11-07T20:35:29.965-08:00] ##
+[2026-11-07T20:35:29.965-08:00] ## The following settings can be adjusted to configure which packages to use from Ubuntu.
+[2026-11-07T20:35:29.965-08:00] ## Mirror your choices (except for URIs and Suites) in the security section below to
+[2026-11-07T20:35:29.981-08:00] ## ensure timely security updates.
+[2026-11-07T20:35:29.981-08:00] ##
+[2026-11-07T20:35:29.981-08:00] ## Types: Append deb-src to enable the fetching of source package.
+[2026-11-07T20:35:29.981-08:00] ## URIs: A URL to the repository (you may add multiple URLs)
+[2026-11-07T20:35:29.997-08:00] ## Suites: The following additional suites can be configured
+[2026-11-07T20:35:29.997-08:00] ##   <name>-updates   - Major bug fix updates produced after the final release of the
+[2026-11-07T20:35:30.013-08:00] ##                      distribution.
+[2026-11-07T20:35:30.013-08:00] ##   <name>-backports - software from this repository may not have been tested as
+[2026-11-07T20:35:30.013-08:00] ##                      extensively as that contained in the main release, although it includes
+[2026-11-07T20:35:30.029-08:00] ##                      newer versions of some applications which may provide useful features.
+[2026-11-07T20:35:30.029-08:00] ##                      Also, please note that software in backports WILL NOT receive any review
+[2026-11-07T20:35:30.045-08:00] ##                      or updates from the Ubuntu security team.
+[2026-11-07T20:35:30.045-08:00] ## Components: Aside from main, the following components can be added to the list
+[2026-11-07T20:35:30.045-08:00] ##   restricted  - Software that may not be under a free license, or protected by patents.
+[2026-11-07T20:35:30.061-08:00] ##   universe    - Community maintained packages. Software in this repository receives maintenance
+[2026-11-07T20:35:30.061-08:00] ##                 from volunteers in the Ubuntu community, or a 10 year security maintenance
+[2026-11-07T20:35:30.077-08:00] ##                 commitment from Canonical when an Ubuntu Pro subscription is attached.
+[2026-11-07T20:35:30.077-08:00] ##   multiverse  - Community maintained of restricted. Software from this repository is
+[2026-11-07T20:35:30.093-08:00] ##                 ENTIRELY UNSUPPORTED by the Ubuntu team, and may not be under a free
+[2026-11-07T20:35:30.093-08:00] ##                 licence. Please satisfy yourself as to your rights to use the software.
+[2026-11-07T20:35:30.109-08:00] ##                 Also, please note that software in multiverse WILL NOT receive any
+[2026-11-07T20:35:30.109-08:00] ##                 review or updates from the Ubuntu security team.
+[2026-11-07T20:35:30.125-08:00] ##
+[2026-11-07T20:35:30.125-08:00] ## See the sources.list(5) manual page for further settings.
+[2026-11-07T20:35:30.125-08:00] Types: deb
+[2026-11-07T20:35:30.125-08:00] URIs: http://ports.ubuntu.com/ubuntu-ports/
+[2026-11-07T20:35:30.125-08:00] Suites: noble noble-updates noble-backports
+[2026-11-07T20:35:30.125-08:00] Components: main universe restricted multiverse
+[2026-11-07T20:35:30.141-08:00] Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+[2026-11-07T20:35:30.141-08:00] 
+[2026-11-07T20:35:30.141-08:00] ## Ubuntu security updates. Aside from URIs and Suites,
+[2026-11-07T20:35:30.141-08:00] ## this should mirror your choices in the previous section.
+[2026-11-07T20:35:30.157-08:00] Types: deb
+[2026-11-07T20:35:30.157-08:00] URIs: http://ports.ubuntu.com/ubuntu-ports/
+[2026-11-07T20:35:30.157-08:00] Suites: noble-security
+[2026-11-07T20:35:30.157-08:00] Components: main universe restricted multiverse
+[2026-11-07T20:35:30.157-08:00] Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+[2026-11-07T20:35:30.173-08:00] # Ubuntu sources have moved to the /etc/apt/sources.list.d/ubuntu.sources
+[2026-11-07T20:35:30.173-08:00] # file, which uses the deb822 format. Use deb822-formatted .sources files
+[2026-11-07T20:35:30.173-08:00] # to manage package sources in the /etc/apt/sources.list.d/ directory.
+[2026-11-07T20:35:30.189-08:00] # See the sources.list(5) manual page for details.
+[2026-11-07T20:35:30.189-08:00] 
+[2026-11-07T20:35:30.189-08:00] __RC=0__a6fdd732ab810eb06302b5da
+[2026-11-07T20:35:30.189-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:35:30.189-08:00] [host] rc=0
+[2026-11-07T20:35:30.189-08:00] 
+[2026-11-07T20:35:30.189-08:00] [host] command: command -v timeout; apt-get --version | head -1
+[2026-11-07T20:35:30.236-08:00] printf '\n__RV_BEGIN_e4d46aee5d8a2d3f07194136__\n'; sh -c 'comm\rmand -v timeout; apt-get --version | head -1'; __rv_rc=$?; printf '\n'; echo __RC\rC=${__rv_rc}__e4d46aee5d8a2d3f07194136
+[2026-11-07T20:35:30.237-08:00] \x1b[?2004l\r
+[2026-11-07T20:35:30.253-08:00] __RV_BEGIN_e4d46aee5d8a2d3f07194136__
+[2026-11-07T20:35:30.268-08:00] /bin/timeout
+[2026-11-07T20:35:31.068-08:00] apt 2.8.3 (riscv64)
+[2026-11-07T20:35:31.084-08:00] 
+[2026-11-07T20:35:31.085-08:00] __RC=0__e4d46aee5d8a2d3f07194136
+[2026-11-07T20:35:31.085-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:35:31.085-08:00] [host] rc=0
+[2026-11-07T20:35:31.085-08:00] 
+[2026-11-07T20:35:31.085-08:00] [host] command: timeout --signal=INT --kill-after=10s 420s apt-get -o Acquire::http::Proxy=http://127.0.0.1:7897 -o Acquire::https::Proxy=http://127.0.0.1:7897 -o Acquire::Retries=0 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
+[2026-11-07T20:35:31.148-08:00] printf '\n__RV_BEGIN_3258a024d0a8489d51e47153__\n'; sh -c 'time\reout --signal=INT --kill-after=10s 420s apt-get -o Acquire::http::Proxy=http://12\r27.0.0.1:7897 -o Acquire::https::Proxy=http://127.0.0.1:7897 -o Acquire::Retries=\r=0 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update'; __rv_rc=$?\r?; printf '\n'; echo __RC=${__rv_rc}__3258a024d0a8489d51e47153
+[2026-11-07T20:35:31.181-08:00] \x1b[?2004l\r
+[2026-11-07T20:35:31.181-08:00] __RV_BEGIN_3258a024d0a8489d51e47153__
+[2026-11-07T20:35:32.220-08:00] \r0% [Working]\r0% [Waiting for headers]\r                        \rHit:1 http://ports.ubuntu.com/ubuntu-ports noble InRelease
+[2026-11-07T20:35:33.036-08:00] \r                        \r0% [Working]\r            \rGet:2 http://ports.ubuntu.com/ubuntu-ports noble-updates InRelease [126 kB]
+[2026-11-07T20:35:33.469-08:00] \r0% [2 InRelease 3788 B/126 kB 3%]\r                                 \r0% [Working]\r            \rGet:3 http://ports.ubuntu.com/ubuntu-ports noble-backports InRelease [126 kB]
+[2026-11-07T20:35:34.524-08:00] \r0% [3 InRelease 7884 B/126 kB 6%]\r0% [3 InRelease 83.7 kB/126 kB 66%]\r                                   \r0% [Waiting for headers]\r0% [Waiting for headers]\r                        \rGet:4 http://ports.ubuntu.com/ubuntu-ports noble-security InRelease [126 kB]
+[2026-11-07T20:35:35.612-08:00] \r0% [4 InRelease 7884 B/126 kB 6%]\r0% [4 InRelease 98.2 kB/126 kB 78%]\r                                   \r0% [Working]\r0% [Working]\r0% [Working]\r0% [Waiting for headers]\r                        \rGet:5 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 Packages [728 kB]
+[2026-11-07T20:35:37.724-08:00] \r0% [5 Packages 7953 B/728 kB 1%]\r0% [5 Packages 66.4 kB/728 kB 9%]                                 71.6 kB/s 42s\r0% [5 Packages 408 kB/728 kB 56%]                                 71.6 kB/s 37s\r0% [5 Packages 728 kB/728 kB 100%]                                71.6 kB/s 33s\r0% [Working]                                                      71.6 kB/s 33s\r0% [5 Packages store 0 B] [Connecting to 127.0.0.1 (127.0.0.1)]   71.6 kB/s 33s\r0% [5 Packages store 0 B] [Waiting for headers]                   71.6 kB/s 33s\r                                                                               \rGet:6 http://ports.ubuntu.com/ubuntu-ports noble-updates/main Translation-en [313 kB]
+[2026-11-07T20:35:40.028-08:00] \r0% [5 Packages store 0 B] [6 Translation-en 0 B/313 kB 0%]        71.6 kB/s 33s\r0% [5 Packages store 0 B] [6 Translation-en 101 kB/313 kB 32%]    71.6 kB/s 32s\r                                                                               \r34% [5 Packages store 0 B] [6 Translation-en 313 kB/313 kB 100%]\r34% [5 Packages store 0 B] [Waiting for headers]              71.6 kB/s 1min 1s\r34% [Waiting for headers]                                     71.6 kB/s 1min 1s\r34% [6 Translation-en store 0 B] [Waiting for headers]        71.6 kB/s 1min 1s\r                                                                               \rGet:7 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe riscv64 Packages [1294 kB]
+[2026-11-07T20:35:41.420-08:00] \r                                                                               \r35% [6 Translation-en store 0 B] [7 Packages 5551 B/1294 kB 0%]\r36% [6 Translation-en store 0 B] [7 Packages 92.4 kB/1294 kB 7%]  71.6 kB/s 60s\r39% [6 Translation-en store 0 B] [7 Packages 301 kB/1294 kB 23%]  71.6 kB/s 57s\r42% [7 Packages 551 kB/1294 kB 43%]                               71.6 kB/s 54s\r53% [Waiting for headers]                                         71.6 kB/s 43s\r53% [7 Packages store 0 B] [Waiting for headers]                  71.6 kB/s 43s\r53% [7 Packages store 0 B] [Waiting for headers]                  71.6 kB/s 43s\r                                                                               \rGet:8 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe Translation-en [344 kB]
+[2026-11-07T20:35:43.756-08:00] \r53% [7 Packages store 0 B] [8 Translation-en 2657 B/344 kB 1%]    71.6 kB/s 43s\r53% [7 Packages store 0 B] [8 Translation-en 66.4 kB/344 kB 19%]    385 kB/s 7s\r57% [7 Packages store 0 B] [8 Translation-en 291 kB/344 kB 85%]     385 kB/s 7s\r57% [7 Packages store 0 B] [Connecting to 127.0.0.1 (127.0.0.1)]    385 kB/s 7s\r57% [7 Packages store 0 B] [Waiting for headers]                    385 kB/s 7s\r                                                                               \rGet:9 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted riscv64 Packages [11.9 kB]
+[2026-11-07T20:35:45.404-08:00] \r57% [7 Packages store 0 B] [9 Packages 7955 B/11.9 kB 67%]          385 kB/s 7s\r57% [7 Packages store 0 B] [Connecting to 127.0.0.1 (127.0.0.1)]    385 kB/s 7s\r                                                                               \rGet:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted Translation-en [420 kB]
+[2026-11-07T20:35:45.932-08:00] \r58% [7 Packages store 0 B] [10 Translation-en 6753 B/420 kB 2%]     385 kB/s 7s\r59% [10 Translation-en 54.8 kB/420 kB 13%]                          385 kB/s 7s\r                                                                               \r59% [8 Translation-en store 0 B] [10 Translation-en 54.8 kB/420 kB 13%]\r                                                                       \r62% [8 Translation-en store 0 B] [10 Translation-en 327 kB/420 kB 78%]\r64% [8 Translation-en store 0 B]                                    385 kB/s 6s\r                                                                               \rGet:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/multiverse Translation-en [14.3 kB]
+[2026-11-07T20:35:47.420-08:00] \r                                                                               \r64% [8 Translation-en store 0 B] [11 Translation-en 0 B/14.3 kB 0%]\r64% [11 Translation-en 14.2 kB/14.3 kB 100%]                        385 kB/s 6s\r                                                                               \r64% [9 Packages store 0 B] [11 Translation-en 14.2 kB/14.3 kB 100%]\r64% [9 Packages store 68.3 kB]                                      385 kB/s 6s\r65% [Waiting for headers]                                           385 kB/s 6s\r65% [10 Translation-en store 0 B] [Waiting for headers]             385 kB/s 6s\r65% [10 Translation-en store 0 B] [Waiting for headers]             385 kB/s 6s\r                                                                               \rGet:12 http://ports.ubuntu.com/ubuntu-ports noble-security/main riscv64 Packages [499 kB]
+[2026-11-07T20:35:48.124-08:00] \r65% [10 Translation-en store 0 B] [12 Packages 0 B/499 kB 0%]       385 kB/s 6s\r66% [10 Translation-en store 0 B] [12 Packages 78.0 kB/499 kB 16%]  385 kB/s 5s\r70% [10 Translation-en store 0 B] [12 Packages 434 kB/499 kB 87%]   385 kB/s 4s\r71% [10 Translation-en store 0 B]                                   385 kB/s 4s\r                                                                               \rGet:13 http://ports.ubuntu.com/ubuntu-ports noble-security/main Translation-en [234 kB]
+[2026-11-07T20:35:49.708-08:00] \r                                                                               \r71% [10 Translation-en store 0 B] [13 Translation-en 6753 B/234 kB 3%]\r72% [13 Translation-en 37.4 kB/234 kB 16%]                          385 kB/s 4s\r                                                                               \r72% [11 Translation-en store 0 B] [13 Translation-en 40.3 kB/234 kB 17%]\r73% [13 Translation-en 43.2 kB/234 kB 18%]                          385 kB/s 4s\r73% [12 Packages store 0 B] [13 Translation-en 43.2 kB/234 kB 18%]  385 kB/s 4s\r75% [12 Packages store 0 B]                                         234 kB/s 6s\r75% [12 Packages store 0 B] [Waiting for headers]                   234 kB/s 6s\r                                                                               \rGet:14 http://ports.ubuntu.com/ubuntu-ports noble-security/universe riscv64 Packages [942 kB]
+[2026-11-07T20:35:51.004-08:00] \r75% [12 Packages store 0 B] [14 Packages 4096 B/942 kB 0%]          234 kB/s 6s\r76% [14 Packages 14.2 kB/942 kB 2%]                                 234 kB/s 6s\r76% [13 Translation-en store 0 B] [14 Packages 14.2 kB/942 kB 2%]   234 kB/s 6s\r78% [13 Translation-en store 0 B] [14 Packages 156 kB/942 kB 17%]   234 kB/s 6s\r87% [13 Translation-en store 0 B] [14 Packages 815 kB/942 kB 87%]   234 kB/s 3s\r89% [13 Translation-en store 0 B]                                   234 kB/s 2s\r89% [Waiting for headers]                                           234 kB/s 2s\r89% [14 Packages store 0 B] [Waiting for headers]                   234 kB/s 2s\r                                                                               \rGet:15 http://ports.ubuntu.com/ubuntu-ports noble-security/universe Translation-en [248 kB]
+[2026-11-07T20:35:52.812-08:00] \r89% [14 Packages store 0 B] [15 Translation-en 0 B/248 kB 0%]       234 kB/s 2s\r90% [14 Packages store 0 B] [15 Translation-en 95.3 kB/248 kB 39%]  234 kB/s 2s\r92% [14 Packages store 0 B]                                         234 kB/s 1s\r92% [14 Packages store 0 B] [Waiting for headers]                   234 kB/s 1s\r                                                                               \rGet:16 http://ports.ubuntu.com/ubuntu-ports noble-security/restricted riscv64 Packages [9976 B]
+[2026-11-07T20:35:54.140-08:00] \r92% [14 Packages store 0 B] [16 Packages 0 B/9976 B 0%]             234 kB/s 1s\r93% [14 Packages store 0 B]                                         234 kB/s 1s\r93% [Waiting for headers]                                           234 kB/s 1s\r93% [15 Translation-en store 0 B] [Waiting for headers]             234 kB/s 1s\r                                                                               \rGet:17 http://ports.ubuntu.com/ubuntu-ports noble-security/restricted Translation-en [394 kB]
+[2026-11-07T20:35:54.700-08:00] \r                                                                               \r93% [15 Translation-en store 0 B] [17 Translation-en 6753 B/394 kB 2%]\r94% [15 Translation-en store 0 B] [17 Translation-en 98.2 kB/394 kB 25%]\r98% [17 Translation-en 362 kB/394 kB 92%]                           234 kB/s 0s\r98% [16 Packages store 0 B] [17 Translation-en 365 kB/394 kB 92%]   234 kB/s 0s\r99% [17 Translation-en 394 kB/394 kB 100%]                          234 kB/s 0s\r99% [Working]                                                       234 kB/s 0s\r99% [17 Translation-en store 0 B] [Waiting for headers]             234 kB/s 0s\r99% [17 Translation-en store 0 B] [Waiting for headers]             234 kB/s 0s\r                                                                               \rGet:18 http://ports.ubuntu.com/ubuntu-ports noble-security/multiverse Translation-en [12.4 kB]
+[2026-11-07T20:35:56.172-08:00] \r                                                                               \r99% [17 Translation-en store 0 B] [18 Translation-en 3859 B/12.4 kB 31%]\r99% [17 Translation-en store 0 B]                                   234 kB/s 0s\r99% [17 Translation-en store 0 B]                                   255 kB/s 0s\r99% [17 Translation-en store 0 B]                                   255 kB/s 0s\r99% [17 Translation-en store 0 B]                                   255 kB/s 0s\r100% [Working]                                                      255 kB/s 0s\r100% [18 Translation-en store 0 B]                                  255 kB/s 0s\r100% [Working]                                                      255 kB/s 0s\r                                                                               \rFetched 5842 kB in 26s (225 kB/s)
+[2026-11-07T20:35:58.075-08:00] \rReading package lists... 0%\r\rReading package lists... 0%\r\rReading package lists... 0%\r\rReading package lists... 2%\r\rReading package lists... 4%\r\rReading package lists... 4%\r\rReading package lists... 4%\r\rReading package lists... 5%\r\rReading package lists... 5%\r\rReading package lists... 6%\r\rReading package lists... 7%\r\rReading package lists... 8%\r\rReading package lists... 9%\r\rReading package lists... 10%\r\rReading package lists... 11%\r\rReading package lists... 13%\r\rReading package lists... 14%\r\rReading package lists... 16%\r\rReading package lists... 17%\r\rReading package lists... 18%\r\rReading package lists... 20%\r\rReading package lists... 22%\r\rReading package lists... 24%\r\rReading package lists... 25%\r\rReading package lists... 26%\r\rReading package lists... 27%\r\rReading package lists... 28%\r\rReading package lists... 29%\r\rReading package lists... 30%\r\rReading package lists... 31%\r\rReading package lists... 32%\r\rReading package lists... 34%\r\rReading package lists... 35%\r\rReading package lists... 36%\r\rReading package lists... 37%\r\rReading package lists... 38%\r\rReading package lists... 40%\r\rReading package lists... 42%\r\rReading package lists... 43%\r\rReading package lists... 45%\r\rReading package lists... 46%\r\rReading package lists... 47%\r\rReading package lists... 47%\r\rReading package lists... 47%\r\rReading package lists... 50%\r\rReading package lists..[ 7110.054548] sched: RT throttling activated
+[2026-11-07T20:36:36.010-08:00] . 54%\r\rReading package lists... 57%\r\rReading package lists... 60%\r\rReading package lists... 64%\r\rReading package lists... 67%\r\rReading package lists... 67%\r\rReading package lists... 67%\r\rReading package lists... 67%\r\rReading package lists... 67%\r\rReading package lists... 67%\r\rReading package lists... 68%\r\rReading package lists... 68%\r\rReading package lists... 68%\r\rReading package lists... 68%\r\rReading package lists... 68%\r\rReading package lists... 70%\r\rReading package lists... 70%\r\rReading package lists... 70%\r\rReading package lists... 73%\r\rReading package lists... 73%\r\rReading package lists... 74%\r\rReading package lists... 76%\r\rReading package lists... 78%\r\rReading package lists... 78%\r\rReading package lists... 78%\r\rReading package lists... 80%\r\rReading package lists... 80%\r\rReading package lists... 80%\r\rReading package lists... 80%\r\rReading package lists... 84%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 85%\r\rReading package lists... 86%\r\rReading package lists... 86%\r\rReading package lists... 86%\r\rReading package lists... 86%\r\rReading package lists... 86%\r\rReading package lists... 86%\r\rReading package lists... 87%\r\rReading package lists... 87%\r\rReading package lists... 87%\r\rReading package lists... 89%\r\rReading package lists... 89%\r\rReading package lists... 92%\r\rReading package lists... 93%\r\rReading package lists... 93%\r\rReading package lists... 95%\r\rReading package lists... 95%\r\rReading package lists... 95%\r\rReading package lists... 95%\r\rReading package lists... 97%\r\rReading package lists... 99%\r\rReading package lists... 99%\r\rReading package lists... 99%\r\rReading package lists... 99%\r\rReading package lists... 99%\r\rReading package lists... 99%\r\rReading package lists... Done\r
+[2026-11-07T20:36:52.746-08:00] 
+[2026-11-07T20:36:52.762-08:00] __RC=0__3258a024d0a8489d51e47153
+[2026-11-07T20:36:52.762-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:36:52.762-08:00] [host] rc=0
+[2026-11-07T20:36:52.763-08:00] 
+[2026-11-07T20:36:52.763-08:00] [host] command: apt-get -o Acquire::http::Proxy=http://127.0.0.1:7897 -o Acquire::https::Proxy=http://127.0.0.1:7897 -s install git ca-certificates
+[2026-11-07T20:36:52.810-08:00] printf '\n__RV_BEGIN_52bfa8d1237e913fd8b7db6d__\n'; sh -c 'apt-\r-get -o Acquire::http::Proxy=http://127.0.0.1:7897 -o Acquire::https::Proxy=http:\r://127.0.0.1:7897 -s install git ca-certificates'; __rv_rc=$?; printf '\n'; echo \r __RC=${__rv_rc}__52bfa8d1237e913fd8b7db6d
+[2026-11-07T20:36:52.842-08:00] \x1b[?2004l\r
+[2026-11-07T20:36:52.842-08:00] __RV_BEGIN_52bfa8d1237e913fd8b7db6d__
+[2026-11-07T20:36:53.018-08:00] \rReading package lists... 0%\r\rReading package lists... 100%\r\rReading package lists... Done\r
+[2026-11-07T20:36:53.930-08:00] \rBuilding dependency tree... 0%\r\rBuilding dependency tree... 0%\r\rBuilding dependency tree... 38%\r\rBuilding dependency tree... 50%\r\rBuilding dependency tree... 50%\r\rBuilding dependency tree... 58%\r\rBuilding dependency tree... 70%\r\rBuilding dependency tree... 82%\r\rBuilding dependency tree... 94%\r\rBuilding dependency tree... Done\r
+[2026-11-07T20:36:57.818-08:00] \rReading state information... 0% \r\rReading state information... 0%\r\rReading state information... Done\r
+[2026-11-07T20:37:06.282-08:00] The following package was automatically installed and is no longer required:
+[2026-11-07T20:37:06.330-08:00]   libpng16-16t64
+[2026-11-07T20:37:06.330-08:00] Use 'apt autoremove' to remove it.
+[2026-11-07T20:37:06.362-08:00] The following additional packages will be installed:
+[2026-11-07T20:37:06.442-08:00]   git-man less libcurl3t64-gnutls liberror-perl
+[2026-11-07T20:37:06.522-08:00] Suggested packages:
+[2026-11-07T20:37:06.522-08:00]   gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui
+[2026-11-07T20:37:06.522-08:00]   gitk gitweb git-cvs git-mediawiki git-svn
+[2026-11-07T20:37:07.242-08:00] The following NEW packages will be installed:
+[2026-11-07T20:37:07.306-08:00]   git git-man less libcurl3t64-gnutls liberror-perl
+[2026-11-07T20:37:07.338-08:00] The following packages will be upgraded:
+[2026-11-07T20:37:07.402-08:00]   ca-certificates
+[2026-11-07T20:37:07.722-08:00] 1 upgraded, 5 newly installed, 0 to remove and 24 not upgraded.
+[2026-11-07T20:37:17.497-08:00] Inst ca-certificates [20260816ubuntu0.24.04.1] (20260816ubuntu0.24.04.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+[2026-11-07T20:37:17.689-08:00] Inst less (590-2ubuntu2.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [riscv64])
+[2026-11-07T20:37:17.881-08:00] Inst libcurl3t64-gnutls (8.5.0-2ubuntu10.16 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [riscv64])
+[2026-11-07T20:37:18.057-08:00] Inst liberror-perl (0.17029-2 Ubuntu:24.04/noble [all])
+[2026-11-07T20:37:18.249-08:00] Inst git-man (1:2.43.0-1ubuntu7.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+[2026-11-07T20:37:18.441-08:00] Inst git (1:2.43.0-1ubuntu7.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [riscv64])
+[2026-11-07T20:37:18.458-08:00] Conf ca-certificates (20260816ubuntu0.24.04.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+[2026-11-07T20:37:18.458-08:00] Conf less (590-2ubuntu2.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [riscv64])
+[2026-11-07T20:37:18.473-08:00] Conf libcurl3t64-gnutls (8.5.0-2ubuntu10.16 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [riscv64])
+[2026-11-07T20:37:18.473-08:00] Conf liberror-perl (0.17029-2 Ubuntu:24.04/noble [all])
+[2026-11-07T20:37:18.489-08:00] Conf git-man (1:2.43.0-1ubuntu7.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+[2026-11-07T20:37:18.489-08:00] Conf git (1:2.43.0-1ubuntu7.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [riscv64])
+[2026-11-07T20:37:18.553-08:00] 
+[2026-11-07T20:37:18.554-08:00] __RC=0__52bfa8d1237e913fd8b7db6d
+[2026-11-07T20:37:18.554-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:37:18.554-08:00] [host] rc=0
+[2026-11-07T20:37:18.554-08:00] 
+[2026-11-07T20:37:18.554-08:00] [host] command: dpkg-query -W -f='${Package} ${Version} ${Status}\n' git ca-certificates 2>&1
+[2026-11-07T20:37:18.601-08:00] printf '\n__RV_BEGIN_d77658e85a921d936e34d0d7__\n'; sh -c 'dpkg\rg-query -W -f='"'"'${Package} ${Version} ${Status}\n'"'"' git ca-certificates 2>&\r&1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__d77658e85a921d936e34d0d7
+[2026-11-07T20:37:18.617-08:00] \x1b[?2004l\r
+[2026-11-07T20:37:18.617-08:00] __RV_BEGIN_d77658e85a921d936e34d0d7__
+[2026-11-07T20:37:18.793-08:00] ca-certificates 20260816ubuntu0.24.04.1 install ok installed
+[2026-11-07T20:37:18.809-08:00] git  unknown ok not-installed
+[2026-11-07T20:37:18.809-08:00] 
+[2026-11-07T20:37:18.810-08:00] __RC=0__d77658e85a921d936e34d0d7
+[2026-11-07T20:37:18.810-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:37:18.810-08:00] [host] rc=0
+[2026-11-07T20:37:18.825-08:00] exit
+[2026-11-07T20:37:18.826-08:00] \x1b[?2004l\rexit
+[2026-11-07T20:37:18.826-08:00] Exited Ubuntu (status 0). Mounts are kept.
+[2026-11-07T20:37:18.826-08:00] To unmount, run from Buildroot: sh /mount_emmc.sh stop
+[2026-11-07T20:37:18.841-08:00] 
+[2026-11-07T20:37:18.841-08:00] __RV008R3_START_DONE_14a2e184a05d28e7f12f_0__
+[2026-11-07T20:37:18.841-08:00] # 
+[2026-11-07T20:37:18.842-08:00] [host] interactive Ubuntu shell exited; parent shell confirmed
+[2026-11-07T20:37:18.842-08:00] 
+[2026-11-07T20:37:18.842-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T20:37:18.873-08:00] printf '\n__RV_BEGIN_20352ce0b045800a4f96a523__\n'; sh -c 'sh /mount_emmc.sh st\rtatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__20352ce0b045800a4f96a523
+[2026-11-07T20:37:18.889-08:00] 
+[2026-11-07T20:37:18.889-08:00] __RV_BEGIN_20352ce0b045800a4f96a523__
+[2026-11-07T20:37:18.985-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T20:37:18.985-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T20:37:18.986-08:00] Root:   /mnt/ubuntu
+[2026-11-07T20:37:19.001-08:00] /dev/mmcblk1p1 /mnt/ubuntu ext4 rw,relatime 0 0
+[2026-11-07T20:37:19.001-08:00] proc /mnt/ubuntu/proc proc rw,relatime 0 0
+[2026-11-07T20:37:19.017-08:00] sysfs /mnt/ubuntu/sys sysfs rw,relatime 0 0
+[2026-11-07T20:37:19.017-08:00] rootfs /mnt/ubuntu/dev rootfs rw,size=1015660k,nr_inodes=253915 0 0
+[2026-11-07T20:37:19.017-08:00] devpts /mnt/ubuntu/dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+[2026-11-07T20:37:19.017-08:00] tmpfs /mnt/ubuntu/run tmpfs rw,relatime 0 0
+[2026-11-07T20:37:19.049-08:00] 
+[2026-11-07T20:37:19.049-08:00] __RC=0__20352ce0b045800a4f96a523
+[2026-11-07T20:37:19.049-08:00] # 
+[2026-11-07T20:37:19.049-08:00] [host] rc=0
+[2026-11-07T20:37:19.050-08:00] 
+[2026-11-07T20:37:19.050-08:00] [host] command: sh /mount_emmc.sh stop
+[2026-11-07T20:37:19.097-08:00] printf '\n__RV_BEGIN_205f49d38a719503dcb951fd__\n'; sh -c 'sh /mount_emmc.sh st\rtop'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__205f49d38a719503dcb951fd
+[2026-11-07T20:37:19.097-08:00] 
+[2026-11-07T20:37:19.098-08:00] __RV_BEGIN_205f49d38a719503dcb951fd__
+[2026-11-07T20:37:19.257-08:00] Stopping Ubuntu mounts; leave all chroot sessions first.
+[2026-11-07T20:37:28.425-08:00] [ 7162.768747] EXT4-fs (mmcblk1p1): unmounting filesystem <ID>.
+[2026-11-07T20:37:28.489-08:00] Ubuntu unmounted.
+[2026-11-07T20:37:28.505-08:00] 
+[2026-11-07T20:37:28.505-08:00] __RC=0__205f49d38a719503dcb951fd
+[2026-11-07T20:37:28.505-08:00] # 
+[2026-11-07T20:37:28.505-08:00] [host] rc=0
+[2026-11-07T20:37:28.505-08:00] 
+[2026-11-07T20:37:28.505-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T20:37:28.553-08:00] printf '\n__RV_BEGIN_ecc3a6fe318ebcb77e4757ce__\n'; sh -c 'sh /mount_emmc.sh st\rtatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__ecc3a6fe318ebcb77e4757ce
+[2026-11-07T20:37:28.569-08:00] 
+[2026-11-07T20:37:28.569-08:00] __RV_BEGIN_ecc3a6fe318ebcb77e4757ce__
+[2026-11-07T20:37:28.649-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T20:37:28.649-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T20:37:28.649-08:00] Root:   /mnt/ubuntu
+[2026-11-07T20:37:28.697-08:00] Ubuntu root is not mounted.
+[2026-11-07T20:37:28.697-08:00] 
+[2026-11-07T20:37:28.697-08:00] __RC=0__ecc3a6fe318ebcb77e4757ce
+[2026-11-07T20:37:28.713-08:00] # 
+[2026-11-07T20:37:28.713-08:00] [host] rc=0
+[2026-11-07T20:37:28.713-08:00] 
+[2026-11-07T20:37:28.713-08:00] [host] command: awk '$2=="/mnt/ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/emmc_ro/")==1 {print; bad=1} END {exit bad}' /proc/mounts && echo EMMC_ALL_UNMOUNTED
+[2026-11-07T20:37:28.777-08:00] printf '\n__RV_BEGIN_5cfa7fa4c7ad763c6a0bb974__\n'; sh -c 'awk '"'"'$2=="/mnt/u\rubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/em\rmmc_ro/")==1 {print; bad=1} END {exit bad}'"'"' /proc/mounts && echo EMMC_ALL_UNM\rMOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__5cfa7fa4c7ad763c6a0bb974\r4
+[2026-11-07T20:37:28.793-08:00] 
+[2026-11-07T20:37:28.793-08:00] __RV_BEGIN_5cfa7fa4c7ad763c6a0bb974__
+[2026-11-07T20:37:28.857-08:00] EMMC_ALL_UNMOUNTED
+[2026-11-07T20:37:28.873-08:00] 
+[2026-11-07T20:37:28.873-08:00] __RC=0__5cfa7fa4c7ad763c6a0bb974
+[2026-11-07T20:37:28.873-08:00] # 
+[2026-11-07T20:37:28.873-08:00] [host] rc=0
+
+===== ubuntu-install-raw.log =====
+[2026-11-07T20:38:43.871-08:00] 
+[2026-11-07T20:38:43.871-08:00] [host] command: sha256sum /mount_emmc.sh; sh /mount_emmc.sh status
+[2026-11-07T20:38:43.916-08:00] printf '\n__RV_BEGIN_d1099b935dd1413e60819557__\n'; sh -c 'sha256sum /mount_emm\rmc.sh; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__\r_d1099b935dd1413e60819557
+[2026-11-07T20:38:43.932-08:00] 
+[2026-11-07T20:38:43.932-08:00] __RV_BEGIN_d1099b935dd1413e60819557__
+[2026-11-07T20:38:43.996-08:00] d31e23ca801f024d30f1b9210651017f224dc7b5298b328661b53e69379cfcad  /mount_emmc.sh
+[2026-11-07T20:38:44.044-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T20:38:44.044-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T20:38:44.044-08:00] Root:   /mnt/ubuntu
+[2026-11-07T20:38:44.092-08:00] Ubuntu root is not mounted.
+[2026-11-07T20:38:44.108-08:00] 
+[2026-11-07T20:38:44.108-08:00] __RC=0__d1099b935dd1413e60819557
+[2026-11-07T20:38:44.108-08:00] # 
+[2026-11-07T20:38:44.108-08:00] [host] rc=0
+[2026-11-07T20:38:44.108-08:00] 
+[2026-11-07T20:38:44.108-08:00] [host] interactive start; inherited HISTFILE=/dev/null to avoid persistent command history
+[2026-11-07T20:38:44.140-08:00] HISTFILE=/dev/null sh /mount_emmc.sh start; __rv007_rc=$?; printf '\n__RV008R3_\r_START_DONE_062b15f9410725007d53_%s__\n' "$__rv007_rc"
+[2026-11-07T20:38:45.116-08:00] [ 7239.852041] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+[2026-11-07T20:38:45.500-08:00] Entering Ubuntu chroot on /dev/mmcblk1p1...
+[2026-11-07T20:38:46.140-08:00] \x1b[?2004hroot@nucleisys:/# HISTFILE=/dev/null; set +o history; printf '\n__RV008R3_HISTORY\rY_OFF__\n'
+[2026-11-07T20:38:46.172-08:00] \x1b[?2004l\r
+[2026-11-07T20:38:46.172-08:00] __RV008R3_HISTORY_OFF__
+[2026-11-07T20:38:46.172-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:38:46.172-08:00] [host] command: date -u
+[2026-11-07T20:38:46.204-08:00] printf '\n__RV_BEGIN_47d9e341a7df001f4915fc1f__\n'; sh -c 'date\re -u'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__47d9e341a7df001f4915fc1f
+[2026-11-07T20:38:46.220-08:00] \x1b[?2004l\r
+[2026-11-07T20:38:46.220-08:00] __RV_BEGIN_47d9e341a7df001f4915fc1f__
+[2026-11-07T20:38:46.300-08:00] Sun Nov  8 04:38:47 UTC 2026
+[2026-11-07T20:38:46.300-08:00] 
+[2026-11-07T20:38:46.300-08:00] __RC=0__47d9e341a7df001f4915fc1f
+[2026-11-07T20:38:46.300-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:38:46.300-08:00] [host] rc=0
+[2026-11-07T20:38:46.300-08:00] 
+[2026-11-07T20:38:46.300-08:00] [host] command: DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::http::Proxy=http://127.0.0.1:7897 -o Acquire::https::Proxy=http://127.0.0.1:7897 -o Acquire::Retries=0 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 --no-remove install -y git ca-certificates
+[2026-11-07T20:38:46.380-08:00] printf '\n__RV_BEGIN_6d951acf880226c220bd3464__\n'; sh -c 'DEBI\rIAN_FRONTEND=noninteractive apt-get -o Acquire::http::Proxy=http://127.0.0.1:7897\r7 -o Acquire::https::Proxy=http://127.0.0.1:7897 -o Acquire::Retries=0 -o Acquire\re::http::Timeout=30 -o Acquire::https::Timeout=30--no-remove install -y git ca-ce\rertificates'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__6d951acf880226c220bd\rd3464
+[2026-11-07T20:38:46.412-08:00] \x1b[?2004l\r
+[2026-11-07T20:38:46.412-08:00] __RV_BEGIN_6d951acf880226c220bd3464__
+[2026-11-07T20:38:47.388-08:00] \rReading package lists... 0%\r\rReading package lists... 100%\r\rReading package lists... Done\r
+[2026-11-07T20:38:52.155-08:00] \rBuilding dependency tree... 0%\r\rBuilding dependency tree... 0%\r\rBuilding dependency tree... 32%\r\rBuilding dependency tree... 50%\r\rBuilding dependency tree... 50%\r\rBuilding dependency tree... 56%\r\rBuilding dependency tree... 67%\r\rBuilding dependency tree... 78%\r\rBuilding dependency tree... 89%\r\rBuilding dependency tree... Done\r
+[2026-11-07T20:38:56.316-08:00] \rReading state information... 0% \r\rReading state information... 0%\r\rReading state information... Done\r
+[2026-11-07T20:39:04.715-08:00] The following package was automatically installed and is no longer required:
+[2026-11-07T20:39:04.763-08:00]   libpng16-16t64
+[2026-11-07T20:39:04.763-08:00] Use 'apt autoremove' to remove it.
+[2026-11-07T20:39:04.811-08:00] The following additional packages will be installed:
+[2026-11-07T20:39:04.875-08:00]   git-man less libcurl3t64-gnutls liberror-perl
+[2026-11-07T20:39:04.939-08:00] Suggested packages:
+[2026-11-07T20:39:04.955-08:00]   gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui
+[2026-11-07T20:39:04.955-08:00]   gitk gitweb git-cvs git-mediawiki git-svn
+[2026-11-07T20:39:06.411-08:00] The following NEW packages will be installed:
+[2026-11-07T20:39:06.491-08:00]   git git-man less libcurl3t64-gnutls liberror-perl
+[2026-11-07T20:39:06.523-08:00] The following packages will be upgraded:
+[2026-11-07T20:39:06.587-08:00]   ca-certificates
+[2026-11-07T20:39:06.907-08:00] 1 upgraded, 5 newly installed, 0 to remove and 24 not upgraded.
+[2026-11-07T20:39:06.939-08:00] Need to get 7208 kB of archives.
+[2026-11-07T20:39:06.939-08:00] After this operation, 39.3 MB of additional disk space will be used.
+[2026-11-07T20:39:07.115-08:00] \r0% [Working]\r0% [Waiting for headers]\r                        \rGet:1 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 ca-certificates all 20260816ubuntu0.24.04.2 [140 kB]
+[2026-11-07T20:39:07.787-08:00] \r0% [1 ca-certificates 0 B/140 kB 0%]\r2% [1 ca-certificates 140 kB/140 kB 100%]\r                                         \r5% [Working]\r            \rGet:2 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 less riscv64 590-2ubuntu2.1 [146 kB]
+[2026-11-07T20:39:08.795-08:00] \r5% [2 less 0 B/146 kB 0%]\r6% [2 less 92.4 kB/146 kB 63%]\r                              \r10% [Working]\r10% [Waiting for headers]\r                         \rGet:3 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 libcurl3t64-gnutls riscv64 8.5.0-2ubuntu10.16 [352 kB]
+[2026-11-07T20:39:09.931-08:00] \r10% [3 libcurl3t64-gnutls 7900 B/352 kB 2%]\r11% [3 libcurl3t64-gnutls 95.3 kB/352 kB 27%]\r                                             \r17% [Waiting for headers]\r                         \rGet:4 http://ports.ubuntu.com/ubuntu-ports noble/main riscv64 liberror-perl all 0.17029-2 [25.6 kB]
+[2026-11-07T20:39:11.275-08:00] \r17% [4 liberror-perl 0 B/25.6 kB 0%]\r21% [Connecting to 127.0.0.1 (127.0.0.1)]\r                                         \r21% [Waiting for headers]\r                         \rGet:5 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 git-man all 1:2.43.0-1ubuntu7.4 [1101 kB]
+[2026-11-07T20:39:12.027-08:00] \r21% [5 git-man 0 B/1101 kB 0%]\r22% [5 git-man 98.2 kB/1101 kB 9%]\r28% [5 git-man 672 kB/1101 kB 61%]                                 219 kB/s 26s\r36% [Connecting to 127.0.0.1 (127.0.0.1)]                          219 kB/s 24s\r                                                                               \rGet:6 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 git riscv64 1:2.43.0-1ubuntu7.4 [5444 kB]
+[2026-11-07T20:39:13.835-08:00] \r36% [6 git 7898 B/5444 kB 0%]                                      219 kB/s 24s\r37% [6 git 95.3 kB/5444 kB 2%]                                     219 kB/s 24s\r44% [6 git 655 kB/5444 kB 12%]                                     219 kB/s 21s\r54% [6 git 1619 kB/5444 kB 30%]                                    219 kB/s 17s\r67% [6 git 2765 kB/5444 kB 51%]                                    219 kB/s 12s\r87% [6 git 4587 kB/5444 kB 84%]                                     219 kB/s 3s\r97% [6 git 5444 kB/5444 kB 100%]                                    219 kB/s 0s\r100% [Working]                                                      219 kB/s 0s\r                                                                               \rFetched 7208 kB in 10s (712 kB/s)
+[2026-11-07T20:39:24.986-08:00] debconf: delaying package configuration, since apt-utils is not installed
+[2026-11-07T20:39:26.362-08:00] (Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 22555 files and directories currently installed.)
+[2026-11-07T20:39:27.418-08:00] Preparing to unpack .../0-ca-certificates_20260816ubuntu0.24.04.2_all.deb ...
+[2026-11-07T20:39:27.530-08:00] Unpacking ca-certificates (20260816ubuntu0.24.04.2) over (20260816ubuntu0.24.04.1) ...
+[2026-11-07T20:39:29.370-08:00] Selecting previously unselected package less.
+[2026-11-07T20:39:29.418-08:00] Preparing to unpack .../1-less_590-2ubuntu2.1_riscv64.deb ...
+[2026-11-07T20:39:29.466-08:00] Unpacking less (590-2ubuntu2.1) ...
+[2026-11-07T20:39:30.058-08:00] Selecting previously unselected package libcurl3t64-gnutls:riscv64.
+[2026-11-07T20:39:30.090-08:00] Preparing to unpack .../2-libcurl3t64-gnutls_8.5.0-2ubuntu10.16_riscv64.deb ...
+[2026-11-07T20:39:30.154-08:00] Unpacking libcurl3t64-gnutls:riscv64 (8.5.0-2ubuntu10.16) ...
+[2026-11-07T20:39:30.826-08:00] Selecting previously unselected package liberror-perl.
+[2026-11-07T20:39:30.858-08:00] Preparing to unpack .../3-liberror-perl_0.17029-2_all.deb ...
+[2026-11-07T20:39:30.890-08:00] Unpacking liberror-perl (0.17029-2) ...
+[2026-11-07T20:39:31.306-08:00] Selecting previously unselected package git-man.
+[2026-11-07T20:39:31.354-08:00] Preparing to unpack .../4-git-man_1%3a2.43.0-1ubuntu7.4_all.deb ...
+[2026-11-07T20:39:31.386-08:00] Unpacking git-man (1:2.43.0-1ubuntu7.4) ...
+[2026-11-07T20:39:32.170-08:00] Selecting previously unselected package git.
+[2026-11-07T20:39:32.202-08:00] Preparing to unpack .../5-git_1%3a2.43.0-1ubuntu7.4_riscv64.deb ...
+[2026-11-07T20:39:32.362-08:00] Unpacking git (1:2.43.0-1ubuntu7.4) ...
+[2026-11-07T20:39:43.946-08:00] Setting up libcurl3t64-gnutls:riscv64 (8.5.0-2ubuntu10.16) ...
+[2026-11-07T20:39:44.026-08:00] Setting up less (590-2ubuntu2.1) ...
+[2026-11-07T20:39:44.234-08:00] Setting up liberror-perl (0.17029-2) ...
+[2026-11-07T20:39:44.314-08:00] Setting up ca-certificates (20260816ubuntu0.24.04.2) ...
+[2026-11-07T20:40:16.825-08:00] Updating certificates in /etc/ssl/certs...
+[2026-11-07T20:40:26.073-08:00] 0 added, 0 removed; done.
+[2026-11-07T20:40:26.073-08:00] Running hooks in /etc/ca-certificates/update.d...
+[2026-11-07T20:40:26.105-08:00] done.
+[2026-11-07T20:40:26.729-08:00] Setting up git-man (1:2.43.0-1ubuntu7.4) ...
+[2026-11-07T20:40:26.809-08:00] Setting up git (1:2.43.0-1ubuntu7.4) ...
+[2026-11-07T20:40:27.017-08:00] Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+[2026-11-07T20:40:38.600-08:00] 
+[2026-11-07T20:40:38.600-08:00] __RC=0__6d951acf880226c220bd3464
+[2026-11-07T20:40:38.600-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:40:38.616-08:00] [host] rc=0
+[2026-11-07T20:40:38.617-08:00] 
+[2026-11-07T20:40:38.617-08:00] [host] command: git --version
+[2026-11-07T20:40:38.648-08:00] printf '\n__RV_BEGIN_7e5612e218ca1a75793903e5__\n'; sh -c 'git \r --version'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__7e5612e218ca1a7579390\r03e5
+[2026-11-07T20:40:38.664-08:00] \x1b[?2004l\r
+[2026-11-07T20:40:38.664-08:00] __RV_BEGIN_7e5612e218ca1a75793903e5__
+[2026-11-07T20:40:38.728-08:00] git version 2.43.0
+[2026-11-07T20:40:38.744-08:00] 
+[2026-11-07T20:40:38.744-08:00] __RC=0__7e5612e218ca1a75793903e5
+[2026-11-07T20:40:38.744-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:40:38.744-08:00] [host] rc=0
+[2026-11-07T20:40:38.745-08:00] 
+[2026-11-07T20:40:38.745-08:00] [host] command: dpkg-query -W -f='${Package} ${Version} ${Status}\n' git ca-certificates git-man less libcurl3t64-gnutls liberror-perl
+[2026-11-07T20:40:38.808-08:00] printf '\n__RV_BEGIN_e5cecc29e8f5619fbef4bd73__\n'; sh -c 'dpkg\rg-query -W -f='"'"'${Package} ${Version} ${Status}\n'"'"' git ca-certificates git\rt-man less libcurl3t64-gnutls liberror-perl'; __rv_rc=$?; printf '\n'; echo __RC=\r=${__rv_rc}__e5cecc29e8f5619fbef4bd73
+[2026-11-07T20:40:38.824-08:00] \x1b[?2004l\r
+[2026-11-07T20:40:38.824-08:00] __RV_BEGIN_e5cecc29e8f5619fbef4bd73__
+[2026-11-07T20:40:39.000-08:00] ca-certificates 20260816ubuntu0.24.04.2 install ok installed
+[2026-11-07T20:40:39.000-08:00] git 1:2.43.0-1ubuntu7.4 install ok installed
+[2026-11-07T20:40:39.016-08:00] git-man 1:2.43.0-1ubuntu7.4 install ok installed
+[2026-11-07T20:40:39.016-08:00] less 590-2ubuntu2.1 install ok installed
+[2026-11-07T20:40:39.016-08:00] libcurl3t64-gnutls 8.5.0-2ubuntu10.16 install ok installed
+[2026-11-07T20:40:39.016-08:00] liberror-perl 0.17029-2 install ok installed
+[2026-11-07T20:40:39.032-08:00] 
+[2026-11-07T20:40:39.032-08:00] __RC=0__e5cecc29e8f5619fbef4bd73
+[2026-11-07T20:40:39.032-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:40:39.032-08:00] [host] rc=0
+[2026-11-07T20:40:39.033-08:00] 
+[2026-11-07T20:40:39.033-08:00] [host] command: timeout 90s env GIT_TERMINAL_PROMPT=0 git -c http.proxy=http://127.0.0.1:7897 ls-remote https://github.com/Nuclei-Software/nuclei-linux-sdk HEAD
+[2026-11-07T20:40:39.096-08:00] printf '\n__RV_BEGIN_fd2ef88cae2f043423f1bfd1__\n'; sh -c 'time\reout 90s env GIT_TERMINAL_PROMPT=0 git -c http.proxy=http://127.0.0.1:7897 ls-rem\rmote https://github.com/Nuclei-Software/nuclei-linux-sdk HEAD'; __rv_rc=$?; print\rtf '\n'; echo __RC=${__rv_rc}__fd2ef88cae2f043423f1bfd1
+[2026-11-07T20:40:39.112-08:00] \x1b[?2004l\r
+[2026-11-07T20:40:39.112-08:00] __RV_BEGIN_fd2ef88cae2f043423f1bfd1__
+[2026-11-07T20:40:42.200-08:00] 7d6b13933ebb59cafd47805a5a851d3bb4ead527	HEAD
+[2026-11-07T20:40:42.296-08:00] 
+[2026-11-07T20:40:42.296-08:00] __RC=0__fd2ef88cae2f043423f1bfd1
+[2026-11-07T20:40:42.296-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:40:42.296-08:00] [host] rc=0
+[2026-11-07T20:40:42.297-08:00] 
+[2026-11-07T20:40:42.297-08:00] [host] command: dpkg --audit
+[2026-11-07T20:40:42.328-08:00] printf '\n__RV_BEGIN_e4cb099b55ab2a63449e61ce__\n'; sh -c 'dpkg\rg --audit'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e4cb099b55ab2a63449e61\r1ce
+[2026-11-07T20:40:42.344-08:00] \x1b[?2004l\r
+[2026-11-07T20:40:42.344-08:00] __RV_BEGIN_e4cb099b55ab2a63449e61ce__
+[2026-11-07T20:40:42.664-08:00] 
+[2026-11-07T20:40:42.664-08:00] __RC=0__e4cb099b55ab2a63449e61ce
+[2026-11-07T20:40:42.664-08:00] \x1b[?2004hroot@nucleisys:/# 
+[2026-11-07T20:40:42.664-08:00] [host] rc=0
+[2026-11-07T20:40:42.680-08:00] exit
+[2026-11-07T20:40:42.680-08:00] \x1b[?2004l\rexit
+[2026-11-07T20:40:42.680-08:00] Exited Ubuntu (status 0). Mounts are kept.
+[2026-11-07T20:40:42.680-08:00] To unmount, run from Buildroot: sh /mount_emmc.sh stop
+[2026-11-07T20:40:42.696-08:00] 
+[2026-11-07T20:40:42.696-08:00] __RV008R3_START_DONE_062b15f9410725007d53_0__
+[2026-11-07T20:40:42.696-08:00] # 
+[2026-11-07T20:40:42.696-08:00] [host] interactive Ubuntu shell exited; parent shell confirmed
+[2026-11-07T20:40:42.696-08:00] 
+[2026-11-07T20:40:42.696-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T20:40:42.744-08:00] printf '\n__RV_BEGIN_3a307a08c13c683c5e3cd1c8__\n'; sh -c 'sh /mount_emmc.sh st\rtatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__3a307a08c13c683c5e3cd1c8
+[2026-11-07T20:40:42.744-08:00] 
+[2026-11-07T20:40:42.744-08:00] __RV_BEGIN_3a307a08c13c683c5e3cd1c8__
+[2026-11-07T20:40:42.840-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T20:40:42.840-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T20:40:42.840-08:00] Root:   /mnt/ubuntu
+[2026-11-07T20:40:42.856-08:00] /dev/mmcblk1p1 /mnt/ubuntu ext4 rw,relatime 0 0
+[2026-11-07T20:40:42.872-08:00] proc /mnt/ubuntu/proc proc rw,relatime 0 0
+[2026-11-07T20:40:42.872-08:00] sysfs /mnt/ubuntu/sys sysfs rw,relatime 0 0
+[2026-11-07T20:40:42.872-08:00] rootfs /mnt/ubuntu/dev rootfs rw,size=1015660k,nr_inodes=253915 0 0
+[2026-11-07T20:40:42.872-08:00] devpts /mnt/ubuntu/dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+[2026-11-07T20:40:42.888-08:00] tmpfs /mnt/ubuntu/run tmpfs rw,relatime 0 0
+[2026-11-07T20:40:42.904-08:00] 
+[2026-11-07T20:40:42.904-08:00] __RC=0__3a307a08c13c683c5e3cd1c8
+[2026-11-07T20:40:42.920-08:00] #
+[2026-11-07T20:40:42.920-08:00] [host] rc=0
+[2026-11-07T20:40:42.920-08:00] 
+[2026-11-07T20:40:42.920-08:00] [host] command: sh /mount_emmc.sh stop
+[2026-11-07T20:40:42.921-08:00]  printf '\n__RV_BEGIN_e51c052083450c3d886324f6__\n'; sh -c 'sh /mount_emmc.sh st\rtop'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e51c052083450c3d886324f6
+[2026-11-07T20:40:42.968-08:00] 
+[2026-11-07T20:40:42.968-08:00] __RV_BEGIN_e51c052083450c3d886324f6__
+[2026-11-07T20:40:43.112-08:00] Stopping Ubuntu mounts; leave all chroot sessions first.
+[2026-11-07T20:40:48.248-08:00] [ 7363.616175] EXT4-fs (mmcblk1p1): unmounting filesystem <ID>.
+[2026-11-07T20:40:48.344-08:00] Ubuntu unmounted.
+[2026-11-07T20:40:48.344-08:00] 
+[2026-11-07T20:40:48.344-08:00] __RC=0__e51c052083450c3d886324f6
+[2026-11-07T20:40:48.360-08:00] #
+[2026-11-07T20:40:48.360-08:00] [host] rc=0
+[2026-11-07T20:40:48.360-08:00] 
+[2026-11-07T20:40:48.360-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T20:40:48.361-08:00]  printf '\n__RV_BEGIN_d1dcbb8854c0e4712b18cbb9__\n'; sh -c 'sh /mount_emmc.sh st\rtatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__d1dcbb8854c0e4712b18cbb9
+[2026-11-07T20:40:48.408-08:00] 
+[2026-11-07T20:40:48.408-08:00] __RV_BEGIN_d1dcbb8854c0e4712b18cbb9__
+[2026-11-07T20:40:48.504-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T20:40:48.504-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T20:40:48.504-08:00] Root:   /mnt/ubuntu
+[2026-11-07T20:40:48.552-08:00] Ubuntu root is not mounted.
+[2026-11-07T20:40:48.552-08:00] 
+[2026-11-07T20:40:48.552-08:00] __RC=0__d1dcbb8854c0e4712b18cbb9
+[2026-11-07T20:40:48.568-08:00] # 
+[2026-11-07T20:40:48.568-08:00] [host] rc=0
+[2026-11-07T20:40:48.568-08:00] 
+[2026-11-07T20:40:48.568-08:00] [host] command: awk '$2=="/mnt/ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/emmc_ro/")==1 {print; bad=1} END {exit bad}' /proc/mounts && echo EMMC_ALL_UNMOUNTED
+[2026-11-07T20:40:48.632-08:00] printf '\n__RV_BEGIN_b89fa2ceceaa2d195762c917__\n'; sh -c 'awk '"'"'$2=="/mnt/u\rubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/em\rmmc_ro/")==1 {print; bad=1} END {exit bad}'"'"' /proc/mounts && echo EMMC_ALL_UNM\rMOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__b89fa2ceceaa2d195762c917\r7
+[2026-11-07T20:40:48.648-08:00] 
+[2026-11-07T20:40:48.648-08:00] __RV_BEGIN_b89fa2ceceaa2d195762c917__
+[2026-11-07T20:40:48.712-08:00] EMMC_ALL_UNMOUNTED
+[2026-11-07T20:40:48.728-08:00] 
+[2026-11-07T20:40:48.728-08:00] __RC=0__b89fa2ceceaa2d195762c917
+[2026-11-07T20:40:48.728-08:00] # 
+[2026-11-07T20:40:48.728-08:00] [host] rc=0
+
+===== final-board-raw.log =====
+[2026-11-07T20:43:19.223-08:00] printf '\n__RV_BEGIN_168230cf67207d081567290a__\n'; sh -c 'set -e
+[2026-11-07T20:43:19.224-08:00] p/rv008r3-final-listeners
+[2026-11-07T20:43:19.240-08:00] ech> netstat -tln > /tmp/rv008r3-final-listeners
+[2026-11-07T20:43:19.240-08:00] > cat /tmp/rv008r3-final-listeners
+[2026-11-07T20:43:19.256-08:00] > if grep '"'"':7897 '"'"' /tmp/rv008r3-final-listeners; then exit 1; fi
+[2026-11-07T20:43:19.272-08:00] > rm /tmp/rv008r3-final-listeners
+[2026-11-07T20:43:19.272-08:00] > echo TUNNEL_CLOSED
+[2026-11-07T20:43:19.287-08:00] > sh /mount_emmc.sh status
+[2026-11-07T20:43:19.288-08:00] > ip -4 addr show eth0
+[2026-11-07T20:43:19.288-08:00] > ip route
+[2026-11-07T20:43:19.288-08:00] > date -u
+[2026-11-07T20:43:19.303-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__168230cf67207d081567290a
+[2026-11-07T20:43:19.304-08:00] 
+[2026-11-07T20:43:19.304-08:00] __RV_BEGIN_168230cf67207d081567290a__
+[2026-11-07T20:43:19.399-08:00] Active Internet connections (only servers)
+[2026-11-07T20:43:19.400-08:00] Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+[2026-11-07T20:43:19.400-08:00] tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      
+[2026-11-07T20:43:19.416-08:00] tcp        0      0 :::22                   :::*                    LISTEN      
+[2026-11-07T20:43:19.447-08:00] TUNNEL_CLOSED
+[2026-11-07T20:43:19.495-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T20:43:19.496-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T20:43:19.496-08:00] Root:   /mnt/ubuntu
+[2026-11-07T20:43:19.559-08:00] Ubuntu root is not mounted.
+[2026-11-07T20:43:19.575-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T20:43:19.591-08:00]     inet 192.168.137.178/24 brd 192.168.137.255 scope global eth0
+[2026-11-07T20:43:19.591-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:43:19.592-08:00]     inet 192.168.50.2/24 scope global eth0
+[2026-11-07T20:43:19.592-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T20:43:19.607-08:00] 192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+[2026-11-07T20:43:19.608-08:00] 192.168.137.0/24 dev eth0 scope link  src 192.168.137.178 
+[2026-11-07T20:43:19.624-08:00] Sun Nov  8 04:43:21 UTC 2026
+[2026-11-07T20:43:19.640-08:00] 
+[2026-11-07T20:43:19.640-08:00] __RC=0__168230cf67207d081567290a
+[2026-11-07T20:43:19.640-08:00] # 

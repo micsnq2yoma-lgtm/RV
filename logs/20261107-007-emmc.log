@@ -1,0 +1,466 @@
+# Task 007 serial transcript. Authentication excluded. Build account/host, MAC, filesystem UUID and home entry identifiers masked where present. NUL represented as \x00. Raw retained in ignored .venv.
+# First interactive attempt reached Ubuntu but the host prompt matcher timed out on terminal control characters. It exited and stopped mounts normally. The corrected retry and successful command/cleanup transcript follow.
+[2026-11-07T04:04:41.522-08:00] 
+[2026-11-07T04:04:41.522-08:00] [host] command: cat /sys/block/mmcblk1/device/type /sys/block/mmcblk1/device/name /sys/block/mmcblk1/size; cat /proc/partitions | grep mmcblk1; ls /dev/mmcblk1p1
+[2026-11-07T04:04:41.583-08:00] printf '\n__RV_BEGIN_a702627e9c5103f0b9cd7966__\n'; sh -c 'cat /sys/block/mmcbl
+lk1/device/type /sys/block/mmcblk1/device/name /sys/block/mmcblk1/size; cat /proc
+c/partitions | grep mmcblk1; ls /dev/mmcblk1p1'; __rv_rc=$?; printf '\n'; echo __
+_RC=${__rv_rc}__a702627e9c5103f0b9cd7966
+[2026-11-07T04:04:41.615-08:00] 
+[2026-11-07T04:04:41.615-08:00] __RV_BEGIN_a702627e9c5103f0b9cd7966__
+[2026-11-07T04:04:41.663-08:00] MMC
+[2026-11-07T04:04:41.663-08:00] CJUD4R
+[2026-11-07T04:04:41.663-08:00] 124993536
+[2026-11-07T04:04:41.695-08:00]  179        8   62496768 mmcblk1
+[2026-11-07T04:04:41.695-08:00]  179        9   62496760 mmcblk1p1
+[2026-11-07T04:04:41.711-08:00]  179       16      32640 mmcblk1boot0
+[2026-11-07T04:04:41.711-08:00]  179       24      32640 mmcblk1boot1
+[2026-11-07T04:04:41.711-08:00] [1;35m/dev/mmcblk1p1[m
+[2026-11-07T04:04:41.727-08:00] 
+[2026-11-07T04:04:41.727-08:00] __RC=0__a702627e9c5103f0b9cd7966
+[2026-11-07T04:04:41.727-08:00] # 
+[2026-11-07T04:04:41.727-08:00] [host] rc=0
+[2026-11-07T04:04:41.727-08:00] 
+[2026-11-07T04:04:41.727-08:00] [host] command: blkid /dev/mmcblk1p1 2>/dev/null || true
+[2026-11-07T04:04:41.775-08:00] printf '\n__RV_BEGIN_f4daf63cf5124818627b3058__\n'; sh -c 'blkid /dev/mmcblk1p1
+1 2>/dev/null || true'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__f4daf63cf5
+5124818627b3058
+[2026-11-07T04:04:41.791-08:00] 
+[2026-11-07T04:04:41.791-08:00] __RV_BEGIN_f4daf63cf5124818627b3058__
+[2026-11-07T04:04:41.871-08:00] /dev/mmcblk1p1: UUID="[redacted filesystem UUID]"
+[2026-11-07T04:04:41.887-08:00] 
+[2026-11-07T04:04:41.887-08:00] __RC=0__f4daf63cf5124818627b3058
+[2026-11-07T04:04:41.887-08:00] # 
+[2026-11-07T04:04:41.887-08:00] [host] rc=0
+[2026-11-07T04:04:41.887-08:00] 
+[2026-11-07T04:04:41.887-08:00] [host] command: if grep -q ' /mnt/emmc_ro ' /proc/mounts; then echo EMMC_RO_TARGET_ALREADY_MOUNTED; exit 1; fi
+[2026-11-07T04:04:41.887-08:00] if grep -q '^/dev/mmcblk1p1 ' /proc/mounts; then echo EMMC_ALREADY_MOUNTED; exit 1; fi
+[2026-11-07T04:04:41.887-08:00] mkdir -p /mnt/emmc_ro || exit $?
+[2026-11-07T04:04:41.887-08:00] mount -t ext4 -o ro,noload /dev/mmcblk1p1 /mnt/emmc_ro || exit $?
+[2026-11-07T04:04:41.887-08:00] trap 'umount /mnt/emmc_ro' 0
+[2026-11-07T04:04:41.887-08:00] awk '$1=="/dev/mmcblk1p1" && $2=="/mnt/emmc_ro" && $3=="ext4" && $4 ~ /(^|,)ro(,|$)/ {print; ok=1} END {exit !ok}' /proc/mounts || exit 1
+[2026-11-07T04:04:41.887-08:00] df -h /mnt/emmc_ro
+[2026-11-07T04:04:41.887-08:00] ls -la /mnt/emmc_ro
+[2026-11-07T04:04:41.887-08:00] cat /mnt/emmc_ro/etc/os-release || exit 1
+[2026-11-07T04:04:41.887-08:00] if ! grep -qE '^ID="?ubuntu"?$' /mnt/emmc_ro/etc/os-release; then echo NOT_UBUNTU_STOP; exit 1; fi
+[2026-11-07T04:04:41.887-08:00] ls -l /mnt/emmc_ro/bin/bash /mnt/emmc_ro/sbin/init /mnt/emmc_ro/lib/systemd/systemd 2>&1
+[2026-11-07T04:04:41.887-08:00] ls /mnt/emmc_ro/lib/modules 2>&1
+[2026-11-07T04:04:41.887-08:00] ls /mnt/emmc_ro/home 2>&1
+[2026-11-07T04:04:41.887-08:00] du -sh /mnt/emmc_ro/usr 2>/dev/null
+[2026-11-07T04:04:41.887-08:00] umount /mnt/emmc_ro || exit $?
+[2026-11-07T04:04:41.887-08:00] trap - 0
+[2026-11-07T04:04:41.887-08:00] if grep -q ' /mnt/emmc_ro ' /proc/mounts; then exit 1; fi
+[2026-11-07T04:04:41.887-08:00] echo EMMC_RO_UNMOUNTED
+[2026-11-07T04:04:41.935-08:00] printf '\n__RV_BEGIN_a1d11ef466f4ffebbd1ebff3__\n'; sh -c 'if grep -q '"'"' /mn
+nt/emmc_ro '"'"' /proc/mounts; then echo EMMC_RO_TARGET_ALREADY_MOUNTED; exit 1; 
+ fi
+[2026-11-07T04:04:41.951-08:00]  || exi> if grep -q '"'"'^/dev/mmcblk1p1 '"'"' /proc/mounts; then echo EMMC_ALREADY_MOUN
+NTED; exit 1; fi
+[2026-11-07T04:04:41.983-08:00] > mkdir -p /mnt/emmc_ro || exit $?
+[2026-11-07T04:04:41.999-08:00] 1ef466f4ffebbd1ebff3
+[2026-11-07T04:04:41.999-08:00] > mount -t ext4 -o ro,noload /dev/mmcblk1p1 /mnt/emmc_ro || exit $?
+[2026-11-07T04:04:42.015-08:00] > trap '"'"'umount /mnt/emmc_ro'"'"' 0
+[2026-11-07T04:04:42.015-08:00] > awk '"'"'$1=="/dev/mmcblk1p1" && $2=="/mnt/emmc_ro" && $3=="ext4" && $4 ~ /(^|,
+,)ro(,|$)/ {print; ok=1} END {exit !ok}'"'"' /proc/mounts || exit 1
+[2026-11-07T04:04:42.047-08:00] > df -h /mnt/emmc_ro
+[2026-11-07T04:04:42.047-08:00] > ls -la /mnt/emmc_ro
+[2026-11-07T04:04:42.063-08:00] > cat /mnt/emmc_ro/etc/os-release || exit 1
+[2026-11-07T04:04:42.063-08:00] > if ! grep -qE '"'"'^ID="?ubuntu"?$'"'"' /mnt/emmc_ro/etc/os-release; then echo 
+ NOT_UBUNTU_STOP; exit 1; fi
+[2026-11-07T04:04:42.095-08:00] > ls -l /mnt/emmc_ro/bin/bash /mnt/emmc_ro/sbin/init /mnt/emmc_ro/lib/systemd/sys
+stemd 2>&1
+[2026-11-07T04:04:42.111-08:00] > ls /mnt/emmc_ro/lib/modules 2>&1
+[2026-11-07T04:04:42.111-08:00] > ls /mnt/emmc_ro/home 2>&1
+[2026-11-07T04:04:42.127-08:00] > du -sh /mnt/emmc_ro/usr 2>/dev/null
+[2026-11-07T04:04:42.127-08:00] > umount /mnt/emmc_ro || exit $?
+[2026-11-07T04:04:42.143-08:00] > trap - 0
+[2026-11-07T04:04:42.143-08:00] > if grep -q '"'"' /mnt/emmc_ro '"'"' /proc/mounts; then exit 1; fi
+[2026-11-07T04:04:42.159-08:00] > echo EMMC_RO_UNMOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__a1d11ef
+f466f4ffebbd1ebff3
+[2026-11-07T04:04:42.175-08:00] 
+[2026-11-07T04:04:42.175-08:00] __RV_BEGIN_a1d11ef466f4ffebbd1ebff3__
+[2026-11-07T04:04:43.023-08:00] [  122.872482] EXT4-fs (mmcblk1p1): orphan cleanup on readonly fs
+[2026-11-07T04:04:43.039-08:00] [  122.880550] EXT4-fs (mmcblk1p1): mounted filesystem [redacted filesystem UUID] ro without journal. Quota mode: disabled.
+[2026-11-07T04:04:43.055-08:00] /dev/mmcblk1p1 /mnt/emmc_ro ext4 ro,relatime,norecovery 0 0
+[2026-11-07T04:04:43.087-08:00] Filesystem                Size      Used Available Use% Mounted on
+[2026-11-07T04:04:43.087-08:00] /dev/mmcblk1p1           58.4G      1.1G     54.3G   2% /mnt/emmc_ro
+[2026-11-07T04:04:43.183-08:00] total 100
+[2026-11-07T04:04:43.183-08:00] drwxr-xr-x   21 root     root          4096 Jan  1 00:14 [1;34m.[m
+[2026-11-07T04:04:43.199-08:00] drwxr-xr-x    3 root     root            60 Jan  1 00:02 [1;34m..[m
+[2026-11-07T04:04:43.215-08:00] lrwxrwxrwx    1 root     root             7 Jan  1 00:10 [1;36mbin[m -> [1;34musr/bin[m
+[2026-11-07T04:04:43.231-08:00] drwxr-xr-x    2 root     root          4096 May 28  2025 [1;34mbin.usr-is-merged[m
+[2026-11-07T04:04:43.231-08:00] drwxr-xr-x    2 root     root          4096 Apr 22  2024 [1;34mboot[m
+[2026-11-07T04:04:43.247-08:00] drwxr-xr-x    3 root     root          4096 Jan  1 00:02 [1;34mdev[m
+[2026-11-07T04:04:43.247-08:00] drwxr-xr-x   62 root     root          4096 Jan  1  1970 [1;34metc[m
+[2026-11-07T04:04:43.247-08:00] drwxr-xr-x    3 root     root          4096 Jan  1 00:11 [1;34mhome[m
+[2026-11-07T04:04:43.263-08:00] lrwxrwxrwx    1 root     root             7 Jan  1 00:10 [1;36mlib[m -> [1;34musr/lib[m
+[2026-11-07T04:04:43.263-08:00] drwxr-xr-x    2 root     root          4096 Nov 14  2024 [1;34mlib.usr-is-merged[m
+[2026-11-07T04:04:43.295-08:00] drwx------    2 root     root         16384 Oct 28  2026 [1;34mlost+found[m
+[2026-11-07T04:04:43.295-08:00] drwxr-xr-x    2 root     root          4096 Aug  5  2025 [1;34mmedia[m
+[2026-11-07T04:04:43.295-08:00] drwxr-xr-x    2 root     root          4096 Aug  5  2025 [1;34mmnt[m
+[2026-11-07T04:04:43.311-08:00] -rw-r--r--    1 root     root          3426 Oct 28  2026 [0;0mntp.py[m
+[2026-11-07T04:04:43.311-08:00] drwxr-xr-x    2 root     root          4096 Aug  5  2025 [1;34mopt[m
+[2026-11-07T04:04:43.311-08:00] drwxr-xr-x    2 root     root          4096 Apr 22  2024 [1;34mproc[m
+[2026-11-07T04:04:43.327-08:00] drwx------    5 root     root          4096 Oct 28  2026 [1;34mroot[m
+[2026-11-07T04:04:43.327-08:00] drwxr-xr-x    3 root     root          4096 Aug  5  2025 [1;34mrun[m
+[2026-11-07T04:04:43.343-08:00] lrwxrwxrwx    1 root     root             8 Jan  1 00:10 [1;36msbin[m -> [1;34musr/sbin[m
+[2026-11-07T04:04:43.343-08:00] drwxr-xr-x    2 root     root          4096 May 28  2025 [1;34msbin.usr-is-merged[m
+[2026-11-07T04:04:43.359-08:00] drwxr-xr-x    2 root     root          4096 Aug  5  2025 [1;34msrv[m
+[2026-11-07T04:04:43.359-08:00] drwxr-xr-x    2 root     root          4096 Apr 22  2024 [1;34msys[m
+[2026-11-07T04:04:43.359-08:00] -rw-r--r--    1 root     root          2420 Oct 28  2026 [0;0mtest.py[m
+[2026-11-07T04:04:43.375-08:00] drwxrwxrwt    5 root     root          4096 Nov  5  2026 [1;34mtmp[m
+[2026-11-07T04:04:43.375-08:00] drwxr-xr-x   11 root     root          4096 Aug  5  2025 [1;34musr[m
+[2026-11-07T04:04:43.375-08:00] drwxr-xr-x   11 root     root          4096 Aug  5  2025 [1;34mvar[m
+[2026-11-07T04:04:43.391-08:00] PRETTY_NAME="Ubuntu 24.04.3 LTS"
+[2026-11-07T04:04:43.391-08:00] NAME="Ubuntu"
+[2026-11-07T04:04:43.391-08:00] VERSION_ID="24.04"
+[2026-11-07T04:04:43.391-08:00] VERSION="24.04.3 LTS (Noble Numbat)"
+[2026-11-07T04:04:43.391-08:00] VERSION_CODENAME=noble
+[2026-11-07T04:04:43.391-08:00] ID=ubuntu
+[2026-11-07T04:04:43.407-08:00] ID_LIKE=debian
+[2026-11-07T04:04:43.407-08:00] HOME_URL="https://www.ubuntu.com/"
+[2026-11-07T04:04:43.407-08:00] SUPPORT_URL="https://help.ubuntu.com/"
+[2026-11-07T04:04:43.407-08:00] BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+[2026-11-07T04:04:43.407-08:00] PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+[2026-11-07T04:04:43.423-08:00] UBUNTU_CODENAME=noble
+[2026-11-07T04:04:43.423-08:00] LOGO=ubuntu-logo
+[2026-11-07T04:04:43.423-08:00] -rwxr-xr-x    1 root     root       1211376 Mar 31  2024 [1;32m/mnt/emmc_ro/bin/bash[m
+[2026-11-07T04:04:43.423-08:00] -rwxr-xr-x    1 root     root         88480 Oct 12  2026 [1;32m/mnt/emmc_ro/lib/systemd/systemd[m
+[2026-11-07T04:04:43.439-08:00] lrwxrwxrwx    1 root     root            22 Jan  1 00:10 [1;36m/mnt/emmc_ro/sbin/init[m -> [1;32m../lib/systemd/systemd[m
+[2026-11-07T04:04:43.455-08:00] ls: /mnt/emmc_ro/lib/modules: No such file or directory
+[2026-11-07T04:04:43.455-08:00] [redacted home entry]
+[2026-11-07T04:04:55.758-08:00] 757.0M	/mnt/emmc_ro/usr
+[2026-11-07T04:04:57.038-08:00] [  136.950451] EXT4-fs (mmcblk1p1): unmounting filesystem [redacted filesystem UUID].
+[2026-11-07T04:04:57.134-08:00] EMMC_RO_UNMOUNTED
+[2026-11-07T04:04:57.150-08:00] 
+[2026-11-07T04:04:57.150-08:00] __RC=0__a1d11ef466f4ffebbd1ebff3
+[2026-11-07T04:04:57.150-08:00] # 
+[2026-11-07T04:04:57.151-08:00] [host] rc=0
+[2026-11-07T04:04:57.151-08:00] 
+[2026-11-07T04:04:57.151-08:00] [host] command: ls -l /mount_emmc.sh; sha256sum /mount_emmc.sh; sh /mount_emmc.sh status
+[2026-11-07T04:04:57.198-08:00] printf '\n__RV_BEGIN_6886706fe07dbaa58eb8f728__\n'; sh -c 'ls -l /mount_emmc.sh
+h; sha256sum /mount_emmc.sh; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; 
+ echo __RC=${__rv_rc}__6886706fe07dbaa58eb8f728
+[2026-11-07T04:04:57.214-08:00] 
+[2026-11-07T04:04:57.214-08:00] __RV_BEGIN_6886706fe07dbaa58eb8f728__
+[2026-11-07T04:04:57.278-08:00] -rwxr-xr-x    1 root     root          4420 Nov  6  2026 [1;32m/mount_emmc.sh[m
+[2026-11-07T04:04:57.310-08:00] d31e23ca801f024d30f1b9210651017f224dc7b5298b328661b53e69379cfcad  /mount_emmc.sh
+[2026-11-07T04:04:57.358-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:04:57.359-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:04:57.374-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:04:57.406-08:00] Ubuntu root is not mounted.
+[2026-11-07T04:04:57.422-08:00] 
+[2026-11-07T04:04:57.422-08:00] __RC=0__6886706fe07dbaa58eb8f728
+[2026-11-07T04:04:57.422-08:00] # 
+[2026-11-07T04:04:57.423-08:00] [host] rc=0
+[2026-11-07T04:07:10.021-08:00] 
+[2026-11-07T04:07:10.021-08:00] [host] command: sha256sum /mount_emmc.sh; sh /mount_emmc.sh status
+[2026-11-07T04:07:10.071-08:00] printf '\n__RV_BEGIN_7c1f13a48efea39f869fa17a__\n'; sh -c 'sha256sum /mount_emm
+mc.sh; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__
+_7c1f13a48efea39f869fa17a
+[2026-11-07T04:07:10.087-08:00] 
+[2026-11-07T04:07:10.087-08:00] __RV_BEGIN_7c1f13a48efea39f869fa17a__
+[2026-11-07T04:07:10.135-08:00] d31e23ca801f024d30f1b9210651017f224dc7b5298b328661b53e69379cfcad  /mount_emmc.sh
+[2026-11-07T04:07:10.199-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:07:10.199-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:07:10.199-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:07:10.247-08:00] Ubuntu root is not mounted.
+[2026-11-07T04:07:10.263-08:00] 
+[2026-11-07T04:07:10.263-08:00] __RC=0__7c1f13a48efea39f869fa17a
+[2026-11-07T04:07:10.263-08:00] # 
+[2026-11-07T04:07:10.263-08:00] [host] rc=0
+[2026-11-07T04:07:10.263-08:00] 
+[2026-11-07T04:07:10.263-08:00] [host] interactive start; inherited HISTFILE=/dev/null to avoid persistent command history
+[2026-11-07T04:07:10.295-08:00] HISTFILE=/dev/null sh /mount_emmc.sh start; __rv007_rc=$?; printf '\n__RV007_ST
+TART_DONE_545379b10a6cdf27f281_%s__\n' "$__rv007_rc"
+[2026-11-07T04:07:11.767-08:00] [  272.370841] EXT4-fs (mmcblk1p1): recovery complete
+[2026-11-07T04:07:11.767-08:00] [  272.378067] EXT4-fs (mmcblk1p1): mounted filesystem [redacted filesystem UUID] r/w with ordered data mode. Quota mode: disabled.
+[2026-11-07T04:07:12.119-08:00] Entering Ubuntu chroot on /dev/mmcblk1p1...
+[2026-11-07T04:07:12.695-08:00] [?2004hroot@[redacted host]:/# HISTFILE=/dev/null; set +o history; echo __RV007_HISTORY_OFF__ 
+[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00root@[redacted host]:/# HISTFILE=/dev/null; set +o history; echo __RV007_HISTORY_OFF_[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00_
+[2026-11-07T04:07:12.727-08:00] [?2004l
+__RV007_HISTORY_OFF__
+[2026-11-07T04:07:12.743-08:00] [?2004hroot@[redacted host]:/# exit
+[2026-11-07T04:07:32.798-08:00] [?2004l
+exit
+[2026-11-07T04:07:32.814-08:00] Exited Ubuntu (status 0). Mounts are kept.
+[2026-11-07T04:07:32.814-08:00] To unmount, run from Buildroot: sh /mount_emmc.sh stop
+[2026-11-07T04:07:32.814-08:00] 
+[2026-11-07T04:07:32.814-08:00] __RV007_START_DONE_545379b10a6cdf27f281_0__
+[2026-11-07T04:07:32.830-08:00] # 
+[2026-11-07T04:07:32.830-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T04:07:32.877-08:00] printf '\n__RV_BEGIN_ca3a3f6ee82995f1590b429b__\n'; sh -c 'sh /mount_emmc.sh st
+tatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__ca3a3f6ee82995f1590b429b
+[2026-11-07T04:07:32.893-08:00] 
+[2026-11-07T04:07:32.894-08:00] __RV_BEGIN_ca3a3f6ee82995f1590b429b__
+[2026-11-07T04:07:32.973-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:07:32.974-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:07:32.974-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:07:32.989-08:00] /dev/mmcblk1p1 /mnt/ubuntu ext4 rw,relatime 0 0
+[2026-11-07T04:07:33.006-08:00] proc /mnt/ubuntu/proc proc rw,relatime 0 0
+[2026-11-07T04:07:33.006-08:00] sysfs /mnt/ubuntu/sys sysfs rw,relatime 0 0
+[2026-11-07T04:07:33.006-08:00] rootfs /mnt/ubuntu/dev rootfs rw,size=1015660k,nr_inodes=253915 0 0
+[2026-11-07T04:07:33.006-08:00] devpts /mnt/ubuntu/dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+[2026-11-07T04:07:33.022-08:00] tmpfs /mnt/ubuntu/run tmpfs rw,relatime 0 0
+[2026-11-07T04:07:33.037-08:00] 
+[2026-11-07T04:07:33.038-08:00] __RC=0__ca3a3f6ee82995f1590b429b
+[2026-11-07T04:07:33.038-08:00] # 
+[2026-11-07T04:07:33.038-08:00] [host] rc=0
+[2026-11-07T04:07:33.038-08:00] 
+[2026-11-07T04:07:33.038-08:00] [host] command: sh /mount_emmc.sh stop
+[2026-11-07T04:07:33.085-08:00] printf '\n__RV_BEGIN_10d5cfbd2f7b0bd9d785a645__\n'; sh -c 'sh /mount_emmc.sh st
+top'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__10d5cfbd2f7b0bd9d785a645
+[2026-11-07T04:07:33.086-08:00] 
+[2026-11-07T04:07:33.086-08:00] __RV_BEGIN_10d5cfbd2f7b0bd9d785a645__
+[2026-11-07T04:07:33.229-08:00] Stopping Ubuntu mounts; leave all chroot sessions first.
+[2026-11-07T04:07:33.661-08:00] [  294.375411] EXT4-fs (mmcblk1p1): unmounting filesystem [redacted filesystem UUID].
+[2026-11-07T04:07:33.725-08:00] Ubuntu unmounted.
+[2026-11-07T04:07:33.726-08:00] 
+[2026-11-07T04:07:33.726-08:00] __RC=0__10d5cfbd2f7b0bd9d785a645
+[2026-11-07T04:07:33.726-08:00] # 
+[2026-11-07T04:07:33.726-08:00] [host] rc=0
+[2026-11-07T04:07:33.726-08:00] 
+[2026-11-07T04:07:33.726-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T04:07:33.757-08:00] printf '\n__RV_BEGIN_6bc84cdac70edc424dc0f21a__\n'; sh -c 'sh /mount_emmc.sh st
+tatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__6bc84cdac70edc424dc0f21a
+[2026-11-07T04:07:33.774-08:00] 
+[2026-11-07T04:07:33.774-08:00] __RV_BEGIN_6bc84cdac70edc424dc0f21a__
+[2026-11-07T04:07:33.869-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:07:33.870-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:07:33.870-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:07:33.917-08:00] Ubuntu root is not mounted.
+[2026-11-07T04:07:33.918-08:00] 
+[2026-11-07T04:07:33.918-08:00] __RC=0__6bc84cdac70edc424dc0f21a
+[2026-11-07T04:07:33.918-08:00] # 
+[2026-11-07T04:07:33.918-08:00] [host] rc=0
+[2026-11-07T04:07:33.918-08:00] 
+[2026-11-07T04:07:33.918-08:00] [host] command: awk '$2=="/mnt/ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/emmc_ro/")==1 {print; bad=1} END {exit bad}' /proc/mounts && echo EMMC_ALL_UNMOUNTED
+[2026-11-07T04:07:33.981-08:00] printf '\n__RV_BEGIN_b19a3c29ed0e6c1d8daa44ad__\n'; sh -c 'awk '"'"'$2=="/mnt/u
+ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/em
+mmc_ro/")==1 {print; bad=1} END {exit bad}'"'"' /proc/mounts && echo EMMC_ALL_UNM
+MOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__b19a3c29ed0e6c1d8daa44ad
+d
+[2026-11-07T04:07:34.014-08:00] 
+[2026-11-07T04:07:34.014-08:00] __RV_BEGIN_b19a3c29ed0e6c1d8daa44ad__
+[2026-11-07T04:07:34.077-08:00] EMMC_ALL_UNMOUNTED
+[2026-11-07T04:07:34.078-08:00] 
+[2026-11-07T04:07:34.078-08:00] __RC=0__b19a3c29ed0e6c1d8daa44ad
+[2026-11-07T04:07:34.078-08:00] # 
+[2026-11-07T04:07:34.078-08:00] [host] rc=0
+[2026-11-07T04:08:28.746-08:00] 
+[2026-11-07T04:08:28.746-08:00] [host] command: sha256sum /mount_emmc.sh; sh /mount_emmc.sh status
+[2026-11-07T04:08:28.798-08:00] printf '\n__RV_BEGIN_f5d380e2da039d18598e36ac__\n'; sh -c 'sha256sum /mount_emm
+mc.sh; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__
+_f5d380e2da039d18598e36ac
+[2026-11-07T04:08:28.814-08:00] 
+[2026-11-07T04:08:28.814-08:00] __RV_BEGIN_f5d380e2da039d18598e36ac__
+[2026-11-07T04:08:28.862-08:00] d31e23ca801f024d30f1b9210651017f224dc7b5298b328661b53e69379cfcad  /mount_emmc.sh
+[2026-11-07T04:08:28.926-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:08:28.926-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:08:28.926-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:08:28.974-08:00] Ubuntu root is not mounted.
+[2026-11-07T04:08:28.974-08:00] 
+[2026-11-07T04:08:28.974-08:00] __RC=0__f5d380e2da039d18598e36ac
+[2026-11-07T04:08:28.974-08:00] # 
+[2026-11-07T04:08:28.974-08:00] [host] rc=0
+[2026-11-07T04:08:28.974-08:00] 
+[2026-11-07T04:08:28.975-08:00] [host] interactive start; inherited HISTFILE=/dev/null to avoid persistent command history
+[2026-11-07T04:08:29.006-08:00] HISTFILE=/dev/null sh /mount_emmc.sh start; __rv007_rc=$?; printf '\n__RV007_ST
+TART_DONE_a6766d4dfd721fc15d7a_%s__\n' "$__rv007_rc"
+[2026-11-07T04:08:29.982-08:00] [  350.978092] EXT4-fs (mmcblk1p1): mounted filesystem [redacted filesystem UUID] r/w with ordered data mode. Quota mode: disabled.
+[2026-11-07T04:08:30.318-08:00] Entering Ubuntu chroot on /dev/mmcblk1p1...
+[2026-11-07T04:08:30.958-08:00] [?2004hroot@[redacted host]:/# HISTFILE=/dev/null; set +o history; printf '\n__RV007_HISTORY_O
+OFF__\n'
+[2026-11-07T04:08:31.006-08:00] [?2004l
+
+[2026-11-07T04:08:31.006-08:00] __RV007_HISTORY_OFF__
+[2026-11-07T04:08:31.006-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:31.006-08:00] [host] command: cat /etc/os-release
+[2026-11-07T04:08:31.038-08:00] printf '\n__RV_BEGIN_d5d7e9695039c3bcade48130__\n'; sh -c 'cat 
+ /etc/os-release'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__d5d7e9695039c3b
+bcade48130
+[2026-11-07T04:08:31.054-08:00] [?2004l
+
+[2026-11-07T04:08:31.054-08:00] __RV_BEGIN_d5d7e9695039c3bcade48130__
+[2026-11-07T04:08:31.118-08:00] PRETTY_NAME="Ubuntu 24.04.3 LTS"
+[2026-11-07T04:08:31.118-08:00] NAME="Ubuntu"
+[2026-11-07T04:08:31.118-08:00] VERSION_ID="24.04"
+[2026-11-07T04:08:31.118-08:00] VERSION="24.04.3 LTS (Noble Numbat)"
+[2026-11-07T04:08:31.118-08:00] VERSION_CODENAME=noble
+[2026-11-07T04:08:31.118-08:00] ID=ubuntu
+[2026-11-07T04:08:31.118-08:00] ID_LIKE=debian
+[2026-11-07T04:08:31.118-08:00] HOME_URL="https://www.ubuntu.com/"
+[2026-11-07T04:08:31.134-08:00] SUPPORT_URL="https://help.ubuntu.com/"
+[2026-11-07T04:08:31.134-08:00] BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+[2026-11-07T04:08:31.134-08:00] PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+[2026-11-07T04:08:31.134-08:00] UBUNTU_CODENAME=noble
+[2026-11-07T04:08:31.150-08:00] LOGO=ubuntu-logo
+[2026-11-07T04:08:31.150-08:00] 
+[2026-11-07T04:08:31.150-08:00] __RC=0__d5d7e9695039c3bcade48130
+[2026-11-07T04:08:31.150-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:31.151-08:00] [host] rc=0
+[2026-11-07T04:08:31.151-08:00] 
+[2026-11-07T04:08:31.151-08:00] [host] command: uname -a
+[2026-11-07T04:08:31.182-08:00] printf '\n__RV_BEGIN_4955be720c949008cb902f59__\n'; sh -c 'unam
+me -a'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__4955be720c949008cb902f59
+[2026-11-07T04:08:31.198-08:00] [?2004l
+
+[2026-11-07T04:08:31.198-08:00] __RV_BEGIN_4955be720c949008cb902f59__
+[2026-11-07T04:08:31.230-08:00] Linux [redacted host] 6.6.90-rt54+ #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026 riscv64 riscv64 riscv64 GNU/Linux
+[2026-11-07T04:08:31.246-08:00] 
+[2026-11-07T04:08:31.246-08:00] __RC=0__4955be720c949008cb902f59
+[2026-11-07T04:08:31.246-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:31.246-08:00] [host] rc=0
+[2026-11-07T04:08:31.246-08:00] 
+[2026-11-07T04:08:31.246-08:00] [host] command: id
+[2026-11-07T04:08:31.278-08:00] printf '\n__RV_BEGIN_b7e14cda60e852766cfabdf6__\n'; sh -c id; _
+__rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__b7e14cda60e852766cfabdf6
+[2026-11-07T04:08:31.294-08:00] [?2004l
+
+[2026-11-07T04:08:31.294-08:00] __RV_BEGIN_b7e14cda60e852766cfabdf6__
+[2026-11-07T04:08:31.374-08:00] uid=0(root) gid=0(root) groups=0(root),10(uucp)
+[2026-11-07T04:08:31.374-08:00] 
+[2026-11-07T04:08:31.374-08:00] __RC=0__b7e14cda60e852766cfabdf6
+[2026-11-07T04:08:31.390-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:31.390-08:00] [host] rc=0
+[2026-11-07T04:08:31.390-08:00] 
+[2026-11-07T04:08:31.390-08:00] [host] command: which apt python3 gcc make git 2>&1
+[2026-11-07T04:08:31.422-08:00] printf '\n__RV_BEGIN_88e490e60459bcb671fa177e__\n'; sh -c 'whic
+ch apt python3 gcc make git 2>&1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}_
+__88e490e60459bcb671fa177e
+[2026-11-07T04:08:31.438-08:00] [?2004l
+
+[2026-11-07T04:08:31.438-08:00] __RV_BEGIN_88e490e60459bcb671fa177e__
+[2026-11-07T04:08:31.486-08:00] /bin/apt
+[2026-11-07T04:08:31.486-08:00] /bin/python3
+[2026-11-07T04:08:31.486-08:00] /bin/gcc
+[2026-11-07T04:08:31.486-08:00] /bin/make
+[2026-11-07T04:08:31.502-08:00] 
+[2026-11-07T04:08:31.502-08:00] __RC=1__88e490e60459bcb671fa177e
+[2026-11-07T04:08:31.502-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:31.502-08:00] [host] rc=1
+[2026-11-07T04:08:31.503-08:00] 
+[2026-11-07T04:08:31.503-08:00] [host] command: python3 --version 2>&1
+[2026-11-07T04:08:31.534-08:00] printf '\n__RV_BEGIN_1d7a0e5aeebfa8ac3213e46a__\n'; sh -c 'pyth
+hon3 --version 2>&1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__1d7a0e5aeebf
+fa8ac3213e46a
+[2026-11-07T04:08:31.550-08:00] [?2004l
+
+[2026-11-07T04:08:31.550-08:00] __RV_BEGIN_1d7a0e5aeebfa8ac3213e46a__
+[2026-11-07T04:08:31.902-08:00] Python 3.12.3
+[2026-11-07T04:08:31.918-08:00] 
+[2026-11-07T04:08:31.918-08:00] __RC=0__1d7a0e5aeebfa8ac3213e46a
+[2026-11-07T04:08:31.934-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:31.934-08:00] [host] rc=0
+[2026-11-07T04:08:31.934-08:00] 
+[2026-11-07T04:08:31.934-08:00] [host] command: gcc --version 2>&1 | head -1
+[2026-11-07T04:08:31.966-08:00] printf '\n__RV_BEGIN_33719fc53bb89685ad9307e4__\n'; sh -c 'gcc 
+ --version 2>&1 | head -1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__33719f
+fc53bb89685ad9307e4
+[2026-11-07T04:08:31.982-08:00] [?2004l
+
+[2026-11-07T04:08:31.982-08:00] __RV_BEGIN_33719fc53bb89685ad9307e4__
+[2026-11-07T04:08:32.238-08:00] gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+[2026-11-07T04:08:32.238-08:00] 
+[2026-11-07T04:08:32.238-08:00] __RC=0__33719fc53bb89685ad9307e4
+[2026-11-07T04:08:32.255-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:32.255-08:00] [host] rc=0
+[2026-11-07T04:08:32.255-08:00] 
+[2026-11-07T04:08:32.255-08:00] [host] command: ls /usr/lib/riscv64-linux-gnu 2>/dev/null | head -5
+[2026-11-07T04:08:32.286-08:00] printf '\n__RV_BEGIN_0d2c1eca146fef5018d797e0__\n'; sh -c 'ls /
+/usr/lib/riscv64-linux-gnu 2>/dev/null | head -5'; __rv_rc=$?; printf '\n'; echo 
+ __RC=${__rv_rc}__0d2c1eca146fef5018d797e0
+[2026-11-07T04:08:32.302-08:00] [?2004l
+
+[2026-11-07T04:08:32.319-08:00] __RV_BEGIN_0d2c1eca146fef5018d797e0__
+[2026-11-07T04:08:32.382-08:00] Mcrt1.o
+[2026-11-07T04:08:32.382-08:00] Scrt1.o
+[2026-11-07T04:08:32.382-08:00] audit
+[2026-11-07T04:08:32.382-08:00] bfd-plugins
+[2026-11-07T04:08:32.382-08:00] cmake
+[2026-11-07T04:08:32.398-08:00] 
+[2026-11-07T04:08:32.398-08:00] __RC=0__0d2c1eca146fef5018d797e0
+[2026-11-07T04:08:32.398-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:32.398-08:00] [host] rc=0
+[2026-11-07T04:08:32.398-08:00] 
+[2026-11-07T04:08:32.398-08:00] [host] command: df -h /
+[2026-11-07T04:08:32.430-08:00] printf '\n__RV_BEGIN_e64a6720c8f6662e454c10ca__\n'; sh -c 'df -
+-h /'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e64a6720c8f6662e454c10ca
+[2026-11-07T04:08:32.446-08:00] [?2004l
+
+[2026-11-07T04:08:32.446-08:00] __RV_BEGIN_e64a6720c8f6662e454c10ca__
+[2026-11-07T04:08:32.494-08:00] Filesystem      Size  Used Avail Use% Mounted on
+[2026-11-07T04:08:32.494-08:00] /dev/mmcblk1p1   59G  1.2G   55G   3% /
+[2026-11-07T04:08:32.494-08:00] 
+[2026-11-07T04:08:32.494-08:00] __RC=0__e64a6720c8f6662e454c10ca
+[2026-11-07T04:08:32.494-08:00] [?2004hroot@[redacted host]:/# 
+[2026-11-07T04:08:32.494-08:00] [host] rc=0
+[2026-11-07T04:08:32.510-08:00] exit
+[2026-11-07T04:08:32.510-08:00] [?2004l
+exit
+[2026-11-07T04:08:32.510-08:00] Exited Ubuntu (status 0). Mounts are kept.
+[2026-11-07T04:08:32.510-08:00] To unmount, run from Buildroot: sh /mount_emmc.sh stop
+[2026-11-07T04:08:32.526-08:00] 
+[2026-11-07T04:08:32.526-08:00] __RV007_START_DONE_a6766d4dfd721fc15d7a_0__
+[2026-11-07T04:08:32.526-08:00] # 
+[2026-11-07T04:08:32.526-08:00] [host] interactive Ubuntu shell exited; parent shell confirmed
+[2026-11-07T04:08:32.526-08:00] 
+[2026-11-07T04:08:32.527-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T04:08:32.558-08:00] printf '\n__RV_BEGIN_6bcdae1e501719f6e5cd8cca__\n'; sh -c 'sh /mount_emmc.sh st
+tatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__6bcdae1e501719f6e5cd8cca
+[2026-11-07T04:08:32.574-08:00] 
+[2026-11-07T04:08:32.574-08:00] __RV_BEGIN_6bcdae1e501719f6e5cd8cca__
+[2026-11-07T04:08:32.670-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:08:32.670-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:08:32.670-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:08:32.686-08:00] /dev/mmcblk1p1 /mnt/ubuntu ext4 rw,relatime 0 0
+[2026-11-07T04:08:32.686-08:00] proc /mnt/ubuntu/proc proc rw,relatime 0 0
+[2026-11-07T04:08:32.702-08:00] sysfs /mnt/ubuntu/sys sysfs rw,relatime 0 0
+[2026-11-07T04:08:32.702-08:00] rootfs /mnt/ubuntu/dev rootfs rw,size=1015660k,nr_inodes=253915 0 0
+[2026-11-07T04:08:32.702-08:00] devpts /mnt/ubuntu/dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+[2026-11-07T04:08:32.718-08:00] tmpfs /mnt/ubuntu/run tmpfs rw,relatime 0 0
+[2026-11-07T04:08:32.734-08:00] 
+[2026-11-07T04:08:32.734-08:00] __RC=0__6bcdae1e501719f6e5cd8cca
+[2026-11-07T04:08:32.734-08:00] # 
+[2026-11-07T04:08:32.734-08:00] [host] rc=0
+[2026-11-07T04:08:32.734-08:00] 
+[2026-11-07T04:08:32.734-08:00] [host] command: sh /mount_emmc.sh stop
+[2026-11-07T04:08:32.782-08:00] printf '\n__RV_BEGIN_07f2930cc2f7860e1729848c__\n'; sh -c 'sh /mount_emmc.sh st
+top'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__07f2930cc2f7860e1729848c
+[2026-11-07T04:08:32.798-08:00] 
+[2026-11-07T04:08:32.798-08:00] __RV_BEGIN_07f2930cc2f7860e1729848c__
+[2026-11-07T04:08:32.942-08:00] Stopping Ubuntu mounts; leave all chroot sessions first.
+[2026-11-07T04:08:33.438-08:00] [  354.454625] EXT4-fs (mmcblk1p1): unmounting filesystem [redacted filesystem UUID].
+[2026-11-07T04:08:33.486-08:00] Ubuntu unmounted.
+[2026-11-07T04:08:33.486-08:00] 
+[2026-11-07T04:08:33.486-08:00] __RC=0__07f2930cc2f7860e1729848c
+[2026-11-07T04:08:33.486-08:00] # 
+[2026-11-07T04:08:33.486-08:00] [host] rc=0
+[2026-11-07T04:08:33.486-08:00] 
+[2026-11-07T04:08:33.486-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T04:08:33.518-08:00] printf '\n__RV_BEGIN_df4ae9541b3ee562705e830c__\n'; sh -c 'sh /mount_emmc.sh st
+tatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__df4ae9541b3ee562705e830c
+[2026-11-07T04:08:33.534-08:00] 
+[2026-11-07T04:08:33.534-08:00] __RV_BEGIN_df4ae9541b3ee562705e830c__
+[2026-11-07T04:08:33.630-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:08:33.630-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:08:33.630-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:08:33.678-08:00] Ubuntu root is not mounted.
+[2026-11-07T04:08:33.694-08:00] 
+[2026-11-07T04:08:33.694-08:00] __RC=0__df4ae9541b3ee562705e830c
+[2026-11-07T04:08:33.694-08:00] # 
+[2026-11-07T04:08:33.694-08:00] [host] rc=0
+[2026-11-07T04:08:33.694-08:00] 
+[2026-11-07T04:08:33.694-08:00] [host] command: awk '$2=="/mnt/ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/emmc_ro/")==1 {print; bad=1} END {exit bad}' /proc/mounts && echo EMMC_ALL_UNMOUNTED
+[2026-11-07T04:08:33.758-08:00] printf '\n__RV_BEGIN_3097eed10620c4a353c3d81a__\n'; sh -c 'awk '"'"'$2=="/mnt/u
+ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/em
+mmc_ro/")==1 {print; bad=1} END {exit bad}'"'"' /proc/mounts && echo EMMC_ALL_UNM
+MOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__3097eed10620c4a353c3d81a
+a
+[2026-11-07T04:08:33.790-08:00] 
+[2026-11-07T04:08:33.790-08:00] __RV_BEGIN_3097eed10620c4a353c3d81a__
+[2026-11-07T04:08:33.854-08:00] EMMC_ALL_UNMOUNTED
+[2026-11-07T04:08:33.854-08:00] 
+[2026-11-07T04:08:33.854-08:00] __RC=0__3097eed10620c4a353c3d81a
+[2026-11-07T04:08:33.854-08:00] # 
+[2026-11-07T04:08:33.854-08:00] [host] rc=0
