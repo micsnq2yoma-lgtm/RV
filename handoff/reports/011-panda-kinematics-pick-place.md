@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-07–08（America/Los_Angeles；UTC 2026-11-08）
 - **结果**：failed
-- **分支 / PR**：`task-011-pick-place` / 待填写
+- **分支 / PR**：`task-011-pick-place` / [草稿 PR #8](https://github.com/micsnq2yoma-lgtm/RV/pull/8)
 
 ## 一句话结论
 
