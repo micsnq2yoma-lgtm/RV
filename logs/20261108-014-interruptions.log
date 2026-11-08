@@ -1,0 +1,49 @@
+[
+  {
+    "stage": "initial SSH connection",
+    "local_date": "2026-11-08",
+    "time_scope": "after 02:07:46 bootstrap",
+    "observation": "SSH handshake/connect timeout before prepare/upload; operator RESET",
+    "formal_trial": false
+  },
+  {
+    "stage": "original IK profiling attempt",
+    "time_scope": "after first recovery and before 02:13 RESET",
+    "observation": "no profile output; SSH job read timeout and new proxy connection timeout; operator RESET",
+    "formal_trial": false
+  },
+  {
+    "stage": "second recovery preparation",
+    "time_scope": "after 02:15:10 bootstrap and successful upload",
+    "observation": "next SSH connection failed before retry profile ran; operator RESET",
+    "formal_trial": false
+  },
+  {
+    "stage": "vision native build and perception validation preparation",
+    "last_output_local": "2026-11-08T02:41:36-08:00",
+    "observation": "controller/sysmon output stopped; dashboard disconnected; build job had no output; operator RESET",
+    "formal_trial": false
+  },
+  {
+    "stage": "T3 trial 1, place_in second cube",
+    "last_output_local": "2026-11-08T03:18:17-08:00",
+    "observation": "controller/sysmon stopped and dashboard disconnected; RESET requested; no investigation",
+    "formal_trial": true,
+    "seed": 14300,
+    "run": "20261108T191714-492047781"
+  },
+  {
+    "stage": "idle dashboard awaiting manual start of T3 trial2",
+    "last_output_local": "2026-11-08T04:35:38-08:00",
+    "observation": "controller/sysmon stopped and HTTP timed out before new trial existed; RESET requested; no investigation",
+    "formal_trial": false
+  },
+  {
+    "stage": "T3 trial2 initial perception",
+    "last_output_local": "2026-11-08T04:42:45-08:00",
+    "observation": "controller/sysmon stopped; HTTP timeout before API call; RESET requested; no investigation",
+    "formal_trial": true,
+    "seed": 14301,
+    "run": "20261108T204209-240194014"
+  }
+]

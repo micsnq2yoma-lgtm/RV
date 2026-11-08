@@ -1,0 +1,110 @@
+# Task 005 board-info transcript. Host phase/result lines are annotations, separate from received board output.
+# Authentication excluded. Build account/host and recognizable MAC addresses masked. NUL represented as \x00. Unmodified raw retained locally in ignored .venv.
+[2026-11-07T01:30:40.070-08:00] 
+[2026-11-07T01:30:40.070-08:00] [host] command: cat /proc/version
+[2026-11-07T01:30:40.114-08:00] printf '\n__RV_BEGIN_398d765543478984eab9e7b6__\n'; sh -c 'cat /proc/version'; 
+ __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__398d765543478984eab9e7b6
+[2026-11-07T01:30:40.130-08:00] 
+[2026-11-07T01:30:40.130-08:00] __RV_BEGIN_398d765543478984eab9e7b6__
+[2026-11-07T01:30:40.178-08:00] Linux version 6.6.90-rt54+ ([redacted build host]) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026
+[2026-11-07T01:30:40.194-08:00] 
+[2026-11-07T01:30:40.194-08:00] __RC=0__398d765543478984eab9e7b6
+[2026-11-07T01:30:40.194-08:00] # 
+[2026-11-07T01:30:40.195-08:00] [host] rc=0
+[2026-11-07T01:30:40.195-08:00] 
+[2026-11-07T01:30:40.195-08:00] [host] command: ls -l /mount_emmc.sh
+[2026-11-07T01:30:40.242-08:00] printf '\n__RV_BEGIN_7b6f78e21407a2efccdb9e69__\n'; sh -c 'ls -l /mount_emmc.sh
+h'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__7b6f78e21407a2efccdb9e69
+[2026-11-07T01:30:40.242-08:00] 
+[2026-11-07T01:30:40.242-08:00] __RV_BEGIN_7b6f78e21407a2efccdb9e69__
+[2026-11-07T01:30:40.306-08:00] -rwxr-xr-x    1 root     root          4420 Nov  6  2026 [1;32m/mount_emmc.sh[m
+[2026-11-07T01:30:40.306-08:00] 
+[2026-11-07T01:30:40.306-08:00] __RC=0__7b6f78e21407a2efccdb9e69
+[2026-11-07T01:30:40.322-08:00] # 
+[2026-11-07T01:30:40.322-08:00] [host] rc=0
+[2026-11-07T01:30:40.323-08:00] 
+[2026-11-07T01:30:40.323-08:00] [host] command: grep -E '^PermitRootLogin' /etc/ssh/sshd_config
+[2026-11-07T01:30:40.370-08:00] printf '\n__RV_BEGIN_c06419ab07eb441f3cf85d34__\n'; sh -c 'grep -E '"'"'^Permit
+tRootLogin'"'"' /etc/ssh/sshd_config'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_
+_rc}__c06419ab07eb441f3cf85d34
+[2026-11-07T01:30:40.386-08:00] 
+[2026-11-07T01:30:40.386-08:00] __RV_BEGIN_c06419ab07eb441f3cf85d34__
+[2026-11-07T01:30:40.434-08:00] PermitRootLogin yes
+[2026-11-07T01:30:40.450-08:00] 
+[2026-11-07T01:30:40.450-08:00] __RC=0__c06419ab07eb441f3cf85d34
+[2026-11-07T01:30:40.450-08:00] # 
+[2026-11-07T01:30:40.450-08:00] [host] rc=0
+[2026-11-07T01:30:40.451-08:00] 
+[2026-11-07T01:30:40.451-08:00] [host] command: ls -ld /etc /etc/ssh
+[2026-11-07T01:30:40.482-08:00] printf '\n__RV_BEGIN_d8cd89c082e884c834608a9b__\n'; sh -c 'ls -ld /etc /etc/ssh
+h'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__d8cd89c082e884c834608a9b
+[2026-11-07T01:30:40.498-08:00] 
+[2026-11-07T01:30:40.498-08:00] __RV_BEGIN_d8cd89c082e884c834608a9b__
+[2026-11-07T01:30:40.562-08:00] drwxrwxr-x    8 root     root           560 Nov  6  2026 [1;34m/etc[m
+[2026-11-07T01:30:40.562-08:00] drwxrwxr-x    2 root     root           220 Jan  1 00:00 [1;34m/etc/ssh[m
+[2026-11-07T01:30:40.562-08:00] 
+[2026-11-07T01:30:40.562-08:00] __RC=0__d8cd89c082e884c834608a9b
+[2026-11-07T01:30:40.578-08:00] #
+[2026-11-07T01:30:40.578-08:00] [host] rc=0
+[2026-11-07T01:30:40.578-08:00] 
+[2026-11-07T01:30:40.578-08:00] [host] command: cat /sys/devices/system/cpu/online
+[2026-11-07T01:30:40.579-08:00]  printf '\n__RV_BEGIN_ced730f8890e414df1cc85c2__\n'; sh -c 'cat /sys/devices/sys
+stem/cpu/online'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__ced730f8890e414d
+df1cc85c2
+[2026-11-07T01:30:40.626-08:00] 
+[2026-11-07T01:30:40.626-08:00] __RV_BEGIN_ced730f8890e414df1cc85c2__
+[2026-11-07T01:30:40.674-08:00] 0-1
+[2026-11-07T01:30:40.690-08:00] 
+[2026-11-07T01:30:40.690-08:00] __RC=0__ced730f8890e414df1cc85c2
+[2026-11-07T01:30:40.690-08:00] # 
+[2026-11-07T01:30:40.690-08:00] [host] rc=0
+[2026-11-07T01:30:40.690-08:00] 
+[2026-11-07T01:30:40.690-08:00] [host] command: ls /dev/mmcblk*; cat /sys/block/mmcblk0/device/type /sys/block/mmcblk0/size /sys/block/mmcblk1/device/type
+[2026-11-07T01:30:40.738-08:00] printf '\n__RV_BEGIN_0d55277e683e8302f998dfbb__\n'; sh -c 'ls /dev/mmcblk*; cat
+t /sys/block/mmcblk0/device/type /sys/block/mmcblk0/size /sys/block/mmcblk1/devic
+ce/type'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__0d55277e683e8302f998dfbb
+b
+[2026-11-07T01:30:40.770-08:00] 
+[2026-11-07T01:30:40.770-08:00] __RV_BEGIN_0d55277e683e8302f998dfbb__
+[2026-11-07T01:30:40.818-08:00] [1;35m/dev/mmcblk0[m       [1;35m/dev/mmcblk1[m       [1;35m/dev/mmcblk1boot1[m
+[2026-11-07T01:30:40.834-08:00] [1;35m/dev/mmcblk0p1[m     [1;35m/dev/mmcblk1boot0[m  [1;35m/dev/mmcblk1p1[m
+[2026-11-07T01:30:40.850-08:00] SD
+[2026-11-07T01:30:40.850-08:00] 62333952
+[2026-11-07T01:30:40.850-08:00] MMC
+[2026-11-07T01:30:40.850-08:00] 
+[2026-11-07T01:30:40.866-08:00] __RC=0__0d55277e683e8302f998dfbb
+[2026-11-07T01:30:40.866-08:00] # 
+[2026-11-07T01:30:40.866-08:00] [host] rc=0
+[2026-11-07T01:30:40.867-08:00] 
+[2026-11-07T01:30:40.867-08:00] [host] command: if grep -q ' /media ' /proc/mounts; then echo MEDIA_ALREADY_MOUNTED; exit 1; fi
+[2026-11-07T01:30:40.867-08:00] test -d /media || exit 1
+[2026-11-07T01:30:40.867-08:00] mount -o ro /dev/mmcblk0p1 /media || exit $?
+[2026-11-07T01:30:40.867-08:00] trap 'umount /media' 0
+[2026-11-07T01:30:40.867-08:00] awk '$1=="/dev/mmcblk0p1" && $2=="/media" && $4 ~ /(^|,)ro(,|$)/ {print; ok=1} END {exit !ok}' /proc/mounts || exit 1
+[2026-11-07T01:30:40.867-08:00] sha256sum /media/uInitrd.lz4 || exit $?
+[2026-11-07T01:30:40.867-08:00] umount /media || exit $?
+[2026-11-07T01:30:40.867-08:00] trap - 0
+[2026-11-07T01:30:40.867-08:00] if grep -q ' /media ' /proc/mounts; then exit 1; fi
+[2026-11-07T01:30:40.867-08:00] echo TF_CARD_UNMOUNTED
+[2026-11-07T01:30:40.914-08:00] printf '\n__RV_BEGIN_e336950a424ab648330176c9__\n'; sh -c 'if grep -q '"'"' /me
+edia '"'"' /proc/mounts; then echo MEDIA_ALREADY_MOUNTED; exit 1; fi
+[2026-11-07T01:30:40.930-08:00] _RC=${__rv_rc}__e3369> test -d /media || exit 1
+[2026-11-07T01:30:40.930-08:00] > mount -o ro /dev/mmcblk0p1 /media || exit $?
+[2026-11-07T01:30:40.946-08:00] > trap '"'"'umount /media'"'"' 0
+[2026-11-07T01:30:40.946-08:00] > awk '"'"'$1=="/dev/mmcblk0p1" && $2=="/media" && $4 ~ /(^|,)ro(,|$)/ {print; ok
+k=1} END {exit !ok}'"'"' /proc/mounts || exit 1
+[2026-11-07T01:30:40.978-08:00] > sha256sum /media/uInitrd.lz4 || exit $?
+[2026-11-07T01:30:40.978-08:00] > umount /media || exit $?
+[2026-11-07T01:30:40.994-08:00] > trap - 0
+[2026-11-07T01:30:40.994-08:00] > if grep -q '"'"' /media '"'"' /proc/mounts; then exit 1; fi
+[2026-11-07T01:30:41.010-08:00] > echo TF_CARD_UNMOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e336950
+0a424ab648330176c9
+[2026-11-07T01:30:41.026-08:00] 
+[2026-11-07T01:30:41.026-08:00] __RV_BEGIN_e336950a424ab648330176c9__
+[2026-11-07T01:30:41.154-08:00] /dev/mmcblk0p1 /media vfat ro,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0
+[2026-11-07T01:30:43.090-08:00] 82a45be4f417110b532bd785f1d49353025ad0b62046754e74ceb1ee2c84181b  /media/uInitrd.lz4
+[2026-11-07T01:30:43.186-08:00] TF_CARD_UNMOUNTED
+[2026-11-07T01:30:43.202-08:00] 
+[2026-11-07T01:30:43.202-08:00] __RC=0__e336950a424ab648330176c9
+[2026-11-07T01:30:43.202-08:00] # 
+[2026-11-07T01:30:43.202-08:00] [host] rc=0

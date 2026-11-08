@@ -7,3 +7,6 @@
 *.so.*  binary
 *.a     binary
 *.sh    text eol=lf
+*.py    text eol=lf
+# Preserve received log bytes, including timestamped blank lines.
+logs/*.log -text -whitespace

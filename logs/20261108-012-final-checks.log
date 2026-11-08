@@ -1,0 +1,117 @@
+Task 012 actual hardware evidence, 2026-11-08 America/Los_Angeles.
+Raw source text preserved except redaction of MACs, identifiers, host paths and build host.
+Authentication, SSH public keys and private known_hosts files excluded. Full originals stay in ignored .venv/012.
+Host annotations and derived interrupt deltas are explicitly labelled.
+
+===== final-cleanup.log =====
+Task 012 final cleanup verification
+  820 root     bash -c set -eu echo 'Task 012 final cleanup verification' if ps | grep -E '[r]t_ctl|[i]solation_load.py|[d]d if=/dev/zero'; then     echo 'Unexpected task process remains'; exit 1 fi echo 'No task controller/load process remains' sh /mount_emmc.sh status if awk '$2 == "/mnt/ubuntu" || index($2,"/mnt/ubuntu/")==1 {print;found=1} END {exit !found}' /proc/mounts; then     echo 'Unexpected Ubuntu mount remains'; exit 1 fi echo 'No Ubuntu root or child mounts remain' test ! -e /tmp/rt_ctl.sock echo 'Task Unix socket absent' netstat -lnt if netstat -lnt | grep -q ':7897 '; then echo 'Unexpected proxy listener'; exit 1; fi ip -4 addr show eth0 ip route cat /sys/class/net/eth0/carrier dmesg | tail -30 for value in 0 100 invalid; do     set +e     /tmp/rv012/rt_ctl-buildroot --fifo-priority "$value"     result=$?     set -e     echo "Invalid priority $value returned $result"     test "$result" -eq 2 done test ! -e /tmp/rt_ctl.sock echo 'Invalid scheduling arguments rejected before socket creation' 
+Unexpected task process remains
+
+[host] exit_status=1
+Task 012 final cleanup verification
+No task controller/load process remains
+=== Ubuntu eMMC mount status ===
+Device: /dev/mmcblk1p1
+Root:   /mnt/ubuntu
+Ubuntu root is not mounted.
+No Ubuntu root or child mounts remain
+Task Unix socket absent
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      
+tcp        0      0 :::22                   :::*                    LISTEN      
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+    inet 192.168.50.2/24 scope global eth0
+       valid_lft forever preferred_lft forever
+192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+1
+[    8.686373] NET: Registered PF_PACKET protocol family
+[    8.722923] mmc0: host does not support reading read-only switch, assuming write-enable
+[    8.739762] mmc0: new high speed SDHC card at address aaaa
+[    8.744028] mmcblk0: mmc0:aaaa SD32G 29.7 GiB
+[    8.790561]  mmcblk0: p1
+[    8.795696] clk: Disabling unused clocks
+[    8.802528] Freeing unused kernel image (initmem) memory: 2140K
+[    8.802750] Run /init as init process
+[    8.802782]   with arguments:
+[    8.802795]     /init
+[    8.802808]   with environment:
+[    8.802818]     HOME=/
+[    8.802830]     TERM=linux
+[    8.804818] mmc1: new DDR MMC card at address 0001
+[    8.809387] mmcblk1: mmc1:0001 CJUD4R 59.6 GiB
+[    8.824691]  mmcblk1: p1
+[    8.828642] mmcblk1boot0: mmc1:0001 CJUD4R 31.9 MiB
+[    8.842063] mmcblk1boot1: mmc1:0001 CJUD4R 31.9 MiB
+[   14.655846] random: crng init done
+[   79.557719] EXT4-fs (mmcblk1p1): recovery complete
+[   79.568759] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+[   92.294748] EXT4-fs (mmcblk1p1): unmounting filesystem <ID>.
+[   94.989792] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+[  117.833247] EXT4-fs (mmcblk1p1): unmounting filesystem <ID>.
+[  122.306855] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+[  736.077339] EXT4-fs (mmcblk1p1): unmounting filesystem <ID>.
+[  756.224435] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+[ 1369.812321] EXT4-fs (mmcblk1p1): unmounting filesystem <ID>.
+[ 1400.517851] EXT4-fs (mmcblk1p1): mounted filesystem <ID> r/w with ordered data mode. Quota mode: disabled.
+[ 2012.961617] EXT4-fs (mmcblk1p1): unmounting filesystem <ID>.
+Invalid priority 0 returned 2
+Invalid priority 100 returned 2
+Invalid priority invalid returned 2
+Invalid scheduling arguments rejected before socket creation
+
+[host] exit_status=0
+
+===== final-host.json =====
+{
+    "Utc":  "2026-11-08T09:52:25.2129535Z",
+    "BoardAdapterStatus":  "Up",
+    "BoardAdapterLinkSpeed":  "100 Mbps",
+    "Addresses":  [
+                      {
+                          "IPAddress":  "192.168.50.1",
+                          "PrefixLength":  24
+                      }
+                  ],
+    "Gateway":  [
+
+                ],
+    "Dns":  [
+
+            ],
+    "ProxyListeners":  [
+                           {
+                               "LocalAddress":  "127.0.0.1",
+                               "LocalPort":  7897
+                           }
+                       ],
+    "SshProcesses":  [
+
+                     ],
+    "TaskPythonProcesses":  [
+
+                            ],
+    "HostHttpsOk":  true
+}
+
+===== verification.log =====
+AST OK: scripts/stability_serial.py
+AST OK: sim_agent/board/tools/isolation_load.py
+AST OK: sim_agent/pc/stability_runner.py
+Rejected before authentication: ['E6', '--label', '../unsafe']
+Rejected before authentication: ['E6']
+E4-verified/E5/E6 same binary and source hashes; local sources match
+E1 600 seconds completed; cleanup logged
+E2 600 seconds completed; cleanup logged
+E3 600 seconds completed; cleanup logged
+E4 600 seconds completed; cleanup logged
+E4-verified 600 seconds completed; cleanup logged
+E5 600 seconds completed; cleanup logged
+E6 600 seconds completed; cleanup logged
+Final board cleanup and host connectivity/state verified
+[host] Additional verification after all timing windows (terminal result transcribed):
+.venv/010/py/Scripts/python.exe -m unittest discover -s sim_agent/pc -v
+Ran 7 tests in 0.526s
+OK
+[host] Initial cleanup ps-commandline match included the checking shell itself; corrected to exact process names and reran successfully. Both raw attempts retained.

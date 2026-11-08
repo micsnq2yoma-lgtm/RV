@@ -1,0 +1,301 @@
+Task 008 public redacted evidence copy. Full originals remain in ignored .venv.
+MAC, link-local IPv6, host/adapter identifiers and local user paths are masked.
+NUL/ESC bytes are displayed as \x00/\x1b; other received text is preserved.
+Host timestamps use America/Los_Angeles; JSON UTC timestamps end in Z.
+
+===== Initial Get-NetAdapter =====
+
+Name                               InterfaceDescription                       Status       LinkSpeed
+----                               --------------------                       ------       ---------
+<AUX-ADAPTER>                       Bluetooth Device (Personal Area Network)   Disconnected 3 Mbps
+<VIRTUAL-ADAPTER> Hyper-V Virtual Ethernet Adapter           Up           10 Gbps
+<VIRTUAL-ADAPTER-1>      VMware Virtual Ethernet Adapter for VMnet1 Up           100 Mbps
+<BOARD-ETHERNET>                             Realtek PCIe GbE Family Controller         Disconnected 0 bps
+<TUN-ADAPTER>                             Meta Tunnel                                Up           100 Gbps
+<WAN-WIFI>                               Intel(R) Wi-Fi 6 AX200 160MHz              Up           865 Mbps
+<VIRTUAL-ADAPTER-2>      VMware Virtual Ethernet Adapter for VMnet8 Up           100 Mbps
+
+
+
+===== Initial Get-NetIPConfiguration =====
+
+InterfaceAlias     : <VIRTUAL-ADAPTER-1>
+IPv4Address        : {192.168.78.1}
+IPv4DefaultGateway : 
+DNSServer          : {MSFT_DNSClientServerAddress (Name = "24", CreationClassName = "", SystemCreationClassName = "", SystemName = "23"), MSFT_DNSClientServerAddress (Name = "24", CreationClassName = "", SystemCreationClassName = "", SystemName = "2")}
+
+InterfaceAlias     : <VIRTUAL-ADAPTER>
+IPv4Address        : {192.168.48.1}
+IPv4DefaultGateway : 
+DNSServer          : {MSFT_DNSClientServerAddress (Name = "49", CreationClassName = "", SystemCreationClassName = "", SystemName = "23"), MSFT_DNSClientServerAddress (Name = "49", CreationClassName = "", SystemCreationClassName = "", SystemName = "2")}
+
+InterfaceAlias     : <VIRTUAL-ADAPTER-2>
+IPv4Address        : {192.168.152.1}
+IPv4DefaultGateway : 
+DNSServer          : {MSFT_DNSClientServerAddress (Name = "6", CreationClassName = "", SystemCreationClassName = "", SystemName = "23"), MSFT_DNSClientServerAddress (Name = "6", CreationClassName = "", SystemCreationClassName = "", SystemName = "2")}
+
+InterfaceAlias     : <TUN-ADAPTER>
+IPv4Address        : {198.18.0.1}
+IPv4DefaultGateway : 
+DNSServer          : {MSFT_DNSClientServerAddress (Name = "18", CreationClassName = "", SystemCreationClassName = "", SystemName = "23"), MSFT_DNSClientServerAddress (Name = "18", CreationClassName = "", SystemCreationClassName = "", SystemName = "2")}
+
+InterfaceAlias     : <WAN-WIFI>
+IPv4Address        : {192.168.31.52}
+IPv4DefaultGateway : {MSFT_NetRoute (InstanceID = ":8:8:8:9:55;?55;C?8;@B8?;8;55;")}
+DNSServer          : {MSFT_DNSClientServerAddress (Name = "15", CreationClassName = "", SystemCreationClassName = "", SystemName = "23"), MSFT_DNSClientServerAddress (Name = "15", CreationClassName = "", SystemCreationClassName = "", SystemName = "2")}
+
+InterfaceAlias     : <AUX-ADAPTER>
+IPv4Address        : {169.254.143.54}
+IPv4DefaultGateway : 
+DNSServer          : {MSFT_DNSClientServerAddress (Name = "25", CreationClassName = "", SystemCreationClassName = "", SystemName = "23"), MSFT_DNSClientServerAddress (Name = "25", CreationClassName = "", SystemCreationClassName = "", SystemName = "2")}
+
+InterfaceAlias     : <BOARD-ETHERNET>
+IPv4Address        : {169.254.205.202}
+IPv4DefaultGateway : {MSFT_NetRoute (InstanceID = ":8:8:8:9:55??55;C?8;@B8;8;55;")}
+DNSServer          : {MSFT_DNSClientServerAddress (Name = "23", CreationClassName = "", SystemCreationClassName = "", SystemName = "23"), MSFT_DNSClientServerAddress (Name = "23", CreationClassName = "", SystemCreationClassName = "", SystemName = "2")}
+
+
+
+===== Initial administrator ICS state (all sharing disabled) =====
+[
+    {
+        "Name":  "<VIRTUAL-ADAPTER>",
+        "Guid":  "{<ID>}",
+        "Status":  2,
+        "SharingEnabled":  false,
+        "SharingType":  null
+    },
+    {
+        "Name":  "<AUX-ADAPTER>",
+        "Guid":  "{<ID>}",
+        "Status":  7,
+        "SharingEnabled":  false,
+        "SharingType":  null
+    },
+    {
+        "Name":  "<VIRTUAL-ADAPTER-1>",
+        "Guid":  "{<ID>}",
+        "Status":  2,
+        "SharingEnabled":  false,
+        "SharingType":  null
+    },
+    {
+        "Name":  "<VIRTUAL-ADAPTER-2>",
+        "Guid":  "{<ID>}",
+        "Status":  2,
+        "SharingEnabled":  false,
+        "SharingType":  null
+    },
+    {
+        "Name":  "<WAN-WIFI>",
+        "Guid":  "{<ID>}",
+        "Status":  2,
+        "SharingEnabled":  false,
+        "SharingType":  null
+    },
+    {
+        "Name":  "<BOARD-ETHERNET>",
+        "Guid":  "{<ID>}",
+        "Status":  2,
+        "SharingEnabled":  false,
+        "SharingType":  null
+    },
+    {
+        "Name":  "<TUN-ADAPTER>",
+        "Guid":  "{<ID>}",
+        "Status":  2,
+        "SharingEnabled":  false,
+        "SharingType":  null
+    }
+]
+
+===== Isolated Chrome baseline (no explicit proxy argument) =====
+{
+  "BrowserVersion": "156.0.8078.80",
+  "ExitCode": 0,
+  "ExpectedPageRead": true,
+  "ExplicitProxyArgument": false,
+  "Utc": "2026-11-07T14:58:49.5211659Z"
+}
+
+===== Attempt 20261107-045120 =====
+
+===== apply.done =====
+SUCCESS
+
+===== guard.reason =====
+Protected host network state changed
+At <LOCAL_REPO>\.venv\task008-ics-guard.ps1:32 char:125
++ ... saved.ProtectedJson) { throw 'Protected host network state changed' }
++                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Protected host network state changed:String) [], RuntimeException
+    + FullyQualifiedErrorId : Protected host network state changed
+ 
+
+
+===== rollback.error =====
+Get-NetIPAddress :  CIM 服务器上的 ROOT/StandardCimv2/MSFT_NetIPAddress 类实例的 CIM 查询: SELECT * FROM MSFT_NetIPAddress  WHERE 
+((InterfaceIndex = 23)) AND ((AddressFamily = 2)) 找不到任何匹配的 MSFT_NetIPAddress 对象。请验证查询参数，然后重试。
+At <LOCAL_REPO>\.venv\task008-network-common.ps1:96 char:28
++ ... ddress in @(Get-NetIPAddress -InterfaceIndex $index -AddressFamily IP ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (MSFT_NetIPAddress:String) [Get-NetIPAddress], CimJobException
+    + FullyQualifiedErrorId : CmdletizationQuery_NotFound,Get-NetIPAddress
+ 
+
+
+===== recovery.done =====
+RECOVERY_VERIFIED
+
+===== guard.done =====
+{
+    "RunId":  "<ID>",
+    "Pid":  37872,
+    "Counter":  51,
+    "Utc":  "2026-11-07T12:53:28.2973907Z",
+    "DeadlineUtc":  "2026-11-07T13:11:27.0188390Z",
+    "State":  "rollback-error",
+    "Detail":  "See rollback.error and exact snapshots"
+}
+
+
+===== Attempt 20261107-184805 =====
+
+===== apply.done =====
+SUCCESS
+
+===== guard.reason =====
+Three consecutive host connectivity checks failed
+At <LOCAL_REPO>\.venv\task008-ics-guard.ps1:44 char:40
++ ... es -ge 3) { throw 'Three consecutive host connectivity checks failed' ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Three consecuti...y checks failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : Three consecutive host connectivity checks failed
+ 
+
+
+===== recovery.done =====
+RECOVERY_VERIFIED
+
+===== guard.done =====
+{
+    "RunId":  "<ID>",
+    "Pid":  48156,
+    "Counter":  34,
+    "Utc":  "2026-11-08T02:50:00.0175279Z",
+    "DeadlineUtc":  "2026-11-08T03:08:07.8808975Z",
+    "State":  "rolled-back",
+    "Detail":  "Sharing disabled; original private DHCP/DNS configuration restored; protected state verified"
+}
+
+
+===== Attempt 20261107-185811 =====
+
+===== apply.done =====
+SUCCESS
+
+===== guard.reason =====
+Three consecutive host connectivity checks failed
+At <LOCAL_REPO>\.venv\task008-ics-guard.ps1:45 char:40
++ ... es -ge 3) { throw 'Three consecutive host connectivity checks failed' ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Three consecuti...y checks failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : Three consecutive host connectivity checks failed
+ 
+
+
+===== recovery.done =====
+RECOVERY_VERIFIED
+
+===== http-probes.jsonl =====
+{"Utc":"2026-11-08T02:59:41.3259108Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0609268}
+{"Utc":"2026-11-08T02:59:47.3915318Z","Url":"https://github.com/","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0244541}
+{"Utc":"2026-11-08T02:59:56.0916864Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0171572}
+{"Utc":"2026-11-08T03:00:02.1104101Z","Url":"https://github.com/","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0219774}
+{"Utc":"2026-11-08T03:00:10.7914264Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0240390999999995}
+{"Utc":"2026-11-08T03:00:16.8171731Z","Url":"https://github.com/","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0226345}
+
+===== guard.done =====
+{
+    "RunId":  "<ID>",
+    "Pid":  22456,
+    "Counter":  46,
+    "Utc":  "2026-11-08T03:00:27.6286248Z",
+    "DeadlineUtc":  "2026-11-08T03:18:13.4606599Z",
+    "State":  "rolled-back",
+    "Detail":  "Sharing disabled; original private DHCP/DNS configuration restored; protected state verified"
+}
+
+
+===== Attempt 20261107-190145 =====
+
+===== apply.done =====
+SUCCESS
+
+===== guard.reason =====
+Three consecutive host connectivity checks failed
+At <LOCAL_REPO>\.venv\task008-ics-guard.ps1:45 char:40
++ ... es -ge 3) { throw 'Three consecutive host connectivity checks failed' ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Three consecuti...y checks failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : Three consecutive host connectivity checks failed
+ 
+
+
+===== http-probes.jsonl =====
+{"Utc":"2026-11-08T03:03:04.8895917Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0704265}
+{"Utc":"2026-11-08T03:03:10.9655352Z","Url":"https://github.com/","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0202501999999996}
+{"Utc":"2026-11-08T03:03:19.7197442Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0255714}
+{"Utc":"2026-11-08T03:03:25.7469027Z","Url":"https://github.com/","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0243661}
+{"Utc":"2026-11-08T03:03:34.4795104Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0273964}
+{"Utc":"2026-11-08T03:03:40.5084807Z","Url":"https://github.com/","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0273749}
+
+===== guard.done =====
+{
+    "RunId":  "<ID>",
+    "Pid":  47692,
+    "Counter":  40,
+    "Utc":  "2026-11-08T03:03:51.5148039Z",
+    "DeadlineUtc":  "2026-11-08T03:21:46.9909892Z",
+    "State":  "rolled-back",
+    "Detail":  "Sharing disabled; original private DHCP/DNS configuration restored; protected state verified"
+}
+
+
+===== Final active ICS independent PowerShell 7 HTTPS checks =====
+{"Utc":"2026-11-08T03:02:57.4033283Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.\r\n ---> System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.\r\n   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)\r\n   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)\r\n   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)\r\n   --- End of inner exception stack trace ---\r\n   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)\r\n   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)\r\n   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.SocketsHttpHandler.<SendAsync>g__CreateHandlerAndSendAsync|115_0(HttpRequestMessage request, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)\r\n   at Microsoft.PowerShell.Commands.WebRequestPSCmdlet.GetResponse(HttpClient client, HttpRequestMessage request, Boolean handleRedirect)\r\n   at Microsoft.PowerShell.Commands.WebRequestPSCmdlet.ProcessRecord()","Seconds":5.5528608,"Runtime":"7.6.5"}
+{"Utc":"2026-11-08T03:03:02.9741107Z","Url":"https://github.com/","Status":null,"Error":"System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.\r\n ---> System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.\r\n   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)\r\n   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)\r\n   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)\r\n   --- End of inner exception stack trace ---\r\n   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)\r\n   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)\r\n   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.SocketsHttpHandler.<SendAsync>g__CreateHandlerAndSendAsync|115_0(HttpRequestMessage request, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)\r\n   at Microsoft.PowerShell.Commands.WebRequestPSCmdlet.GetResponse(HttpClient client, HttpRequestMessage request, Boolean handleRedirect)\r\n   at Microsoft.PowerShell.Commands.WebRequestPSCmdlet.ProcessRecord()","Seconds":5.0080047,"Runtime":"7.6.5"}
+{"Utc":"2026-11-08T03:03:07.9843110Z","Url":"https://example.com/","Status":null,"Error":"System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.\r\n ---> System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.\r\n   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)\r\n   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)\r\n   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)\r\n   --- End of inner exception stack trace ---\r\n   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, Boolean async, Stream stream, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)\r\n   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)\r\n   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)\r\n   at System.Net.Http.SocketsHttpHandler.<SendAsync>g__CreateHandlerAndSendAsync|115_0(HttpRequestMessage request, CancellationToken cancellationToken)\r\n   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)\r\n   at Microsoft.PowerShell.Commands.WebRequestPSCmdlet.GetResponse(HttpClient client, HttpRequestMessage request, Boolean handleRedirect)\r\n   at Microsoft.PowerShell.Commands.WebRequestPSCmdlet.ProcessRecord()","Seconds":5.0056961,"Runtime":"7.6.5"}
+
+===== Final active ICS isolated Chrome stderr =====
+[39332:24896:1107/190257.822:ERROR:chrome\browser\extensions\external_registry_loader_win.cc:147] Missing value path for key Software\Google\Chrome\Extensions\<EXTENSION_ID>.
+[39332:24896:1107/190257.824:ERROR:chrome\browser\extensions\external_registry_loader_win.cc:147] Missing value path for key Software\Google\Chrome\Extensions\<EXTENSION_ID>.
+[39332:8324:1107/190300.449:ERROR:components\headless\command_handler\headless_command_handler.cc:403] Page load failed: net::ERR_NETWORK_CHANGED
+
+===== Final post-rollback fresh PowerShell 5 HTTPS checks =====
+{"Url":"https://www.microsoft.com/favicon.ico","Status":200,"Seconds":0.4212913}
+{"Url":"https://github.com/","Status":200,"Seconds":0.42504169999999997}
+{"Url":"https://example.com","Status":200,"Seconds":0.3424221}
+
+===== Later read-only final check; current Clash contents preserved =====
+{
+    "Utc":  "2026-11-08T03:09:02.8527611Z",
+    "GuardFinal":  "rolled-back",
+    "ProtectedConfigurationMatches":  false,
+    "ProtectedFieldsDifferent":  [
+                                     "ClashHashes"
+                                 ],
+    "ProtectedNetworkSettingsMatch":  true,
+    "PrivateConfigurationMatches":  true,
+    "PrivateIPv4":  [
+                        {
+                            "Address":  "169.254.205.202",
+                            "Prefix":  16,
+                            "Origin":  "WellKnown"
+                        }
+                    ],
+    "HostHttpsReachable":  true,
+    "DiagnosticProcessesStillRunning":  [
+
+                                        ]
+}
