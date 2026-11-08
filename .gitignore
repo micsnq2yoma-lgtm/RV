@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.py[cod]
+sim_agent/pc/assets/
+sim_agent/board/rt_ctl/rt_ctl
+sim_agent/runs/

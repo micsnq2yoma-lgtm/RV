@@ -1,0 +1,431 @@
+Task 008 public redacted evidence copy. Full originals remain in ignored .venv.
+MAC, link-local IPv6, host/adapter identifiers and local user paths are masked.
+NUL/ESC bytes are displayed as \x00/\x1b; other received text is preserved.
+Host timestamps use America/Los_Angeles; JSON UTC timestamps end in Z.
+
+===== Serial inspection, RJ1/J1 comparison, DHCP address observations =====
+[2026-11-07T04:33:29.459-08:00] 
+[2026-11-07T04:33:29.459-08:00] [host] command: cat /etc/os-release
+[2026-11-07T04:33:29.489-08:00] printf '\n__RV_BEGIN_e88d8994cd521586747cdfc0__\n'; sh -c 'cat /etc/os-release'
+'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e88d8994cd521586747cdfc0
+[2026-11-07T04:33:29.506-08:00] 
+[2026-11-07T04:33:29.506-08:00] __RV_BEGIN_e88d8994cd521586747cdfc0__
+[2026-11-07T04:33:29.569-08:00] NAME=Buildroot
+[2026-11-07T04:33:29.569-08:00] VERSION=2024.08
+[2026-11-07T04:33:29.569-08:00] ID=buildroot
+[2026-11-07T04:33:29.569-08:00] VERSION_ID=2024.08
+[2026-11-07T04:33:29.569-08:00] PRETTY_NAME="Buildroot 2024.08"
+[2026-11-07T04:33:29.569-08:00] 
+[2026-11-07T04:33:29.569-08:00] __RC=0__e88d8994cd521586747cdfc0
+[2026-11-07T04:33:29.569-08:00] # 
+[2026-11-07T04:33:29.570-08:00] [host] rc=0
+[2026-11-07T04:33:29.570-08:00] 
+[2026-11-07T04:33:29.570-08:00] [host] command: ip link show eth0; cat /sys/class/net/eth0/carrier
+[2026-11-07T04:33:29.617-08:00] printf '\n__RV_BEGIN_1243539420c1c57eb68a5b22__\n'; sh -c 'ip link show eth0; c
+cat /sys/class/net/eth0/carrier'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__
+_1243539420c1c57eb68a5b22
+[2026-11-07T04:33:29.633-08:00] 
+[2026-11-07T04:33:29.633-08:00] __RV_BEGIN_1243539420c1c57eb68a5b22__
+[2026-11-07T04:33:29.681-08:00] 2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T04:33:29.697-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T04:33:29.697-08:00] 0
+[2026-11-07T04:33:29.713-08:00] 
+[2026-11-07T04:33:29.713-08:00] __RC=0__1243539420c1c57eb68a5b22
+[2026-11-07T04:33:29.713-08:00] # 
+[2026-11-07T04:33:29.713-08:00] [host] rc=0
+[2026-11-07T04:33:29.714-08:00] 
+[2026-11-07T04:33:29.714-08:00] [host] command: ip addr show eth0; ip route
+[2026-11-07T04:33:29.761-08:00] printf '\n__RV_BEGIN_c223ef2ce0824c02077e58bc__\n'; sh -c 'ip addr show eth0; i
+ip route'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__c223ef2ce0824c02077e58b
+bc
+[2026-11-07T04:33:29.777-08:00] 
+[2026-11-07T04:33:29.777-08:00] __RV_BEGIN_c223ef2ce0824c02077e58bc__
+[2026-11-07T04:33:29.825-08:00] 2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T04:33:29.841-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T04:33:29.857-08:00] 
+[2026-11-07T04:33:29.857-08:00] __RC=0__c223ef2ce0824c02077e58bc
+[2026-11-07T04:33:29.857-08:00] # 
+[2026-11-07T04:33:29.857-08:00] [host] rc=0
+[2026-11-07T04:33:29.857-08:00] 
+[2026-11-07T04:33:29.857-08:00] [host] command: cat /etc/resolv.conf
+[2026-11-07T04:33:29.889-08:00] printf '\n__RV_BEGIN_f2ea2ca6de3df9891f7f094f__\n'; sh -c 'cat /etc/resolv.conf
+f'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__f2ea2ca6de3df9891f7f094f
+[2026-11-07T04:33:29.905-08:00] 
+[2026-11-07T04:33:29.905-08:00] __RV_BEGIN_f2ea2ca6de3df9891f7f094f__
+[2026-11-07T04:33:29.969-08:00] 
+[2026-11-07T04:33:29.969-08:00] __RC=0__f2ea2ca6de3df9891f7f094f
+[2026-11-07T04:33:29.969-08:00] # 
+[2026-11-07T04:33:29.969-08:00] [host] rc=0
+[2026-11-07T04:33:29.969-08:00] 
+[2026-11-07T04:33:29.969-08:00] [host] command: ps | grep -E "udhcpc|sshd" | grep -v grep
+[2026-11-07T04:33:30.017-08:00] printf '\n__RV_BEGIN_8a63148ea583b82a2043cbba__\n'; sh -c 'ps | grep -E "udhcpc
+c|sshd" | grep -v grep'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__8a63148ea
+a583b82a2043cbba
+[2026-11-07T04:33:30.033-08:00] 
+[2026-11-07T04:33:30.033-08:00] __RV_BEGIN_8a63148ea583b82a2043cbba__
+[2026-11-07T04:33:30.225-08:00]   182 root     udhcpc -i eth1 -b -R
+[2026-11-07T04:33:30.225-08:00]   184 root     udhcpc -i eth0 -b -R
+[2026-11-07T04:33:30.225-08:00]   186 root     sshd: /usr/sbin/sshd [listener] 0 of 10-100 startups
+[2026-11-07T04:33:30.225-08:00] 
+[2026-11-07T04:33:30.225-08:00] __RC=0__8a63148ea583b82a2043cbba
+[2026-11-07T04:33:30.241-08:00] # 
+[2026-11-07T04:33:30.241-08:00] [host] rc=0
+[2026-11-07T04:33:30.241-08:00] 
+[2026-11-07T04:33:30.242-08:00] [host] command: readlink /sys/class/net/eth0/device/driver; sh /mount_emmc.sh status
+[2026-11-07T04:33:30.289-08:00] printf '\n__RV_BEGIN_c87ccb472e13be9990fabb62__\n'; sh -c 'readlink /sys/class/
+/net/eth0/device/driver; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; echo
+o __RC=${__rv_rc}__c87ccb472e13be9990fabb62
+[2026-11-07T04:33:30.305-08:00] 
+[2026-11-07T04:33:30.305-08:00] __RV_BEGIN_c87ccb472e13be9990fabb62__
+[2026-11-07T04:33:30.353-08:00] ../../../bus/platform/drivers/nuclei-xec
+[2026-11-07T04:33:30.417-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T04:33:30.417-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T04:33:30.417-08:00] Root:   /mnt/ubuntu
+[2026-11-07T04:33:30.465-08:00] Ubuntu root is not mounted.
+[2026-11-07T04:33:30.465-08:00] 
+[2026-11-07T04:33:30.481-08:00] __RC=0__c87ccb472e13be9990fabb62
+[2026-11-07T04:33:30.481-08:00] # 
+[2026-11-07T04:33:30.482-08:00] [host] rc=0
+[2026-11-07T04:35:17.698-08:00] printf '\n__RV_BEGIN_0b1ad71b55ce88dbec74d918__\n'; sh -c 'ip link show eth0; c
+cat /sys/class/net/eth0/carrier'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__
+_0b1ad71b55ce88dbec74d918
+[2026-11-07T04:35:17.714-08:00] 
+[2026-11-07T04:35:17.714-08:00] __RV_BEGIN_0b1ad71b55ce88dbec74d918__
+[2026-11-07T04:35:17.762-08:00] 2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T04:35:17.778-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T04:35:17.778-08:00] 0
+[2026-11-07T04:35:17.794-08:00] 
+[2026-11-07T04:35:17.794-08:00] __RC=0__0b1ad71b55ce88dbec74d918
+[2026-11-07T04:35:17.794-08:00] # 
+[2026-11-07T04:36:48.007-08:00] printf '\n__RV_BEGIN_7999a9706c6c09e62b7ab4d2__\n'; sh -c 'ip link show eth0; c
+cat /sys/class/net/eth0/carrier'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__
+_7999a9706c6c09e62b7ab4d2
+[2026-11-07T04:36:48.024-08:00] 
+[2026-11-07T04:36:48.024-08:00] __RV_BEGIN_7999a9706c6c09e62b7ab4d2__
+[2026-11-07T04:36:48.071-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T04:36:48.088-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T04:36:48.088-08:00] 1
+[2026-11-07T04:36:48.103-08:00] 
+[2026-11-07T04:36:48.104-08:00] __RC=0__7999a9706c6c09e62b7ab4d2
+[2026-11-07T04:36:48.104-08:00] # 
+[2026-11-07T04:54:32.280-08:00] printf '\n__RV_BEGIN_e612f77b78b1222a5b253532__\n'; sh -c 'ip addr show eth0; i
+ip route; cat /etc/resolv.conf'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__e
+e612f77b78b1222a5b253532
+[2026-11-07T04:54:32.296-08:00] 
+[2026-11-07T04:54:32.296-08:00] __RV_BEGIN_e612f77b78b1222a5b253532__
+[2026-11-07T04:54:32.344-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T04:54:32.360-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T04:54:32.360-08:00]     inet 192.168.137.26/24 brd 192.168.137.255 scope global eth0
+[2026-11-07T04:54:32.360-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T04:54:32.376-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-07T04:54:32.376-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T04:54:32.376-08:00] default via 192.168.137.1 dev eth0 
+[2026-11-07T04:54:32.376-08:00] 192.168.137.0/24 dev eth0 scope link  src 192.168.137.26 
+[2026-11-07T04:54:32.392-08:00] search mshome.net # eth0
+[2026-11-07T04:54:32.408-08:00] nameserver 192.168.137.1 # eth0
+[2026-11-07T04:54:32.408-08:00] 
+[2026-11-07T04:54:32.408-08:00] __RC=0__e612f77b78b1222a5b253532
+[2026-11-07T04:54:32.408-08:00] # 
+[2026-11-07T18:47:59.681-08:00] 
+[2026-11-07T18:47:59.682-08:00] [host] command: cat /etc/os-release
+[2026-11-07T18:47:59.682-08:00]  printf '\n__RV_BEGIN_2b1dcf3d569b1d88615f0d7b__\n'; sh -c 'cat /etc/os-release'
+'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__2b1dcf3d569b1d88615f0d7b
+[2026-11-07T18:47:59.734-08:00] 
+[2026-11-07T18:47:59.734-08:00] __RV_BEGIN_2b1dcf3d569b1d88615f0d7b__
+[2026-11-07T18:47:59.781-08:00] NAME=Buildroot
+[2026-11-07T18:47:59.782-08:00] VERSION=2024.08
+[2026-11-07T18:47:59.798-08:00] ID=buildroot
+[2026-11-07T18:47:59.798-08:00] VERSION_ID=2024.08
+[2026-11-07T18:47:59.798-08:00] PRETTY_NAME="Buildroot 2024.08"
+[2026-11-07T18:47:59.798-08:00] 
+[2026-11-07T18:47:59.798-08:00] __RC=0__2b1dcf3d569b1d88615f0d7b
+[2026-11-07T18:47:59.798-08:00] # 
+[2026-11-07T18:47:59.798-08:00] [host] rc=0
+[2026-11-07T18:47:59.798-08:00] 
+[2026-11-07T18:47:59.798-08:00] [host] command: ip link show eth0; cat /sys/class/net/eth0/carrier
+[2026-11-07T18:47:59.845-08:00] printf '\n__RV_BEGIN_beacefc9b772659f836ce872__\n'; sh -c 'ip link show eth0; c
+cat /sys/class/net/eth0/carrier'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__
+_beacefc9b772659f836ce872
+[2026-11-07T18:47:59.862-08:00] 
+[2026-11-07T18:47:59.862-08:00] __RV_BEGIN_beacefc9b772659f836ce872__
+[2026-11-07T18:47:59.909-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T18:47:59.926-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T18:47:59.941-08:00] 1
+[2026-11-07T18:47:59.942-08:00] 
+[2026-11-07T18:47:59.942-08:00] __RC=0__beacefc9b772659f836ce872
+[2026-11-07T18:47:59.942-08:00] # 
+[2026-11-07T18:47:59.942-08:00] [host] rc=0
+[2026-11-07T18:47:59.942-08:00] 
+[2026-11-07T18:47:59.942-08:00] [host] command: ip addr show eth0; ip route
+[2026-11-07T18:47:59.973-08:00] printf '\n__RV_BEGIN_1b11287eb8ec5716458c4f90__\n'; sh -c 'ip addr show eth0; i
+ip route'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__1b11287eb8ec5716458c4f9
+90
+[2026-11-07T18:47:59.990-08:00] 
+[2026-11-07T18:47:59.990-08:00] __RV_BEGIN_1b11287eb8ec5716458c4f90__
+[2026-11-07T18:48:00.053-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T18:48:00.054-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T18:48:00.070-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-07T18:48:00.070-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T18:48:00.070-08:00] 
+[2026-11-07T18:48:00.070-08:00] __RC=0__1b11287eb8ec5716458c4f90
+[2026-11-07T18:48:00.070-08:00] # 
+[2026-11-07T18:48:00.070-08:00] [host] rc=0
+[2026-11-07T18:48:00.070-08:00] 
+[2026-11-07T18:48:00.070-08:00] [host] command: cat /etc/resolv.conf
+[2026-11-07T18:48:00.101-08:00] printf '\n__RV_BEGIN_697a6c79d5ad0b75e75e86e5__\n'; sh -c 'cat /etc/resolv.conf
+f'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__697a6c79d5ad0b75e75e86e5
+[2026-11-07T18:48:00.118-08:00] 
+[2026-11-07T18:48:00.118-08:00] __RV_BEGIN_697a6c79d5ad0b75e75e86e5__
+[2026-11-07T18:48:00.166-08:00] 
+[2026-11-07T18:48:00.166-08:00] __RC=0__697a6c79d5ad0b75e75e86e5
+[2026-11-07T18:48:00.182-08:00] # 
+[2026-11-07T18:48:00.182-08:00] [host] rc=0
+[2026-11-07T18:48:00.182-08:00] 
+[2026-11-07T18:48:00.182-08:00] [host] command: ps | grep -E "udhcpc|sshd" | grep -v grep
+[2026-11-07T18:48:00.229-08:00] printf '\n__RV_BEGIN_9ff01f4a8e48936dfc6f2b57__\n'; sh -c 'ps | grep -E "udhcpc
+c|sshd" | grep -v grep'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__9ff01f4a8
+8e48936dfc6f2b57
+[2026-11-07T18:48:00.230-08:00] 
+[2026-11-07T18:48:00.245-08:00] __RV_BEGIN_9ff01f4a8e48936dfc6f2b57__
+[2026-11-07T18:48:00.421-08:00]   183 root     udhcpc -i eth0 -b -R
+[2026-11-07T18:48:00.422-08:00]   185 root     udhcpc -i eth1 -b -R
+[2026-11-07T18:48:00.438-08:00]   187 root     sshd: /usr/sbin/sshd [listener] 0 of 10-100 startups
+[2026-11-07T18:48:00.438-08:00] 
+[2026-11-07T18:48:00.438-08:00] __RC=0__9ff01f4a8e48936dfc6f2b57
+[2026-11-07T18:48:00.438-08:00] # 
+[2026-11-07T18:48:00.438-08:00] [host] rc=0
+[2026-11-07T18:48:00.438-08:00] 
+[2026-11-07T18:48:00.438-08:00] [host] command: readlink /sys/class/net/eth0/device/driver; sh /mount_emmc.sh status
+[2026-11-07T18:48:00.469-08:00] printf '\n__RV_BEGIN_7bfd7ccb6f655d46bc503021__\n'; sh -c 'readlink /sys/class/
+/net/eth0/device/driver; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; echo
+o __RC=${__rv_rc}__7bfd7ccb6f655d46bc503021
+[2026-11-07T18:48:00.502-08:00] 
+[2026-11-07T18:48:00.502-08:00] __RV_BEGIN_7bfd7ccb6f655d46bc503021__
+[2026-11-07T18:48:00.549-08:00] ../../../bus/platform/drivers/nuclei-xec
+[2026-11-07T18:48:00.597-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T18:48:00.598-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T18:48:00.598-08:00] Root:   /mnt/ubuntu
+[2026-11-07T18:48:00.645-08:00] Ubuntu root is not mounted.
+[2026-11-07T18:48:00.662-08:00] 
+[2026-11-07T18:48:00.662-08:00] __RC=0__7bfd7ccb6f655d46bc503021
+[2026-11-07T18:48:00.662-08:00] # 
+[2026-11-07T18:48:00.662-08:00] [host] rc=0
+[2026-11-07T18:50:26.619-08:00] printf '\n__RV_BEGIN_b47e6c1cf21ebe4374224798__\n'; sh -c 'ip addr show eth0; i
+ip route; cat /etc/resolv.conf'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__b
+b47e6c1cf21ebe4374224798
+[2026-11-07T18:50:26.635-08:00] 
+[2026-11-07T18:50:26.635-08:00] __RV_BEGIN_b47e6c1cf21ebe4374224798__
+[2026-11-07T18:50:26.699-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T18:50:26.715-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T18:50:26.715-08:00]     inet 192.168.137.178/24 brd 192.168.137.255 scope global eth0
+[2026-11-07T18:50:26.715-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T18:50:26.731-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-07T18:50:26.731-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T18:50:26.731-08:00] default via 192.168.137.1 dev eth0 
+[2026-11-07T18:50:26.747-08:00] 192.168.137.0/24 dev eth0 scope link  src 192.168.137.178 
+[2026-11-07T18:50:26.763-08:00] search mshome.net # eth0
+[2026-11-07T18:50:26.763-08:00] nameserver 192.168.137.1 # eth0
+[2026-11-07T18:50:26.763-08:00] 
+[2026-11-07T18:50:26.763-08:00] __RC=0__b47e6c1cf21ebe4374224798
+[2026-11-07T18:50:26.763-08:00] # 
+[2026-11-07T18:58:56.326-08:00] printf '\n__RV_BEGIN_6d07d2085f173893ab542d5a__\n'; sh -c 'date -u; command -v 
+ timeout; sh /mount_emmc.sh status'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc
+c}__6d07d2085f173893ab542d5a
+[2026-11-07T18:58:56.343-08:00] 
+[2026-11-07T18:58:56.343-08:00] __RV_BEGIN_6d07d2085f173893ab542d5a__
+[2026-11-07T18:58:56.390-08:00] Thu Jan  1 00:20:13 UTC 1970
+[2026-11-07T18:58:56.454-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T18:58:56.455-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T18:58:56.455-08:00] Root:   /mnt/ubuntu
+[2026-11-07T18:58:56.502-08:00] Ubuntu root is not mounted.
+[2026-11-07T18:58:56.518-08:00] 
+[2026-11-07T18:58:56.518-08:00] __RC=0__6d07d2085f173893ab542d5a
+[2026-11-07T18:58:56.518-08:00] # 
+
+===== Active ICS simultaneous board checks (final round) =====
+[2026-11-07T19:02:50.654-08:00] 
+[2026-11-07T19:02:50.654-08:00] [host] Interrupt previous timed-out ping and confirm shell before new observation
+[2026-11-07T19:02:50.667-08:00] ^C
+[2026-11-07T19:02:50.667-08:00] 
+[2026-11-07T19:02:50.667-08:00] # 
+[2026-11-07T19:02:57.425-08:00] [host] command: ip addr show eth0; ip route; cat /etc/resolv.conf
+[2026-11-07T19:02:57.478-08:00] printf '\n__RV_BEGIN_02cfc61a29ceb3160972c855__\n'; sh -c 'ip addr show eth0; i
+ip route; cat /etc/resolv.conf'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__0
+02cfc61a29ceb3160972c855
+[2026-11-07T19:02:57.496-08:00] 
+[2026-11-07T19:02:57.496-08:00] __RV_BEGIN_02cfc61a29ceb3160972c855__
+[2026-11-07T19:02:57.546-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T19:02:57.559-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T19:02:57.559-08:00]     inet 192.168.137.178/24 brd 192.168.137.255 scope global eth0
+[2026-11-07T19:02:57.575-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T19:02:57.575-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-07T19:02:57.575-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T19:02:57.575-08:00] default via 192.168.137.1 dev eth0 
+[2026-11-07T19:02:57.591-08:00] 192.168.137.0/24 dev eth0 scope link  src 192.168.137.178 
+[2026-11-07T19:02:57.591-08:00] search mshome.net # eth0
+[2026-11-07T19:02:57.591-08:00] nameserver 192.168.137.1 # eth0
+[2026-11-07T19:02:57.607-08:00] 
+[2026-11-07T19:02:57.607-08:00] __RC=0__02cfc61a29ceb3160972c855
+[2026-11-07T19:02:57.607-08:00] # 
+[2026-11-07T19:02:57.609-08:00] [host] rc=0
+[2026-11-07T19:02:57.609-08:00] 
+[2026-11-07T19:02:57.609-08:00] [host] command: ping -c 3 -w 6 192.168.137.1
+[2026-11-07T19:02:57.638-08:00] printf '\n__RV_BEGIN_562bf801d496ae750b9db126__\n'; sh -c 'ping -c 3 -w 6 192.1
+168.137.1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__562bf801d496ae750b9db1
+126
+[2026-11-07T19:02:57.655-08:00] 
+[2026-11-07T19:02:57.655-08:00] __RV_BEGIN_562bf801d496ae750b9db126__
+[2026-11-07T19:02:57.719-08:00] PING 192.168.137.1 (192.168.137.1): 56 data bytes
+[2026-11-07T19:03:05.696-08:00] ^C
+[2026-11-07T19:03:05.696-08:00] 
+[2026-11-07T19:03:05.696-08:00] --- 192.168.137.1 ping statistics ---
+[2026-11-07T19:03:05.697-08:00] 3 packets transmitted, 0 packets received, 100% packet loss
+[2026-11-07T19:03:05.697-08:00] 
+[2026-11-07T19:03:05.697-08:00] __RC=1__562bf801d496ae750b9db126
+[2026-11-07T19:03:05.712-08:00] # 
+[2026-11-07T19:03:05.712-08:00] # 
+[2026-11-07T19:03:05.713-08:00] [host] rc=host-timeout; command interrupted; shell confirmed
+[2026-11-07T19:03:05.713-08:00] 
+[2026-11-07T19:03:05.713-08:00] [host] command: ping -c 3 -w 6 8.8.8.8
+[2026-11-07T19:03:05.744-08:00] printf '\n__RV_BEGIN_f28c26b549366f6908dd94ac__\n'; sh -c 'ping -c 3 -w 6 8.8.8
+8.8'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__f28c26b549366f6908dd94ac
+[2026-11-07T19:03:05.760-08:00] 
+[2026-11-07T19:03:05.760-08:00] __RV_BEGIN_f28c26b549366f6908dd94ac__
+[2026-11-07T19:03:05.808-08:00] PING 8.8.8.8 (8.8.8.8): 56 data bytes
+[2026-11-07T19:03:05.856-08:00] 64 bytes from 8.8.8.8: seq=0 ttl=108 time=49.711 ms
+[2026-11-07T19:03:06.864-08:00] 64 bytes from 8.8.8.8: seq=1 ttl=108 time=53.649 ms
+[2026-11-07T19:03:07.872-08:00] 64 bytes from 8.8.8.8: seq=2 ttl=108 time=63.058 ms
+[2026-11-07T19:03:07.872-08:00] 
+[2026-11-07T19:03:07.872-08:00] --- 8.8.8.8 ping statistics ---
+[2026-11-07T19:03:07.872-08:00] 3 packets transmitted, 3 packets received, 0% packet loss
+[2026-11-07T19:03:07.872-08:00] round-trip min/avg/max = 49.711/55.472/63.058 ms
+[2026-11-07T19:03:07.888-08:00] 
+[2026-11-07T19:03:07.888-08:00] __RC=0__f28c26b549366f6908dd94ac
+[2026-11-07T19:03:07.888-08:00] # 
+[2026-11-07T19:03:07.889-08:00] [host] rc=0
+[2026-11-07T19:03:07.889-08:00] 
+[2026-11-07T19:03:07.889-08:00] [host] command: ping -c 3 -w 6 github.com
+[2026-11-07T19:03:07.920-08:00] printf '\n__RV_BEGIN_2a41b6671481193e1c5ce43e__\n'; sh -c 'ping -c 3 -w 6 githu
+ub.com'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__2a41b6671481193e1c5ce43e 
+\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00ub.com'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__2a41b6671481193e1c5ce43\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00e
+[2026-11-07T19:03:07.952-08:00] 
+[2026-11-07T19:03:07.952-08:00] __RV_BEGIN_2a41b6671481193e1c5ce43e__
+[2026-11-07T19:03:08.016-08:00] PING github.com (198.18.1.137): 56 data bytes
+[2026-11-07T19:03:15.904-08:00] ^C
+[2026-11-07T19:03:15.904-08:00] 
+[2026-11-07T19:03:15.904-08:00] --- github.com ping statistics ---
+[2026-11-07T19:03:15.904-08:00] 3 packets transmitted, 0 packets received, 100% packet loss
+[2026-11-07T19:03:15.920-08:00] 
+[2026-11-07T19:03:15.920-08:00] __RC=1__2a41b6671481193e1c5ce43e
+[2026-11-07T19:03:15.920-08:00] # 
+[2026-11-07T19:03:15.920-08:00] # 
+[2026-11-07T19:03:15.921-08:00] [host] rc=host-timeout; command interrupted; shell confirmed
+[2026-11-07T19:03:15.921-08:00] 
+[2026-11-07T19:03:15.921-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T19:03:15.952-08:00] printf '\n__RV_BEGIN_7b1e93dd84bc655c944b40fd__\n'; sh -c 'sh /mount_emmc.sh st
+tatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__7b1e93dd84bc655c944b40fd
+[2026-11-07T19:03:15.968-08:00] 
+[2026-11-07T19:03:15.968-08:00] __RV_BEGIN_7b1e93dd84bc655c944b40fd__
+[2026-11-07T19:03:16.064-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T19:03:16.064-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T19:03:16.064-08:00] Root:   /mnt/ubuntu
+[2026-11-07T19:03:16.112-08:00] Ubuntu root is not mounted.
+[2026-11-07T19:03:16.112-08:00] 
+[2026-11-07T19:03:16.112-08:00] __RC=0__7b1e93dd84bc655c944b40fd
+[2026-11-07T19:03:16.112-08:00] # 
+[2026-11-07T19:03:16.113-08:00] [host] rc=0
+
+===== NTP unavailable, PC UTC fallback, final eMMC cleanup check =====
+[2026-11-07T19:05:29.557-08:00] 
+[2026-11-07T19:05:29.557-08:00] [host] command: date -u; cat /etc/os-release
+[2026-11-07T19:05:29.600-08:00] printf '\n__RV_BEGIN_4b3a798d52e7c7e6113461af__\n'; sh -c 'date -u; cat /etc/os
+s-release'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__4b3a798d52e7c7e6113461
+1af
+[2026-11-07T19:05:29.600-08:00] 
+[2026-11-07T19:05:29.600-08:00] __RV_BEGIN_4b3a798d52e7c7e6113461af__
+[2026-11-07T19:05:29.664-08:00] Thu Jan  1 00:26:48 UTC 1970
+[2026-11-07T19:05:29.680-08:00] NAME=Buildroot
+[2026-11-07T19:05:29.680-08:00] VERSION=2024.08
+[2026-11-07T19:05:29.680-08:00] ID=buildroot
+[2026-11-07T19:05:29.680-08:00] VERSION_ID=2024.08
+[2026-11-07T19:05:29.680-08:00] PRETTY_NAME="Buildroot 2024.08"
+[2026-11-07T19:05:29.680-08:00] 
+[2026-11-07T19:05:29.680-08:00] __RC=0__4b3a798d52e7c7e6113461af
+[2026-11-07T19:05:29.680-08:00] #
+[2026-11-07T19:05:29.681-08:00] [host] rc=0
+[2026-11-07T19:05:29.681-08:00] 
+[2026-11-07T19:05:29.681-08:00] [host] command: ntpd -n -q -p pool.ntp.org 2>&1
+[2026-11-07T19:05:29.696-08:00]  printf '\n__RV_BEGIN_35b939a709d597710589c68c__\n'; sh -c 'ntpd -n -q -p pool.n
+ntp.org 2>&1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__35b939a709d59771058
+89c68c
+[2026-11-07T19:05:29.728-08:00] 
+[2026-11-07T19:05:29.728-08:00] __RV_BEGIN_35b939a709d597710589c68c__
+[2026-11-07T19:05:29.776-08:00] sh: line 1: ntpd: command not found
+[2026-11-07T19:05:29.776-08:00] 
+[2026-11-07T19:05:29.792-08:00] __RC=127__35b939a709d597710589c68c
+[2026-11-07T19:05:29.792-08:00] # 
+[2026-11-07T19:05:29.792-08:00] [host] rc=127
+[2026-11-07T19:05:29.792-08:00] 
+[2026-11-07T19:05:29.792-08:00] [host] command: ntpd -n -q -p ntp.aliyun.com 2>&1
+[2026-11-07T19:05:29.824-08:00] printf '\n__RV_BEGIN_ed210a13d0965729a3dc587e__\n'; sh -c 'ntpd -n -q -p ntp.al
+liyun.com 2>&1'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__ed210a13d0965729a
+a3dc587e
+[2026-11-07T19:05:29.840-08:00] 
+[2026-11-07T19:05:29.840-08:00] __RV_BEGIN_ed210a13d0965729a3dc587e__
+[2026-11-07T19:05:29.888-08:00] sh: line 1: ntpd: command not found
+[2026-11-07T19:05:29.904-08:00] 
+[2026-11-07T19:05:29.904-08:00] __RC=127__ed210a13d0965729a3dc587e
+[2026-11-07T19:05:29.904-08:00] # 
+[2026-11-07T19:05:29.904-08:00] [host] rc=127
+[2026-11-07T19:05:29.904-08:00] 
+[2026-11-07T19:05:29.904-08:00] [host] command: date -u -s "2026-11-08 03:05:29"; date -u
+[2026-11-07T19:05:29.936-08:00] printf '\n__RV_BEGIN_c8562b4aaa1e66df1191ade6__\n'; sh -c 'date -u -s "2026-11-
+-08 03:05:29"; date -u'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__c8562b4aa
+aa1e66df1191ade6
+[2026-11-07T19:05:29.952-08:00] 
+[2026-11-07T19:05:29.952-08:00] __RV_BEGIN_c8562b4aaa1e66df1191ade6__
+[2026-11-07T19:05:30.016-08:00] Sun Nov  8 03:05:29 UTC 2026
+[2026-11-07T19:05:30.032-08:00] Sun Nov  8 03:05:29 UTC 2026
+[2026-11-07T19:05:30.032-08:00] 
+[2026-11-07T19:05:30.032-08:00] __RC=0__c8562b4aaa1e66df1191ade6
+[2026-11-07T19:05:30.032-08:00] # 
+[2026-11-07T19:05:30.032-08:00] [host] rc=0
+[2026-11-07T19:05:30.033-08:00] 
+[2026-11-07T19:05:30.033-08:00] [host] command: sh /mount_emmc.sh status
+[2026-11-07T19:05:30.064-08:00] printf '\n__RV_BEGIN_f05e6fe0ed4eec150a13e223__\n'; sh -c 'sh /mount_emmc.sh st
+tatus'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__f05e6fe0ed4eec150a13e223
+[2026-11-07T19:05:30.080-08:00] 
+[2026-11-07T19:05:30.080-08:00] __RV_BEGIN_f05e6fe0ed4eec150a13e223__
+[2026-11-07T19:05:30.160-08:00] === Ubuntu eMMC mount status ===
+[2026-11-07T19:05:30.176-08:00] Device: /dev/mmcblk1p1
+[2026-11-07T19:05:30.176-08:00] Root:   /mnt/ubuntu
+[2026-11-07T19:05:30.224-08:00] Ubuntu root is not mounted.
+[2026-11-07T19:05:30.224-08:00] 
+[2026-11-07T19:05:30.224-08:00] __RC=0__f05e6fe0ed4eec150a13e223
+[2026-11-07T19:05:30.224-08:00] # 
+[2026-11-07T19:05:30.224-08:00] [host] rc=0
+[2026-11-07T19:05:30.224-08:00] 
+[2026-11-07T19:05:30.224-08:00] [host] command: awk '$2=="/mnt/ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/emmc_ro/")==1 {print; bad=1} END {exit bad}' /proc/mounts && echo EMMC_ALL_UNMOUNTED
+[2026-11-07T19:05:30.288-08:00] printf '\n__RV_BEGIN_47f29651c338ddb319f56bdc__\n'; sh -c 'awk '"'"'$2=="/mnt/u
+ubuntu" || index($2,"/mnt/ubuntu/")==1 || $2=="/mnt/emmc_ro" || index($2,"/mnt/em
+mmc_ro/")==1 {print; bad=1} END {exit bad}'"'"' /proc/mounts && echo EMMC_ALL_UNM
+MOUNTED'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__47f29651c338ddb319f56bdc
+c
+[2026-11-07T19:05:30.320-08:00] 
+[2026-11-07T19:05:30.320-08:00] __RV_BEGIN_47f29651c338ddb319f56bdc__
+[2026-11-07T19:05:30.384-08:00] EMMC_ALL_UNMOUNTED
+[2026-11-07T19:05:30.384-08:00] 
+[2026-11-07T19:05:30.384-08:00] __RC=0__47f29651c338ddb319f56bdc
+[2026-11-07T19:05:30.384-08:00] # 
+[2026-11-07T19:05:30.384-08:00] [host] rc=0
+[2026-11-07T19:05:30.384-08:00] 
+[2026-11-07T19:05:30.384-08:00] [host] command: ps | grep -E "[p]ing|[n]tpd"
+[2026-11-07T19:05:30.416-08:00] printf '\n__RV_BEGIN_21b54c769baa45113c57b61c__\n'; sh -c 'ps | grep -E "[p]ing
+g|[n]tpd"'; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__21b54c769baa45113c57b6
+61c
+[2026-11-07T19:05:30.432-08:00] 
+[2026-11-07T19:05:30.432-08:00] __RV_BEGIN_21b54c769baa45113c57b61c__
+[2026-11-07T19:05:30.608-08:00] 
+[2026-11-07T19:05:30.608-08:00] __RC=1__21b54c769baa45113c57b61c
+[2026-11-07T19:05:30.608-08:00] # 
+[2026-11-07T19:05:30.608-08:00] [host] rc=1
