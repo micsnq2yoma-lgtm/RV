@@ -1,0 +1,144 @@
+[HOST NOTE] Verbatim dmesg stdout with host timestamps; recovered kernel ring buffer, not a U-Boot or complete power-on serial capture.
+[2026-11-05T02:04:10.894-08:00] [HOST COMMAND] dmesg
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Linux version 6.6.90-rt54+ (linux@ubuntu) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #1 SMP PREEMPT_RT Mon May 11 19:34:25 PDT 2026
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Machine model: nuclei,p0soc
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SBI specification v1.0 detected
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SBI implementation ID=0x1 Version=0x10003
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SBI TIME extension detected
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SBI IPI extension detected
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SBI RFENCE extension detected
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SBI SRST extension detected
+[2026-11-05T02:04:10.894-08:00] [    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[2026-11-05T02:04:10.894-08:00] [    0.000000] printk: legacy bootconsole [sbi0] enabled
+[2026-11-05T02:04:10.894-08:00] [    0.000000] efi: UEFI not found.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x0000000000000000..0x000000000003ffff (256 KiB) nomap non-reusable mmode_resv0@0
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x0000000000040000..0x000000000007ffff (256 KiB) nomap non-reusable mmode_resv1@40000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x000000007e000000..0x000000007e037fff (224 KiB) nomap non-reusable region@7E000000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x000000007e038000..0x000000007e06ffff (224 KiB) nomap non-reusable region@7E038000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x000000007e070000..0x000000007e077fff (32 KiB) nomap non-reusable region@7E070000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x000000007e078000..0x000000007e07ffff (32 KiB) nomap non-reusable region@7E078000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x000000007e080000..0x000000007e0fffff (512 KiB) nomap non-reusable region@7E080000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x000000007e100000..0x000000007e10ffff (64 KiB) nomap non-reusable rpmsg@7E100000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Reserved memory: created DMA memory pool at 0x000000007e110000, size 0 MiB
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: initialized node rpmsg_dma@7E110000, compatible id shared-dma-pool
+[2026-11-05T02:04:10.894-08:00] [    0.000000] OF: reserved mem: 0x000000007e110000..0x000000007e1fffff (960 KiB) nomap non-reusable rpmsg_dma@7E110000
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Zone ranges:
+[2026-11-05T02:04:10.894-08:00] [    0.000000]   DMA32    [mem 0x0000000000000000-0x000000007fffffff]
+[2026-11-05T02:04:10.894-08:00] [    0.000000]   Normal   empty
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Movable zone start for each node
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Early memory node ranges
+[2026-11-05T02:04:10.894-08:00] [    0.000000]   node   0: [mem 0x0000000000000000-0x000000000007ffff]
+[2026-11-05T02:04:10.894-08:00] [    0.000000]   node   0: [mem 0x0000000000080000-0x000000007dffffff]
+[2026-11-05T02:04:10.894-08:00] [    0.000000]   node   0: [mem 0x000000007e000000-0x000000007e1fffff]
+[2026-11-05T02:04:10.894-08:00] [    0.000000]   node   0: [mem 0x000000007e200000-0x000000007fffffff]
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x000000007fffffff]
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SBI HSM extension detected
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Falling back to deprecated "riscv,isa"
+[2026-11-05T02:04:10.894-08:00] [    0.000000] riscv: base ISA extensions acdfim
+[2026-11-05T02:04:10.894-08:00] [    0.000000] riscv: ELF capabilities acdfim
+[2026-11-05T02:04:10.894-08:00] [    0.000000] percpu: Embedded 17 pages/cpu s31744 r8192 d29696 u69632
+[2026-11-05T02:04:10.894-08:00] [    0.000000] pcpu-alloc: s31744 r8192 d29696 u69632 alloc=17*4096
+[2026-11-05T02:04:10.894-08:00] [    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 [0] 4 [0] 5 [0] 6 [0] 7 
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Kernel command line: earlycon=sbi console=ttyNUC0
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 517120
+[2026-11-05T02:04:10.894-08:00] [    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[2026-11-05T02:04:10.894-08:00] [    0.000000] Memory: 2031944K/2097152K available (4885K kernel code, 4741K rwdata, 2048K rodata, 2140K init, 329K bss, 65208K reserved, 0K cma-reserved)
+[2026-11-05T02:04:10.894-08:00] [    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[2026-11-05T02:04:10.894-08:00] [    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=8.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] rcu: 	RCU priority boosting: priority 1 delay 500 ms.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] rcu: 	RCU_SOFTIRQ processing moved to rcuc kthreads.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] 	No expedited grace period (rcu_normal_after_boot).
+[2026-11-05T02:04:10.894-08:00] [    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=8
+[2026-11-05T02:04:10.894-08:00] [    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[2026-11-05T02:04:10.894-08:00] [    0.000000] riscv-intc: 64 local interrupts mapped
+[2026-11-05T02:04:10.894-08:00] [    0.000000] plic: interrupt-controller@f94000000: mapped 127 interrupts with 8 handlers for 16 contexts.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] riscv: providing IPIs using SBI IPI extension
+[2026-11-05T02:04:10.894-08:00] [    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[2026-11-05T02:04:10.894-08:00] [    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x5bca7e84f2, max_idle_ns: 440795223084 ns
+[2026-11-05T02:04:10.894-08:00] [    0.000003] sched_clock: 64 bits at 398MHz, resolution 2ns, wraps every 4398046511103ns
+[2026-11-05T02:04:10.894-08:00] [    0.000060] riscv-timer: Timer interrupt in S-mode is available via sstc extension
+[2026-11-05T02:04:10.894-08:00] [    0.000651] Calibrating delay loop (skipped), value calculated using timer frequency.. 796.00 BogoMIPS (lpj=1592000)
+[2026-11-05T02:04:10.894-08:00] [    0.000725] pid_max: default: 32768 minimum: 301
+[2026-11-05T02:04:10.894-08:00] [    0.001525] Mount-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    0.001618] Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    0.014268] riscv: ELF compat mode supported
+[2026-11-05T02:04:10.894-08:00] [    0.014354] ASID allocator using 16 bits (65536 entries)
+[2026-11-05T02:04:10.894-08:00] [    0.017147] rcu: Hierarchical SRCU implementation.
+[2026-11-05T02:04:10.894-08:00] [    0.017187] rcu: 	Max phase no-delay instances is 1000.
+[2026-11-05T02:04:10.894-08:00] [    0.412380] EFI services will not be available.
+[2026-11-05T02:04:10.894-08:00] [    0.458289] smp: Bringing up secondary CPUs ...
+[2026-11-05T02:04:10.894-08:00] [    1.489946] CPU2: failed to come online
+[2026-11-05T02:04:10.894-08:00] [    2.522397] CPU3: failed to come online
+[2026-11-05T02:04:10.894-08:00] [    3.555144] CPU4: failed to come online
+[2026-11-05T02:04:10.894-08:00] [    4.587779] CPU5: failed to come online
+[2026-11-05T02:04:10.894-08:00] [    5.620532] CPU6: failed to come online
+[2026-11-05T02:04:10.894-08:00] [    6.653233] CPU7: failed to come online
+[2026-11-05T02:04:10.894-08:00] [    6.653506] smp: Brought up 1 node, 2 CPUs
+[2026-11-05T02:04:10.894-08:00] [    6.659235] devtmpfs: initialized
+[2026-11-05T02:04:10.894-08:00] [    6.680326] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[2026-11-05T02:04:10.894-08:00] [    6.680438] futex hash table entries: 2048 (order: 5, 131072 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.681606] pinctrl core: initialized pinctrl subsystem
+[2026-11-05T02:04:10.894-08:00] [    6.686771] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[2026-11-05T02:04:10.894-08:00] [    6.690558] DMA: preallocated 256 KiB GFP_KERNEL pool for atomic allocations
+[2026-11-05T02:04:10.894-08:00] [    6.691132] DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[2026-11-05T02:04:10.894-08:00] [    6.742967] cpu1: Ratio of byte access time to unaligned word access is 0.16, unaligned accesses are slow
+[2026-11-05T02:04:10.894-08:00] [    6.767379] cpu0: Ratio of byte access time to unaligned word access is 0.16, unaligned accesses are slow
+[2026-11-05T02:04:10.894-08:00] [    6.768837] nuclei rpmsg driver is registered.
+[2026-11-05T02:04:10.894-08:00] [    6.799257] pps_core: LinuxPPS API ver. 1 registered
+[2026-11-05T02:04:10.894-08:00] [    6.799306] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[2026-11-05T02:04:10.894-08:00] [    6.799485] PTP clock support registered
+[2026-11-05T02:04:10.894-08:00] [    6.813385] clocksource: Switched to clocksource riscv_clocksource
+[2026-11-05T02:04:10.894-08:00] [    6.827499] NET: Registered PF_INET protocol family
+[2026-11-05T02:04:10.894-08:00] [    6.828510] IP idents hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.838279] tcp_listen_portaddr_hash hash table entries: 1024 (order: 3, 40960 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.838530] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.838613] TCP established hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.839578] TCP bind hash table entries: 16384 (order: 8, 1310720 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.850354] TCP: Hash tables configured (established 16384 bind 16384)
+[2026-11-05T02:04:10.894-08:00] [    6.851088] UDP hash table entries: 1024 (order: 4, 98304 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.851610] UDP-Lite hash table entries: 1024 (order: 4, 98304 bytes, linear)
+[2026-11-05T02:04:10.894-08:00] [    6.853175] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[2026-11-05T02:04:10.894-08:00] [    6.863694] workingset: timestamp_bits=62 max_order=19 bucket_order=0
+[2026-11-05T02:04:10.894-08:00] [    6.867216] Trying to unpack rootfs image as initramfs...
+[2026-11-05T02:04:10.894-08:00] [    7.141747] NET: Registered PF_ALG protocol family
+[2026-11-05T02:04:10.894-08:00] [    7.142086] io scheduler mq-deadline registered
+[2026-11-05T02:04:10.894-08:00] [    7.142141] io scheduler kyber registered
+[2026-11-05T02:04:10.894-08:00] [    7.142308] io scheduler bfq registered
+[2026-11-05T02:04:10.894-08:00] [    7.726065] f9c250000.serial: ttyNUC0 at MMIO 0xf9c250000 (irq = 12, base_baud = 6250000) is a Nuclei UART v0
+[2026-11-05T02:04:10.894-08:00] [    7.734302] printk: legacy console [ttyNUC0] enabled
+[2026-11-05T02:04:10.894-08:00] [    7.734360] printk: legacy bootconsole [sbi0] disabled
+[2026-11-05T02:04:10.894-08:00] [    7.814324] brd: module loaded
+[2026-11-05T02:04:10.894-08:00] [    7.874200] loop: module loaded
+[2026-11-05T02:04:10.894-08:00] [    8.475737] Freeing initrd memory: 13884K
+[2026-11-05T02:04:10.894-08:00] [    8.517080] nuclei-xec f9c210000.xec eth0: using MII interface
+[2026-11-05T02:04:10.894-08:00] [    8.519017] Generic PHY f9c210000.xec-ffffffff:01: attached PHY driver (mii_bus:phy_addr=f9c210000.xec-ffffffff:01, irq=POLL)
+[2026-11-05T02:04:10.894-08:00] [    8.519091] nuclei-xec f9c210000.xec eth0: XEC mac at 0xf9c210000 irq 13
+[2026-11-05T02:04:10.894-08:00] [    8.553975] nuclei-xec f9cdc0000.xec eth1: using GMII interface
+[2026-11-05T02:04:10.894-08:00] [    8.554775] Generic PHY f9cdc0000.xec-ffffffff:00: attached PHY driver (mii_bus:phy_addr=f9cdc0000.xec-ffffffff:00, irq=POLL)
+[2026-11-05T02:04:10.894-08:00] [    8.554842] nuclei-xec f9cdc0000.xec eth1: XEC mac at 0xf9cdc0000 irq 14
+[2026-11-05T02:04:10.894-08:00] [    8.589815] nuclei-idu f9c870000.idu: mailbox enabled
+[2026-11-05T02:04:10.894-08:00] [    8.594206] NET: Registered PF_INET6 protocol family
+[2026-11-05T02:04:10.894-08:00] [    8.606878] Segment Routing with IPv6
+[2026-11-05T02:04:10.894-08:00] [    8.607185] In-situ OAM (IOAM) with IPv6
+[2026-11-05T02:04:10.894-08:00] [    8.607596] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[2026-11-05T02:04:10.894-08:00] [    8.612346] NET: Registered PF_PACKET protocol family
+[2026-11-05T02:04:10.894-08:00] [    8.624644] mmc0: host does not support reading read-only switch, assuming write-enable
+[2026-11-05T02:04:10.894-08:00] [    8.629816] mmc0: new high speed SDHC card at address 0001
+[2026-11-05T02:04:10.894-08:00] [    8.639039] mmcblk0: mmc0:0001 EITSD 7.50 GiB
+[2026-11-05T02:04:10.894-08:00] [    8.659826]  mmcblk0: p1
+[2026-11-05T02:04:10.894-08:00] [    8.715712] nuclei,nuclei-rpmsg 7e100000.rpmsg: assigned reserved memory node rpmsg_dma@7E110000
+[2026-11-05T02:04:10.894-08:00] [    8.722837] virtio_rpmsg_bus virtio0: rpmsg host is online
+[2026-11-05T02:04:10.894-08:00] [    8.723976] clk: Disabling unused clocks
+[2026-11-05T02:04:10.894-08:00] [    8.740458] Freeing unused kernel image (initmem) memory: 2140K
+[2026-11-05T02:04:10.894-08:00] [    8.740688] Run /init as init process
+[2026-11-05T02:04:10.894-08:00] [    8.740721]   with arguments:
+[2026-11-05T02:04:10.894-08:00] [    8.740734]     /init
+[2026-11-05T02:04:10.894-08:00] [    8.740747]   with environment:
+[2026-11-05T02:04:10.894-08:00] [    8.740759]     HOME=/
+[2026-11-05T02:04:10.894-08:00] [    8.740772]     TERM=linux
+[2026-11-05T02:04:10.894-08:00] [   15.123334] random: crng init done
+[2026-11-05T02:04:10.894-08:00] [HOST EXIT] 0
