@@ -1,0 +1,470 @@
+# First capture: user confirmed power-on. COM3 ClearCommError (Access denied), exit 125, zero serial bytes.
+# Second capture follows. Build account/host and hardware identifiers are redacted in the public copy. Raw captures are retained locally.
+[2026-11-05T19:27:56.765-08:00] Nuclei SDK Build Time: Nov  4 2026, 10:13:08
+[2026-11-05T19:27:56.766-08:00] Download Mode: FLASHXIP2
+[2026-11-05T19:27:56.766-08:00] CPU Frequency 200000000 Hz
+[2026-11-05T19:27:56.766-08:00] CPU HartID: 0
+[2026-11-05T19:27:57.341-08:00] 
+[2026-11-05T19:27:57.341-08:00] /*****trained delay registers:*****/
+[2026-11-05T19:27:57.341-08:00] f0_ac0_bit0_dly:2f5
+[2026-11-05T19:27:57.357-08:00] f0_ac0_bit1_dly:2fb
+[2026-11-05T19:27:57.357-08:00] f0_ac0_bit2_dly:303
+[2026-11-05T19:27:57.357-08:00] f0_ac0_bit3_dly:301
+[2026-11-05T19:27:57.357-08:00] f0_ac1_bit0_dly:2f7
+[2026-11-05T19:27:57.357-08:00] f0_ac1_bit1_dly:307
+[2026-11-05T19:27:57.357-08:00] f0_ac1_bit2_dly:0
+[2026-11-05T19:27:57.357-08:00] f0_ac1_bit3_dly:0
+[2026-11-05T19:27:57.357-08:00] f0_ac2_bit0_dly:2fe
+[2026-11-05T19:27:57.357-08:00] f0_ac2_bit1_dly:2fc
+[2026-11-05T19:27:57.373-08:00] f0_ac2_bit2_dly:2fc
+[2026-11-05T19:27:57.373-08:00] f0_ac2_bit3_dly:304
+[2026-11-05T19:27:57.373-08:00] f0_ac3_bit0_dly:2fc
+[2026-11-05T19:27:57.373-08:00] f0_ac3_bit1_dly:300
+[2026-11-05T19:27:57.373-08:00] f0_ac3_bit2_dly:0
+[2026-11-05T19:27:57.373-08:00] f0_ac3_bit3_dly:0
+[2026-11-05T19:27:57.373-08:00] f0_ac4_bit0_dly:2ee
+[2026-11-05T19:27:57.373-08:00] f0_ac4_bit1_dly:2ee
+[2026-11-05T19:27:57.373-08:00] f0_ac4_bit2_dly:0
+[2026-11-05T19:27:57.389-08:00] f0_ac4_bit3_dly:2ee
+[2026-11-05T19:27:57.389-08:00] f0_ac5_bit0_dly:2f0
+[2026-11-05T19:27:57.389-08:00] f0_ac5_bit1_dly:2f0
+[2026-11-05T19:27:57.389-08:00] f0_ac5_bit2_dly:0
+[2026-11-05T19:27:57.389-08:00] f0_ac5_bit3_dly:0
+[2026-11-05T19:27:57.389-08:00] f0_rank0_db0_wrdqs_dly: cyc_lat=f, slv_dly=1fe
+[2026-11-05T19:27:57.389-08:00] f0_rank0_db0_gt_dly: cyc_lat=6, slv_dly=e8
+[2026-11-05T19:27:57.405-08:00] f0_rank0_db0_rdlvl_dly: dq0_dly_enc=0, dq0_rddqs_r_dly=91, dq0_rddqs_f_dly=91
+[2026-11-05T19:27:57.405-08:00] f0_rank0_db0_rdlvl_dly: dq1_dly_enc=0, dq1_rddqs_r_dly=a0, dq1_rddqs_f_dly=a0
+[2026-11-05T19:27:57.405-08:00] f0_rank0_db0_rdlvl_dly: dq2_dly_enc=0, dq2_rddqs_r_dly=82, dq2_rddqs_f_dly=91
+[2026-11-05T19:27:57.421-08:00] f0_rank0_db0_rdlvl_dly: dq3_dly_enc=0, dq3_rddqs_r_dly=91, dq3_rddqs_f_dly=96
+[2026-11-05T19:27:57.421-08:00] f0_rank0_db0_rdlvl_dly: dq4_dly_enc=0, dq4_rddqs_r_dly=87, dq4_rddqs_f_dly=a0
+[2026-11-05T19:27:57.437-08:00] f0_rank0_db0_rdlvl_dly: dq5_dly_enc=0, dq5_rddqs_r_dly=91, dq5_rddqs_f_dly=a5
+[2026-11-05T19:27:57.437-08:00] f0_rank0_db0_rdlvl_dly: dq6_dly_enc=0, dq6_rddqs_r_dly=87, dq6_rddqs_f_dly=96
+[2026-11-05T19:27:57.453-08:00] f0_rank0_db0_rdlvl_dly: dq7_dly_enc=0, dq7_rddqs_r_dly=91, dq7_rddqs_f_dly=a0
+[2026-11-05T19:27:57.453-08:00] f0_rank0_db0_rdlvl_dly: dq8_dly_enc=0, dq8_rddqs_r_dly=8c, dq8_rddqs_f_dly=a5
+[2026-11-05T19:27:57.453-08:00] f0_rank0_db0_wrdq0_dly:408
+[2026-11-05T19:27:57.469-08:00] f0_rank0_db0_wrdq1_dly:400
+[2026-11-05T19:27:57.469-08:00] f0_rank0_db0_wrdq2_dly:40a
+[2026-11-05T19:27:57.469-08:00] f0_rank0_db0_wrdq3_dly:404
+[2026-11-05T19:27:57.469-08:00] f0_rank0_db0_wrdq4_dly:404
+[2026-11-05T19:27:57.469-08:00] f0_rank0_db0_wrdq5_dly:404
+[2026-11-05T19:27:57.469-08:00] f0_rank0_db0_wrdq6_dly:412
+[2026-11-05T19:27:57.485-08:00] f0_rank0_db0_wrdq7_dly:404
+[2026-11-05T19:27:57.485-08:00] f0_rank0_db0_wrdq8_dly:400
+[2026-11-05T19:27:57.485-08:00] f0_rank0_db1_wrdqs_dly: cyc_lat=f, slv_dly=1e2
+[2026-11-05T19:27:57.485-08:00] f0_rank0_db1_gt_dly: cyc_lat=6, slv_dly=f4
+[2026-11-05T19:27:57.485-08:00] f0_rank0_db1_rdlvl_dly: dq0_dly_enc=0, dq0_rddqs_r_dly=8c, dq0_rddqs_f_dly=82
+[2026-11-05T19:27:57.501-08:00] f0_rank0_db1_rdlvl_dly: dq1_dly_enc=0, dq1_rddqs_r_dly=96, dq1_rddqs_f_dly=96
+[2026-11-05T19:27:57.501-08:00] f0_rank0_db1_rdlvl_dly: dq2_dly_enc=0, dq2_rddqs_r_dly=7d, dq2_rddqs_f_dly=82
+[2026-11-05T19:27:57.517-08:00] f0_rank0_db1_rdlvl_dly: dq3_dly_enc=0, dq3_rddqs_r_dly=8c, dq3_rddqs_f_dly=87
+[2026-11-05T19:27:57.517-08:00] f0_rank0_db1_rdlvl_dly: dq4_dly_enc=0, dq4_rddqs_r_dly=87, dq4_rddqs_f_dly=82
+[2026-11-05T19:27:57.517-08:00] f0_rank0_db1_rdlvl_dly: dq5_dly_enc=0, dq5_rddqs_r_dly=8c, dq5_rddqs_f_dly=96
+[2026-11-05T19:27:57.533-08:00] f0_rank0_db1_rdlvl_dly: dq6_dly_enc=0, dq6_rddqs_r_dly=82, dq6_rddqs_f_dly=87
+[2026-11-05T19:27:57.533-08:00] f0_rank0_db1_rdlvl_dly: dq7_dly_enc=0, dq7_rddqs_r_dly=87, dq7_rddqs_f_dly=87
+[2026-11-05T19:27:57.549-08:00] f0_rank0_db1_rdlvl_dly: dq8_dly_enc=0, dq8_rddqs_r_dly=9b, dq8_rddqs_f_dly=a0
+[2026-11-05T19:27:57.549-08:00] f0_rank0_db1_wrdq0_dly:3fc
+[2026-11-05T19:27:57.549-08:00] f0_rank0_db1_wrdq1_dly:3ec
+[2026-11-05T19:27:57.565-08:00] f0_rank0_db1_wrdq2_dly:3fa
+[2026-11-05T19:27:57.565-08:00] f0_rank0_db1_wrdq3_dly:3f6
+[2026-11-05T19:27:57.565-08:00] f0_rank0_db1_wrdq4_dly:3e6
+[2026-11-05T19:27:57.565-08:00] f0_rank0_db1_wrdq5_dly:3e6
+[2026-11-05T19:27:57.565-08:00] f0_rank0_db1_wrdq6_dly:400
+[2026-11-05T19:27:57.565-08:00] f0_rank0_db1_wrdq7_dly:404
+[2026-11-05T19:27:57.565-08:00] f0_rank0_db1_wrdq8_dly:3ea
+[2026-11-05T19:27:57.581-08:00] f0_rank1_db0_wrdqs_dly: cyc_lat=0, slv_dly=2
+[2026-11-05T19:27:57.581-08:00] f0_rank1_db0_gt_dly: cyc_lat=6, slv_dly=ea
+[2026-11-05T19:27:57.581-08:00] f0_rank1_db0_rdlvl_dly: dq0_dly_enc=0, dq0_rddqs_r_dly=8c, dq0_rddqs_f_dly=91
+[2026-11-05T19:27:57.581-08:00] f0_rank1_db0_rdlvl_dly: dq1_dly_enc=0, dq1_rddqs_r_dly=9b, dq1_rddqs_f_dly=a0
+[2026-11-05T19:27:57.597-08:00] f0_rank1_db0_rdlvl_dly: dq2_dly_enc=0, dq2_rddqs_r_dly=87, dq2_rddqs_f_dly=96
+[2026-11-05T19:27:57.597-08:00] f0_rank1_db0_rdlvl_dly: dq3_dly_enc=0, dq3_rddqs_r_dly=91, dq3_rddqs_f_dly=91
+[2026-11-05T19:27:57.613-08:00] f0_rank1_db0_rdlvl_dly: dq4_dly_enc=0, dq4_rddqs_r_dly=82, dq4_rddqs_f_dly=a0
+[2026-11-05T19:27:57.613-08:00] f0_rank1_db0_rdlvl_dly: dq5_dly_enc=0, dq5_rddqs_r_dly=96, dq5_rddqs_f_dly=a5
+[2026-11-05T19:27:57.629-08:00] f0_rank1_db0_rdlvl_dly: dq6_dly_enc=0, dq6_rddqs_r_dly=8c, dq6_rddqs_f_dly=a0
+[2026-11-05T19:27:57.629-08:00] f0_rank1_db0_rdlvl_dly: dq7_dly_enc=0, dq7_rddqs_r_dly=91, dq7_rddqs_f_dly=a0
+[2026-11-05T19:27:57.629-08:00] f0_rank1_db0_rdlvl_dly: dq8_dly_enc=0, dq8_rddqs_r_dly=91, dq8_rddqs_f_dly=a5
+[2026-11-05T19:27:57.645-08:00] f0_rank1_db0_wrdq0_dly:402
+[2026-11-05T19:27:57.645-08:00] f0_rank1_db0_wrdq1_dly:3fa
+[2026-11-05T19:27:57.645-08:00] f0_rank1_db0_wrdq2_dly:408
+[2026-11-05T19:27:57.645-08:00] f0_rank1_db0_wrdq3_dly:402
+[2026-11-05T19:27:57.661-08:00] f0_rank1_db0_wrdq4_dly:404
+[2026-11-05T19:27:57.661-08:00] f0_rank1_db0_wrdq5_dly:402
+[2026-11-05T19:27:57.661-08:00] f0_rank1_db0_wrdq6_dly:408
+[2026-11-05T19:27:57.661-08:00] f0_rank1_db0_wrdq7_dly:402
+[2026-11-05T19:27:57.661-08:00] f0_rank1_db0_wrdq8_dly:3f8
+[2026-11-05T19:27:57.661-08:00] f0_rank1_db1_wrdqs_dly: cyc_lat=f, slv_dly=1dc
+[2026-11-05T19:27:57.677-08:00] f0_rank1_db1_gt_dly: cyc_lat=6, slv_dly=f6
+[2026-11-05T19:27:57.677-08:00] f0_rank1_db1_rdlvl_dly: dq0_dly_enc=0, dq0_rddqs_r_dly=8c, dq0_rddqs_f_dly=82
+[2026-11-05T19:27:57.677-08:00] f0_rank1_db1_rdlvl_dly: dq1_dly_enc=0, dq1_rddqs_r_dly=9b, dq1_rddqs_f_dly=9b
+[2026-11-05T19:27:57.693-08:00] f0_rank1_db1_rdlvl_dly: dq2_dly_enc=0, dq2_rddqs_r_dly=78, dq2_rddqs_f_dly=82
+[2026-11-05T19:27:57.693-08:00] f0_rank1_db1_rdlvl_dly: dq3_dly_enc=0, dq3_rddqs_r_dly=96, dq3_rddqs_f_dly=87
+[2026-11-05T19:27:57.709-08:00] f0_rank1_db1_rdlvl_dly: dq4_dly_enc=0, dq4_rddqs_r_dly=87, dq4_rddqs_f_dly=87
+[2026-11-05T19:27:57.709-08:00] f0_rank1_db1_rdlvl_dly: dq5_dly_enc=0, dq5_rddqs_r_dly=8c, dq5_rddqs_f_dly=96
+[2026-11-05T19:27:57.709-08:00] f0_rank1_db1_rdlvl_dly: dq6_dly_enc=0, dq6_rddqs_r_dly=82, dq6_rddqs_f_dly=82
+[2026-11-05T19:27:57.725-08:00] f0_rank1_db1_rdlvl_dly: dq7_dly_enc=0, dq7_rddqs_r_dly=8c, dq7_rddqs_f_dly=87
+[2026-11-05T19:27:57.725-08:00] f0_rank1_db1_rdlvl_dly: dq8_dly_enc=0, dq8_rddqs_r_dly=a0, dq8_rddqs_f_dly=a0
+[2026-11-05T19:27:57.741-08:00] f0_rank1_db1_wrdq0_dly:3f4
+[2026-11-05T19:27:57.741-08:00] f0_rank1_db1_wrdq1_dly:3ea
+[2026-11-05T19:27:57.741-08:00] f0_rank1_db1_wrdq2_dly:3f6
+[2026-11-05T19:27:57.741-08:00] f0_rank1_db1_wrdq3_dly:3ea
+[2026-11-05T19:27:57.741-08:00] f0_rank1_db1_wrdq4_dly:3e8
+[2026-11-05T19:27:57.741-08:00] f0_rank1_db1_wrdq5_dly:3e8
+[2026-11-05T19:27:57.757-08:00] f0_rank1_db1_wrdq6_dly:400
+[2026-11-05T19:27:57.757-08:00] f0_rank1_db1_wrdq7_dly:402
+[2026-11-05T19:27:57.757-08:00] f0_rank1_db1_wrdq8_dly:3e8
+[2026-11-05T19:27:57.757-08:00] 
+[2026-11-05T19:27:57.757-08:00] /*****trained obs dly:*****/
+[2026-11-05T19:27:57.757-08:00] ca[0] obs: le_dly=20a, te_dly=3f2
+[2026-11-05T19:27:57.757-08:00] ca[1] obs: le_dly=20a, te_dly=3ee
+[2026-11-05T19:27:57.773-08:00] ca[2] obs: le_dly=20e, te_dly=3ea
+[2026-11-05T19:27:57.773-08:00] ca[3] obs: le_dly=21e, te_dly=3ea
+[2026-11-05T19:27:57.773-08:00] ca[4] obs: le_dly=20e, te_dly=3ea
+[2026-11-05T19:27:57.773-08:00] ca[5] obs: le_dly=212, te_dly=3ee
+[2026-11-05T19:27:57.773-08:00] cs    obs: le_dly=1f8, le_dly=3e9
+[2026-11-05T19:27:57.789-08:00] db0_rdlvl_obs_dq0_dqs_rise_dly: le_dly= 1e, te_dly= fa, win_size= dc
+[2026-11-05T19:27:57.789-08:00] db0_rdlvl_obs_dq0_dqs_fall_dly: le_dly= 28, te_dly= fa, win_size= d2
+[2026-11-05T19:27:57.789-08:00] db0_rdlvl_obs_dq1_dqs_rise_dly: le_dly= 28, te_dly=10e, win_size= e6
+[2026-11-05T19:27:57.805-08:00] db0_rdlvl_obs_dq1_dqs_fall_dly: le_dly= 32, te_dly=10e, win_size= dc
+[2026-11-05T19:27:57.805-08:00] db0_rdlvl_obs_dq2_dqs_rise_dly: le_dly= 14, te_dly= fa, win_size= e6
+[2026-11-05T19:27:57.805-08:00] db0_rdlvl_obs_dq2_dqs_fall_dly: le_dly= 32, te_dly= fa, win_size= c8
+[2026-11-05T19:27:57.821-08:00] db0_rdlvl_obs_dq3_dqs_rise_dly: le_dly= 1e, te_dly=104, win_size= e6
+[2026-11-05T19:27:57.821-08:00] db0_rdlvl_obs_dq3_dqs_fall_dly: le_dly= 1e, te_dly=104, win_size= e6
+[2026-11-05T19:27:57.837-08:00] db0_rdlvl_obs_dq4_dqs_rise_dly: le_dly= 14, te_dly= f0, win_size= dc
+[2026-11-05T19:27:57.837-08:00] db0_rdlvl_obs_dq4_dqs_fall_dly: le_dly= 32, te_dly=10e, win_size= dc
+[2026-11-05T19:27:57.837-08:00] db0_rdlvl_obs_dq5_dqs_rise_dly: le_dly= 32, te_dly= fa, win_size= c8
+[2026-11-05T19:27:57.853-08:00] db0_rdlvl_obs_dq5_dqs_fall_dly: le_dly= 46, te_dly=104, win_size= be
+[2026-11-05T19:27:57.853-08:00] db0_rdlvl_obs_dq6_dqs_rise_dly: le_dly= 1e, te_dly= fa, win_size= dc
+[2026-11-05T19:27:57.853-08:00] db0_rdlvl_obs_dq6_dqs_fall_dly: le_dly= 3c, te_dly=104, win_size= c8
+[2026-11-05T19:27:57.869-08:00] db0_rdlvl_obs_dq7_dqs_rise_dly: le_dly= 1e, te_dly=104, win_size= e6
+[2026-11-05T19:27:57.869-08:00] db0_rdlvl_obs_dq7_dqs_fall_dly: le_dly= 32, te_dly=10e, win_size= dc
+[2026-11-05T19:27:57.885-08:00] db0_rdlvl_obs_dq8_dqs_rise_dly: le_dly= 1e, te_dly=104, win_size= e6
+[2026-11-05T19:27:57.885-08:00] db0_rdlvl_obs_dq8_dqs_fall_dly: le_dly= 3c, te_dly=10e, win_size= d2
+[2026-11-05T19:27:57.885-08:00] db0_wdqlvl_obs_dq0_dly: le_dly=3ac, te_dly=458, win_size= ac
+[2026-11-05T19:27:57.901-08:00] db0_wdqlvl_obs_dq1_dly: le_dly=3a0, te_dly=454, win_size= b4
+[2026-11-05T19:27:57.901-08:00] db0_wdqlvl_obs_dq2_dly: le_dly=3bc, te_dly=454, win_size= 98
+[2026-11-05T19:27:57.901-08:00] db0_wdqlvl_obs_dq3_dly: le_dly=3b4, te_dly=450, win_size= 9c
+[2026-11-05T19:27:57.917-08:00] db0_wdqlvl_obs_dq4_dly: le_dly=3b4, te_dly=454, win_size= a0
+[2026-11-05T19:27:57.917-08:00] db0_wdqlvl_obs_dq5_dly: le_dly=3b4, te_dly=450, win_size= 9c
+[2026-11-05T19:27:57.917-08:00] db0_wdqlvl_obs_dq6_dly: le_dly=3b4, te_dly=45c, win_size= a8
+[2026-11-05T19:27:57.933-08:00] db0_wdqlvl_obs_dq7_dly: le_dly=3b0, te_dly=454, win_size= a4
+[2026-11-05T19:27:57.933-08:00] db0_wdqlvl_obs_dq8_dly: le_dly=3a0, te_dly=450, win_size= b0
+[2026-11-05T19:27:57.933-08:00] db1_rdlvl_obs_dq0_dqs_rise_dly: le_dly= 1e, te_dly= fa, win_size= dc
+[2026-11-05T19:27:57.949-08:00] db1_rdlvl_obs_dq0_dqs_fall_dly: le_dly= 1e, te_dly= e6, win_size= c8
+[2026-11-05T19:27:57.949-08:00] db1_rdlvl_obs_dq1_dqs_rise_dly: le_dly= 32, te_dly=104, win_size= d2
+[2026-11-05T19:27:57.965-08:00] db1_rdlvl_obs_dq1_dqs_fall_dly: le_dly= 28, te_dly=10e, win_size= e6
+[2026-11-05T19:27:57.965-08:00] db1_rdlvl_obs_dq2_dqs_rise_dly: le_dly=  a, te_dly= e6, win_size= dc
+[2026-11-05T19:27:57.965-08:00] db1_rdlvl_obs_dq2_dqs_fall_dly: le_dly= 14, te_dly= f0, win_size= dc
+[2026-11-05T19:27:57.981-08:00] db1_rdlvl_obs_dq3_dqs_rise_dly: le_dly= 28, te_dly=104, win_size= dc
+[2026-11-05T19:27:57.981-08:00] db1_rdlvl_obs_dq3_dqs_fall_dly: le_dly= 14, te_dly= fa, win_size= e6
+[2026-11-05T19:27:57.981-08:00] db1_rdlvl_obs_dq4_dqs_rise_dly: le_dly= 1e, te_dly= f0, win_size= d2
+[2026-11-05T19:27:57.997-08:00] db1_rdlvl_obs_dq4_dqs_fall_dly: le_dly= 14, te_dly= fa, win_size= e6
+[2026-11-05T19:27:57.997-08:00] db1_rdlvl_obs_dq5_dqs_rise_dly: le_dly= 1e, te_dly= fa, win_size= dc
+[2026-11-05T19:27:58.013-08:00] db1_rdlvl_obs_dq5_dqs_fall_dly: le_dly= 28, te_dly=104, win_size= dc
+[2026-11-05T19:27:58.013-08:00] db1_rdlvl_obs_dq6_dqs_rise_dly: le_dly= 1e, te_dly= e6, win_size= c8
+[2026-11-05T19:27:58.013-08:00] db1_rdlvl_obs_dq6_dqs_fall_dly: le_dly= 1e, te_dly= e6, win_size= c8
+[2026-11-05T19:27:58.029-08:00] db1_rdlvl_obs_dq7_dqs_rise_dly: le_dly= 1e, te_dly= fa, win_size= dc
+[2026-11-05T19:27:58.029-08:00] db1_rdlvl_obs_dq7_dqs_fall_dly: le_dly= 1e, te_dly= f0, win_size= d2
+[2026-11-05T19:27:58.029-08:00] db1_rdlvl_obs_dq8_dqs_rise_dly: le_dly= 32, te_dly=10e, win_size= dc
+[2026-11-05T19:27:58.045-08:00] db1_rdlvl_obs_dq8_dqs_fall_dly: le_dly= 32, te_dly=10e, win_size= dc
+[2026-11-05T19:27:58.045-08:00] db1_wdqlvl_obs_dq0_dly: le_dly=39c, te_dly=44c, win_size= b0
+[2026-11-05T19:27:58.061-08:00] db1_wdqlvl_obs_dq1_dly: le_dly=394, te_dly=440, win_size= ac
+[2026-11-05T19:27:58.061-08:00] db1_wdqlvl_obs_dq2_dly: le_dly=3a0, te_dly=44c, win_size= ac
+[2026-11-05T19:27:58.061-08:00] db1_wdqlvl_obs_dq3_dly: le_dly=394, te_dly=440, win_size= ac
+[2026-11-05T19:27:58.077-08:00] db1_wdqlvl_obs_dq4_dly: le_dly=394, te_dly=43c, win_size= a8
+[2026-11-05T19:27:58.077-08:00] db1_wdqlvl_obs_dq5_dly: le_dly=394, te_dly=43c, win_size= a8
+[2026-11-05T19:27:58.077-08:00] db1_wdqlvl_obs_dq6_dly: le_dly=3a4, te_dly=45c, win_size= b8
+[2026-11-05T19:27:58.093-08:00] db1_wdqlvl_obs_dq7_dly: le_dly=3a0, te_dly=464, win_size= c4
+[2026-11-05T19:27:58.093-08:00] db1_wdqlvl_obs_dq8_dly: le_dly=390, te_dly=440, win_size= b0
+[2026-11-05T19:27:58.093-08:00] 
+[2026-11-05T19:27:58.093-08:00] /*****training status:*****/
+[2026-11-05T19:27:58.093-08:00] db0_mstr_obs: byp_mode=0, half_clk_mode=0, dly_enc_avg=0x9b
+[2026-11-05T19:27:58.109-08:00] db1_mstr_obs: byp_mode=0, half_clk_mode=0, dly_enc_avg=0x9f
+[2026-11-05T19:27:58.109-08:00] cbt_status:0 (r0_grp0_cslvl_err=0, r0_grp0_calvl_err=0)
+[2026-11-05T19:27:58.109-08:00] cbt_status:0 (r1_grp0_cslvl_err=0, r1_grp0_calvl_err=0)
+[2026-11-05T19:27:58.125-08:00] db0_lvl_status=0 (r0_wrlvl_err=0, r0_gtlvl_err=0, r0_rdlvl_err=0, r0_wdqlvl_err=0)
+[2026-11-05T19:27:58.125-08:00] db0_lvl_status=0 (r1_wrlvl_err=0, r1_gtlvl_err=0, r1_rdlvl_err=0, r1_wdqlvl_err=0)
+[2026-11-05T19:27:58.141-08:00] db1_lvl_status=0 (r0_wrlvl_err=0, r0_gtlvl_err=0, r0_rdlvl_err=0, r0_wdqlvl_err=0)
+[2026-11-05T19:27:58.141-08:00] db1_lvl_status=0 (r1_wrlvl_err=0, r1_gtlvl_err=0, r1_rdlvl_err=0, r1_wdqlvl_err=0)
+[2026-11-05T19:27:58.157-08:00] idt_lvl_status:0 (r0_wrlvl_err=0, r0_gtlvl_err=0, r0_rdlvl_err=0, r0_wdqlvl_err=0, r0_calvl_err=0)
+[2026-11-05T19:27:58.157-08:00] idt_lvl_status:0 (r1_wrlvl_err=0, r1_gtlvl_err=0, r1_rdlvl_err=0, r1_wdqlvl_err=0, r1_calvl_err=0)
+[2026-11-05T19:27:58.173-08:00] ================================
+[2026-11-05T19:27:58.173-08:00] DDR PHY training is succeeded!!!
+[2026-11-05T19:27:58.173-08:00] PLL freq:1400MHZ, active rank:3
+[2026-11-05T19:27:58.173-08:00] ================================
+[2026-11-05T19:27:58.173-08:00] phy_init_vref=0x4040, wr_ensclie=0xc, rd_enslice=0x4, rd_tsel_en=1, pvt_code=0x403
+[2026-11-05T19:27:58.189-08:00] trained db0_vref=0x3232, trained db1_vref=0x3232
+[2026-11-05T19:27:58.189-08:00] ca_odt=0x0, r0_ca_vref(phy reg)=0x71, r0_MR12=0x71, r1_ca_vref(phy reg)=0x71, r1_MR12=0x71
+[2026-11-05T19:27:58.205-08:00] dq_odt=0x3, r0_dq_vref(phy reg)=0x2a, r0_MR14=0x2a, r1_dq_vref(phy reg)=0x2f, r1_MR14=0x2f
+[2026-11-05T19:27:58.221-08:00] dis_auto_ctrlupd=0, phymstr_en=1, srf_en=1, powerdown_en=1, sr_powerdown_en=1
+[2026-11-05T19:27:58.237-08:00] HS_SDIO0 CR=0x7460a0e8, power=3
+[2026-11-05T19:27:58.253-08:00] HS_SDIO0 eMMC board init done (8-bit SDR, VCCQ=3.3V)
+[2026-11-05T19:27:58.253-08:00] config done ok usb top
+[2026-11-05T19:27:58.845-08:00] 
+[2026-11-05T19:27:58.845-08:00] OpenSBI v1.3
+[2026-11-05T19:27:58.845-08:00] Build time: 2026-03-03 22:43:28 -0800
+[2026-11-05T19:27:58.845-08:00] Build compiler: gcc version 14.2.1 20240816 (g553a166de)
+[2026-11-05T19:27:58.845-08:00]    ____                    _____ ____ _____
+[2026-11-05T19:27:58.861-08:00]   / __ \                  / ____|  _ \_   _|
+[2026-11-05T19:27:58.861-08:00]  | |  | |_ __   ___ _ __ | (___ | |_) || |
+[2026-11-05T19:27:58.861-08:00]  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+[2026-11-05T19:27:58.861-08:00]  | |__| | |_) |  __/ | | |____) | |_) || |_
+[2026-11-05T19:27:58.877-08:00]   \____/| .__/ \___|_| |_|_____/|___\x00/_____|
+[2026-11-05T19:27:58.877-08:00]         | |
+[2026-11-05T19:27:58.877-08:00]         |_|
+[2026-11-05T19:27:58.877-08:00] 
+[2026-11-05T19:27:58.925-08:00] Platform Name             : nuclei,p0soc
+[2026-11-05T19:27:58.925-08:00] Platform Features         : medeleg
+[2026-11-05T19:27:58.925-08:00] Platform HART Count       : 8
+[2026-11-05T19:27:58.925-08:00] Platform IPI Device       : aclint-mswi
+[2026-11-05T19:27:58.925-08:00] Platform Timer Device     : aclint-mtimer @ 398000000Hz
+[2026-11-05T19:27:58.941-08:00] Platform Console Device   : nuclei_uart
+[2026-11-05T19:27:58.941-08:00] Platform HSM Device       : ---
+[2026-11-05T19:27:58.941-08:00] Platform PMU Device       : ---
+[2026-11-05T19:27:58.941-08:00] Platform Reboot Device    : nuclei_reset
+[2026-11-05T19:27:58.941-08:00] Platform Shutdown Device  : nuclei_reset
+[2026-11-05T19:27:58.957-08:00] Platform Suspend Device   : ---
+[2026-11-05T19:27:58.957-08:00] Platform CPPC Device      : ---
+[2026-11-05T19:27:58.957-08:00] Firmware Base             : 0x0
+[2026-11-05T19:27:58.957-08:00] Firmware Size             : 396 KB
+[2026-11-05T19:27:58.957-08:00] Firmware RW Offset        : 0x40000
+[2026-11-05T19:27:58.973-08:00] Firmware RW Size          : 140 KB
+[2026-11-05T19:27:58.973-08:00] Firmware Heap Offset      : 0x57000
+[2026-11-05T19:27:58.973-08:00] Firmware Heap Size        : 48 KB (total), 3 KB (reserved), 9 KB (used), 35 KB (free)
+[2026-11-05T19:27:58.973-08:00] Firmware Scratch Size     : 4096 B (total), 760 B (used), 3336 B (free)
+[2026-11-05T19:27:58.989-08:00] Runtime SBI Version       : 1.0
+[2026-11-05T19:27:58.989-08:00] 
+[2026-11-05T19:27:58.989-08:00] Domain0 Name              : root
+[2026-11-05T19:27:58.989-08:00] Domain0 Boot HART         : 1
+[2026-11-05T19:27:58.989-08:00] Domain0 HARTs             : 0*,1*,2*,3*,4*,5*,6*,7*
+[2026-11-05T19:27:59.005-08:00] Domain0 Region00          : 0x0000000f90030000-0x0000000f9003ffff M: (I,R,W) S/U: ()
+[2026-11-05T19:27:59.005-08:00] Domain0 Region01          : 0x0000000000000000-0x000000000003ffff M: (R,X) S/U: ()
+[2026-11-05T19:27:59.005-08:00] Domain0 Region02          : 0x0000000000040000-0x000000000007ffff M: (R,W) S/U: ()
+[2026-11-05T19:27:59.021-08:00] Domain0 Region03          : 0x0000000000000000-0xffffffffffffffff M: (R,W,X) S/U: (R,W,X)
+[2026-11-05T19:27:59.021-08:00] Domain0 Next Address      : 0x0000000000200000
+[2026-11-05T19:27:59.037-08:00] Domain0 Next Arg1         : 0x0000000008000000
+[2026-11-05T19:27:59.037-08:00] Domain0 Next Mode         : S-mode
+[2026-11-05T19:27:59.037-08:00] Domain0 SysReset          : yes
+[2026-11-05T19:27:59.037-08:00] Domain0 SysSuspend        : yes
+[2026-11-05T19:27:59.037-08:00] 
+[2026-11-05T19:27:59.037-08:00] Boot HART ID              : 1
+[2026-11-05T19:27:59.053-08:00] Boot HART Domain          : root
+[2026-11-05T19:27:59.053-08:00] Boot HART Priv Version    : v1.12
+[2026-11-05T19:27:59.053-08:00] Boot HART Base ISA        : rv64imafdcbpk
+[2026-11-05T19:27:59.053-08:00] Boot HART ISA Extensions  : sscofpmf,time,sstc
+[2026-11-05T19:27:59.053-08:00] Boot HART PMP Count       : 8
+[2026-11-05T19:27:59.053-08:00] Boot HART PMP Granularity : 4096
+[2026-11-05T19:27:59.069-08:00] Boot HART PMP Address Bits: 34
+[2026-11-05T19:27:59.069-08:00] Boot HART MHPM Count      : 4
+[2026-11-05T19:27:59.069-08:00] Boot HART MIDELEG         : 0x0000000000002222
+[2026-11-05T19:27:59.069-08:00] Boot HART MEDELEG         : 0x000000000000b109
+[2026-11-05T19:27:59.085-08:00] 
+[2026-11-05T19:27:59.085-08:00] 
+[2026-11-05T19:27:59.085-08:00] U-Boot 2024.01-00012-gc0a14d778e (Mar 03 2026 - 22:43:19 -0800)
+[2026-11-05T19:27:59.085-08:00] 
+[2026-11-05T19:27:59.085-08:00] CPU:   rv64imafdc_zicbom_svpbmt_sstc_sscofpmf
+[2026-11-05T19:27:59.085-08:00] Model: nuclei,p0soc
+[2026-11-05T19:27:59.101-08:00] DRAM:  2 GiB
+[2026-11-05T19:27:59.101-08:00] Board: Initialized
+[2026-11-05T19:27:59.101-08:00] Core:  24 devices, 11 uclasses, devicetree: board
+[2026-11-05T19:27:59.117-08:00] MMC:   SDIO Version:10400 nuclei_mmc: 0
+[2026-11-05T19:27:59.117-08:00] Loading Environment from nowhere... OK
+[2026-11-05T19:27:59.117-08:00] In:    serial@f9c250000
+[2026-11-05T19:27:59.117-08:00] Out:   serial@f9c250000
+[2026-11-05T19:27:59.117-08:00] Err:   serial@f9c250000
+[2026-11-05T19:27:59.133-08:00] Hit any key to stop autoboot:  5  4  3  2  1  0 
+[2026-11-05T19:28:04.109-08:00] clk_div:1f4-bebc200-61a80
+[2026-11-05T19:28:04.285-08:00] clk_div:1f4-bebc200-61a80
+[2026-11-05T19:28:04.301-08:00] clk_div:4-bebc200-2faf080
+[2026-11-05T19:28:04.301-08:00] switch to partitions #0, OK
+[2026-11-05T19:28:04.301-08:00] mmc0 is current device
+[2026-11-05T19:28:04.301-08:00] Scanning mmc 0:1...
+[2026-11-05T19:28:04.317-08:00] Found U-Boot script /boot.scr
+[2026-11-05T19:28:04.333-08:00] 719 bytes read in 17 ms (41 KiB/s)
+[2026-11-05T19:28:04.333-08:00] ## Executing script at 00200000
+[2026-11-05T19:28:04.333-08:00] Boot images located in .
+[2026-11-05T19:28:04.349-08:00] Loading kernel: ./uImage.lz4
+[2026-11-05T19:28:04.957-08:00] 4223577 bytes read in 610 ms (6.6 MiB/s)
+[2026-11-05T19:28:04.957-08:00] Loading ramdisk: ./uInitrd.lz4
+[2026-11-05T19:28:07.037-08:00] 14856105 bytes read in 2096 ms (6.8 MiB/s)
+[2026-11-05T19:28:07.053-08:00] Loading dtb: ./kernel.dtb
+[2026-11-05T19:28:07.069-08:00] 8621 bytes read in 18 ms (466.8 KiB/s)
+[2026-11-05T19:28:07.069-08:00] Starts booting from SD
+[2026-11-05T19:28:07.069-08:00] ## Booting kernel from Legacy Image at 03000000 ...
+[2026-11-05T19:28:07.069-08:00]    Image Name:   Linux
+[2026-11-05T19:28:07.085-08:00]    Image Type:   RISC-V Linux Kernel Image (lz4 compressed)
+[2026-11-05T19:28:07.085-08:00]    Data Size:    4223513 Bytes = 4 MiB
+[2026-11-05T19:28:07.085-08:00]    Load Address: 00400000
+[2026-11-05T19:28:07.085-08:00]    Entry Point:  00400000
+[2026-11-05T19:28:07.085-08:00]    Verifying Checksum ... OK
+[2026-11-05T19:28:07.197-08:00] ## Loading init Ramdisk from Legacy Image at 08300000 ...
+[2026-11-05T19:28:07.197-08:00]    Image Name:   Initrd
+[2026-11-05T19:28:07.197-08:00]    Image Type:   RISC-V Linux RAMDisk Image (lz4 compressed)
+[2026-11-05T19:28:07.197-08:00]    Data Size:    14856041 Bytes = 14.2 MiB
+[2026-11-05T19:28:07.213-08:00]    Load Address: 00000000
+[2026-11-05T19:28:07.213-08:00]    Entry Point:  00000000
+[2026-11-05T19:28:07.213-08:00]    Verifying Checksum ... OK
+[2026-11-05T19:28:07.565-08:00] ## Flattened Device Tree blob at 08000000
+[2026-11-05T19:28:07.565-08:00]    Booting using the fdt blob at 0x8000000
+[2026-11-05T19:28:07.581-08:00] Working FDT set to 8000000
+[2026-11-05T19:28:07.581-08:00]    Uncompressing Kernel Image
+[2026-11-05T19:28:07.981-08:00]    Using Device Tree in place at 0000000008000000, end 00000000080051ac
+[2026-11-05T19:28:07.997-08:00] Working FDT set to 8000000
+[2026-11-05T19:28:08.013-08:00] 
+[2026-11-05T19:28:08.013-08:00] Starting kernel ...
+[2026-11-05T19:28:08.013-08:00] 
+[2026-11-05T19:28:08.365-08:00] [    0.000000] Linux version 6.6.90-rt54+ ([redacted build host]) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #6 SMP PREEMPT_RT Thu Nov  5 09:57:02 CST 2026
+[2026-11-05T19:28:08.381-08:00] [    0.000000] Machine model: nuclei,p0soc
+[2026-11-05T19:28:08.381-08:00] [    0.000000] SBI specification v1.0 detected
+[2026-11-05T19:28:08.397-08:00] [    0.000000] SBI implementation ID=0x1 Version=0x10003
+[2026-11-05T19:28:08.397-08:00] [    0.000000] SBI TIME extension detected
+[2026-11-05T19:28:08.397-08:00] [    0.000000] SBI IPI extension detected
+[2026-11-05T19:28:08.397-08:00] [    0.000000] SBI RFENCE extension detected
+[2026-11-05T19:28:08.413-08:00] [    0.000000] SBI SRST extension detected
+[2026-11-05T19:28:08.413-08:00] [    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[2026-11-05T19:28:08.413-08:00] [    0.000000] printk: legacy bootconsole [sbi0] enabled
+[2026-11-05T19:28:08.413-08:00] [    0.000000] efi: UEFI not found.
+[2026-11-05T19:28:08.429-08:00] [    0.000000] OF: reserved mem: 0x0000000000000000..0x000000000003ffff (256 KiB) nomap non-reusable mmode_resv0@0
+[2026-11-05T19:28:08.429-08:00] [    0.000000] OF: reserved mem: 0x0000000000040000..0x000000000007ffff (256 KiB) nomap non-reusable mmode_resv1@40000
+[2026-11-05T19:28:08.445-08:00] [    0.000000] OF: reserved mem: 0x000000007e000000..0x000000007e037fff (224 KiB) nomap non-reusable region@7e000000
+[2026-11-05T19:28:08.445-08:00] [    0.000000] OF: reserved mem: 0x000000007e038000..0x000000007e06ffff (224 KiB) nomap non-reusable region@7e038000
+[2026-11-05T19:28:08.461-08:00] [    0.000000] OF: reserved mem: 0x000000007e070000..0x000000007e077fff (32 KiB) nomap non-reusable region@7e070000
+[2026-11-05T19:28:08.477-08:00] [    0.000000] OF: reserved mem: 0x000000007e078000..0x000000007e07ffff (32 KiB) nomap non-reusable region@7e078000
+[2026-11-05T19:28:08.477-08:00] [    0.000000] OF: reserved mem: 0x000000007e080000..0x000000007e0fffff (512 KiB) nomap non-reusable region@7e080000
+[2026-11-05T19:28:08.493-08:00] [    0.000000] OF: reserved mem: 0x000000007e100000..0x000000007e10ffff (64 KiB) nomap non-reusable rpmsg@7e100000
+[2026-11-05T19:28:08.509-08:00] [    0.000000] OF: reserved mem: 0x000000007e110000..0x000000007e1fffff (960 KiB) nomap non-reusable rpmsg_dma@7e110000
+[2026-11-05T19:28:08.509-08:00] [    0.000000] Zone ranges:
+[2026-11-05T19:28:08.509-08:00] [    0.000000]   DMA32    [mem 0x0000000000000000-0x000000007fffffff]
+[2026-11-05T19:28:08.525-08:00] [    0.000000]   Normal   empty
+[2026-11-05T19:28:08.525-08:00] [    0.000000] Movable zone start for each node
+[2026-11-05T19:28:08.525-08:00] [    0.000000] Early memory node ranges
+[2026-11-05T19:28:08.525-08:00] [    0.000000]   node   0: [mem 0x0000000000000000-0x000000000007ffff]
+[2026-11-05T19:28:08.541-08:00] [    0.000000]   node   0: [mem 0x0000000000080000-0x000000007dffffff]
+[2026-11-05T19:28:08.541-08:00] [    0.000000]   node   0: [mem 0x000000007e000000-0x000000007e1fffff]
+[2026-11-05T19:28:08.541-08:00] [    0.000000]   node   0: [mem 0x000000007e200000-0x000000007fffffff]
+[2026-11-05T19:28:08.557-08:00] [    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x000000007fffffff]
+[2026-11-05T19:28:08.557-08:00] [    0.000000] SBI HSM extension detected
+[2026-11-05T19:28:08.573-08:00] [    0.000000] Falling back to deprecated "riscv,isa"
+[2026-11-05T19:28:08.573-08:00] [    0.000000] riscv: base ISA extensions acdfim
+[2026-11-05T19:28:08.573-08:00] [    0.000000] riscv: ELF capabilities acdfim
+[2026-11-05T19:28:08.573-08:00] [    0.000000] percpu: Embedded 17 pages/cpu s31744 r8192 d29696 u69632
+[2026-11-05T19:28:08.589-08:00] [    0.000000] Kernel command line: earlycon=sbi console=ttyNUC0
+[2026-11-05T19:28:08.589-08:00] [    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[2026-11-05T19:28:08.605-08:00] [    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[2026-11-05T19:28:08.605-08:00] [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 517120
+[2026-11-05T19:28:08.605-08:00] [    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[2026-11-05T19:28:08.621-08:00] [    0.000000] Memory: 2031328K/2097152K available (4859K kernel code, 4738K rwdata, 2048K rodata, 2140K init, 329K bss, 65824K reserved, 0K cma-reserved)
+[2026-11-05T19:28:08.637-08:00] [    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[2026-11-05T19:28:08.637-08:00] [    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[2026-11-05T19:28:08.637-08:00] [    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=8.
+[2026-11-05T19:28:08.653-08:00] [    0.000000] rcu: 	RCU priority boosting: priority 1 delay 500 ms.
+[2026-11-05T19:28:08.653-08:00] [    0.000000] rcu: 	RCU_SOFTIRQ processing moved to rcuc kthreads.
+[2026-11-05T19:28:08.653-08:00] [    0.000000] 	No expedited grace period (rcu_normal_after_boot).
+[2026-11-05T19:28:08.669-08:00] [    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[2026-11-05T19:28:08.669-08:00] [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=8
+[2026-11-05T19:28:08.685-08:00] [    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[2026-11-05T19:28:08.685-08:00] [    0.000000] riscv-intc: 64 local interrupts mapped
+[2026-11-05T19:28:08.685-08:00] [    0.000000] plic: interrupt-controller@f94000000: mapped 127 interrupts with 8 handlers for 16 contexts.
+[2026-11-05T19:28:08.701-08:00] [    0.000000] riscv: providing IPIs using SBI IPI extension
+[2026-11-05T19:28:08.701-08:00] [    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[2026-11-05T19:28:08.717-08:00] [    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x5bca7e84f2, max_idle_ns: 440795223084 ns
+[2026-11-05T19:28:08.717-08:00] [    0.000004] sched_clock: 64 bits at 398MHz, resolution 2ns, wraps every 4398046511103ns
+[2026-11-05T19:28:08.733-08:00] [    0.000068] riscv-timer: Timer interrupt in S-mode is available via sstc extension
+[2026-11-05T19:28:08.733-08:00] [    0.000644] Calibrating delay loop (skipped), value calculated using timer frequency.. 796.00 BogoMIPS (lpj=1592000)
+[2026-11-05T19:28:08.749-08:00] [    0.000716] pid_max: default: 32768 minimum: 301
+[2026-11-05T19:28:08.749-08:00] [    0.001567] Mount-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+[2026-11-05T19:28:08.765-08:00] [    0.001665] Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+[2026-11-05T19:28:08.765-08:00] [    0.014372] riscv: ELF compat mode supported
+[2026-11-05T19:28:08.765-08:00] [    0.014455] ASID allocator using 16 bits (65536 entries)
+[2026-11-05T19:28:08.781-08:00] [    0.017237] rcu: Hierarchical SRCU implementation.
+[2026-11-05T19:28:08.781-08:00] [    0.017277] rcu: 	Max phase no-delay instances is 1000.
+[2026-11-05T19:28:08.781-08:00] [    0.420284] EFI services will not be available.
+[2026-11-05T19:28:08.797-08:00] [    0.442774] smp: Bringing up secondary CPUs ...
+[2026-11-05T19:28:09.837-08:00] [    1.487231] CPU2: failed to come online
+[2026-11-05T19:28:10.861-08:00] [    2.517384] CPU3: failed to come online
+[2026-11-05T19:28:11.885-08:00] [    3.547546] CPU4: failed to come online
+[2026-11-05T19:28:12.909-08:00] [    4.577469] CPU5: failed to come online
+[2026-11-05T19:28:13.932-08:00] [    5.607549] CPU6: failed to come online
+[2026-11-05T19:28:14.956-08:00] [    6.637850] CPU7: failed to come online
+[2026-11-05T19:28:14.957-08:00] [    6.638120] smp: Brought up 1 node, 2 CPUs
+[2026-11-05T19:28:14.973-08:00] [    6.646203] devtmpfs: initialized
+[2026-11-05T19:28:14.988-08:00] [    6.668294] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[2026-11-05T19:28:15.005-08:00] [    6.668526] futex hash table entries: 2048 (order: 5, 131072 bytes, linear)
+[2026-11-05T19:28:15.005-08:00] [    6.669727] pinctrl core: initialized pinctrl subsystem
+[2026-11-05T19:28:15.005-08:00] [    6.674647] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[2026-11-05T19:28:15.021-08:00] [    6.678564] DMA: preallocated 256 KiB GFP_KERNEL pool for atomic allocations
+[2026-11-05T19:28:15.021-08:00] [    6.679140] DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[2026-11-05T19:28:15.037-08:00] [    6.707201] cpu1: Ratio of byte access time to unaligned word access is 0.16, unaligned accesses are slow
+[2026-11-05T19:28:15.069-08:00] [    6.744497] cpu0: Ratio of byte access time to unaligned word access is 0.16, unaligned accesses are slow
+[2026-11-05T19:28:15.084-08:00] [    6.769774] pps_core: LinuxPPS API ver. 1 registered
+[2026-11-05T19:28:15.085-08:00] [    6.769822] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[2026-11-05T19:28:15.101-08:00] [    6.769955] PTP clock support registered
+[2026-11-05T19:28:15.101-08:00] [    6.775506] clocksource: Switched to clocksource riscv_clocksource
+[2026-11-05T19:28:15.117-08:00] [    6.789257] NET: Registered PF_INET protocol family
+[2026-11-05T19:28:15.117-08:00] [    6.790288] IP idents hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[2026-11-05T19:28:15.117-08:00] [    6.799106] tcp_listen_portaddr_hash hash table entries: 1024 (order: 3, 40960 bytes, linear)
+[2026-11-05T19:28:15.133-08:00] [    6.799352] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[2026-11-05T19:28:15.133-08:00] [    6.799430] TCP established hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[2026-11-05T19:28:15.149-08:00] [    6.800676] TCP bind hash table entries: 16384 (order: 8, 1310720 bytes, linear)
+[2026-11-05T19:28:15.149-08:00] [    6.811355] TCP: Hash tables configured (established 16384 bind 16384)
+[2026-11-05T19:28:15.165-08:00] [    6.812563] UDP hash table entries: 1024 (order: 4, 98304 bytes, linear)
+[2026-11-05T19:28:15.165-08:00] [    6.813086] UDP-Lite hash table entries: 1024 (order: 4, 98304 bytes, linear)
+[2026-11-05T19:28:15.165-08:00] [    6.814670] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[2026-11-05T19:28:15.181-08:00] [    6.825076] workingset: timestamp_bits=62 max_order=19 bucket_order=0
+[2026-11-05T19:28:15.181-08:00] [    6.829460] Trying to unpack rootfs image as initramfs...
+[2026-11-05T19:28:15.404-08:00] [    7.074316] NET: Registered PF_ALG protocol family
+[2026-11-05T19:28:15.405-08:00] [    7.074655] io scheduler mq-deadline registered
+[2026-11-05T19:28:15.405-08:00] [    7.074701] io scheduler kyber registered
+[2026-11-05T19:28:15.405-08:00] [    7.074856] io scheduler bfq registered
+[2026-11-05T19:28:15.932-08:00] [    7.629708] f9c250000.serial: [redacted] at MMIO 0xf9c250000 (irq = 12, base_baud = 6250000) is a Nuclei UART v0
+[2026-11-05T19:28:15.949-08:00] [    7.637947] printk: legacy console [ttyNUC0] enabled
+[2026-11-05T19:28:15.949-08:00] [    7.638005] printk: legacy bootconsole [sbi0] disabled
+[2026-11-05T19:28:16.044-08:00] [    7.725461] brd: module loaded
+[2026-11-05T19:28:16.108-08:00] [    7.792799] loop: module loaded
+[2026-11-05T19:28:16.796-08:00] [    8.491177] Freeing initrd memory: 14500K
+[2026-11-05T19:28:16.844-08:00] [    8.537557] nuclei-xec f9c210000.xec eth0: using MII interface
+[2026-11-05T19:28:16.845-08:00] [    8.539014] Generic PHY f9c210000.xec-ffffffff:01: attached PHY driver (mii_bus:phy_addr=f9c210000.xec-ffffffff:01, irq=POLL)
+[2026-11-05T19:28:16.861-08:00] [    8.539081] nuclei-xec f9c210000.xec eth0: XEC mac at 0xf9c210000 irq 13
+[2026-11-05T19:28:16.908-08:00] [    8.592090] nuclei-xec f9cdc0000.xec eth1: using GMII interface
+[2026-11-05T19:28:16.909-08:00] [    8.592876] Generic PHY f9cdc0000.xec-ffffffff:00: attached PHY driver (mii_bus:phy_addr=f9cdc0000.xec-ffffffff:00, irq=POLL)
+[2026-11-05T19:28:16.925-08:00] [    8.592935] nuclei-xec f9cdc0000.xec eth1: XEC mac at 0xf9cdc0000 irq 14
+[2026-11-05T19:28:16.940-08:00] [    8.630407] nuclei-emmc f9cda1000.mmc: eMMC v8: batched PIO, 128 KiB requests, DDR52 via DT
+[2026-11-05T19:28:16.972-08:00] [    8.661219] NET: Registered PF_INET6 protocol family
+[2026-11-05T19:28:16.988-08:00] [    8.673674] Segment Routing with IPv6
+[2026-11-05T19:28:16.989-08:00] [    8.673999] In-situ OAM (IOAM) with IPv6
+[2026-11-05T19:28:16.989-08:00] [    8.674379] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[2026-11-05T19:28:16.989-08:00] [    8.682706] NET: Registered PF_PACKET protocol family
+[2026-11-05T19:28:17.005-08:00] [    8.691729] mmc0: host does not support reading read-only switch, assuming write-enable
+[2026-11-05T19:28:17.005-08:00] [    8.695206] mmc0: new high speed SDHC card at address aaaa
+[2026-11-05T19:28:17.020-08:00] [    8.705431] mmcblk0: mmc0:aaaa SD32G 29.7 GiB
+[2026-11-05T19:28:17.052-08:00] [    8.741823] mmc1: new DDR MMC card at address 0001
+[2026-11-05T19:28:17.053-08:00] [    8.750874]  mmcblk0: p1
+[2026-11-05T19:28:17.084-08:00] [    8.772544] mmcblk1: mmc1:0001 CJUD4R 59.6 GiB
+[2026-11-05T19:28:17.100-08:00] [    8.795283]  mmcblk1: p1
+[2026-11-05T19:28:17.101-08:00] [    8.801824] mmcblk1boot0: mmc1:0001 CJUD4R 31.9 MiB
+[2026-11-05T19:28:17.132-08:00] [    8.830703] mmcblk1boot1: mmc1:0001 CJUD4R 31.9 MiB
+[2026-11-05T19:28:17.164-08:00] [    8.867006] clk: Disabling unused clocks
+[2026-11-05T19:28:17.181-08:00] [    8.875197] Freeing unused kernel image (initmem) memory: 2140K
+[2026-11-05T19:28:17.181-08:00] [    8.875393] Run /init as init process
+[2026-11-05T19:28:17.516-08:00] Saving 256 bits of non-creditable seed for next boot
+[2026-11-05T19:28:17.564-08:00] Starting syslogd: OK
+[2026-11-05T19:28:17.644-08:00] Starting klogd: OK
+[2026-11-05T19:28:17.724-08:00] Running sysctl: OK
+[2026-11-05T19:28:17.948-08:00] Configure eth0!
+[2026-11-05T19:28:17.949-08:00] Configure eth1!
+[2026-11-05T19:28:17.980-08:00] udhcpc: started, v1.36.1
+[2026-11-05T19:28:17.996-08:00] udhcpc: started, v1.36.1
+[2026-11-05T19:28:18.028-08:00] Starting mdev... OK
+[2026-11-05T19:28:18.460-08:00] udhcpc: broadcasting discover
+[2026-11-05T19:28:18.524-08:00] udhcpc: broadcasting discover
+[2026-11-05T19:28:21.484-08:00] udhcpc: broadcasting discover
+[2026-11-05T19:28:21.548-08:00] udhcpc: broadcasting discover
+[2026-11-05T19:28:21.900-08:00] modprobe: can't change directory to '/lib/modules': No such file or directory
+[2026-11-05T19:28:21.948-08:00] Starting haveged: haveged: command socket is listening at fd 3
+[2026-11-05T19:28:22.044-08:00] OK
+[2026-11-05T19:28:22.092-08:00] Starting crond: OK
+[2026-11-05T19:28:23.020-08:00] [   14.737586] random: crng init done
+[2026-11-05T19:28:23.021-08:00] ssh-keygen: generating new host keys: RSA udhcpc: broadcasting discover
+[2026-11-05T19:28:24.604-08:00] udhcpc: broadcasting discover
+[2026-11-05T19:28:24.844-08:00] ECDSA ED25519 
+[2026-11-05T19:28:24.924-08:00] Starting sshd: OK
+[2026-11-05T19:28:25.372-08:00] 
+[2026-11-05T19:28:25.373-08:00] Welcome to Nuclei System Technology
+[2026-11-05T19:28:25.373-08:00] nucleisys login: 
