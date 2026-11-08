@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RV Panda 智能体架构</title>
+<style>
+:root{--bg:#fff;--ink:#1a1d20;--ink2:#4b5862;--muted:#66717b;--line:#c9d3d8;--card:#f4f7f8;--surf:#fff;
+--acc:#00a3a6;--accs:#dff3f3;--plan:#5b4fcf;--plans:#ecebfb;--amb:#c98500;--ambs:#fbf1dc;--ok:#0e8a5f;--oks:#e1f3ea;--warn:#d03b3b;--warns:#fbe9e9;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1316;--ink:#e6eaed;--ink2:#b3bec6;--muted:#95a1aa;--line:#3a4850;--card:#182025;--surf:#141b20;
+--acc:#2cc7c9;--accs:#12302f;--plan:#9085e9;--plans:#252239;--amb:#e0a12a;--ambs:#2b2312;--ok:#2fb380;--oks:#15291f;--warn:#e66767;--warns:#2e1a1a;color-scheme:dark}}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif;line-height:1.55}
+main{max-width:1240px;margin:0 auto;padding:28px 16px 40px}
+h1{font-size:1.5rem}h2{font-size:1.15rem;margin:30px 0 6px}
+p.lead{color:var(--ink2);margin:6px 0 14px}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--ink);font-size:13px;font-family:inherit}
+.t{font-weight:700;font-size:14px}.s{fill:var(--muted);font-size:11.5px}.m{font-family:ui-monospace,Menlo,monospace;font-size:11.5px}
+.box{fill:var(--surf);stroke:var(--line);stroke-width:1.2}
+.grp{fill:var(--card);stroke:var(--line);stroke-width:1.2}
+.acc{fill:var(--accs);stroke:var(--acc)}.plan{fill:var(--plans);stroke:var(--plan)}.amb{fill:var(--ambs);stroke:var(--amb)}.ok{fill:var(--oks);stroke:var(--ok)}.warn{fill:var(--warns);stroke:var(--warn)}
+.ln{stroke:var(--ink2);stroke-width:1.4;fill:none}.ln.a{stroke:var(--acc)}.ln.p{stroke:var(--plan)}.ln.o{stroke:var(--amb)}.ln.g{stroke:var(--ok)}.ln.w{stroke:var(--warn)}.dash{stroke-dasharray:5 4}
+.lbl{fill:var(--ink2);font-size:11.5px}
+ol{padding-left:1.3em;color:var(--ink2)}li{margin:3px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.85rem;color:var(--ink2);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+</style>
+</head>
+<body><main>
+<h1>RV 板上的智能体如何控制 MuJoCo 里的 Panda</h1>
+<p class="lead">电脑只负责物理仿真、渲染和显示；感知、规划（调用 DeepSeek）、运动学和实时控制都在 RV 板上完成。两者之间只有一根网线（J1 / eth0）。</p>
+
+<h2>一、软硬件架构</h2>
+<svg viewBox="0 0 1200 790" role="img" aria-label="软硬件架构图">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="context-stroke"/></marker></defs>
+<rect x="470" y="10" width="260" height="62" rx="12" class="box plan"/>
+<text x="600" y="36" text-anchor="middle" class="t">DeepSeek API（云端）</text>
+<text x="600" y="56" text-anchor="middle" class="s">模型 deepseek-flash · 工具调用 · 流式输出</text>
+<!-- PC -->
+<rect x="10" y="100" width="400" height="680" rx="14" class="grp"/>
+<text x="30" y="128" class="t">电脑（Windows）</text>
+<text x="30" y="146" class="s">x86 · Python · MuJoCo 4.0 · Menagerie Franka Panda</text>
+<rect x="30" y="162" width="360" height="104" rx="10" class="box amb"/>
+<text x="46" y="186" class="t">物理进程 sim_server.py（HIGH 优先级）</text>
+<text x="46" y="206" class="s">MuJoCo 步长 2 ms（500 Hz）· Panda + 4 块积木 + 2 托盘</text>
+<text x="46" y="224" class="s">关节位置伺服 · 100 ms 收不到指令就保持（看门狗）</text>
+<text x="46" y="242" class="s">发送状态包 250 Hz，应用板子回的关节目标</text>
+<rect x="30" y="278" width="360" height="104" rx="10" class="box acc"/>
+<text x="46" y="302" class="t">渲染进程（独立进程，不拖慢物理）</text>
+<text x="46" y="322" class="s">相机：top 俯视 · front 正面 · side 侧面 · wrist 腕部</text>
+<text x="46" y="340" class="s">按需出图给板子（感知用）· 渲染目标图片 goal_image</text>
+<text x="46" y="358" class="s">MJPEG 推流 127.0.0.1:8090 → 浏览器</text>
+<rect x="30" y="420" width="360" height="86" rx="10" class="box"/>
+<text x="46" y="444" class="t">浏览器：工作台</text>
+<text x="46" y="464" class="s">页面、事件、主板数据来自 RV 板 :8080（SSE）</text>
+<text x="46" y="482" class="s">四个视角画面直接来自本机 :8090</text>
+<rect x="30" y="520" width="360" height="74" rx="10" class="box plan"/>
+<text x="46" y="544" class="t">Clash（127.0.0.1:7897）+ SSH 客户端</text>
+<text x="46" y="564" class="s">ssh -R：板子的 127.0.0.1:7897 → 电脑的 Clash</text>
+<text x="46" y="582" class="s">不开 Allow LAN，不改防火墙</text>
+<rect x="30" y="608" width="360" height="62" rx="10" class="box"/>
+<text x="46" y="632" class="t">串口工具 serial_console.py</text>
+<text x="46" y="652" class="s">USB-C 调试口 → FT2232 → COM3 · 115200</text>
+<text x="30" y="710" class="s">有线网卡固定 IP 192.168.50.1/24（无网关、无 DNS）</text>
+<text x="30" y="728" class="s">Wi-Fi 网卡照常上网</text>
+<!-- 网线标题 -->
+<text x="525" y="166" text-anchor="middle" class="t">一根网线：J1 / eth0</text>
+<text x="525" y="184" text-anchor="middle" class="s">192.168.50.1 ⇄ 192.168.50.2</text>
+<!-- RV board -->
+<rect x="640" y="100" width="550" height="680" rx="14" class="grp"/>
+<text x="660" y="126" class="t">RV 开发板 · 芯来 UX900 · riscv64 · 2 核 · 2 GB LPDDR4</text>
+<text x="660" y="144" class="s">OpenSBI 1.3 → U-Boot 2024.01 → boot_1106 → Linux 6.6-rt（PREEMPT_RT）</text>
+<!-- CPU1 -->
+<rect x="660" y="162" width="168" height="160" rx="12" class="box ok"/>
+<text x="674" y="186" class="t">CPU1 · 实时</text>
+<text x="674" y="208" class="t">L1 rt_ctl（C）</text>
+<text x="674" y="228" class="s">SCHED_FIFO 80 · mlockall</text>
+<text x="674" y="246" class="s">收状态包即回指令</text>
+<text x="674" y="264" class="s">五次多项式插补</text>
+<text x="674" y="282" class="s">处理 ≈0.18 ms/包</text>
+<text x="674" y="308" class="m">/tmp/rt_ctl.sock</text>
+<!-- storage -->
+<rect x="660" y="560" width="168" height="200" rx="12" class="box"/>
+<text x="674" y="584" class="t">存储与接口</text>
+<text x="674" y="606" class="s">TF 卡：启动文件</text>
+<text x="674" y="624" class="s">eMMC 59.6 GB：Ubuntu</text>
+<text x="674" y="642" class="s">24.04（gcc、numpy）</text>
+<text x="674" y="660" class="s">/tmp（内存）：日志、图片</text>
+<text x="674" y="682" class="s">J1 eth0 百兆：仿真通信</text>
+<text x="674" y="700" class="s">RJ1 eth1 千兆：EtherCAT</text>
+<text x="674" y="718" class="s">（留给真机）</text>
+<text x="674" y="740" class="s">CAN FD ×2 · RS485 ×4</text>
+<!-- CPU0 -->
+<rect x="844" y="162" width="330" height="430" rx="12" class="box"/>
+<text x="860" y="186" class="t">CPU0 · 普通优先级（eMMC Ubuntu）</text>
+<rect x="860" y="198" width="298" height="74" rx="8" class="box plan"/>
+<text x="874" y="220" class="t">L4 智能体 agent（常驻）</text>
+<text x="874" y="238" class="s">场景文字 → DeepSeek → 计划 + 一个动作</text>
+<text x="874" y="255" class="s">经 127.0.0.1:7897 访问外网</text>
+<rect x="860" y="282" width="298" height="74" rx="8" class="box acc"/>
+<text x="874" y="304" class="t">L3 感知 perception</text>
+<text x="874" y="322" class="s">HSV 颜色分割（C 加速）· 像素→桌面坐标</text>
+<text x="874" y="339" class="s">三视角融合出塔顺序 · 目标图片识别</text>
+<rect x="860" y="366" width="298" height="74" rx="8" class="box amb"/>
+<text x="874" y="388" class="t">L2 技能 + 运动学</text>
+<text x="874" y="406" class="s">IK（C/ctypes，约 18 ms）· 抓 / 放 / 移动</text>
+<text x="874" y="423" class="s">生成轨迹段（终点、时长）</text>
+<rect x="860" y="450" width="298" height="58" rx="8" class="box"/>
+<text x="874" y="472" class="t">L5 工作台 dashboard（:8080）</text>
+<text x="874" y="490" class="s">页面 + SSE 事件流 · 回放 · 不转发视频</text>
+<rect x="860" y="518" width="298" height="58" rx="8" class="box"/>
+<text x="874" y="540" class="t">sysmon 主板监控</text>
+<text x="874" y="558" class="s">每秒：各核 CPU、内存、中断、网络、实时环</text>
+<text x="844" y="618" class="s">工具：pick · stack_on · place_in</text>
+<text x="844" y="636" class="s">　　　place_on_table · home · finish · update_plan</text>
+<text x="844" y="660" class="s">Key：eMMC 上 /root/.config/rv-agent/（600）</text>
+<text x="844" y="684" class="s">换真机时：rt_ctl 改为通过 eth1 驱动</text>
+<text x="844" y="702" class="s">EtherCAT 伺服，L2–L5 不用改</text>
+<!-- 板内箭头 -->
+<path class="ln p" d="M1009 272 v10" marker-end="url(#ar)"/>
+<path class="ln a" d="M1009 356 v10" marker-end="url(#ar)"/>
+<path class="ln o" d="M860 403 H744 V322" marker-end="url(#ar)"/>
+<text x="752" y="396" class="lbl">轨迹段</text>
+<!-- 网络连线 -->
+<path class="ln o" d="M390 205 H660" marker-end="url(#ar)"/>
+<text x="420" y="199" class="lbl">UDP 15001 状态包 144 B · 250 Hz →</text>
+<path class="ln g" d="M660 250 H390" marker-end="url(#ar)"/>
+<text x="420" y="244" class="lbl">← 关节目标 80 B（每包回一个）</text>
+<path class="ln a" d="M390 340 H860" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<text x="420" y="334" class="lbl">TCP 15002 图像 / goal_image</text>
+<path class="ln" d="M860 479 H390" marker-end="url(#ar)"/>
+<text x="420" y="473" class="lbl">HTTP 8080 页面 + SSE 事件</text>
+<path class="ln p dash" d="M660 548 H390" marker-end="url(#ar)"/>
+<text x="420" y="542" class="lbl">SSH -R 7897 代理隧道</text>
+<path class="ln p dash" d="M300 520 V500 H585 V90 H600 V72" marker-end="url(#ar)"/>
+<text x="568" y="120" class="lbl">DeepSeek 请求</text>
+<path class="ln dash" d="M390 640 H660" marker-end="url(#ar)"/>
+<text x="420" y="634" class="lbl">USB-C 串口 COM3（控制台）</text>
+</svg>
+<div class="legend"><span><i style="background:var(--acc)"></i>感知 / 视觉</span><span><i style="background:var(--plan)"></i>规划 / 大模型</span><span><i style="background:var(--amb)"></i>动作 / 物理</span><span><i style="background:var(--ok)"></i>实时控制</span></div>
+
+<h2>二、智能体完成一个任务的过程（以“按图叠放”为例）</h2>
+<svg viewBox="0 0 1200 380" role="img" aria-label="智能体循环">
+<defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="context-stroke"/></marker></defs>
+<rect x="10" y="30" width="200" height="120" rx="12" class="box"/>
+<text x="110" y="58" text-anchor="middle" class="t">0 · 读任务</text>
+<text x="110" y="82" text-anchor="middle" class="s">目标图片 → 板上识别</text>
+<text x="110" y="100" text-anchor="middle" class="s">“蓝·红·绿 自下而上”</text>
+<text x="110" y="118" text-anchor="middle" class="s">转成文字目标</text>
+<rect x="250" y="30" width="210" height="120" rx="12" class="box acc"/>
+<text x="355" y="58" text-anchor="middle" class="t">1 · 观察</text>
+<text x="355" y="82" text-anchor="middle" class="s">向电脑要 top/front/side 图</text>
+<text x="355" y="100" text-anchor="middle" class="s">板上颜色分割 + 坐标换算</text>
+<text x="355" y="118" text-anchor="middle" class="s">→ 当前塔结构（文字）</text>
+<rect x="500" y="30" width="210" height="120" rx="12" class="box plan"/>
+<text x="605" y="58" text-anchor="middle" class="t">2 · 规划</text>
+<text x="605" y="82" text-anchor="middle" class="s">目标 + 当前状态 + 上一步结果</text>
+<text x="605" y="100" text-anchor="middle" class="s">→ DeepSeek（约 1.2 s）</text>
+<text x="605" y="118" text-anchor="middle" class="s">update_plan + 选一个动作</text>
+<rect x="750" y="30" width="210" height="120" rx="12" class="box amb"/>
+<text x="855" y="58" text-anchor="middle" class="t">3 · 执行</text>
+<text x="855" y="82" text-anchor="middle" class="s">如 stack_on(blue_cube)</text>
+<text x="855" y="100" text-anchor="middle" class="s">技能 → IK → 轨迹段</text>
+<text x="855" y="118" text-anchor="middle" class="s">rt_ctl 250 Hz → MuJoCo</text>
+<rect x="990" y="30" width="200" height="120" rx="12" class="box ok"/>
+<text x="1090" y="58" text-anchor="middle" class="t">4 · 校验</text>
+<text x="1090" y="82" text-anchor="middle" class="s">夹爪宽度判断抓没抓住</text>
+<text x="1090" y="100" text-anchor="middle" class="s">重新观察，对照目标</text>
+<text x="1090" y="118" text-anchor="middle" class="s">达成 → finish</text>
+<path class="ln" d="M210 90 H250" marker-end="url(#ar2)"/>
+<path class="ln a" d="M460 90 H500" marker-end="url(#ar2)"/>
+<path class="ln p" d="M710 90 H750" marker-end="url(#ar2)"/>
+<path class="ln o" d="M960 90 H990" marker-end="url(#ar2)"/>
+<path class="ln g" d="M1090 150 V200 H355 V150" marker-end="url(#ar2)"/>
+<text x="700" y="194" text-anchor="middle" class="lbl">没达成目标：回到观察（最多 12 轮）</text>
+<path class="ln w dash" d="M855 150 V250 H605 V150" marker-end="url(#ar2)"/>
+<text x="730" y="268" text-anchor="middle" class="lbl" style="fill:var(--warn)">动作失败（没抓住、IK 不收敛）：把原因告诉模型 → 重新规划（第 2 版计划）</text>
+<rect x="10" y="296" width="1180" height="74" rx="10" class="box"/>
+<text x="26" y="320" class="t">分工原则</text>
+<text x="26" y="342" class="s">· 大模型只做决策：选“哪个积木、做什么”，不给坐标；DeepSeek 看图不可靠，所以看图由板子完成，以文字形式交给模型。</text>
+<text x="26" y="360" class="s">· 慢的在 CPU0（感知约 1 s，模型约 1.2 s），快的在 CPU1（250 Hz 实时环）；大模型在等待时，机械臂照样平稳运动或保持不动。</text>
+</svg>
+
+<h2>三、一个周期里数据怎么流动</h2>
+<ol>
+<li>电脑上的物理进程每 4 ms 发一个状态包（7 个关节角、速度、夹爪宽度）给板子的 <code>rt_ctl</code>。</li>
+<li><code>rt_ctl</code> 在 CPU1 上按当前轨迹段插值出下一个关节目标，约 0.18 ms 内回包；电脑把目标交给 MuJoCo 的位置伺服。</li>
+<li>智能体需要“看”时，通过 TCP 15002 向电脑要图像，板上感知算出积木位置和塔的顺序。</li>
+<li>智能体把目标、当前状态、上一步结果整理成文字，经 SSH 隧道和电脑的 Clash 发给 DeepSeek，拿回 <code>update_plan</code> 和一个动作。</li>
+<li>技能层用 IK 把动作拆成若干轨迹段，通过 <code>/tmp/rt_ctl.sock</code> 交给 <code>rt_ctl</code> 执行；执行完再观察、校验。</li>
+<li>所有事件和每秒的主板数据通过 SSE 推到浏览器的工作台；四个视角画面由电脑直接推流到浏览器。</li>
+</ol>
+</main></body></html>
