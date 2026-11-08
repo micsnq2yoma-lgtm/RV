@@ -26,6 +26,8 @@ static const double lo[7]={-2.8973,-1.7628,-2.8973,-3.0718,-2.8973,-0.0175,-2.89
 static const double hi[7]={2.8973,1.7628,2.8973,-0.0698,2.8973,3.7525,2.8973};
 typedef struct { unsigned long long n,lost,interval_n; double proc_sum,proc_max,dt_sum,dt_sq,dt_max; } stats;
 static stats total;
+/* Diagnostic lifetime maxima survive protocol-mandated per-peer resets. */
+static double lifetime_proc_max,lifetime_dt_max;
 static pthread_mutex_t stats_lock=PTHREAD_MUTEX_INITIALIZER;
 static volatile sig_atomic_t finished;
 typedef struct __attribute__((packed)) { char magic[4]; uint32_t op; double goal[7], grip, duration; } segment_request;
@@ -83,22 +85,28 @@ static void *reporter(void *arg) {
     (void)arg;
     do {
         struct timespec pause={1,0}; nanosleep(&pause,NULL);
-        pthread_mutex_lock(&stats_lock); stats s=total; pthread_mutex_unlock(&stats_lock);
+        pthread_mutex_lock(&stats_lock); stats s=total; double lp=lifetime_proc_max,ld=lifetime_dt_max; pthread_mutex_unlock(&stats_lock);
         double mean=s.interval_n?s.dt_sum/s.interval_n:0;
-        printf("{\"rx\":%llu,\"lost\":%llu,\"processing_us_mean\":%.3f,\"processing_us_max\":%.3f,\"interval_ms_mean\":%.6f,\"interval_ms_max\":%.6f,\"interval_ms_std\":%.6f}\n",
+        printf("{\"rx\":%llu,\"lost\":%llu,\"processing_us_mean\":%.3f,\"processing_us_max\":%.3f,\"interval_ms_mean\":%.6f,\"interval_ms_max\":%.6f,\"interval_ms_std\":%.6f,\"lifetime_processing_us_max\":%.3f,\"lifetime_interval_ms_max\":%.6f}\n",
             s.n,s.lost,s.n?s.proc_sum/s.n*1e6:0,s.proc_max*1e6,mean*1e3,s.dt_max*1e3,
-            sqrt(fmax(0,s.interval_n?s.dt_sq/s.interval_n-mean*mean:0))*1e3);
+            sqrt(fmax(0,s.interval_n?s.dt_sq/s.interval_n-mean*mean:0))*1e3,lp*1e6,ld*1e3);
         fflush(stdout);
     } while(!finished);
     return NULL;
 }
 int main(int argc,char **argv) {
-    int cpu=-1,sine=0; const char *socket_path="/tmp/rt_ctl.sock";
+    int cpu=-1,sine=0,priority=80,policy=SCHED_FIFO; const char *socket_path="/tmp/rt_ctl.sock";
     for(int i=1;i<argc;i++) {
         if(!strcmp(argv[i],"--sine")) sine=1;
+        else if(!strcmp(argv[i],"--fifo-priority") && i+1<argc) {
+            char *end; long value=strtol(argv[++i],&end,10);
+            if(*end || value<1 || value>99) return 2;
+            priority=(int)value;policy=SCHED_FIFO;
+        }
+        else if(!strcmp(argv[i],"--sched-other")) {policy=SCHED_OTHER;priority=0;}
         else if(!strcmp(argv[i],"--cpu") && i+1<argc) { cpu=atoi(argv[++i]); if(cpu<0 || cpu>=CPU_SETSIZE) return 2; }
         else if(!strcmp(argv[i],"--socket") && i+1<argc) socket_path=argv[++i];
-        else { fprintf(stderr,"usage: rt_ctl [--sine] [--cpu N] [--socket PATH]\n"); return 2; }
+        else { fprintf(stderr,"usage: rt_ctl [--sine] [--cpu N] [--socket PATH] [--fifo-priority 1..99 | --sched-other]\n"); return 2; }
     }
     signal(SIGINT,on_signal); signal(SIGTERM,on_signal);
     int fd=socket(AF_INET,SOCK_DGRAM,0); if(fd<0) {perror("socket");return 1;}
@@ -116,11 +124,11 @@ int main(int argc,char **argv) {
     if(pthread_create(&log_thread,NULL,reporter,NULL)) {fputs("reporter failed\n",stderr);return 1;}
     if(cpu>=0) {cpu_set_t set;CPU_ZERO(&set);CPU_SET(cpu,&set);if(sched_setaffinity(0,sizeof(set),&set)){perror("affinity");return 1;}}
     if(mlockall(MCL_CURRENT|MCL_FUTURE)) {perror("mlockall");return 1;}
-    struct sched_param param={.sched_priority=80};
-    if(sched_setscheduler(0,SCHED_FIFO,&param)) {perror("SCHED_FIFO");return 1;}
-    printf("SCHED_FIFO=80 mlockall=ok cpu=%d sine=%d\n",cpu,sine);fflush(stdout);
+    struct sched_param param={.sched_priority=priority};
+    if(sched_setscheduler(0,policy,&param)) {perror("sched_setscheduler");return 1;}
+    printf("%s=%d mlockall=ok cpu=%d sine=%d\n",policy==SCHED_FIFO?"SCHED_FIFO":"SCHED_OTHER",priority,cpu,sine);fflush(stdout);
     rv_state state; rv_command cmd; memset(&cmd,0,sizeof(cmd));memcpy(cmd.magic,"RVC1",4);
-    double first=0,previous=0,stop_deadline=0,center[7]; uint32_t last=0;int have=0;
+    double first=0,previous=0,lifetime_previous=0,stop_deadline=0,center[7]; uint32_t last=0;int have=0;
     struct sockaddr_in peer; socklen_t plen=sizeof(peer);
     while(1) {
         double tick=now_s();
@@ -139,6 +147,8 @@ int main(int argc,char **argv) {
         if(!valid)continue;
         uint32_t delta=state.seq-last;
         if(have && state.seq==last && !(state.flags&2))continue;
+        double lifetime_dt=lifetime_previous?received-lifetime_previous:0;
+        lifetime_previous=received;
         if(have && (state.seq<last || (state.flags&2))) {
             pthread_mutex_lock(&stats_lock);memset(&total,0,sizeof(total));pthread_mutex_unlock(&stats_lock);
             previous=0;segment_exists=segment_active=0;have=0;generation++;
@@ -159,6 +169,7 @@ int main(int argc,char **argv) {
         cmd.seq++;
         double processing=now_s()-received;
         pthread_mutex_lock(&stats_lock);
+        lifetime_proc_max=fmax(lifetime_proc_max,processing);lifetime_dt_max=fmax(lifetime_dt_max,lifetime_dt);
         total.n++;total.lost+=lost;total.proc_sum+=processing;total.proc_max=fmax(total.proc_max,processing);
         if(dt>0){total.interval_n++;total.dt_sum+=dt;total.dt_sq+=dt*dt;total.dt_max=fmax(total.dt_max,dt);}
         pthread_mutex_unlock(&stats_lock);

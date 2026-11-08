@@ -183,3 +183,29 @@ Verify all Ubuntu mounts are gone before closing the SSH proxy tunnel. Never
 force unmount. Measured results and remaining limits belong in the
 [task 011 report](../handoff/reports/011-panda-kinematics-pick-place.md);
 [task 010's original failures](../handoff/reports/010-mujoco-panda-loopback.md) remain historical evidence.
+
+## Task 012 diagnostic controls
+
+The controller accepts `--fifo-priority 1..99` (default 80) or `--sched-other`.
+Keep `--cpu 1`; the isolation Python load pins itself to CPU0. These are diagnostic
+choices, not a demonstrated fix for the board hang. JSON fields
+`lifetime_processing_us_max` and `lifetime_interval_ms_max` survive scene resets;
+ordinary packet and timing statistics still reset with the protocol epoch.
+
+`scripts/stability_baseline.sh` records the available kernel diagnostics.
+The Windows `scripts/stability_serial.py` collector uses pyserial and a control
+file: writing `sysrq` requests 30 seconds of passive capture followed by BREAK
+and w/l/t, five seconds apart; writing `stop` closes capture. It never resets the
+board. Keep authentication out of the captured/public stream.
+
+`pc/stability_runner.py E1` through `E6` is the task-specific Windows/Paramiko
+supervisor, run from the repository root after board preparation. It expects a
+verified `.venv/012/known_hosts`, transient `RV_BOARD_PASSWORD`, the prepared
+board RAM tree `/tmp/rv012`, and the existing `.venv/010/py` MuJoCo environment.
+Use `--label` for a new evidence directory; existing evidence is never overwritten.
+The RAM tree must contain the compiled controller, agent modules, load tool and
+eMMC load script. This runner does not bootstrap, authenticate over serial, upload
+sources or request a hardware reset. Follow the task's evidence and human reset
+procedure on failure; inspect processes and mounts before any manual cleanup.
+
+See [stability findings](../docs/STABILITY.md) for experiment scope and limitations.

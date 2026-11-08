@@ -1,0 +1,30 @@
+Task 012 actual hardware evidence, 2026-11-08 America/Los_Angeles.
+Raw source text preserved except redaction of MACs, identifiers, host paths and build host.
+Authentication, SSH public keys and private known_hosts files excluded. Full originals stay in ignored .venv/012.
+Host annotations and derived interrupt deltas are explicitly labelled.
+
+===== compile-stall-observation.log =====
+Host observation at 2026-11-08T09:11 UTC (approximate; see serial timestamps):
+E4 completed and Ubuntu was unmounted normally. No rt_ctl or skills test was running.
+The next operation mounted Ubuntu, bound Buildroot /tmp into Ubuntu /tmp and invoked make for lifetime-statistics instrumentation.
+SSH compile output had not returned; first independent ping timed out.
+Continuous serial collector instructed to observe 30 seconds, then send BREAK+w/l/t five seconds apart.
+No RESET has been requested at this point.
+User observation: main power LED on; no obvious heat; wiring unchanged. User pressed RESET after evidence collection.
+
+===== compile-timeout.log =====
+[host] Error excerpt transcribed from the failed prepare/compile tool output.
+[host] The helper buffered stdout until EOF; partial command output was not saved when recv timed out.
+paramiko.buffered_pipe.PipeTimeout
+During handling of the above exception, another exception occurred:
+  File ".venv/012/upload.py", line 11, in <module>
+    data=out.read()+err.read()
+  File "paramiko/channel.py", line 699, in recv
+    raise socket.timeout()
+TimeoutError
+
+===== diagnose-compile-stall.log =====
+[2026-11-08T01:13:18.007-08:00] 
+[2026-11-08T01:13:18.007-08:00] [host] Clear pending input, request alive marker and uptime; observe 10 seconds
+[2026-11-08T01:13:28.094-08:00] 
+[2026-11-08T01:13:28.094-08:00] [host] received_bytes=0
