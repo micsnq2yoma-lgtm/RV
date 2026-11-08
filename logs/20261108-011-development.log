@@ -1,0 +1,365 @@
+Task 011 real-board simulation evidence. Execution started locally 2026-11-07 America/Los_Angeles; UTC records 2026-11-08.
+Original measurements retained; host paths, MACs and identifiers redacted. No credentials or API calls.
+
+===== smoke1\pc.log =====
+{"event": "slow", "activity": "graphics_viewer_sync", "milliseconds": 47.735300000567804}
+{"tcp_error": "TimeoutError"}
+{"final": true, "physics_steps": 0, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 0.0, "physics_gap_max_ms": 0.0, "snapshot_skips": 0, "q_min": [0.0, 0.0, 0.0, -1.57079, 0.0, 1.57079, -0.7853], "q_max": [0.0, 0.0, 0.0, -1.57079, 0.0, 1.57079, -0.7853], "gripper_min": 0.08, "gripper_max": 0.08, "wall_seconds": 0, "sent": 0, "received": 0, "invalid": 0, "no_reply": 0, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 0, "sim_time": 0.0, "rtt_samples": 0, "rtt_ms_p50": null, "rtt_ms_p99": null, "rtt_ms_max": null}
+Traceback (most recent call last):
+  File "<LOCAL_PATH>", line 446, in <module>
+    sim.run(args.seconds,args.headless,not args.in_process)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<LOCAL_PATH>", line 270, in run
+    if not ctypes.windll.kernel32.SetPriorityClass(ctypes.windll.kernel32.GetCurrentProcess(),0x80):raise OSError('HIGH_PRIORITY_CLASS failed')
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: HIGH_PRIORITY_CLASS failed
+
+===== smoke1\client.log =====
+OWNED_PID=5116
+bash: line 1: exec: taskset: not found
+
+===== smoke1\rt.log =====
+OWNED_PID=5114
+SCHED_FIFO=80 mlockall=ok cpu=1 sine=0
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+
+===== smoke1\orchestration.log =====
+{"utc": "2026-11-08T07:17:24Z", "started": "smoke", "pc_pid": 38908}
+{"utc": "2026-11-08T07:17:24Z", "running": "smoke"}
+{"utc": "2026-11-08T07:17:24Z", "client_exit": 127}
+{"utc": "2026-11-08T07:17:28Z", "pc_exit": 1}
+{"utc": "2026-11-08T07:17:30Z", "stopped": "rt", "pid": 5114, "rc": 0}
+
+===== smoke2\pc.log =====
+{"final": true, "physics_steps": 0, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 0.0, "physics_gap_max_ms": 0.0, "snapshot_skips": 0, "q_min": [0.0, 0.0, 0.0, -1.57079, 0.0, 1.57079, -0.7853], "q_max": [0.0, 0.0, 0.0, -1.57079, 0.0, 1.57079, -0.7853], "gripper_min": 0.08, "gripper_max": 0.08, "wall_seconds": 0, "sent": 0, "received": 0, "invalid": 0, "no_reply": 0, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 0, "sim_time": 0.0, "rtt_samples": 0, "rtt_ms_p50": null, "rtt_ms_p99": null, "rtt_ms_max": null}
+Traceback (most recent call last):
+  File "<LOCAL_PATH>", line 447, in <module>
+    sim.run(args.seconds,args.headless,not args.in_process)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<LOCAL_PATH>", line 268, in run
+    if not ready.wait(60) or not graphics.is_alive():raise RuntimeError('graphics initialization failed')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: graphics initialization failed
+
+===== smoke2\client.log =====
+OWNED_PID=5145
+{"tcp_listening": 15002}
+Traceback (most recent call last):
+  File "/root/rv011/agent/demo_s3.py", line 80, in <module>
+    sim=SimClient();rt=RTClient()
+        ^^^^^^^^^^^
+  File "/root/rv011/agent/transport.py", line 47, in __init__
+    self.sock,_=self.listener.accept(); self.sock.settimeout(30)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+===== smoke2\rt.log =====
+OWNED_PID=5143
+SCHED_FIFO=80 mlockall=ok cpu=1 sine=0
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+
+===== smoke2\orchestration.log =====
+{"utc": "2026-11-08T07:18:09Z", "started": "smoke", "pc_pid": 8076}
+{"utc": "2026-11-08T07:18:09Z", "running": "smoke"}
+{"utc": "2026-11-08T07:18:39Z", "running": "smoke"}
+{"utc": "2026-11-08T07:19:09Z", "running": "smoke"}
+{"utc": "2026-11-08T07:19:17Z", "client_exit": 1}
+{"utc": "2026-11-08T07:19:18Z", "pc_exit": 1}
+{"utc": "2026-11-08T07:19:19Z", "stopped": "rt", "pid": 5143, "rc": 0}
+
+===== smoke3\pc.log =====
+{"graphics_stage": "starting"}
+{"graphics_stage": "model_ready"}
+{"final": true, "physics_steps": 0, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 0.0, "physics_gap_max_ms": 0.0, "snapshot_skips": 0, "q_min": [0.0, 0.0, 0.0, -1.57079, 0.0, 1.57079, -0.7853], "q_max": [0.0, 0.0, 0.0, -1.57079, 0.0, 1.57079, -0.7853], "gripper_min": 0.08, "gripper_max": 0.08, "wall_seconds": 0, "sent": 0, "received": 0, "invalid": 0, "no_reply": 0, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 0, "sim_time": 0.0, "rtt_samples": 0, "rtt_ms_p50": null, "rtt_ms_p99": null, "rtt_ms_max": null}
+Traceback (most recent call last):
+  File "<LOCAL_PATH>", line 449, in <module>
+    sim.run(args.seconds,args.headless,not args.in_process)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<LOCAL_PATH>", line 270, in run
+    if not ready.wait(60) or not graphics.is_alive():raise RuntimeError('graphics initialization failed')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: graphics initialization failed
+
+===== smoke3\client.log =====
+OWNED_PID=5177
+{"tcp_listening": 15002}
+Traceback (most recent call last):
+  File "/root/rv011/agent/demo_s3.py", line 80, in <module>
+    sim=SimClient();rt=RTClient()
+        ^^^^^^^^^^^
+  File "/root/rv011/agent/transport.py", line 47, in __init__
+    self.sock,_=self.listener.accept(); self.sock.settimeout(30)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+===== smoke3\rt.log =====
+OWNED_PID=5175
+SCHED_FIFO=80 mlockall=ok cpu=1 sine=0
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+
+===== smoke3\orchestration.log =====
+{"utc": "2026-11-08T07:20:51Z", "started": "smoke", "pc_pid": 30472}
+{"utc": "2026-11-08T07:20:51Z", "running": "smoke"}
+{"utc": "2026-11-08T07:21:21Z", "running": "smoke"}
+{"utc": "2026-11-08T07:21:51Z", "running": "smoke"}
+{"utc": "2026-11-08T07:21:59Z", "client_exit": 1}
+{"utc": "2026-11-08T07:22:00Z", "pc_exit": 1}
+{"utc": "2026-11-08T07:22:00Z", "stopped": "rt", "pid": 5175, "rc": 0}
+
+===== smoke4\pc.log =====
+{"graphics_stage": "starting"}
+{"graphics_stage": "model_ready"}
+{"graphics_stage": "viewer_ready"}
+{"graphics_stage": "renderer_ready"}
+{"graphics_isolated": true, "physics_priority": "HIGH", "graphics_pid": 11260}
+{"command_recovered": true, "mode": 0}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 2501, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 4.961200000252575, "physics_gap_max_ms": 3.1142999996518483, "snapshot_skips": 0, "q_min": [0.0, 0.0, -0.002252133709180122, -1.8748964982650766, -0.01495192831519214, 1.5332711049115202, -0.7853002240213001], "q_max": [6.2092124954746085e-06, 0.3793463821875071, 7.151155202782813e-06, -1.57079, 0.0, 1.57079, -0.7852748263972757], "gripper_min": 0.07999769726838088, "gripper_max": 0.08000000049850806, "wall_seconds": 5.000807300000815, "sent": 1250, "received": 1250, "invalid": 0, "no_reply": 0, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 0, "sim_time": 5.001999999999671, "rtt_samples": 1250, "rtt_ms_p50": 0.9998499999710475, "rtt_ms_p99": 1.2688439996964007, "rtt_ms_max": 1.423100000465638}
+{"tcp_error": "TimeoutError"}
+{"command_recovered": true, "mode": 0}
+{"final": false, "physics_steps": 4996, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 0, "q_min": [-7.477377002693007e-07, 0.0, -0.005508504881895234, -2.013476979232371, -0.02104889017326972, 1.5303695505188806, -0.7853002242932766], "q_max": [0.00021067978880433012, 0.6311025135454028, 7.155227935971985e-06, -1.57079, 0.0, 1.57079, -0.7850465343585575], "gripper_min": 0.07999687377289227, "gripper_max": 0.08000000106611069, "wall_seconds": 10.00159259999964, "sent": 481, "received": 480, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 1, "sim_time": 1.9220000000000015, "rtt_samples": 480, "rtt_ms_p50": 0.953750000007858, "rtt_ms_p99": 1.2293399999543906, "rtt_ms_max": 1.5483000006497605}
+{"final": false, "physics_steps": 7494, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 0, "q_min": [-0.04389920196885972, 0.0, -0.1650230222067913, -2.013476979232371, -0.02104889017326972, 1.5303695505188806, -0.7853002242932766], "q_max": [0.00021067978880433012, 0.7100312209386558, 7.155227935971985e-06, -1.57079, 0.14131445210143634, 2.287985821419924, 0.5201931742878255], "gripper_min": 0.07999687377289227, "gripper_max": 0.08000178063156008, "wall_seconds": 15.002468700000463, "sent": 1730, "received": 1729, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 3, "sim_time": 6.91799999999946, "rtt_samples": 1729, "rtt_ms_p50": 0.9594999992259545, "rtt_ms_p99": 1.214452000713209, "rtt_ms_max": 3.510499998810701}
+{"final": false, "physics_steps": 9994, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 0, "q_min": [-0.05807990266972723, 0.0, -0.1766361231478724, -2.013476979232371, -0.02104889017326972, 1.5303695505188806, -0.7853002242932766], "q_max": [0.00021067978880433012, 0.8988482051055856, 7.155227935971985e-06, -1.5599130708142281, 0.172880132992015, 2.4286647173478464, 0.5202000460641766], "gripper_min": 0.03975031964890077, "gripper_max": 0.08000178063156008, "wall_seconds": 20.003033900000446, "sent": 2980, "received": 2979, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 3, "sim_time": 11.91800000000065, "rtt_samples": 2979, "rtt_ms_p50": 0.9618999993108446, "rtt_ms_p99": 1.2182840004970772, "rtt_ms_max": 3.510499998810701}
+{"final": false, "physics_steps": 12494, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 0, "q_min": [-0.05807990266972723, 0.0, -0.1766361231478724, -2.1044474974060643, -0.02104889017326972, 1.5303695505188806, -0.7853002242932766], "q_max": [0.6124265462990434, 0.8988482051055856, 7.155227935971985e-06, -1.5599130708142281, 0.172880132992015, 2.672568568729823, 1.297277827131787], "gripper_min": 0.039497982035932716, "gripper_max": 0.08000178063156008, "wall_seconds": 25.003087299999606, "sent": 4230, "received": 4229, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 3, "sim_time": 16.918000000001502, "rtt_samples": 4229, "rtt_ms_p50": 0.9527999991405522, "rtt_ms_p99": 1.2091439998039277, "rtt_ms_max": 3.510499998810701}
+{"command_recovered": true, "mode": 0}
+{"final": false, "physics_steps": 14995, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 0, "q_min": [-0.05807990266972723, 0.0, -0.1766361231478724, -2.1044474974060643, -0.02104889017326972, 1.5303695505188806, -0.7853002243140683], "q_max": [0.6221450438077036, 0.8988482051055856, 7.155227935971985e-06, -1.5599130708142281, 0.172880132992015, 2.672568568729823, 1.297277827131787], "gripper_min": 0.039497982035932716, "gripper_max": 0.08000178063156008, "wall_seconds": 30.004620100000466, "sent": 892, "received": 892, "invalid": 0, "no_reply": 0, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 3, "sim_time": 3.5679999999998286, "rtt_samples": 892, "rtt_ms_p50": 0.9411999999429099, "rtt_ms_p99": 1.1877629997070471, "rtt_ms_max": 1.285700000153156}
+{"final": false, "physics_steps": 17494, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 1, "q_min": [-0.05807990266972723, 0.0, -0.1766361231478724, -2.1044474974060643, -0.02104889017326972, 1.5303695505188806, -0.7853002243140683], "q_max": [0.6221450438077036, 0.8988482051055856, 7.155227935971985e-06, -1.5599130708142281, 0.172880132992015, 2.672568568729823, 1.297277827131787], "gripper_min": 0.039497982035932716, "gripper_max": 0.08000178063156008, "wall_seconds": 35.004912800000966, "sent": 2142, "received": 2141, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 4, "sim_time": 8.56599999999953, "rtt_samples": 2141, "rtt_ms_p50": 0.937000000703847, "rtt_ms_p99": 1.1824999997770647, "rtt_ms_max": 1.3763000006292714}
+{"event": "slow", "activity": "tcp_request", "milliseconds": 47.253800001271884, "op": "render"}
+{"final": false, "physics_steps": 19994, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 1, "q_min": [-0.05807990266972723, 0.0, -0.1766361231478724, -2.1044474974060643, -0.02104889017326972, 1.5303695505188806, -0.7853002243140683], "q_max": [0.6221450438077036, 0.9096901131721048, 7.155227935971985e-06, -1.3542867670031675, 0.172880132992015, 2.672568568729823, 1.297277827131787], "gripper_min": 0.039497982035932716, "gripper_max": 0.08000178063156008, "wall_seconds": 40.00541669999984, "sent": 3392, "received": 3391, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 4, "sim_time": 13.5660000000012, "rtt_samples": 3391, "rtt_ms_p50": 0.9363999997731298, "rtt_ms_p99": 1.191310000831436, "rtt_ms_max": 2.943999999843072}
+{"final": false, "physics_steps": 22493, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 1, "q_min": [-0.05807990266972723, 0.0, -0.1766361231478724, -2.1044474974060643, -0.02104889017326972, 1.5303695505188806, -0.7853002243140683], "q_max": [0.6221450438077036, 0.9458999750787387, 7.155227935971985e-06, -1.3409145718918116, 0.172880132992015, 2.672568568729823, 1.297277827131787], "gripper_min": 0.039497982035932716, "gripper_max": 0.08000178063156008, "wall_seconds": 45.0051497000004, "sent": 4641, "received": 4641, "invalid": 0, "no_reply": 0, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 5, "sim_time": 18.56400000000059, "rtt_samples": 4641, "rtt_ms_p50": 0.937000000703847, "rtt_ms_p99": 1.193839999905322, "rtt_ms_max": 2.943999999843072}
+{"final": true, "physics_steps": 22651, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 14.471700000285637, "physics_gap_max_ms": 12.54749999861815, "snapshot_skips": 1, "q_min": [-0.05807990266972723, 0.0, -0.1766361231478724, -2.1044474974060643, -0.02104889017326972, 1.5303695505188806, -0.7853002243140683], "q_max": [0.6221450438077036, 0.9458999750787387, 7.155227935971985e-06, -1.3409145718918116, 0.172880132992015, 2.672568568729823, 1.297277827131787], "gripper_min": 0.039497982035932716, "gripper_max": 0.08000178063156008, "wall_seconds": 45.321516100000736, "sent": 4720, "received": 4720, "invalid": 0, "no_reply": 0, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 5, "sim_time": 18.880000000000415, "rtt_samples": 4720, "rtt_ms_p50": 0.9363500003018999, "rtt_ms_p99": 1.1933529993621055, "rtt_ms_max": 2.943999999843072}
+
+===== smoke4\client.log =====
+OWNED_PID=5190
+{"tcp_listening": 15002}
+{"ik_seconds": 1.3610829639983422, "iterations": 9, "target": [0.6841088505930876, -0.12690651941667228, 0.123]}
+{"ik_seconds": 0.4158973960002186, "iterations": 3, "target": [0.6841088505930876, -0.12690651941667228, 0.023]}
+{"pick_width": 0.039872875556294554}
+{"ik_seconds": 0.4232516330012004, "iterations": 3, "target": [0.6841088505930876, -0.12690651941667228, 0.123]}
+{"ik_seconds": 1.1863619739997375, "iterations": 8, "target": [0.5, 0.3, 0.131]}
+{"ik_seconds": 0.41872404500099947, "iterations": 3, "target": [0.5, 0.3, 0.031]}
+{"ik_seconds": 0.5703823869989719, "iterations": 4, "target": [0.5, 0.3, 0.131]}
+{"final_objects": {"red_cube": {"name": "red_cube", "pos": [0.4996692184276946, 0.2969768498098852, 0.027892244579783804], "quat": [0.9999999608038521, 2.5066909139493156e-12, 1.3397341994223083e-10, 0.0002799862376897592]}, "green_cube": {"name": "green_cube", "pos": [0.7062291839202972, 0.21549568580158107, 0.019892244579783825], "quat": [0.9999999999999993, 1.4268681595206816e-10, -2.0810625713262568e-11, -2.5328198754985714e-09]}, "blue_cube": {"name": "blue_cube", "pos": [0.6893980989533972, 0.13238280347723072, 0.01989224457978381], "quat": [0.9999999999999996, -1.379142725185043e-10, -8.334558225202035e-12, -3.262869945642099e-09]}, "left_tray": {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, "right_tray": {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}}, "task": 1, "trial": 0}
+{"task": 1, "trial": 0, "seed": 0, "success": true, "seconds": 18.44748740200157, "reason": null}
+{"ik_seconds": 1.8038054700009525, "iterations": 12, "target": [0.689398098790225, 0.13238280617705195, 0.123]}
+{"ik_seconds": 0.41700619099719916, "iterations": 3, "target": [0.689398098790225, 0.13238280617705195, 0.023]}
+{"pick_width": 0.03987300372816409}
+{"ik_seconds": 0.4163982960017165, "iterations": 3, "target": [0.689398098790225, 0.13238280617705195, 0.123]}
+{"ik_seconds": 0.4177191529997799, "iterations": 3, "target": [0.7062303614457304, 0.21576011834111922, 0.16289224457978382]}
+{"ik_seconds": 0.4140844469984586, "iterations": 3, "target": [0.7062303614457304, 0.21576011834111922, 0.06289224457978383]}
+{"ik_seconds": 0.4129688079992775, "iterations": 3, "target": [0.7062303614457304, 0.21576011834111922, 0.16289224457978382]}
+{"final_objects": {"red_cube": {"name": "red_cube", "pos": [0.6841088505901378, -0.12690651681799145, 0.019892244579783815], "quat": [1.0, 1.3173315309193094e-10, 1.5211835389736586e-13, -2.8025196200334813e-13]}, "green_cube": {"name": "green_cube", "pos": [0.7071934562469199, 0.2158170252701496, 0.019792833571409013], "quat": [0.9999973069183137, 0.00023764587373315961, 4.742158976247342e-05, -0.002308122993296559]}, "blue_cube": {"name": "blue_cube", "pos": [0.7075911617661163, 0.21380030458538574, 0.05958414221066404], "quat": [0.9999998434923277, 0.0004997542335109196, 9.502512131892464e-05, -0.00023287604898764526]}, "left_tray": {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, "right_tray": {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}}, "task": 2, "trial": 0}
+{"task": 2, "trial": 0, "seed": 0, "success": true, "seconds": 17.80318205399817, "reason": null}
+{"summary": true, "task": 1, "success": 1, "total": 1, "mean_seconds": 18.44748740200157}
+{"summary": true, "task": 2, "success": 1, "total": 1, "mean_seconds": 17.80318205399817}
+
+===== smoke4\rt.log =====
+OWNED_PID=5188
+SCHED_FIFO=80 mlockall=ok cpu=1 sine=0
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":0,"lost":0,"processing_us_mean":0.000,"processing_us_max":0.000,"interval_ms_mean":0.000000,"interval_ms_max":0.000000,"interval_ms_std":0.000000}
+{"rx":152,"lost":0,"processing_us_mean":184.480,"processing_us_max":365.374,"interval_ms_mean":4.022730,"interval_ms_max":4.533317,"interval_ms_std":0.226632}
+{"rx":401,"lost":0,"processing_us_mean":188.052,"processing_us_max":474.658,"interval_ms_mean":4.021314,"interval_ms_max":4.935825,"interval_ms_std":0.274916}
+{"rx":650,"lost":0,"processing_us_mean":187.152,"processing_us_max":474.658,"interval_ms_mean":4.020721,"interval_ms_max":4.935825,"interval_ms_std":0.282366}
+{"rx":899,"lost":0,"processing_us_mean":186.333,"processing_us_max":474.658,"interval_ms_mean":4.021086,"interval_ms_max":4.935825,"interval_ms_std":0.281285}
+{"rx":1148,"lost":0,"processing_us_mean":185.966,"processing_us_max":474.658,"interval_ms_mean":4.020426,"interval_ms_max":4.935825,"interval_ms_std":0.278211}
+{"rx":1394,"lost":0,"processing_us_mean":184.992,"processing_us_max":474.658,"interval_ms_mean":4.028484,"interval_ms_max":14.639176,"interval_ms_std":0.397361}
+{"rx":1643,"lost":0,"processing_us_mean":183.865,"processing_us_max":474.658,"interval_ms_mean":4.027213,"interval_ms_max":14.639176,"interval_ms_std":0.384584}
+{"rx":1892,"lost":0,"processing_us_mean":181.912,"processing_us_max":474.658,"interval_ms_mean":4.026320,"interval_ms_max":14.639176,"interval_ms_std":0.372219}
+{"rx":124,"lost":0,"processing_us_mean":172.370,"processing_us_max":399.409,"interval_ms_mean":4.008521,"interval_ms_max":4.915663,"interval_ms_std":0.323084}
+{"rx":372,"lost":0,"processing_us_mean":172.984,"processing_us_max":430.711,"interval_ms_mean":4.017819,"interval_ms_max":4.915663,"interval_ms_std":0.310748}
+{"rx":621,"lost":0,"processing_us_mean":176.737,"processing_us_max":430.711,"interval_ms_mean":4.018520,"interval_ms_max":5.428254,"interval_ms_std":0.313784}
+{"rx":870,"lost":0,"processing_us_mean":177.559,"processing_us_max":430.711,"interval_ms_mean":4.019116,"interval_ms_max":5.428254,"interval_ms_std":0.306066}
+{"rx":1119,"lost":0,"processing_us_mean":176.832,"processing_us_max":454.945,"interval_ms_mean":4.019644,"interval_ms_max":5.428254,"interval_ms_std":0.304810}
+{"rx":1367,"lost":0,"processing_us_mean":176.410,"processing_us_max":490.887,"interval_ms_mean":4.023287,"interval_ms_max":6.317035,"interval_ms_std":0.313362}
+{"rx":1616,"lost":0,"processing_us_mean":174.719,"processing_us_max":490.887,"interval_ms_mean":4.023124,"interval_ms_max":6.317035,"interval_ms_std":0.309454}
+{"rx":1865,"lost":0,"processing_us_mean":174.884,"processing_us_max":490.887,"interval_ms_mean":4.022432,"interval_ms_max":6.317035,"interval_ms_std":0.312309}
+{"rx":2113,"lost":0,"processing_us_mean":175.366,"processing_us_max":490.887,"interval_ms_mean":4.022229,"interval_ms_max":6.317035,"interval_ms_std":0.312668}
+{"rx":2362,"lost":0,"processing_us_mean":175.414,"processing_us_max":490.887,"interval_ms_mean":4.022038,"interval_ms_max":6.317035,"interval_ms_std":0.312116}
+{"rx":2612,"lost":0,"processing_us_mean":175.587,"processing_us_max":490.887,"interval_ms_mean":4.021974,"interval_ms_max":6.317035,"interval_ms_std":0.308973}
+{"rx":2860,"lost":0,"processing_us_mean":175.607,"processing_us_max":490.887,"interval_ms_mean":4.021671,"interval_ms_max":6.317035,"interval_ms_std":0.306666}
+{"rx":3110,"lost":0,"processing_us_mean":176.066,"processing_us_max":490.887,"interval_ms_mean":4.021646,"interval_ms_max":6.317035,"interval_ms_std":0.306429}
+{"rx":3358,"lost":0,"processing_us_mean":176.100,"processing_us_max":490.887,"interval_ms_mean":4.021601,"interval_ms_max":6.317035,"interval_ms_std":0.305093}
+{"rx":3607,"lost":0,"processing_us_mean":176.041,"processing_us_max":490.887,"interval_ms_mean":4.021410,"interval_ms_max":6.317035,"interval_ms_std":0.304158}
+{"rx":3857,"lost":0,"processing_us_mean":175.588,"processing_us_max":490.887,"interval_ms_mean":4.021407,"interval_ms_max":6.317035,"interval_ms_std":0.301328}
+{"rx":4106,"lost":0,"processing_us_mean":176.099,"processing_us_max":490.887,"interval_ms_mean":4.021311,"interval_ms_max":6.317035,"interval_ms_std":0.299174}
+{"rx":4355,"lost":0,"processing_us_mean":175.742,"processing_us_max":490.887,"interval_ms_mean":4.021235,"interval_ms_max":6.317035,"interval_ms_std":0.297246}
+{"rx":15,"lost":0,"processing_us_mean":160.616,"processing_us_max":183.880,"interval_ms_mean":3.981135,"interval_ms_max":4.393704,"interval_ms_std":0.231224}
+{"rx":265,"lost":0,"processing_us_mean":171.788,"processing_us_max":453.618,"interval_ms_mean":4.017510,"interval_ms_max":4.686864,"interval_ms_std":0.264479}
+{"rx":513,"lost":0,"processing_us_mean":175.584,"processing_us_max":453.618,"interval_ms_mean":4.021681,"interval_ms_max":4.801894,"interval_ms_std":0.287834}
+{"rx":762,"lost":0,"processing_us_mean":175.610,"processing_us_max":453.618,"interval_ms_mean":4.019673,"interval_ms_max":4.801894,"interval_ms_std":0.283023}
+{"rx":1011,"lost":0,"processing_us_mean":177.301,"processing_us_max":453.618,"interval_ms_mean":4.020095,"interval_ms_max":4.811000,"interval_ms_std":0.277736}
+{"rx":1261,"lost":0,"processing_us_mean":177.178,"processing_us_max":453.618,"interval_ms_mean":4.019803,"interval_ms_max":4.811000,"interval_ms_std":0.279199}
+{"rx":1510,"lost":0,"processing_us_mean":176.247,"processing_us_max":453.618,"interval_ms_mean":4.019971,"interval_ms_max":5.128834,"interval_ms_std":0.276311}
+{"rx":1758,"lost":0,"processing_us_mean":176.516,"processing_us_max":453.618,"interval_ms_mean":4.021558,"interval_ms_max":5.790661,"interval_ms_std":0.279114}
+{"rx":2007,"lost":0,"processing_us_mean":175.535,"processing_us_max":453.618,"interval_ms_mean":4.021263,"interval_ms_max":5.790661,"interval_ms_std":0.277262}
+{"rx":2256,"lost":0,"processing_us_mean":175.387,"processing_us_max":453.618,"interval_ms_mean":4.021208,"interval_ms_max":5.790661,"interval_ms_std":0.277475}
+{"rx":2505,"lost":0,"processing_us_mean":174.907,"processing_us_max":453.618,"interval_ms_mean":4.020986,"interval_ms_max":5.790661,"interval_ms_std":0.278184}
+{"rx":2754,"lost":0,"processing_us_mean":175.548,"processing_us_max":453.618,"interval_ms_mean":4.021133,"interval_ms_max":5.790661,"interval_ms_std":0.282604}
+{"rx":3003,"lost":0,"processing_us_mean":175.224,"processing_us_max":453.618,"interval_ms_mean":4.021034,"interval_ms_max":5.849535,"interval_ms_std":0.286835}
+{"rx":3252,"lost":0,"processing_us_mean":175.106,"processing_us_max":453.618,"interval_ms_mean":4.020971,"interval_ms_max":5.849535,"interval_ms_std":0.287129}
+{"rx":3501,"lost":0,"processing_us_mean":175.274,"processing_us_max":461.566,"interval_ms_mean":4.020843,"interval_ms_max":5.849535,"interval_ms_std":0.288064}
+{"rx":3750,"lost":0,"processing_us_mean":175.220,"processing_us_max":461.566,"interval_ms_mean":4.020809,"interval_ms_max":5.849535,"interval_ms_std":0.286577}
+{"rx":3998,"lost":0,"processing_us_mean":174.899,"processing_us_max":461.566,"interval_ms_mean":4.021142,"interval_ms_max":5.849535,"interval_ms_std":0.286276}
+{"rx":4247,"lost":0,"processing_us_mean":174.693,"processing_us_max":461.566,"interval_ms_mean":4.021301,"interval_ms_max":6.124608,"interval_ms_std":0.286711}
+{"rx":4496,"lost":0,"processing_us_mean":174.849,"processing_us_max":461.566,"interval_ms_mean":4.021247,"interval_ms_max":6.124608,"interval_ms_std":0.287858}
+{"rx":4720,"lost":0,"processing_us_mean":175.090,"processing_us_max":461.566,"interval_ms_mean":4.021237,"interval_ms_max":6.124608,"interval_ms_std":0.286466}
+{"rx":4720,"lost":0,"processing_us_mean":175.090,"processing_us_max":461.566,"interval_ms_mean":4.021237,"interval_ms_max":6.124608,"interval_ms_std":0.286466}
+
+===== smoke4\orchestration.log =====
+{"utc": "2026-11-08T07:22:26Z", "started": "smoke", "pc_pid": 17196}
+{"utc": "2026-11-08T07:22:26Z", "running": "smoke"}
+{"utc": "2026-11-08T07:22:56Z", "running": "smoke"}
+{"utc": "2026-11-08T07:23:14Z", "client_exit": 0}
+{"utc": "2026-11-08T07:23:14Z", "pc_exit": 0}
+{"utc": "2026-11-08T07:23:14Z", "client_exit": 0}
+{"utc": "2026-11-08T07:23:15Z", "stopped": "rt", "pid": 5188, "rc": 0}

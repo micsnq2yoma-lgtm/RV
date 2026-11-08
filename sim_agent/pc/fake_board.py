@@ -12,13 +12,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'board/tools'))
 from proto_client import serve
 
 
-def main(seconds, out, pause=True):
+def main(seconds, out, pause=True, restart_at=None):
     worker = threading.Thread(target=serve, args=('127.0.0.1', out), daemon=True)
     worker.start()
     start = time.perf_counter()
     center = None
     first = None
     seq = 0
+    restarted=False
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
         udp.bind(('127.0.0.1', 15001))
         udp.settimeout(.5)
@@ -35,6 +36,8 @@ def main(seconds, out, pause=True):
             if center is None:
                 center, first = fields[:7], time.perf_counter()
             t = time.perf_counter()-first
+            if restart_at is not None and t>=restart_at and not restarted:
+                seq=0;restarted=True
             q = center.copy()
             q[0] += .3*math.sin(2*math.pi*t/4)
             q[3] += .3*math.sin(2*math.pi*t/4)
@@ -51,6 +54,7 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--seconds', type=float, default=20)
     p.add_argument('--out', default='sim_agent/runs/local-images')
+    p.add_argument('--restart-at',type=float)
     p.add_argument('--no-pause', action='store_true')
     a = p.parse_args()
-    main(a.seconds, a.out, not a.no_pause)
+    main(a.seconds, a.out, not a.no_pause,a.restart_at)

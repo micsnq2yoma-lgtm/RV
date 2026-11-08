@@ -1,10 +1,18 @@
-# Panda simulation — task 010 (simulation only)
+# Panda simulation and S3 skills (tasks 010–011)
 
-Protocol: [design v1](../docs/SIM_AGENT_DESIGN.md). No EtherCAT access. J1 is eth0;
-Windows initiates both connections. Do not change Windows firewall or Clash.
-Real-board timing acceptance is separate from the localhost fixture.
+This is simulation only. Keep servo power disconnected. J1 is eth0; Windows
+initiates UDP 15001 and TCP 15002. No EtherCAT, eth1, DeepSeek, firewall or Clash
+changes are used by S3. Wire formats remain RVS1=144 and RVC1=80 bytes; see
+[protocol v1.1](../docs/SIM_AGENT_DESIGN.md#33-协议-v11-补充2026-11-08根据报告-010).
 
-## PC setup (PowerShell, repository root)
+Task 011 remains **failed**: FK and IK checks passed, tray placement was 9/10,
+and stacking was 10/10, but two whole-board hangs prevented the ten-minute
+stability acceptance. The root cause is unresolved. See the report before
+repeating board tests; the short final timing window is not acceptance evidence.
+
+## PC setup
+
+From the repository root in PowerShell:
 
 ```powershell
 python -m venv .venv/010/py
@@ -12,99 +20,166 @@ python -m venv .venv/010/py
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File sim_agent/pc/fetch_assets.ps1
 ```
 
-Dependencies are pinned to MuJoCo 4.0.0, numpy 2.5.4, Pillow 13.0.0 (JPEG encoder).
-Assets: [Google DeepMind MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie),
-commit `98a70c569c4c1b6da467a20012f766ee1f8dc521`,
-`franka_emika_panda`, Apache-2.0. The downloader retains upstream LICENSE/README.
-No meshes or original model XML are committed. Our scene includes the original
-`panda.xml`; original actuators remain unchanged. A wrist camera is attached to
-the original `hand` with MjSpec at load time. Table surface is world z=0 m.
+Dependencies: MuJoCo 4.0.0, numpy 2.5.4, Pillow 13.0.0. The downloader pins
+[MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie) commit
+`98a70c569c4c1b6da467a20012f766ee1f8dc521` and retains the Panda Apache-2.0 license.
+Original XML and meshes are ignored. We preserve the original eight actuators.
+The table surface is z=0 m; cube edges are 4 cm, mass 0.05 kg, friction
+`1 0.01 0.001`. Tray interiors are 0.20 x 0.16 m, floor height 0.008 m.
 
-## Local fixture before board testing
+## Board setup
 
-Run in two terminals in the same host/network context:
-
-```powershell
-.venv/010/py/Scripts/python.exe sim_agent/pc/fake_board.py --seconds 30
-.venv/010/py/Scripts/python.exe sim_agent/pc/sim_server.py --board-ip 127.0.0.1 --seconds 18
-```
-
-The fixture replies with sine targets, requests both images and reset, deliberately
-withholds commands from t=6 to 6.5 seconds, then resumes. Use `--no-pause` for
-an uninterrupted fixture run. Images default to ignored `sim_agent/runs/local-images`.
-Local timing and intentional dropped replies are **not** real-board acceptance.
-`--headless` closes only the viewer; the rendering thread still serves images.
-
-## Board preparation and launch
-
-Confirm current wiring and servo power disconnected, then follow
-[NETWORK.md](../docs/NETWORK.md) to log into Buildroot, release COM3, and run:
-
-```powershell
-./scripts/board_bootstrap.ps1 -Port COM3
-```
-
-Copy `sim_agent/board/rt_ctl/{rt_ctl.c,protocol.h,Makefile}` and
-`sim_agent/board/tools/proto_client.py` to the board. Use the existing board_scp
-wrapper or verified SSH/SCP; never embed passwords. Enter eMMC Ubuntu via
-`sh /mount_emmc.sh start`, then compile in the uploaded directory:
+Follow [NETWORK.md](../docs/NETWORK.md) for current wiring, bootstrap, verified
+SSH and the temporary proxy tunnel. Mount Ubuntu with `sh /mount_emmc.sh start`.
+Install numpy **before** timing tests, in Ubuntu:
 
 ```sh
+P=http://127.0.0.1:7897
+apt-get -o Acquire::http::Proxy=$P -o Acquire::https::Proxy=$P install -y python3-numpy
+```
+
+Upload `sim_agent/board/rt_ctl/` source files and `sim_agent/board/agent/*.py` to
+Ubuntu `/root/rv011/rt_ctl/` and `/root/rv011/agent/` respectively. Exclude binaries
+and `__pycache__`; use the existing SSH/SCP procedure and never embed credentials.
+For timing workloads also upload `board/tools/timing_client.py` to
+Ubuntu `/root/rv011/tools/timing_client.py`.
+Compile inside Ubuntu:
+
+```sh
+cd /root/rv011/rt_ctl
 make CFLAGS='-O2 -Wall -Wextra -std=c11'
-./rt_ctl --sine --cpu 1
 ```
 
-The process exits on failed mlockall, affinity or SCHED_FIFO=80. It does not
-silently downgrade scheduling. Prefer copying the executable to Buildroot RAM
-and running there if its dynamic loader/libs are compatible; otherwise use
-chroot and record that fact. Do not claim either path works until tested.
-In a separate board shell:
+## Start S3
+
+In two separate Buildroot SSH shells, with Ubuntu already mounted:
 
 ```sh
-python3 proto_client.py --out /tmp/rv010-images
+# Terminal 1: compiled C controller, no sine mode for skills
+chroot /mnt/ubuntu /root/rv011/rt_ctl/rt_ctl --cpu 1
+
+# Terminal 2: two tasks, each with seeds 0..9, fixed before testing
+chroot /mnt/ubuntu python3 /root/rv011/agent/demo_s3.py --count 10 --out /root/rv011-images
 ```
 
-Then on the PC (viewer opens, 600 seconds by default):
+Then start the PC (a longer ceiling permits both task suites):
 
 ```powershell
-.venv/010/py/Scripts/python.exe sim_agent/pc/sim_server.py --board-ip 192.168.50.2 --seconds 600
+.venv/010/py/Scripts/python.exe sim_agent/pc/sim_server.py --seconds 900
 ```
 
-The TCP client requests hello, objects, top and wrist JPEGs (640x480 quality 80),
-reset seed=1, then objects. It reports metadata and bytes rather than dumping
-base64. The returned objects are ground truth for testing, not Agent perception.
+The client waits for the PC's outbound connection. C runs FIFO80 with mlockall on
+CPU1; it exits on setup failure. Python skills set their own affinity to CPU0.
+For task 011 both run in Ubuntu, so `/tmp/rt_ctl.sock` resolves to the same path.
+`--socket PATH` can override the C endpoint; the Python RTClient also accepts a
+path. Do not replace an existing socket until its owner has been inspected.
 
-## Timing and shutdown
+For a continuous ten-minute timing run, replace the demo client with the command
+below and run the PC with `--seconds 600`. It sends a four-second trajectory and
+requests a top image every five seconds. `render 35` and `ping 35` are the
+three-minute comparison workloads, paired with C `--sine`.
 
-- RVS1=144 bytes, RVC1=80 bytes, explicitly little-endian. UDP 15001/TCP 15002.
-- Physics uses 2ms deadlines, skips catch-up when late; state every second step.
-  OpenGL/JPEG run on a dedicated thread with a brief locked state copy.
-- A separate UDP reader timestamps actual arrival; RTT uses echoed ack and
-  monotonic send/arrival timestamps, not time when physics applies the command.
-- Joint targets are range-clamped and slewed by at most 0.004 rad/physics step
-  (2 rad/s). Mode 0 and timeout hold measured position. Timeout is checked at
-  98ms (one-step margin); OS scheduling can still exceed 100ms and must be reported.
-- Loss counts unanswered states older than 100ms, excludes live in-flight and
-  reset-discarded states. Stats separately expose those counts; intended interruption
-  periods must not be mixed into the uninterrupted ten-minute benchmark.
-- C reports cumulative receive/loss, processing mean/max, interval mean/max/std
-  every second from a non-RT reporter. No terminal I/O on the normal RT packet path.
-- Ctrl+C on rt_ctl keeps responding mode=0 for 0.5s, then exits. Test shutdown
-  and restart explicitly. Ctrl+C on the PC stops its threads and closes the viewer.
-  After all board processes finish, exit chroot and `sh /mount_emmc.sh stop`;
-  verify unmounted before ending the session. No forced unmount.
+```sh
+chroot /mnt/ubuntu python3 /root/rv011/tools/timing_client.py trajectory 118
+```
 
-## Measured results (2026-11-07 local / 2026-11-08 UTC)
+`--validate` runs 50 random joint poses and 30 IK targets. Joint transitions also
+respect the velocity limit, and FK is checked after one additional settling
+second. FK uses the measured `ee_pose.q`, comparing to the independently returned
+MuJoCo TCP pose. The log separately records command tracking error: random
+joint-limit poses may collide with the table or robot and need not reach their
+command. This is a kinematic model check, not collision-free planning.
 
-`python -m unittest discover -s sim_agent/pc -v` tests exact offsets, lengths,
-invalid magic/mode/NaN/Inf. The real-board executable compiled without warnings
-in eMMC Ubuntu and ran from Buildroot `/tmp/rv010-rt_ctl --sine --cpu 1`, with
-`SCHED_FIFO=80 mlockall=ok`. The Python TCP client ran in Ubuntu.
+## Trajectory interface
 
-The 600.002-second run had 0% sequence loss, RTT p50 0.916 ms / p99 1.169 ms /
-max 4.833 ms, but board processing max **490.236 us** exceeded the 200 us limit.
-PC watchdog activation also exceeded 100 ms during four stalls. Acceptance
-therefore **failed**. An independent stop/restart test reached the watchdog at
-99.305 ms after the last command (already holding after SIGINT mode=0).
-Both returned images show all three cubes and both trays. Actual logs, images,
-timing limits and cleanup: [task 010 report](../handoff/reports/010-mujoco-panda-loopback.md).
+Linux Unix datagrams, little-endian, at `/tmp/rt_ctl.sock`. Clients bind an abstract
+Unix address for replies. `transport.py` is the reference requester.
+
+| Message | Python struct | Fields |
+|---|---|---|
+| Request, 80 bytes | `<4sI9d` | magic `RVT1`; op uint32; q_goal[7]; gripper_goal; duration_s |
+| Reply, 144 bytes | `<4sIII16d` | magic `RVR1`; status; active; generation; measured q[7]; q_des[7]; measured gripper; gripper_des |
+
+Ops: 1=replace segment, 2=query, 3=cancel/hold. Query/cancel still use an 80-byte
+request, with unused doubles zeroed. Status: 0=accepted, 1=invalid, 2=no state yet.
+Generation increments on new segments/cancel. `active=0` means interpolation is
+complete, not proof that the physical joint has settled. Invalid lengths, magic,
+ops, nonfinite targets, limit violations and durations outside [0.5,120] s are
+rejected. No trajectory means mode=0; a finished trajectory keeps mode=1 at its
+endpoint until replaced or cancelled.
+
+A new segment starts at the **current interpolated target**, even during another
+segment. Joints use `10u^3-15u^4+6u^5`, gripper width varies linearly. Python sets
+`duration=max(0.5, max(abs(q_goal-q_des))/0.5)` seconds, bounding average joint
+speed to 0.5 rad/s (quintic peak is 1.875 times the average). The PC retains its
+joint limits and 2 rad/s target slew limit. SIGINT sends mode=0 for 0.5 s then exits.
+
+## Model export and skills
+
+`kinematics` exports compiled `mjModel` body poses, hinge anchors/axes/ranges and
+qpos0 along link0→hand, plus the TCP site's hand-relative transform. No DH table
+is copied. The site is created in our MjSpec, at the pad tip minus 1 cm: hand-local
+`[0,0,0.1014]` m for this pinned asset. `ee_pose` returns TCP world pos/quaternion,
+measured q and total finger width. All quaternions are w,x,y,z.
+
+`kin.py` composes exported transforms and a geometric Jacobian. IK uses damped
+least squares, joint limits and a weak null-space home bias; it accepts only
+position <1 mm and orientation <1 degree within 200 iterations, otherwise raises.
+`skills.py` provides home, move_to(x,y,z,yaw), pick(x,y,yaw), and place(x,y,z).
+The TCP z axis points down. Pick uses TCP z=0.023 m and a 0.10 m lift; a measured
+width in [0.03,0.05] m is required before and after lifting. Place z means the
+**cube center height**, so TCP is 3 mm higher. Ground truth is deliberately used
+in S3; no camera perception or language model is involved.
+
+Evaluation: the red cube must fit entirely inside the left tray's xy interior
+(center margins 0.08/0.06 m) with center z in (0.02,0.05) m. Stacking requires
+blue-green xy distance <0.02 m and height difference 0.04±0.01 m after settling.
+Every failure and elapsed time is retained; trials are not retried or replaced.
+
+## Scheduling and diagnostics
+
+The default PC runs physics/UDP in a Windows HIGH priority process (never REALTIME)
+and viewer/OpenGL/TCP in a separate NORMAL priority process. Shared qpos/qvel/time
+snapshots are published with a **nonblocking** lock; missed snapshots are counted.
+Renderer startup completes before the benchmark clock. Viewer.sync is at most
+30 Hz; display perturbations are not fed back into the physics process.
+
+`--headless` hides the viewer, while rendering remains available. `--in-process`
+retains the older architecture for diagnostics only. Events above 20 ms identify
+physics starts, mj_step, viewer sync, TCP operations and UDP gaps. The 98 ms
+watchdog runs every physics step; logs distinguish a simultaneous >=98 ms physics
+stall from silence while physics was being scheduled. This is attribution from
+observed timings, not a claim about the OS/driver's underlying cause.
+
+A smaller peer sequence starts a fresh statistics epoch without counting a gap
+as loss. Reset returns sim_time and state sequence to zero, sets flags bit1 and
+resets packet statistics. Physics-step/wall counters remain cumulative. Mode=0
+captures a hold target when entering hold, preventing repeated recapture from
+following gravity-driven drift. `--stop-on-stdin` is an optional supervisor exit:
+STOP/newline or EOF stops cleanly; its reader starts after process spawning.
+
+The GLFW/model APIs follow the official [Python bindings](https://mujoco.readthedocs.io/en/stable/python.html)
+and [mjModel data definitions](https://mujoco.readthedocs.io/en/stable/APIreference/APItypes.html).
+
+## Verification and safe exit
+
+```powershell
+.venv/010/py/Scripts/python.exe -m unittest discover -s sim_agent/pc -v
+```
+
+The tests compare FK to independent MuJoCo poses, check converged/unreachable IK,
+and verify packet offsets, invalid data and JSON error recovery. The original localhost fake_board
+fixture is still available; its metrics are not board acceptance evidence.
+
+Finish the Python client, Ctrl+C the C controller and PC server, then confirm the
+owned processes have exited. Exit any chroot shells and run from Buildroot:
+
+```sh
+sh /mount_emmc.sh stop
+sh /mount_emmc.sh status
+```
+
+Verify all Ubuntu mounts are gone before closing the SSH proxy tunnel. Never
+force unmount. Measured results and remaining limits belong in the
+[task 011 report](../handoff/reports/011-panda-kinematics-pick-place.md);
+[task 010's original failures](../handoff/reports/010-mujoco-panda-loopback.md) remain historical evidence.

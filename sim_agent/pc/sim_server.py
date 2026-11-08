@@ -5,6 +5,7 @@ import io
 import json
 from pathlib import Path
 import queue
+import multiprocessing as mp
 import socket
 import threading
 import time
@@ -18,10 +19,45 @@ OBJECTS = ['red_cube', 'green_cube', 'blue_cube', 'left_tray', 'right_tray']
 HOME = [0, 0, 0, -1.57079, 0, 1.57079, -0.7853]
 
 
+def timing(activity, start, **detail):
+    elapsed = time.perf_counter()-start
+    if elapsed > .020:
+        print(json.dumps(dict(event='slow', activity=activity, milliseconds=elapsed*1000, **detail)), flush=True)
+    return elapsed
+
+
 def load_scene():
     spec = mujoco.MjSpec.from_file(str(Path(__file__).with_name('scene_tabletop.xml')))
     spec.body('hand').add_camera(name='wrist', pos=[0, -.15, .1], quat=[0, 1, 0, 0], fovy=90)
+    # Use compiled fingertip pad extents: tip minus 1 cm, centered between fingers.
+    reference = spec.compile()
+    finger = reference.body('left_finger').id
+    pads = [g for g in range(reference.ngeom) if reference.geom_bodyid[g] == finger
+            and reference.geom_type[g] == mujoco.mjtGeom.mjGEOM_BOX]
+    tip = reference.body_pos[finger, 2] + max(reference.geom_pos[g, 2]+reference.geom_size[g, 2] for g in pads)
+    spec.body('hand').add_site(name='tcp', pos=[0, 0, float(tip)-.01], size=[.005]*3, rgba=[1, 0, 1, 1])
     return spec.compile()
+
+
+def export_kinematics(model):
+    bodies = []
+    body = model.body('hand').id
+    while body:
+        bodies.append(body); body = int(model.body_parentid[body])
+    chain = []
+    for b in reversed(bodies):
+        joints = []
+        for j in range(int(model.body_jntadr[b]), int(model.body_jntadr[b]+model.body_jntnum[b])):
+            if model.jnt_type[j] != mujoco.mjtJoint.mjJNT_HINGE:
+                raise ValueError('only hinge joints supported in arm chain')
+            joints.append(dict(name=model.joint(j).name, pos=model.jnt_pos[j].tolist(),
+                               axis=model.jnt_axis[j].tolist(), range=model.jnt_range[j].tolist(),
+                               qpos0=float(model.qpos0[model.jnt_qposadr[j]])))
+        chain.append(dict(name=model.body(b).name, pos=model.body_pos[b].tolist(),
+                          quat=model.body_quat[b].tolist(), joints=joints))
+    site = model.site('tcp').id
+    return dict(chain=chain, tcp=dict(body='hand', pos=model.site_pos[site].tolist(),
+                                     quat=model.site_quat[site].tolist()))
 
 
 class Simulator:
@@ -48,6 +84,9 @@ class Simulator:
         self.last_rx = None
         self.holding = True
         self.reset_flag = True
+        self.simulation_stalls = self.board_silence = self.snapshot_skips = 0
+        self.send_gap_max = self.physics_gap_max = 0.
+        self.shared = self.remote_jobs = self.render_ready = None
         self.reset(None)
         self.q_min = self.q_max = self.data.qpos[self.qadr].copy()
         self.gripper_min = self.gripper_max = float(sum(self.data.qpos[self.fingers]))
@@ -73,24 +112,46 @@ class Simulator:
         self.last_ack = None
         self.reset_discarded += len(self.pending)
         self.pending.clear()
+        self.seq=self.sent=self.received=self.invalid=self.expired_count=self.reset_discarded=0
+        self.last_cmd_seq=0;self.rtts.clear()
         self.target = np.array(HOME, dtype=float)
 
     def service(self, request, renderer, snapshot):
+        if not isinstance(request,dict):raise ValueError('request must be a JSON object')
         op = request.get('op')
+        if op=='reset' and request.get('seed') is not None and (type(request['seed']) is not int or request['seed']<0):
+            raise ValueError('seed must be a nonnegative integer or null')
         if op == 'hello':
             return dict(sim='mujoco', version=mujoco.__version__, robot='panda', cameras=['top', 'wrist'], table_z=0.0)
         if op == 'ping':
             return {'t': time.time()}
+        if op == 'kinematics':
+            return export_kinematics(self.model)
+        if op == 'reset' and self.remote_jobs is not None:
+            commands,replies=self.remote_jobs
+            commands.put(request.get('seed'))
+            return replies.get(timeout=10)
         if op == 'reset':
             done = queue.Queue(maxsize=1)
             self.jobs.put((request.get('seed'), done), timeout=1)
             return done.get(timeout=5)
-        with self.lock:
-            # Brief state copy only; OpenGL and JPEG encoding never hold physics lock.
-            snapshot.qpos[:] = self.data.qpos
-            snapshot.qvel[:] = self.data.qvel
-            snapshot.time = self.data.time
+        if self.shared is not None:
+            from graphics_process import read_snapshot
+            q,v,t=read_snapshot(*self.shared,self.model)
+            snapshot.qpos[:]=q;snapshot.qvel[:]=v;snapshot.time=t
+        else:
+            with self.lock:
+                snapshot.qpos[:]=self.data.qpos
+                snapshot.qvel[:]=self.data.qvel
+                snapshot.time=self.data.time
+        # Brief state copy only; OpenGL and JPEG encoding never hold physics lock.
         mujoco.mj_forward(self.model, snapshot)
+        if op == 'ee_pose':
+            site = self.model.site('tcp').id
+            quat = np.empty(4)
+            mujoco.mju_mat2Quat(quat, snapshot.site_xmat[site])
+            return dict(pos=snapshot.site_xpos[site].tolist(), quat=quat.tolist(),
+                        q=snapshot.qpos[self.qadr].tolist(), gripper=float(sum(snapshot.qpos[self.fingers])))
         if op == 'objects':
             return {'objects': [dict(name=n, pos=snapshot.body(n).xpos.tolist(),
                                     quat=snapshot.body(n).xquat.tolist()) for n in OBJECTS]}
@@ -108,11 +169,31 @@ class Simulator:
                         cam_xmat=snapshot.cam_xmat[cam.id].tolist())
         raise ValueError('unknown op')
 
+    def request_reply(self, line, renderer, snapshot):
+        """Malformed JSON must not terminate the rendering/TCP worker."""
+        request = None
+        ident = None
+        began = time.perf_counter()
+        try:
+            request = json.loads(line)
+            if isinstance(request, dict):
+                ident = request.get('id')
+            reply = self.service(request, renderer, snapshot)
+        except (ValueError, UnicodeDecodeError, queue.Empty, queue.Full) as exc:
+            reply = {'error': str(exc) or type(exc).__name__}
+        finally:
+            timing('tcp_request', began,
+                   op=request.get('op') if isinstance(request, dict) else None)
+        return {'id': ident, **reply}
+
     def tcp_worker(self):
         # Context is created and destroyed on this rendering thread.
         try:
             with mujoco.Renderer(self.model, height=480, width=640) as renderer:
                 snapshot = mujoco.MjData(self.model)
+                if self.render_ready is not None:
+                    print(json.dumps({'graphics_stage':'renderer_ready'}),flush=True)
+                    self.render_ready.set()
                 while not self.stop.is_set():
                     try:
                         with socket.create_connection((self.address[0], 15002), timeout=2) as conn:
@@ -130,12 +211,8 @@ class Simulator:
                                     raise ValueError('request too large')
                                 while b'\n' in buffer:
                                     line, buffer = buffer.split(b'\n', 1)
-                                    request = json.loads(line)
-                                    try:
-                                        reply = self.service(request, renderer, snapshot)
-                                    except (ValueError, queue.Empty, queue.Full) as e:
-                                        reply = {'error': str(e)}
-                                    conn.sendall((json.dumps({'id': request.get('id'), **reply})+'\n').encode())
+                                    reply = self.request_reply(line, renderer, snapshot)
+                                    conn.sendall((json.dumps(reply)+'\n').encode())
                     except (OSError, ValueError) as e:
                         print(json.dumps({'tcp_error': type(e).__name__}), flush=True)
                     self.stop.wait(2)
@@ -154,6 +231,9 @@ class Simulator:
         inflight = len(self.pending)-expired
         lost = self.expired_count+expired
         return dict(final=final, physics_steps=self.steps,
+                    watchdog_simulation_stalls=self.simulation_stalls,watchdog_board_silence=self.board_silence,
+                    send_gap_max_ms=self.send_gap_max*1000,physics_gap_max_ms=self.physics_gap_max*1000,
+                    snapshot_skips=self.snapshot_skips,
                     q_min=self.q_min.tolist(), q_max=self.q_max.tolist(),
                     gripper_min=self.gripper_min, gripper_max=self.gripper_max,
                     wall_seconds=(self.wall_end or time.perf_counter())-self.wall_start if self.wall_start else 0,
@@ -167,29 +247,62 @@ class Simulator:
                     rtt_ms_p99=float(np.percentile(values, 99)) if len(values) else None,
                     rtt_ms_max=float(max(values)) if len(values) else None)
 
-    def run(self, seconds, headless):
+    def run(self, seconds, headless, isolated=True):
         worker = threading.Thread(target=self.tcp_worker, daemon=True)
         viewer = None
+        graphics = None
         timer_active = False
         if __import__('os').name == 'nt':
             import ctypes
             timer_active = ctypes.windll.winmm.timeBeginPeriod(1) == 0
         try:
-            if not headless:
+            if not headless and not isolated:
                 from mujoco import viewer as mj_viewer
                 viewer = mj_viewer.launch_passive(self.model, self.data)
             # GLFW initialization is process-global: initialize the viewer first,
             # then create the offscreen context on its own rendering thread.
-            worker.start()
+            if isolated:
+                from graphics_process import graphics_main
+                context=mp.get_context('spawn')
+                shared=context.RawArray('d',self.model.nq+self.model.nv+1)
+                snapshot_lock=context.Lock();commands=context.Queue();replies=context.Queue()
+                ready=context.Event();graphics_stop=context.Event()
+                def publish():
+                    if not snapshot_lock.acquire(False):
+                        self.snapshot_skips+=1;return
+                    try:
+                        values=np.frombuffer(shared,dtype=np.float64)
+                        values[:self.model.nq]=self.data.qpos
+                        values[self.model.nq:-1]=self.data.qvel;values[-1]=self.data.time
+                    finally:snapshot_lock.release()
+                publish()
+                graphics=context.Process(target=graphics_main,args=(self.address[0],headless,shared,snapshot_lock,commands,replies,ready,graphics_stop))
+                graphics.start()
+                if not ready.wait(60) or not graphics.is_alive():raise RuntimeError('graphics initialization failed')
+                if __import__('os').name=='nt':
+                    from graphics_process import set_windows_priority
+                    set_windows_priority(0x80)
+                print(json.dumps({'graphics_isolated':True,'physics_priority':'HIGH','graphics_pid':graphics.pid}),flush=True)
+            else:
+                worker.start()
+            if getattr(self,'stop_on_stdin',False):
+                def supervisor():
+                    import sys
+                    sys.stdin.readline();self.stop.set()
+                threading.Thread(target=supervisor,daemon=True).start()
             with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
                 udp.connect(self.address)  # Only replies from the board endpoint are accepted.
                 udp.settimeout(.05)
                 incoming = queue.Queue(maxsize=2048)
                 def receive():
+                    previous = None
                     while not self.stop.is_set():
                         try:
                             packet = udp.recv(65536)
                             arrived = time.perf_counter()
+                            if previous is not None:
+                                timing('udp_receive_gap', previous)
+                            previous = arrived
                             incoming.put_nowait((packet, arrived))
                         except (socket.timeout, ConnectionResetError, queue.Full):
                             continue
@@ -200,16 +313,26 @@ class Simulator:
                 start = due = last_print = last_view = time.perf_counter()
                 self.wall_start = start
                 step = 0
-                while time.perf_counter()-start < seconds and (viewer is None or viewer.is_running()):
+                previous_step = previous_send = None
+                while not self.stop.is_set() and time.perf_counter()-start < seconds and (viewer is None or viewer.is_running()) and (graphics is None or not graphics_stop.is_set()):
                     now = time.perf_counter()
                     if now < due:
                         time.sleep(due-now)
                     now = time.perf_counter()
+                    loop_gap=0 if previous_step is None else now-previous_step
+                    self.physics_gap_max=max(self.physics_gap_max,loop_gap)
+                    if previous_step is not None:
+                        timing('physics_start_gap', previous_step)
+                    previous_step = now
                     if now-due > .002:
                         self.late += 1
                     # Schedule from actual start: no catch-up stepping.
                     due = now + .002 if now-due > .002 else due + .002
                     with self.lock:
+                        if isolated:
+                            try:
+                                seed=commands.get_nowait();self.reset(seed);publish();replies.put({'ok':True})
+                            except queue.Empty:pass
                         while not self.jobs.empty():
                             seed, done = self.jobs.get_nowait()
                             self.reset(seed)
@@ -225,6 +348,11 @@ class Simulator:
                                 self.invalid += 1
                                 continue
                             sent_at = self.pending.get(ack)
+                            if sent_at is not None and seq<self.last_cmd_seq:
+                                # v1.1: smaller peer sequence starts a new statistics epoch.
+                                self.sent=len(self.pending);self.received=self.invalid=self.expired_count=self.reset_discarded=0
+                                self.rtts.clear();self.last_ack=None
+                                print(json.dumps({'peer_sequence_restart':True,'seq':seq}),flush=True)
                             if sent_at is None or arrival-sent_at > .1 or (self.last_ack is not None and not 0 < ((ack-self.last_ack)&0xffffffff) < 0x80000000):
                                 self.invalid += 1
                                 continue
@@ -235,10 +363,11 @@ class Simulator:
                             if self.watchdog_active:
                                 print(json.dumps({'command_recovered': True, 'mode': mode}), flush=True)
                             self.watchdog_active = False
+                            first_command=self.last_rx is None
                             self.last_rx = arrival
                             self.last_cmd_seq = seq
                             if mode == 0:
-                                self.hold()
+                                if not self.holding or first_command:self.hold()
                             else:
                                 # Position clamp + conservative target slew cap, 2 rad/s.
                                 target = np.clip(values[:7], self.ranges[:, 0], self.ranges[:, 1])
@@ -249,14 +378,19 @@ class Simulator:
                         if self.last_rx is None or time.perf_counter()-self.last_rx >= .098:
                             if not self.watchdog_active and self.last_rx is not None:
                                 self.timeouts += 1
+                                source='simulation_stall' if loop_gap>=.098 else 'board_silence'
+                                if source=='simulation_stall':self.simulation_stalls+=1
+                                else:self.board_silence+=1
                                 print(json.dumps({'watchdog': 'hold', 'age_ms': (time.perf_counter()-self.last_rx)*1000,
-                                                  'already_holding': self.holding}), flush=True)
+                                                  'already_holding': self.holding,'source':source}), flush=True)
                             if not self.holding:
                                 self.hold()
                             self.holding = True
                             self.watchdog_active = True
                         self.data.ctrl[:7] += np.clip(self.target-self.data.ctrl[:7], -.004, .004)
+                        began = time.perf_counter()
                         mujoco.mj_step(self.model, self.data)
+                        timing('mj_step', began)
                         step += 1
                         self.steps += 1
                         if step % 2 == 0:
@@ -272,6 +406,10 @@ class Simulator:
                                 sum(self.data.qpos[self.fingers]), flags, self.last_cmd_seq)
                             try:
                                 sent_at = time.perf_counter()
+                                if previous_send is not None:
+                                    self.send_gap_max=max(self.send_gap_max,sent_at-previous_send)
+                                    timing('udp_send_gap', previous_send)
+                                previous_send = sent_at
                                 udp.send(packet)
                             except ConnectionResetError:
                                 continue
@@ -279,15 +417,20 @@ class Simulator:
                             self.seq = (self.seq+1)&0xffffffff
                             self.sent += 1
                             self.reset_flag = False
+                            if isolated:publish()
                             if len(self.pending) > 1024:
                                 kept = {s: t for s, t in self.pending.items() if now-t < 1}
                                 self.expired_count += len(self.pending)-len(kept)
                                 self.pending = kept
                     if viewer and now-last_view >= 1/30:
+                        began = time.perf_counter()
                         viewer.sync()
+                        timing('viewer_sync', began)
                         last_view = now
                     if now-last_print >= 5:
+                        began = time.perf_counter()
                         print(json.dumps(self.stats()), flush=True)
+                        timing('stats_and_output', began)
                         last_print = now
         except KeyboardInterrupt:
             pass
@@ -296,6 +439,9 @@ class Simulator:
             self.stop.set()
             if worker.is_alive():
                 worker.join(timeout=5)
+            if graphics is not None:
+                graphics_stop.set();graphics.join(8)
+                if graphics.is_alive():graphics.terminate();graphics.join(3)
             if viewer:
                 viewer.close()
             if timer_active:
@@ -307,6 +453,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--board-ip', default='192.168.50.2')
     parser.add_argument('--headless', action='store_true')
+    parser.add_argument('--stop-on-stdin',action='store_true',help='supervisor EOF or STOP requests a clean shutdown')
+    parser.add_argument('--in-process',action='store_true',help='diagnostic comparison only')
     parser.add_argument('--seconds', type=float, default=600)
     args = parser.parse_args()
-    Simulator(args.board_ip).run(args.seconds, args.headless)
+    sim=Simulator(args.board_ip)
+    sim.stop_on_stdin=args.stop_on_stdin
+    sim.run(args.seconds,args.headless,not args.in_process)

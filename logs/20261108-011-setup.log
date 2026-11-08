@@ -1,0 +1,239 @@
+Task 011 real-board simulation evidence. Execution started locally 2026-11-07 America/Los_Angeles; UTC records 2026-11-08.
+Original measurements retained; host paths, MACs and identifiers redacted. No credentials or API calls.
+
+===== bootstrap.log =====
+[2026-11-07T23:03:31.777-08:00] printf '\n__RV_BEGIN_fa889ee8995ea7fb83397deb__\n'; sh -c 'set -- '"'"'2026-11-\r-08 07:03:31'"'"'
+[2026-11-07T23:03:31.777-08:00] > #!/bin/sh
+[2026-11-07T23:03:31.777-08:00] > # Task 008-r2: temporary eth0 configuration; run as root in Buildroot.
+[2026-11-07T23:03:31.793-08:00] > set -eu
+[2026-11-07T23:03:31.809-08:00] > 
+[2026-11-07T23:03:31.809-08:00] > if [ "$#" -gt 1 ]; then
+[2026-11-07T23:03:31.809-08:00] >     echo "Usage: sh board_net_up.sh [UTC-time: YYYY-MM-DD HH:MM:SS]" >&2
+[2026-11-07T23:03:31.825-08:00] >     exit 2
+[2026-11-07T23:03:31.825-08:00] > fi
+[2026-11-07T23:03:31.825-08:00] > if [ "$(id -u)" != 0 ]; then
+[2026-11-07T23:03:31.841-08:00] >     echo "Run as root." >&2
+[2026-11-07T23:03:31.841-08:00] >     exit 1
+[2026-11-07T23:03:31.841-08:00] > fi
+[2026-11-07T23:03:31.841-08:00] > 
+[2026-11-07T23:03:31.841-08:00] > ip link set eth0 up
+[2026-11-07T23:03:31.857-08:00] > if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ! ip -4 addr show dev eth0 | grep -Fq '"'"'inet 192.168.50.2/24 '"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-07T23:03:31.873-08:00] >     ip addr add 192.168.50.2/24 dev eth0
+[2026-11-07T23:03:31.889-08:00] > fi
+[2026-11-07T23:03:31.889-08:00] > # Remove only the known obsolete ICS route; preserve unrelated routing.
+[2026-11-07T23:03:31.905-08:00] > if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; then \r\x1b[A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00> if ip route show | grep -Fq '"'"'default via 192.168.137.1 dev eth0'"'"'; the\x1b[K\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00n
+[2026-11-07T23:03:31.937-08:00] >     ip route del default via 192.168.137.1 dev eth0
+[2026-11-07T23:03:31.937-08:00] > fi
+[2026-11-07T23:03:31.953-08:00] > if [ "$#" -eq 1 ]; then
+[2026-11-07T23:03:31.953-08:00] >     date -u -s "$1"
+[2026-11-07T23:03:31.953-08:00] > fi
+[2026-11-07T23:03:31.953-08:00] > ip addr show eth0
+[2026-11-07T23:03:31.969-08:00] > ip route
+[2026-11-07T23:03:31.969-08:00] > date -u
+[2026-11-07T23:03:31.969-08:00] > cat /sys/class/net/eth0/carrier
+[2026-11-07T23:03:31.969-08:00] > '; __rv_rc=$?; printf '\n'; echo __RC=${__rv_rc}__fa889ee8995ea7fb83397deb
+[2026-11-07T23:03:31.985-08:00] 
+[2026-11-07T23:03:31.985-08:00] __RV_BEGIN_fa889ee8995ea7fb83397deb__
+[2026-11-07T23:03:32.145-08:00] Sun Nov  8 07:03:31 UTC 2026
+[2026-11-07T23:03:32.177-08:00] 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+[2026-11-07T23:03:32.177-08:00]     link/ether <MAC> brd <MAC>
+[2026-11-07T23:03:32.193-08:00]     inet 192.168.137.178/24 brd 192.168.137.255 scope global eth0
+[2026-11-07T23:03:32.193-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T23:03:32.193-08:00]     inet 192.168.50.2/24 scope global eth0
+[2026-11-07T23:03:32.193-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T23:03:32.209-08:00]     inet6 <LINK_LOCAL_IPV6>/64 scope link 
+[2026-11-07T23:03:32.209-08:00]        valid_lft forever preferred_lft forever
+[2026-11-07T23:03:32.209-08:00] 192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+[2026-11-07T23:03:32.209-08:00] 192.168.137.0/24 dev eth0 scope link  src 192.168.137.178 
+[2026-11-07T23:03:32.225-08:00] Sun Nov  8 07:03:31 UTC 2026
+[2026-11-07T23:03:32.241-08:00] 1
+[2026-11-07T23:03:32.241-08:00] 
+[2026-11-07T23:03:32.241-08:00] __RC=0__fa889ee8995ea7fb83397deb
+[2026-11-07T23:03:32.257-08:00] # 
+
+===== prepare.log =====
+6.6.90-rt54+
+1
+Entering Ubuntu chroot on /dev/mmcblk1p1...
+bash: cannot set terminal process group (4905): Inappropriate ioctl for device
+bash: no job control in this shell
+root@nucleisys:/# exit
+exit
+Exited Ubuntu (status 0). Mounts are kept.
+To unmount, run from Buildroot: sh /mount_emmc.sh stop
+=== Ubuntu eMMC mount status ===
+Device: /dev/mmcblk1p1
+Root:   /mnt/ubuntu
+/dev/mmcblk1p1 /mnt/ubuntu ext4 rw,relatime 0 0
+proc /mnt/ubuntu/proc proc rw,relatime 0 0
+sysfs /mnt/ubuntu/sys sysfs rw,relatime 0 0
+rootfs /mnt/ubuntu/dev rootfs rw,size=1015660k,nr_inodes=253915 0 0
+devpts /mnt/ubuntu/dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+tmpfs /mnt/ubuntu/run tmpfs rw,relatime 0 0
+numpy_installed False
+
+[host] exit_status=0
+
+===== install-numpy.log =====
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libblas3 libgfortran5 liblapack3
+Suggested packages:
+  gfortran python3-pytest
+The following NEW packages will be installed:
+  libblas3 libgfortran5 liblapack3 python3-numpy
+0 upgraded, 4 newly installed, 0 to remove and 24 not upgraded.
+Need to get 6575 kB of archives.
+After this operation, 24.7 MB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 libblas3 riscv64 3.12.0-3build1.1 [132 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 libgfortran5 riscv64 14.2.0-4ubuntu2~24.04.1 [479 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports noble-updates/main riscv64 liblapack3 riscv64 3.12.0-3build1.1 [2295 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports noble/main riscv64 python3-numpy riscv64 1:1.26.4+ds-6ubuntu1 [3669 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 6575 kB in 10s (660 kB/s)
+Selecting previously unselected package libblas3:riscv64.
+(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 24731 files and directories currently installed.)
+Preparing to unpack .../libblas3_3.12.0-3build1.1_riscv64.deb ...
+Unpacking libblas3:riscv64 (3.12.0-3build1.1) ...
+Selecting previously unselected package libgfortran5:riscv64.
+Preparing to unpack .../libgfortran5_14.2.0-4ubuntu2~24.04.1_riscv64.deb ...
+Unpacking libgfortran5:riscv64 (14.2.0-4ubuntu2~24.04.1) ...
+Selecting previously unselected package liblapack3:riscv64.
+Preparing to unpack .../liblapack3_3.12.0-3build1.1_riscv64.deb ...
+Unpacking liblapack3:riscv64 (3.12.0-3build1.1) ...
+Selecting previously unselected package python3-numpy.
+Preparing to unpack .../python3-numpy_1%3a1.26.4+ds-6ubuntu1_riscv64.deb ...
+Unpacking python3-numpy (1:1.26.4+ds-6ubuntu1) ...
+Setting up libblas3:riscv64 (3.12.0-3build1.1) ...
+update-alternatives: using /usr/lib/riscv64-linux-gnu/blas/libblas.so.3 to provide /usr/lib/riscv64-linux-gnu/libblas.so.3 (libblas.so.3-riscv64-linux-gnu) in auto mode
+Setting up libgfortran5:riscv64 (14.2.0-4ubuntu2~24.04.1) ...
+Setting up liblapack3:riscv64 (3.12.0-3build1.1) ...
+update-alternatives: using /usr/lib/riscv64-linux-gnu/lapack/liblapack.so.3 to provide /usr/lib/riscv64-linux-gnu/liblapack.so.3 (liblapack.so.3-riscv64-linux-gnu) in auto mode
+Setting up python3-numpy (1:1.26.4+ds-6ubuntu1) ...
+
+===== install-status.log =====
+ 5024 root     /tmp/rv010-rt_ctl --sine --cpu 1
+ 5026 root     python3 /tmp/rv011-timing-service.py render
+install ok installed
+
+[host] exit_status=0
+
+===== compile.log =====
+gcc -O2 -Wall -Wextra -std=c11 rt_ctl.c -o rt_ctl -lm -pthread
+1.26.4
+
+===== unit.log =====
+test_fk_matches_independent_engine (test_kinematics.KinematicsTests.test_fk_matches_independent_engine) ... ok
+test_ik_returns_only_converged_solutions (test_kinematics.KinematicsTests.test_ik_returns_only_converged_solutions) ... ok
+test_reject_bad_wire_data (test_protocol.ProtocolTests.test_reject_bad_wire_data) ... ok
+test_wire_offsets (test_protocol.ProtocolTests.test_wire_offsets) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.446s
+
+OK
+
+===== unit-final.log =====
+test_fk_matches_independent_engine (test_kinematics.KinematicsTests.test_fk_matches_independent_engine) ... ok
+test_ik_returns_only_converged_solutions (test_kinematics.KinematicsTests.test_ik_returns_only_converged_solutions) ... ok
+test_reject_bad_wire_data (test_protocol.ProtocolTests.test_reject_bad_wire_data) ... ok
+test_wire_offsets (test_protocol.ProtocolTests.test_wire_offsets) ... ok
+test_bad_json_then_ping (test_rpc.RequestReplies.test_bad_json_then_ping) ... ok
+test_invalid_reset_preserves_id (test_rpc.RequestReplies.test_invalid_reset_preserves_id) ... ok
+test_unknown_operation_preserves_id (test_rpc.RequestReplies.test_unknown_operation_preserves_id) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.612s
+
+OK
+
+===== restart-pc.log =====
+{"graphics_stage": "starting"}
+{"graphics_stage": "model_ready"}
+{"graphics_stage": "viewer_ready"}
+{"graphics_stage": "renderer_ready"}
+{"graphics_isolated": true, "physics_priority": "HIGH", "graphics_pid": 38348}
+{"command_recovered": true, "mode": 0}
+{"event": "slow", "activity": "tcp_request", "milliseconds": 77.96240000061516, "op": "render"}
+{"command_recovered": true, "mode": 0}
+{"peer_sequence_restart": true, "seq": 0}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 2500, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 5.997700000079931, "physics_gap_max_ms": 3.7957999993523117, "snapshot_skips": 0, "q_min": [-0.29665991676065334, 0.0, -0.00028188645733695717, -1.8738545921724514, -0.00036433327519242126, 1.569486129488895, -0.7853078835340515], "q_max": [0.2928064901471607, 0.006868634128397223, 0.0007107742712542364, -1.2838791311249933, 0.0, 1.57079, -0.7852965965360282], "gripper_min": 3.2338372435492534e-06, "gripper_max": 0.08000147052820601, "wall_seconds": 5.000841600000058, "sent": 250, "received": 249, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 1, "sim_time": 4.9079999999996815, "rtt_samples": 249, "rtt_ms_p50": 0.1750999999785563, "rtt_ms_p99": 0.30149599995638715, "rtt_ms_max": 0.3666000011435244}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 4994, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 16.390200000387267, "physics_gap_max_ms": 13.829200001055142, "snapshot_skips": 0, "q_min": [-0.29665991676065334, 0.0, -0.00028188874792369547, -1.8738545921724514, -0.00036448077145885267, 1.569478879377152, -0.7853078835340515], "q_max": [0.2966397428497217, 0.006869579830949001, 0.0007107742712542364, -1.2800055061329896, 0.0, 1.57079, -0.7852965965360282], "gripper_min": 1.2171134249744455e-11, "gripper_max": 0.08000147052820601, "wall_seconds": 10.000990399999864, "sent": 1497, "received": 1496, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 2, "sim_time": 9.895999999999974, "rtt_samples": 1496, "rtt_ms_p50": 0.16504999985045288, "rtt_ms_p99": 0.308169998879748, "rtt_ms_max": 0.47200000153679866}
+{"tcp_error": "TimeoutError"}
+{"final": true, "physics_steps": 5994, "watchdog_simulation_stalls": 0, "watchdog_board_silence": 0, "send_gap_max_ms": 16.390200000387267, "physics_gap_max_ms": 13.829200001055142, "snapshot_skips": 0, "q_min": [-0.29665991676065334, 0.0, -0.00028200312454194443, -1.8738545921724514, -0.00036448077145885267, 1.569478879377152, -0.7853078835340515], "q_max": [0.2966397428497217, 0.006869579830949001, 0.0007107742712542364, -1.2800055061329896, 0.0, 1.57079, -0.785296594736265], "gripper_min": 1.2171134249744455e-11, "gripper_max": 0.08000147052820601, "wall_seconds": 12.001150000000052, "sent": 1997, "received": 1996, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 2, "sim_time": 11.896000000000642, "rtt_samples": 1996, "rtt_ms_p50": 0.16829999913170468, "rtt_ms_p99": 0.31145000102696935, "rtt_ms_max": 0.47200000153679866}
+
+===== restart-fake.log =====
+{"tcp_listening": 15002}
+{"request": {"op": "hello"}, "elapsed_s": 0.00033679999978630804, "reply": {"id": 0, "sim": "mujoco", "version": "4.0.0", "robot": "panda", "cameras": ["top", "wrist"], "table_z": 0.0}}
+{"request": {"op": "objects"}, "elapsed_s": 0.000503999999637017, "reply": {"id": 1, "objects": [{"name": "red_cube", "pos": [0.68, -0.12, 0.024882280000000003], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "green_cube", "pos": [0.72, 0.23, 0.024882280000000003], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "blue_cube", "pos": [0.68, 0.12, 0.024882280000000003], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}]}}
+{"request": {"op": "render", "camera": "top", "w": 640, "h": 480}, "elapsed_s": 0.07858409999971627, "reply": {"id": 2, "w": 640, "h": 480, "fovy": 48.0, "cam_pos": [0.4, 0.0, 1.65], "cam_xmat": [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], "jpeg_bytes": 19641}}
+{"request": {"op": "render", "camera": "wrist", "w": 640, "h": 480}, "elapsed_s": 0.0045547999998234445, "reply": {"id": 3, "w": 640, "h": 480, "fovy": 90.0, "cam_pos": [0.4046154935358802, -2.3814906314779128e-05, 0.5218912262655343], "cam_xmat": [9.380709555695255e-05, -0.999968408866471, 0.00794811105137437, 0.9999999770379421, 9.533554722218618e-05, 0.00019192510663538706, -0.00019267678102018139, 0.007948092864932576, 0.9999683948482903], "jpeg_bytes": 18997}}
+{"request": {"op": "reset", "seed": 1}, "elapsed_s": 0.0033075999999709893, "reply": {"id": 4, "ok": true}}
+{"request": {"op": "objects"}, "elapsed_s": 0.0004284999995434191, "reply": {"id": 5, "objects": [{"name": "red_cube", "pos": [0.6803546487410077, -0.10648608911022193, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "green_cube", "pos": [0.709324788381589, 0.24345948341411733, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "blue_cube", "pos": [0.6743549435603147, 0.11769979346917726, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}]}}
+FAKE_BOARD_COMPLETE replies=1997 (local fixture only)
+
+===== cleanup.log =====
+Task 011 final cleanup (no further control tests)
+No task control processes present after reset
+Stopping Ubuntu mounts; leave all chroot sessions first.
+Ubuntu unmounted.
+=== Ubuntu eMMC mount status ===
+Device: /dev/mmcblk1p1
+Root:   /mnt/ubuntu
+Ubuntu root is not mounted.
+Verified: no Ubuntu root or child mounts
+
+[host] exit_status=0
+
+===== final-board.log =====
+Final Buildroot state
+NAME=Buildroot
+VERSION=2024.08
+ID=buildroot
+VERSION_ID=2024.08
+PRETTY_NAME="Buildroot 2024.08"
+ 08:08:27 up 11 min,  load average: 0.33, 0.21, 0.12
+=== Ubuntu eMMC mount status ===
+Device: /dev/mmcblk1p1
+Root:   /mnt/ubuntu
+Ubuntu root is not mounted.
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      
+tcp        0      0 :::22                   :::*                    LISTEN      
+Verified: reverse proxy listener absent
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+    inet 192.168.50.2/24 scope global eth0
+       valid_lft forever preferred_lft forever
+192.168.50.0/24 dev eth0 scope link  src 192.168.50.2 
+1
+
+[host] exit_status=0
+
+===== final-host.json =====
+{
+  "Utc": "2026-11-08T08:08:58.3566913Z",
+  "BoardAdapterStatus": "Up",
+  "BoardAdapterLinkSpeed": "100 Mbps",
+  "Addresses": [
+    {
+      "IPAddress": "192.168.50.1",
+      "PrefixLength": 24
+    }
+  ],
+  "Gateway": [],
+  "Dns": [],
+  "ProxyListeners": [
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 7897
+    }
+  ],
+  "SshProcesses": [],
+  "TaskPythonProcesses": [],
+  "HostHttpsOk": true
+}
