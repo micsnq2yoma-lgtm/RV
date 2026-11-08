@@ -3,7 +3,7 @@
 - **执行者**：Codex
 - **日期**：2026-11-07（America/Los_Angeles；日志名按任务单 20261108）
 - **结果**：blocked
-- **分支 / PR**：`task-010-mujoco-loopback` / 待创建草稿 PR
+- **分支 / PR**：`task-010-mujoco-loopback` / [草稿 PR #6](https://github.com/micsnq2yoma-lgtm/RV/pull/6)
 
 ## 一句话结论
 
