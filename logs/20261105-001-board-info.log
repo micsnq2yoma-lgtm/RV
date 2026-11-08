@@ -1,0 +1,232 @@
+[HOST NOTE] Selected verbatim command stdout with host timestamps, not a complete serial transcript. Authentication exchange, MAC-bearing network output, full directory listings and raw model NUL output are excluded. Complete records remain unchanged in ignored local .venv/.
+[2026-11-05T02:02:57.831-08:00] [HOST COMMAND] uname -a
+[2026-11-05T02:02:57.831-08:00] Linux nucleisys 6.6.90-rt54+ #1 SMP PREEMPT_RT Mon May 11 19:34:25 PDT 2026 riscv64 GNU/Linux
+[2026-11-05T02:02:57.831-08:00] [HOST EXIT] 0
+[2026-11-05T02:02:58.261-08:00] [HOST COMMAND] cat /proc/version
+[2026-11-05T02:02:58.261-08:00] Linux version 6.6.90-rt54+ (linux@ubuntu) (riscv64-unknown-linux-gnu-gcc (g553a166de) 14.2.1 20240816, GNU ld (GNU Binutils) 2.44) #1 SMP PREEMPT_RT Mon May 11 19:34:25 PDT 2026
+[2026-11-05T02:02:58.261-08:00] [HOST EXIT] 0
+[2026-11-05T02:02:58.695-08:00] [HOST COMMAND] cat /proc/cpuinfo
+[2026-11-05T02:02:58.695-08:00] processor	: 0
+[2026-11-05T02:02:58.695-08:00] hart		: 1
+[2026-11-05T02:02:58.695-08:00] isa		: rv64imafdc_zicbom_zicntr_zicsr_zifencei_zihpm_sscofpmf_sstc_svpbmt
+[2026-11-05T02:02:58.695-08:00] mmu		: sv39
+[2026-11-05T02:02:58.695-08:00] mvendorid	: 0x536
+[2026-11-05T02:02:58.695-08:00] marchid		: 0x900
+[2026-11-05T02:02:58.695-08:00] mimpid		: 0x40000
+[2026-11-05T02:02:58.695-08:00] 
+[2026-11-05T02:02:58.695-08:00] processor	: 1
+[2026-11-05T02:02:58.695-08:00] hart		: 0
+[2026-11-05T02:02:58.695-08:00] isa		: rv64imafdc_zicbom_zicntr_zicsr_zifencei_zihpm_sscofpmf_sstc_svpbmt
+[2026-11-05T02:02:58.695-08:00] mmu		: sv39
+[2026-11-05T02:02:58.695-08:00] mvendorid	: 0x536
+[2026-11-05T02:02:58.695-08:00] marchid		: 0x900
+[2026-11-05T02:02:58.695-08:00] mimpid		: 0x40000
+[2026-11-05T02:02:58.695-08:00] 
+[2026-11-05T02:02:58.695-08:00] [HOST EXIT] 0
+[2026-11-05T02:02:59.148-08:00] [HOST COMMAND] cat /proc/meminfo | head -5
+[2026-11-05T02:02:59.148-08:00] MemTotal:        2047968 kB
+[2026-11-05T02:02:59.148-08:00] MemFree:         1984324 kB
+[2026-11-05T02:02:59.148-08:00] MemAvailable:    1981564 kB
+[2026-11-05T02:02:59.148-08:00] Buffers:               0 kB
+[2026-11-05T02:02:59.148-08:00] Cached:            27772 kB
+[2026-11-05T02:02:59.148-08:00] [HOST EXIT] 0
+[2026-11-05T02:02:59.621-08:00] [HOST COMMAND] cat /proc/cmdline
+[2026-11-05T02:02:59.621-08:00] earlycon=sbi console=ttyNUC0
+[2026-11-05T02:02:59.621-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:00.057-08:00] [HOST COMMAND] cat /proc/device-tree/compatible | tr '\0' '\n'
+[2026-11-05T02:03:00.057-08:00] nuclei,p0soc
+[2026-11-05T02:03:00.057-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:00.979-08:00] [HOST COMMAND] df -h; mount
+[2026-11-05T02:03:00.979-08:00] Filesystem                Size      Used Available Use% Mounted on
+[2026-11-05T02:03:00.979-08:00] tmpfs                  1000.0M         0   1000.0M   0% /dev/shm
+[2026-11-05T02:03:00.979-08:00] tmpfs                  1000.0M     20.0K   1000.0M   0% /tmp
+[2026-11-05T02:03:00.979-08:00] tmpfs                  1000.0M     28.0K   1000.0M   0% /run
+[2026-11-05T02:03:00.979-08:00] rootfs on / type rootfs (rw,size=1015972k,nr_inodes=253993)
+[2026-11-05T02:03:00.979-08:00] proc on /proc type proc (rw,relatime)
+[2026-11-05T02:03:00.979-08:00] devpts on /dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=666)
+[2026-11-05T02:03:00.979-08:00] tmpfs on /dev/shm type tmpfs (rw,relatime)
+[2026-11-05T02:03:00.979-08:00] tmpfs on /tmp type tmpfs (rw,relatime)
+[2026-11-05T02:03:00.979-08:00] tmpfs on /run type tmpfs (rw,nosuid,nodev,relatime,mode=755)
+[2026-11-05T02:03:00.979-08:00] sysfs on /sys type sysfs (rw,relatime)
+[2026-11-05T02:03:00.979-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:01.460-08:00] [HOST COMMAND] ls -l /dev/mmcblk* /dev/ttyS* 2>/dev/null
+[2026-11-05T02:03:01.460-08:00] brw-rw----    1 root     root      179,   0 Jan  1 00:00 [1;35m/dev/mmcblk0[m
+[2026-11-05T02:03:01.460-08:00] brw-rw----    1 root     root      179,   1 Jan  1 00:00 [1;35m/dev/mmcblk0p1[m
+[2026-11-05T02:03:01.460-08:00] [HOST EXIT] 1
+[2026-11-05T02:03:02.369-08:00] [HOST COMMAND] lsmod
+[2026-11-05T02:03:02.369-08:00] Module                  Size  Used by    Not tainted
+[2026-11-05T02:03:02.369-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:02.815-08:00] [HOST COMMAND] ls /sys/bus/platform/drivers/ | grep -iE "xec|eth|mmc"
+[2026-11-05T02:03:02.815-08:00] nuclei-mmc
+[2026-11-05T02:03:02.815-08:00] nuclei-xec
+[2026-11-05T02:03:02.815-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:03.259-08:00] [HOST COMMAND] ls /sys/bus/platform/devices/ | grep -i xec
+[2026-11-05T02:03:03.259-08:00] f9c210000.xec
+[2026-11-05T02:03:03.259-08:00] f9cdc0000.xec
+[2026-11-05T02:03:03.259-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:03.706-08:00] [HOST COMMAND] which ssh scp dropbear sshd sftp-server udhcpc ping insmod modinfo dtc tcpdump 2>/dev/null
+[2026-11-05T02:03:03.706-08:00] /usr/bin/ssh
+[2026-11-05T02:03:03.706-08:00] /usr/bin/scp
+[2026-11-05T02:03:03.706-08:00] /usr/sbin/sshd
+[2026-11-05T02:03:03.706-08:00] /sbin/udhcpc
+[2026-11-05T02:03:03.706-08:00] /bin/ping
+[2026-11-05T02:03:03.706-08:00] /sbin/insmod
+[2026-11-05T02:03:03.706-08:00] [HOST EXIT] 1
+[2026-11-05T02:03:04.150-08:00] [HOST COMMAND] busybox 2>&1 | head -3
+[2026-11-05T02:03:04.150-08:00] BusyBox v1.36.1 (2026-05-11 18:26:04 PDT) multi-call binary.
+[2026-11-05T02:03:04.150-08:00] BusyBox is copyrighted by many authors between 1998-2015.
+[2026-11-05T02:03:04.150-08:00] Licensed under GPLv2. See source distribution for detailed
+[2026-11-05T02:03:04.150-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:04.570-08:00] [HOST COMMAND] date
+[2026-11-05T02:03:04.570-08:00] Thu Jan  1 00:39:01 UTC 1970
+[2026-11-05T02:03:04.570-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:05.048-08:00] [HOST COMMAND] dmesg | grep -iE "error|fail|warn" | head -50
+[2026-11-05T02:03:05.048-08:00] [    1.489946] CPU2: failed to come online
+[2026-11-05T02:03:05.048-08:00] [    2.522397] CPU3: failed to come online
+[2026-11-05T02:03:05.048-08:00] [    3.555144] CPU4: failed to come online
+[2026-11-05T02:03:05.048-08:00] [    4.587779] CPU5: failed to come online
+[2026-11-05T02:03:05.048-08:00] [    5.620532] CPU6: failed to come online
+[2026-11-05T02:03:05.048-08:00] [    6.653233] CPU7: failed to come online
+[2026-11-05T02:03:05.048-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:05.568-08:00] [HOST COMMAND] uname -r; cat /proc/uptime; cat /proc/mounts
+[2026-11-05T02:03:05.568-08:00] 6.6.90-rt54+
+[2026-11-05T02:03:05.568-08:00] 2342.01 4633.08
+[2026-11-05T02:03:05.568-08:00] rootfs / rootfs rw,size=1015972k,nr_inodes=253993 0 0
+[2026-11-05T02:03:05.568-08:00] proc /proc proc rw,relatime 0 0
+[2026-11-05T02:03:05.568-08:00] devpts /dev/pts devpts rw,relatime,gid=5,mode=620,ptmxmode=666 0 0
+[2026-11-05T02:03:05.568-08:00] tmpfs /dev/shm tmpfs rw,relatime 0 0
+[2026-11-05T02:03:05.568-08:00] tmpfs /tmp tmpfs rw,relatime 0 0
+[2026-11-05T02:03:05.568-08:00] tmpfs /run tmpfs rw,nosuid,nodev,relatime,mode=755 0 0
+[2026-11-05T02:03:05.568-08:00] sysfs /sys sysfs rw,relatime 0 0
+[2026-11-05T02:03:05.568-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:06.040-08:00] [HOST COMMAND] for p in /sys/bus/platform/devices/*xec*; do echo "== $p"; readlink "$p/driver"; done
+[2026-11-05T02:03:06.040-08:00] == /sys/bus/platform/devices/f9c210000.xec
+[2026-11-05T02:03:06.040-08:00] ../../../bus/platform/drivers/nuclei-xec
+[2026-11-05T02:03:06.040-08:00] == /sys/bus/platform/devices/f9cdc0000.xec
+[2026-11-05T02:03:06.040-08:00] ../../../bus/platform/drivers/nuclei-xec
+[2026-11-05T02:03:06.040-08:00] [HOST EXIT] 0
+[2026-11-05T02:03:06.567-08:00] [HOST COMMAND] for n in /sys/class/net/*; do echo "== $n"; cat "$n/operstate" "$n/carrier" 2>/dev/null; done
+[2026-11-05T02:03:06.567-08:00] == /sys/class/net/eth0
+[2026-11-05T02:03:06.567-08:00] down
+[2026-11-05T02:03:06.567-08:00] 0
+[2026-11-05T02:03:06.567-08:00] == /sys/class/net/eth1
+[2026-11-05T02:03:06.567-08:00] down
+[2026-11-05T02:03:06.567-08:00] 0
+[2026-11-05T02:03:06.567-08:00] == /sys/class/net/lo
+[2026-11-05T02:03:06.567-08:00] unknown
+[2026-11-05T02:03:06.567-08:00] 1
+[2026-11-05T02:03:06.567-08:00] == /sys/class/net/sit0
+[2026-11-05T02:03:06.567-08:00] down
+[2026-11-05T02:03:06.567-08:00] [HOST EXIT] 1
+[2026-11-05T02:04:01.849-08:00] [HOST COMMAND] mkdir -p /media && mount -o ro /dev/mmcblk0p1 /media
+[2026-11-05T02:04:01.849-08:00] [HOST EXIT] 0
+[2026-11-05T02:04:02.282-08:00] [HOST COMMAND] grep " /media " /proc/mounts
+[2026-11-05T02:04:02.282-08:00] /dev/mmcblk0p1 /media vfat ro,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0
+[2026-11-05T02:04:02.282-08:00] [HOST EXIT] 0
+[2026-11-05T02:04:08.240-08:00] [HOST COMMAND] wc -c /media/boot.scr /media/uImage.lz4 /media/uInitrd.lz4 /media/kernel.dtb
+[2026-11-05T02:04:08.240-08:00]       719 /media/boot.scr
+[2026-11-05T02:04:08.240-08:00]   4245866 /media/uImage.lz4
+[2026-11-05T02:04:08.240-08:00]  14224341 /media/uInitrd.lz4
+[2026-11-05T02:04:08.240-08:00]      9238 /media/kernel.dtb
+[2026-11-05T02:04:08.240-08:00]  18480164 total
+[2026-11-05T02:04:08.240-08:00] [HOST EXIT] 0
+[2026-11-05T02:04:08.719-08:00] [HOST COMMAND] command -v strings modinfo fw_printenv base64 sha256sum; busybox --list | grep -E "^(strings|modinfo|base64|sha256sum)$"
+[2026-11-05T02:04:08.719-08:00] /usr/bin/strings
+[2026-11-05T02:04:08.719-08:00] /bin/base64
+[2026-11-05T02:04:08.719-08:00] /usr/bin/sha256sum
+[2026-11-05T02:04:08.719-08:00] base64
+[2026-11-05T02:04:08.719-08:00] sha256sum
+[2026-11-05T02:04:08.719-08:00] strings
+[2026-11-05T02:04:08.719-08:00] [HOST EXIT] 0
+[2026-11-05T02:04:09.168-08:00] [HOST COMMAND] ls -l /dev/ttyNUC* 2>/dev/null; tty
+[2026-11-05T02:04:09.168-08:00] crw-rw----    1 root     root      249,   0 Jan  1 00:00 [1;35m/dev/ttyNUC0[m
+[2026-11-05T02:04:09.168-08:00] /dev/console
+[2026-11-05T02:04:09.168-08:00] [HOST EXIT] 0
+[2026-11-05T02:05:20.307-08:00] [HOST COMMAND] for d in /media/ecat/ko /media/ecat_newchip/ko /media/ecat_newchip/ko_newchip; do for k in "$d"/*.ko; do [ -f "$k" ] || continue; echo "== $k"; strings "$k" | grep -E "^(vermagic|depends|name)="; done; done; uname -r
+[2026-11-05T02:05:20.307-08:00] == /media/ecat/ko/ec_generic.ko
+[2026-11-05T02:05:20.307-08:00] depends=ec_master
+[2026-11-05T02:05:20.307-08:00] name=ec_generic
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat/ko/ec_master.ko
+[2026-11-05T02:05:20.307-08:00] depends=
+[2026-11-05T02:05:20.307-08:00] name=ec_master
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat/ko/ec_nuclei_xec.ko
+[2026-11-05T02:05:20.307-08:00] depends=ec_master
+[2026-11-05T02:05:20.307-08:00] name=ec_nuclei_xec
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat_newchip/ko/ec_generic.ko
+[2026-11-05T02:05:20.307-08:00] depends=ec_master
+[2026-11-05T02:05:20.307-08:00] name=ec_generic
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat_newchip/ko/ec_master.ko
+[2026-11-05T02:05:20.307-08:00] depends=
+[2026-11-05T02:05:20.307-08:00] name=ec_master
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat_newchip/ko/ec_nuclei_xec.ko
+[2026-11-05T02:05:20.307-08:00] depends=ec_master
+[2026-11-05T02:05:20.307-08:00] name=ec_nuclei_xec
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat_newchip/ko_newchip/ec_generic.ko
+[2026-11-05T02:05:20.307-08:00] depends=ec_master
+[2026-11-05T02:05:20.307-08:00] name=ec_generic
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat_newchip/ko_newchip/ec_master.ko
+[2026-11-05T02:05:20.307-08:00] depends=
+[2026-11-05T02:05:20.307-08:00] name=ec_master
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] == /media/ecat_newchip/ko_newchip/ec_nuclei_xec.ko
+[2026-11-05T02:05:20.307-08:00] depends=ec_master
+[2026-11-05T02:05:20.307-08:00] name=ec_nuclei_xec
+[2026-11-05T02:05:20.307-08:00] vermagic=6.6.90-rt54+ SMP preempt mod_unload modversions riscv
+[2026-11-05T02:05:20.307-08:00] 6.6.90-rt54+
+[2026-11-05T02:05:20.307-08:00] [HOST EXIT] 0
+[2026-11-05T02:05:21.220-08:00] [HOST COMMAND] strings /media/boot.scr
+[2026-11-05T02:05:21.220-08:00] bootscript
+[2026-11-05T02:05:21.220-08:00] test -z "${bootloc}"   && setenv bootloc .
+[2026-11-05T02:05:21.220-08:00] test -z "${kernelimg}" && setenv kernelimg ${bootloc}/uImage.lz4
+[2026-11-05T02:05:21.220-08:00] test -z "${rootfsimg}" && setenv rootfsimg ${bootloc}/uInitrd.lz4
+[2026-11-05T02:05:21.220-08:00] test -z "${dtbimg}"    && setenv dtbimg ${bootloc}/kernel.dtb
+[2026-11-05T02:05:21.220-08:00] echo "Boot images located in ${bootloc}"
+[2026-11-05T02:05:21.220-08:00] echo "Loading kernel: ${kernelimg}"
+[2026-11-05T02:05:21.220-08:00] fatload mmc 0 0x3000000 ${kernelimg}
+[2026-11-05T02:05:21.220-08:00] echo "Loading ramdisk: ${rootfsimg}"
+[2026-11-05T02:05:21.220-08:00] fatload mmc 0 0x8300000 ${rootfsimg}
+[2026-11-05T02:05:21.220-08:00] if test -e mmc 0 ${dtbimg} ; then
+[2026-11-05T02:05:21.220-08:00]     echo "Loading dtb: ${dtbimg}"
+[2026-11-05T02:05:21.220-08:00]     fatload mmc 0 0x8000000 ${dtbimg}
+[2026-11-05T02:05:21.220-08:00] else
+[2026-11-05T02:05:21.220-08:00]     echo "${dtbimg} not found, ignore it"
+[2026-11-05T02:05:21.220-08:00] echo "Starts booting from SD"
+[2026-11-05T02:05:21.220-08:00] bootm 0x3000000 0x8300000 0x8000000
+[2026-11-05T02:05:21.220-08:00] [HOST EXIT] 0
+[2026-11-05T02:05:26.311-08:00] [HOST COMMAND] for f in boot.scr uImage.lz4 uInitrd.lz4 kernel.dtb; do sha256sum "/media/$f" "/media/rpmsg/$f"; done
+[2026-11-05T02:05:26.311-08:00] 13bb8fa510a4d8517f2c830b809d976ae40de0700e62013602e6bee61d690ca0  /media/boot.scr
+[2026-11-05T02:05:26.311-08:00] 13bb8fa510a4d8517f2c830b809d976ae40de0700e62013602e6bee61d690ca0  /media/rpmsg/boot.scr
+[2026-11-05T02:05:26.311-08:00] ac207eca3af4edf66db39be5efd369f52629bcab5c9c90441c5b118ca99a9fe9  /media/uImage.lz4
+[2026-11-05T02:05:26.311-08:00] ac207eca3af4edf66db39be5efd369f52629bcab5c9c90441c5b118ca99a9fe9  /media/rpmsg/uImage.lz4
+[2026-11-05T02:05:26.311-08:00] d64412c9d979d4455f457f0fc88777cbba049672589a5dd701747a3f14724ba8  /media/uInitrd.lz4
+[2026-11-05T02:05:26.311-08:00] d64412c9d979d4455f457f0fc88777cbba049672589a5dd701747a3f14724ba8  /media/rpmsg/uInitrd.lz4
+[2026-11-05T02:05:26.311-08:00] 41e37ed12024407aca57e758ce3def47f373d019d0253b7483c27fce44ab8525  /media/kernel.dtb
+[2026-11-05T02:05:26.311-08:00] 41e37ed12024407aca57e758ce3def47f373d019d0253b7483c27fce44ab8525  /media/rpmsg/kernel.dtb
+[2026-11-05T02:05:26.311-08:00] [HOST EXIT] 0
+[2026-11-05T02:05:26.816-08:00] [HOST COMMAND] for f in possible present online offline; do echo "== $f"; cat "/sys/devices/system/cpu/$f"; done
+[2026-11-05T02:05:26.816-08:00] == possible
+[2026-11-05T02:05:26.816-08:00] 0-7
+[2026-11-05T02:05:26.816-08:00] == present
+[2026-11-05T02:05:26.816-08:00] 0-7
+[2026-11-05T02:05:26.816-08:00] == online
+[2026-11-05T02:05:26.816-08:00] 0-1
+[2026-11-05T02:05:26.816-08:00] == offline
+[2026-11-05T02:05:26.816-08:00] 2-7
+[2026-11-05T02:05:26.816-08:00] [HOST EXIT] 0
+[2026-11-05T02:05:27.277-08:00] [HOST COMMAND] ls -l /media/ecat_newchip/ko_newchip; lsmod
+[2026-11-05T02:05:27.277-08:00] total 776
+[2026-11-05T02:05:27.277-08:00] -rwxr-xr-x    1 root     root         14656 Jan  1  1980 [1;32mec_generic.ko[m
+[2026-11-05T02:05:27.277-08:00] -rwxr-xr-x    1 root     root        743472 Jan  1  1980 [1;32mec_master.ko[m
+[2026-11-05T02:05:27.277-08:00] -rwxr-xr-x    1 root     root         29960 Jan  1  1980 [1;32mec_nuclei_xec.ko[m
+[2026-11-05T02:05:27.277-08:00] Module                  Size  Used by    Not tainted
+[2026-11-05T02:05:27.277-08:00] [HOST EXIT] 0
+[2026-11-05T02:05:27.834-08:00] [HOST COMMAND] umount /media && if grep " /media " /proc/mounts; then echo STILL_MOUNTED; exit 1; else echo TF_CARD_UNMOUNTED; fi
+[2026-11-05T02:05:27.834-08:00] TF_CARD_UNMOUNTED
+[2026-11-05T02:05:27.834-08:00] [HOST EXIT] 0
