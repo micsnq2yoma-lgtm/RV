@@ -1,0 +1,72 @@
+Task 008-r3 redacted evidence. Filename date per task: 20261108.
+Execution: 2026-11-07 America/Los_Angeles / 2026-11-08 UTC.
+Authentication and SSH public keys excluded; identifiers, MAC and local paths masked.
+
+===== host-after-static.log =====
+{"Url":"https://www.microsoft.com/favicon.ico","Status":200,"Seconds":0.2932939}
+{"Url":"https://github.com/","Status":200,"Seconds":0.35816929999999997}
+{"Url":"https://example.com","Status":200,"Seconds":0.2484787}
+
+===== run-20261107-203041/apply.done =====
+SUCCESS
+
+===== run-20261107-203041/http-probes.jsonl =====
+{"Utc":"2026-11-08T04:31:35.1180933Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.45480919999999997}
+{"Utc":"2026-11-08T04:31:40.9350329Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.296294}
+{"Utc":"2026-11-08T04:31:43.8997882Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.1527916}
+{"Utc":"2026-11-08T04:31:46.6906392Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0847274}
+{"Utc":"2026-11-08T04:31:49.4382098Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.085513999999999993}
+{"Utc":"2026-11-08T04:31:52.1500380Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.12424819999999999}
+{"Utc":"2026-11-08T04:31:54.8785312Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.1254911}
+{"Utc":"2026-11-08T04:31:57.6521266Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.14056849999999999}
+{"Utc":"2026-11-08T04:32:00.4591673Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.1154818}
+{"Utc":"2026-11-08T04:32:03.1794364Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.096651}
+{"Utc":"2026-11-08T04:32:05.8935792Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0893132}
+{"Utc":"2026-11-08T04:32:08.6071980Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.1036271}
+{"Utc":"2026-11-08T04:32:11.3502629Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.089028}
+{"Utc":"2026-11-08T04:32:14.0461073Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.087284199999999992}
+{"Utc":"2026-11-08T04:32:16.7190340Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.086932799999999991}
+
+===== run-20261107-203041/guard.done =====
+{
+    "RunId":  "<ID>",
+    "Pid":  21932,
+    "Counter":  41,
+    "Utc":  "2026-11-08T04:32:16.8312349Z",
+    "DeadlineUtc":  "2026-11-08T04:50:43.2721786Z",
+    "State":  "kept",
+    "Detail":  "Host validated; successful static-IP configuration retained"
+}
+
+
+===== final-host-state.json =====
+{
+    "Utc":  "2026-11-08T04:42:57.7308061Z",
+    "FixedAddress":  [
+                         {
+                             "IPAddress":  "192.168.50.1",
+                             "PrefixLength":  24
+                         }
+                     ],
+    "PrivateDhcp":  "Disabled",
+    "PrivateDns":  [
+
+                   ],
+    "PrivateDefaultRoutes":  [
+
+                             ],
+    "ProtectedDifferences":  [
+
+                             ],
+    "FirewallRulePropertiesMatch":  true,
+    "ProxyListeners":  [
+                           {
+                               "LocalAddress":  "127.0.0.1",
+                               "LocalPort":  7897
+                           }
+                       ],
+    "RemainingOwnedTunnels":  [
+
+                              ],
+    "HostHttps":  true
+}

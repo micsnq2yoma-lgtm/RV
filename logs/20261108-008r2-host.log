@@ -1,0 +1,242 @@
+Task 008-r2 public redacted evidence. Task-requested filename date: 20261108.
+Execution local date: 2026-11-07 America/Los_Angeles; UTC: 2026-11-08.
+MAC, identifiers, private paths and adapter names masked; ESC/NUL escaped.
+Authentication and SSH host public keys excluded. Full raw sources remain in ignored .venv.
+
+===== Host baseline =====
+
+Name                          InterfaceDescription                       Status
+----                          --------------------                       ------
+<AUX-ADAPTER>                  Bluetooth Device (Personal Area Network)   Disconnected
+VMware Network Adapter VMnet1 VMware Virtual Ethernet Adapter for VMnet1 Up
+<BOARD-ETHERNET>                        Realtek PCIe GbE Family Controller         Up
+<TUN-ADAPTER>                        Meta Tunnel                                Up
+<WAN-WIFI>                          Intel(R) Wi-Fi 6 AX200 160MHz              Up
+VMware Network Adapter VMnet8 VMware Virtual Ethernet Adapter for VMnet8 Up
+
+
+InterfaceAlias                IPAddress       PrefixLength PrefixOrigin
+--------------                ---------       ------------ ------------
+VMware Network Adapter VMnet8 192.168.152.1             24         Dhcp
+VMware Network Adapter VMnet1 192.168.78.1              24         Dhcp
+<AUX-4>                   169.254.99.80             16    WellKnown
+<AUX-3>                   169.254.188.170           16    WellKnown
+<AUX-ADAPTER>                  169.254.143.54            16    WellKnown
+<BOARD-ETHERNET>                        169.254.205.202           16    WellKnown
+<WAN-WIFI>                          192.168.31.52             24         Dhcp
+<TUN-ADAPTER>                        198.18.0.1                30       Manual
+Loopback Pseudo-Interface 1   127.0.0.1                  8    WellKnown
+
+
+===== Existing 192.168 routes =====
+[
+  {
+    "InterfaceAlias": "VMware Network Adapter VMnet8",
+    "DestinationPrefix": "192.168.152.255/32",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "VMware Network Adapter VMnet8",
+    "DestinationPrefix": "192.168.152.1/32",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "VMware Network Adapter VMnet8",
+    "DestinationPrefix": "192.168.152.0/24",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "VMware Network Adapter VMnet1",
+    "DestinationPrefix": "192.168.78.255/32",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "VMware Network Adapter VMnet1",
+    "DestinationPrefix": "192.168.78.1/32",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "VMware Network Adapter VMnet1",
+    "DestinationPrefix": "192.168.78.0/24",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "<WAN-WIFI>",
+    "DestinationPrefix": "192.168.31.255/32",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "<WAN-WIFI>",
+    "DestinationPrefix": "192.168.31.52/32",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  },
+  {
+    "InterfaceAlias": "<WAN-WIFI>",
+    "DestinationPrefix": "192.168.31.0/24",
+    "NextHop": "0.0.0.0",
+    "RouteMetric": 256
+  }
+]
+
+===== Existing broad proxy firewall rules (before changes) =====
+[
+  {
+    "Name": "{<ID>}",
+    "DisplayName": "sing-tun (<LOCAL_PATH>",
+    "Profile": "Any",
+    "Protocol": "TCP",
+    "LocalPort": "Any",
+    "LocalAddress": [
+      "Any"
+    ],
+    "RemoteAddress": [
+      "Any"
+    ],
+    "Program": "<LOCAL_PATH>"
+  },
+  {
+    "Name": "{<ID>}",
+    "DisplayName": "Clash Verge Service core (verge-mihomo.exe)",
+    "Profile": "Any",
+    "Protocol": "Any",
+    "LocalPort": "Any",
+    "LocalAddress": [
+      "Any"
+    ],
+    "RemoteAddress": [
+      "Any"
+    ],
+    "Program": "<LOCAL_PATH>"
+  },
+  {
+    "Name": "{<ID>}",
+    "DisplayName": "Clash Verge Service core (verge-mihomo-alpha.exe)",
+    "Profile": "Any",
+    "Protocol": "Any",
+    "LocalPort": "Any",
+    "LocalAddress": [
+      "Any"
+    ],
+    "RemoteAddress": [
+      "Any"
+    ],
+    "Program": "<LOCAL_PATH>"
+  }
+]
+
+===== run-20261107-193229/apply.done =====
+SUCCESS
+
+===== run-20261107-193229/http-probes.jsonl =====
+{"Utc":"2026-11-08T03:33:56.1480363Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.71591509999999992}
+{"Utc":"2026-11-08T03:34:02.9299108Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.37098539999999997}
+{"Utc":"2026-11-08T03:34:05.9141284Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.095035899999999993}
+{"Utc":"2026-11-08T03:34:08.6261211Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0999992}
+{"Utc":"2026-11-08T03:34:11.3935251Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0973081}
+{"Utc":"2026-11-08T03:34:14.0920398Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0699901}
+{"Utc":"2026-11-08T03:34:16.7718970Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0817048}
+{"Utc":"2026-11-08T03:34:19.4650943Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.1229149}
+{"Utc":"2026-11-08T03:34:22.1756440Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0668204}
+{"Utc":"2026-11-08T03:34:24.8488609Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0798763}
+{"Utc":"2026-11-08T03:34:27.5719131Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.11378479999999999}
+{"Utc":"2026-11-08T03:34:30.2914217Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.067348999999999992}
+{"Utc":"2026-11-08T03:34:32.9580484Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0724165}
+{"Utc":"2026-11-08T03:34:35.6373325Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.0765517}
+{"Utc":"2026-11-08T03:34:38.3436094Z","Url":"https://www.microsoft.com/favicon.ico","Status":200,"Error":null,"Seconds":0.077255499999999991}
+
+===== run-20261107-193229/guard.done =====
+{
+    "RunId":  "<ID>",
+    "Pid":  37092,
+    "Counter":  58,
+    "Utc":  "2026-11-08T03:34:38.4383593Z",
+    "DeadlineUtc":  "2026-11-08T03:52:31.5957184Z",
+    "State":  "kept",
+    "Detail":  "Host validated; successful static-IP configuration retained"
+}
+
+
+===== firewall-20261107-194323/apply.done =====
+FAILED
+
+===== firewall-20261107-194323/apply.error =====
+Host HTTPS failed after firewall change
+At <LOCAL_PATH>
++ ... (Test-HostInternet)){throw 'Host HTTPS failed after firewall change'}
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Host HTTPS failed after firewall change:String) [], RuntimeException
+    + FullyQualifiedErrorId : Host HTTPS failed after firewall change
+ 
+
+
+===== firewall-20261107-194323/http-probes.jsonl =====
+{"Utc":"2026-11-08T03:44:21.8268816Z","Url":"https://www.microsoft.com/favicon.ico","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0801525}
+{"Utc":"2026-11-08T03:44:27.9161547Z","Url":"https://github.com/","Status":null,"Error":"System.Net.WebException: 操作超时","Seconds":6.0249945}
+
+===== firewall-20261107-194323/guard.reason =====
+firewall apply failed
+At <LOCAL_PATH>
++ ... h $done -Raw).Trim() -ne 'SUCCESS') { throw 'firewall apply failed' }
++                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (firewall apply failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : firewall apply failed
+ 
+
+
+===== firewall-20261107-194323/guard.done =====
+{
+    "RunId":  "<ID>",
+    "Pid":  3136,
+    "Counter":  38,
+    "Utc":  "2026-11-08T03:44:42.6757346Z",
+    "DeadlineUtc":  "2026-11-08T04:03:25.1999575Z",
+    "State":  "rolled-back",
+    "Detail":  "Task static IP removed; original private DHCP/DNS configuration restored; protected state verified"
+}
+
+
+===== Independent read-only rollback verification =====
+{
+  "Utc": "2026-11-08T03:50:39.1849535Z",
+  "GuardFinal": "rolled-back",
+  "OriginalRules": [
+    {
+      "Name": "{<ID>}",
+      "Enabled": 1
+    },
+    {
+      "Name": "{<ID>}",
+      "Enabled": 1
+    },
+    {
+      "Name": "{<ID>}",
+      "Enabled": 1
+    }
+  ],
+  "TaskRuleExists": false,
+  "PrivateConfigRestored": true,
+  "ProtectedDifferences": [],
+  "PrivateAddresses": [
+    "169.254.205.202"
+  ],
+  "ProxyListeners": [
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 7897
+    }
+  ],
+  "HostHttps": true
+}
+
+===== Three fresh HTTPS checks after rollback =====
+{"Url":"https://www.microsoft.com/favicon.ico","Status":200,"Seconds":0.2978953}
+{"Url":"https://github.com/","Status":200,"Seconds":0.32062389999999996}
+{"Url":"https://example.com","Status":200,"Seconds":0.2333312}
