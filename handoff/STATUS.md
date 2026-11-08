@@ -8,7 +8,7 @@
 | 004 | 启动卡更新为 boot_1106 | 第 2 阶段 | done（冷启动故障与镜像无关，见 005） | [任务](tasks/004-update-to-boot-1106.md) | [报告](reports/004-update-to-boot-1106.md) | [草稿 #3](https://github.com/micsnq2yoma-lgtm/RV/pull/3) |
 | 005 | 重上 boot_1106 并统计冷启动 | 第 2 阶段收尾 | done | [任务](tasks/005-reapply-boot-1106-coldboot-stats.md) | [报告](reports/005-reapply-boot-1106-coldboot-stats.md) | [沿用草稿 #3](https://github.com/micsnq2yoma-lgtm/RV/pull/3) |
 | 007 | 检查 eMMC Ubuntu 并进入 chroot | 使用 eMMC 系统 | done | [任务](tasks/007-emmc-ubuntu-check.md) | [报告](reports/007-emmc-ubuntu-check.md) | [PR #4](https://github.com/micsnq2yoma-lgtm/RV/pull/4) |
-| 008 | eth0 固定 IP、Clash 代理与 SSH/SCP | 第 1 阶段 | blocked（r2） | [原任务](tasks/008-eth0-internet-via-pc.md)、[r2](tasks/008-eth0-internet-via-pc-r2.md) | [报告](reports/008-eth0-internet-via-pc.md) | [草稿 PR #5](https://github.com/micsnq2yoma-lgtm/RV/pull/5) |
+| 008 | eth0 固定 IP、SSH 反向代理隧道与 SSH/SCP | 第 1 阶段 | done（r3） | [原任务](tasks/008-eth0-internet-via-pc.md)、[r2](tasks/008-eth0-internet-via-pc-r2.md)、[r3](tasks/008-eth0-internet-via-pc-r3.md) | [报告](reports/008-eth0-internet-via-pc.md) | [草稿 PR #5](https://github.com/micsnq2yoma-lgtm/RV/pull/5) |
 
 001 当前阻塞：串口和只读板级采集已完成，但卡根目录实际为 rpmsg 文件副本，不符合目标新版前置条件；U-Boot 全程与网络验证尚未完成。未写卡或推进任务 002。
 
@@ -23,3 +23,5 @@
 007 已确认 eMMC 单个 ext4 分区内为 Ubuntu 24.04.3 LTS。维护者 start 可进入 chroot，Python 3.12.3、GCC 13.3.0 已确认，PATH 可找到 make、apt，git 未找到，/lib/modules 缺失。正常 exit、stop 后已确认全部卸载，详见 EMMC.md 与报告。
 
 008-r2 已验证电脑/板子固定 IP .50.1/.50.2、原生 SSH、脚本退出码 0/1、SCP 往返哈希和串口一键配置。经额外授权停用三条旧 Clash 宽规则并新增窄规则后，主机 HTTPS 失败，已自动恢复旧规则、删除新规则并恢复原有线 DHCP；主机联网恢复。Allow LAN 未打开，代理/apt 未执行，eMMC 全部未挂载。原 ICS 记录保留在报告中。
+
+008-r3 已完成：主机固定 IP 保留且 HTTPS 正常；不改 Clash、防火墙或 ICS，经 SSH 回环反向隧道验证 wget、apt update、GitHub ls-remote。获准安装 git 2.43.0 及依赖并更新证书；隧道已关闭、eMMC 全部卸载。完整指令见 docs/NETWORK.md。

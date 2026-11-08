@@ -1,11 +1,15 @@
-# 报告 008：eth0 共享联网受主机 HTTPS 故障阻塞
+# 报告 008：eth0 固定 IP 与 SSH 反向隧道联网
 
 - **执行者**：Codex
 - **日期**：2026-11-07（America/Los_Angeles；最终同步测试 UTC 为 11 月 8 日）
-- **结果**：blocked
+- **结果**：done（r3）
 - **分支 / PR**：`task-008-eth0-network` / [草稿 PR #5](https://github.com/micsnq2yoma-lgtm/RV/pull/5)
 
-## 一句话结论
+## 当前结论
+
+**r3 已完成：固定 IP 保留，SSH 反向隧道、wget、apt 和 git 均验证成功。git 2.43.0 已安装；收尾隧道关闭、eMMC 卸载，主机联网正常。** 详见文末 r3 执行记录。
+
+## 历史结论（ICS / r2）
 
 **最新 r2：固定 IP 和 SSH/SCP 已验证；收紧现有 Clash 防火墙规则后主机 HTTPS 失败，按任务要求完整回滚，仍为 blocked。** Allow LAN 未开启，代理与 apt 未执行。详见文末“r2 执行记录”。下方原 ICS 记录保留作为历史证据。
 
@@ -104,3 +108,17 @@
 - 为避免 Windows 多行命令引号损坏，在原 serial_console.py 增加互斥的 `exec --command-file` UTF-8 文件入口，原位置参数命令仍兼容。bootstrap 直接读取 board_net_up.sh，配置逻辑只有一份。
 - 串口工具回归共 9 项，8 通过、1 项 POSIX-shell 测试因 Windows 跳过；首次运行因受限临时目录写入失败，将测试临时目录改到工作区后通过。新 command-file 路径已由真实 bootstrap 和最终只读检查覆盖。PowerShell bootstrap 已在 Windows PowerShell 5.1 实机执行成功。
 - 维护者下一步需要决定如何在保留主机网络所需流量的同时限制代理入站来源；本任务按失败处理到此停止，不自动重复失败组合。待新方案明确后，再恢复主机地址、完成 Allow LAN/代理测试和经当次批准的 apt 安装。
+
+## r3 执行记录
+
+结果：**done**。合并上游 `90039dd`，在原分支继续执行 r3。日期为本地 2026-11-07 / UTC 2026-11-08，日志按任务指定日期命名：[主机](../../logs/20261108-008r3-host.log)、[板子](../../logs/20261108-008r3-board.log)。旧 ICS 和 r2 记录保留为历史，以下为当前结果。
+
+1. **固定 IP 恢复后主机网络正常吗？** 正常。用户确认现场接线和伺服断电；管理员准备精确备份和独立回滚守护，验证心跳递增后取得当次授权，仅将直连有线网卡恢复为 192.168.50.1/24，无 DNS/网关。配置后多个 HTTPS 站点返回 200，守护确认保留并退出。最终 HostHttps=true、ProtectedDifferences=[]、FirewallRulePropertiesMatch=true。Clash 仍只监听电脑 127.0.0.1:7897；未改其设置、ICS、防火墙或 sshd。
+2. **隧道能建立并只在回环监听吗？** 能。bootstrap 返回 0，SSH uname/date 成功；sshd 有效配置 allowtcpforwarding=yes、gatewayports=no、disableforwarding=no、permitopen=any。新脚本实机建立 `-R 127.0.0.1:7897:127.0.0.1:7897`，板上仅回环监听。退出时 Ctrl+C 关闭所属 SSH，主机已无本轮隧道，串口确认 TUNNEL_CLOSED，板上仅剩 SSH 22 监听。
+3. **wget、apt update、git ls-remote 结果？** 均返回 0。Buildroot wget 下载 noble Release，前五行含 Origin/Label Ubuntu、Suite noble、Version 24.04。Ubuntu 保持原 ports.ubuntu.com 源，apt update 获取 5842 kB；通过显式回环代理参数访问 GitHub 得到 HEAD `7d6b13933ebb59cafd47805a5a851d3bb4ead527`。没有改源、执行 apt upgrade 或保存代理配置。APT 处理时出现一条 `sched: RT throttling activated`，没有调整内核参数。
+4. **git 安装与版本？** 用户审核并批准具体计划后，新增 git、git-man、less、libcurl3t64-gnutls、liberror-perl，更新 ca-certificates；实际 5 新增、1 更新、0 删除，下载 7208 kB，安装返回 0。git version 2.43.0，包版本 1:2.43.0-1ubuntu7.4；ca-certificates 20260816ubuntu0.24.04.2。六包均 install ok installed，dpkg --audit 无输出且返回 0。退出 chroot、stop 后确认 EMMC_ALL_UNMOUNTED。
+5. **以后如何操作？** 串口登录并释放端口 → `board_bootstrap.ps1 -Port COM3` → 核验 SSH → 单独终端运行 `board_proxy_tunnel.ps1 -BoardIP 192.168.50.2` → 核验板上回环监听 → `/mount_emmc.sh start` → apt/git 使用 `http://127.0.0.1:7897` 临时参数 → exit、stop → Ctrl+C 关闭隧道并确认监听消失。完整核心指令和主机固定地址撤销方法见 [NETWORK.md](../../docs/NETWORK.md)。
+
+初次只读串口检查发生结束标记字符缺失，工具报超时；保留原始脱敏证据，没有据此声称命令成功。后续 bootstrap、SSH 和收尾串口检查均正常。本地受限环境初次只读收尾检查遇 CIM/COM3 拒绝访问，使用获准的权限重试成功；没有要求用户重复接线或登录。
+
+验证范围：新隧道脚本实机成功，Windows PowerShell 语法检查通过；r2 的 SSH/SCP 验证继续有效，本轮未重复传输测试。未操作 eth1、EtherCAT 或电机。认证、公钥、原始私有快照仅留忽略目录，公开日志已脱敏。最终保留主机固定 IP 和 eMMC 安装结果，代理隧道关闭，eMMC 未挂载。
