@@ -1,0 +1,23 @@
+Task 010 LOCALHOST ONLY; no board connected or RISC-V timing test executed.
+Local date 2026-11-07 America/Los_Angeles; task filename 20261108.
+
+Final local fixture (18 seconds, deliberate 0.5s command interruption):
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 2500, "wall_seconds": 5.002014399999098, "sent": 1250, "received": 1249, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 1, "sim_time": 4.941999999999678, "rtt_samples": 1249, "rtt_ms_p50": 0.17900000057124998, "rtt_ms_p99": 0.31342400092398737, "rtt_ms_max": 0.5037000009906478}
+{"watchdog": "hold", "age_ms": 99.80700000051002}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 4995, "wall_seconds": 10.002903599999627, "sent": 2497, "received": 2372, "invalid": 0, "no_reply": 125, "pending_expired": 125, "loss_percent": 5.006007208650381, "lost": 125, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 2, "sim_time": 9.931999999999986, "rtt_samples": 2372, "rtt_ms_p50": 0.17630000002100132, "rtt_ms_p99": 0.30757400121729006, "rtt_ms_max": 0.5930999996053288}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 7496, "wall_seconds": 15.004965500000253, "sent": 3748, "received": 3622, "invalid": 0, "no_reply": 126, "pending_expired": 125, "loss_percent": 3.3360021350413662, "lost": 125, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 2, "sim_time": 14.934000000001657, "rtt_samples": 3622, "rtt_ms_p50": 0.1768000001902692, "rtt_ms_p99": 0.306800000162184, "rtt_ms_max": 0.5930999996053288}
+{"tcp_error": "TimeoutError"}
+{"final": true, "physics_steps": 8994, "wall_seconds": 18.000990900000033, "sent": 4497, "received": 4371, "invalid": 0, "no_reply": 126, "pending_expired": 125, "loss_percent": 2.780249110320285, "lost": 125, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 2, "sim_time": 17.93000000000094, "rtt_samples": 4371, "rtt_ms_p50": 0.17769999976735562, "rtt_ms_p99": 0.31667000021116126, "rtt_ms_max": 0.5930999996053288}
+
+Local fake-board TCP replies and image timings:
+{"tcp_listening": 15002}
+{"request": {"op": "hello"}, "elapsed_s": 0.00026640000032784883, "reply": {"id": 0, "sim": "mujoco", "version": "4.0.0", "robot": "panda", "cameras": ["top", "wrist"], "table_z": 0.0}}
+{"request": {"op": "objects"}, "elapsed_s": 0.00041730000157258473, "reply": {"id": 1, "objects": [{"name": "red_cube", "pos": [0.68, -0.12, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "green_cube", "pos": [0.72, 0.23, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "blue_cube", "pos": [0.68, 0.12, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}]}}
+{"request": {"op": "render", "camera": "top", "w": 640, "h": 480}, "elapsed_s": 0.05357449999974051, "reply": {"id": 2, "w": 640, "h": 480, "fovy": 48.0, "cam_pos": [0.4, 0.0, 1.65], "cam_xmat": [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], "jpeg_bytes": 19638}}
+{"request": {"op": "render", "camera": "wrist", "w": 640, "h": 480}, "elapsed_s": 0.00449060000028112, "reply": {"id": 3, "w": 640, "h": 480, "fovy": 90.0, "cam_pos": [0.4045717367593803, -1.1796624363648058e-05, 0.5225009107182894], "cam_xmat": [8.418083121591868e-05, -0.9999812964488589, 0.0061155266367329125, 0.9999999846220712, 8.512012226463694e-05, 0.00015333107847024423, -0.000153848765009608, 0.00611551363515115, 0.9999812882367014], "jpeg_bytes": 18894}}
+{"request": {"op": "reset", "seed": 1}, "elapsed_s": 0.0020459999996091938, "reply": {"id": 4, "ok": true}}
+{"request": {"op": "objects"}, "elapsed_s": 0.0002817999993567355, "reply": {"id": 5, "objects": [{"name": "red_cube", "pos": [0.6803546487410077, -0.10648608911022193, 0.024960760000000002], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "green_cube", "pos": [0.709324788381589, 0.24345948341411733, 0.024960760000000002], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "blue_cube", "pos": [0.6743549435603147, 0.11769979346917726, 0.024960760000000002], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}]}}
+FAKE_BOARD_COMPLETE replies=4372 (local fixture only)
