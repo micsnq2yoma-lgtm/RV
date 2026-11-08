@@ -12,6 +12,7 @@
 | 2026-11-07 | 参考资料 | 芯来官方 Linux SDK：https://github.com/Nuclei-Software/nuclei-linux-sdk | 本板的 Buildroot、OpenSBI、U-Boot 都基于它，遇到问题先查它的 README 和 FAQ |
 | 2026-11-08 | 新方向：仿真机器人 Agent Demo | 大模型用 **DeepSeek-V4.1-Flash-1017** API，机械臂用 **Franka Panda**（MuJoCo Menagerie）。电脑跑仿真，RV 板子跑感知、Agent、运动学和实时控制 | 见 `docs/SIM_AGENT_DESIGN.md`、任务 009、010 |
 | 2026-11-08 | DeepSeek 模型 ID | 人选定 **`deepseek-flash`**（API 里没有 `DeepSeek-V4.1-Flash-1017`）。不依赖它的图片理解，见报告 009 | 见 `docs/SIM_AGENT_DESIGN.md` |
+| 2026-11-08 | 整板失联（未解决） | 三次失联都发生在 eMMC 上的 Ubuntu 处于活动状态时；E1–E6 都没能复现（报告 012）。在找到原因之前，运行时的日志和图片写到 `/tmp`，并实时取回电脑；`rt_ctl` 继续用 FIFO80、绑定 CPU1，Python 绑定 CPU0 | 见 `docs/STABILITY.md`、任务 013 |
 
 ## 由此带来的待办（尚未安排成任务）
 
