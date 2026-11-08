@@ -49,6 +49,8 @@ class Simulator:
         self.holding = True
         self.reset_flag = True
         self.reset(None)
+        self.q_min = self.q_max = self.data.qpos[self.qadr].copy()
+        self.gripper_min = self.gripper_max = float(sum(self.data.qpos[self.fingers]))
 
     def reset(self, seed):
         # Called only in the physics thread (initial reset precedes worker startup).
@@ -67,6 +69,7 @@ class Simulator:
         self.last_rx = None
         self.holding = True
         self.reset_flag = True
+        self.watchdog_active = True
         self.last_ack = None
         self.reset_discarded += len(self.pending)
         self.pending.clear()
@@ -151,6 +154,8 @@ class Simulator:
         inflight = len(self.pending)-expired
         lost = self.expired_count+expired
         return dict(final=final, physics_steps=self.steps,
+                    q_min=self.q_min.tolist(), q_max=self.q_max.tolist(),
+                    gripper_min=self.gripper_min, gripper_max=self.gripper_max,
                     wall_seconds=(self.wall_end or time.perf_counter())-self.wall_start if self.wall_start else 0,
                     sent=self.sent, received=self.received, invalid=self.invalid,
                     no_reply=self.sent-self.received, pending_expired=expired,
@@ -164,7 +169,6 @@ class Simulator:
 
     def run(self, seconds, headless):
         worker = threading.Thread(target=self.tcp_worker, daemon=True)
-        worker.start()
         viewer = None
         timer_active = False
         if __import__('os').name == 'nt':
@@ -174,6 +178,9 @@ class Simulator:
             if not headless:
                 from mujoco import viewer as mj_viewer
                 viewer = mj_viewer.launch_passive(self.model, self.data)
+            # GLFW initialization is process-global: initialize the viewer first,
+            # then create the offscreen context on its own rendering thread.
+            worker.start()
             with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
                 udp.connect(self.address)  # Only replies from the board endpoint are accepted.
                 udp.settimeout(.05)
@@ -225,6 +232,9 @@ class Simulator:
                             self.last_ack = ack
                             self.received += 1
                             self.rtts.append(arrival-sent_at)
+                            if self.watchdog_active:
+                                print(json.dumps({'command_recovered': True, 'mode': mode}), flush=True)
+                            self.watchdog_active = False
                             self.last_rx = arrival
                             self.last_cmd_seq = seq
                             if mode == 0:
@@ -237,16 +247,24 @@ class Simulator:
                             self.holding = mode == 0
                         # One physics-step guard margin to target <=100ms watchdog activation.
                         if self.last_rx is None or time.perf_counter()-self.last_rx >= .098:
-                            if not self.holding:
+                            if not self.watchdog_active and self.last_rx is not None:
                                 self.timeouts += 1
-                                print(json.dumps({'watchdog': 'hold', 'age_ms': (time.perf_counter()-self.last_rx)*1000}), flush=True)
+                                print(json.dumps({'watchdog': 'hold', 'age_ms': (time.perf_counter()-self.last_rx)*1000,
+                                                  'already_holding': self.holding}), flush=True)
+                            if not self.holding:
                                 self.hold()
                             self.holding = True
+                            self.watchdog_active = True
                         self.data.ctrl[:7] += np.clip(self.target-self.data.ctrl[:7], -.004, .004)
                         mujoco.mj_step(self.model, self.data)
                         step += 1
                         self.steps += 1
                         if step % 2 == 0:
+                            self.q_min = np.minimum(self.q_min, self.data.qpos[self.qadr])
+                            self.q_max = np.maximum(self.q_max, self.data.qpos[self.qadr])
+                            width = float(sum(self.data.qpos[self.fingers]))
+                            self.gripper_min = min(self.gripper_min, width)
+                            self.gripper_max = max(self.gripper_max, width)
                             timed_out = self.last_rx is None or time.perf_counter()-self.last_rx >= .098
                             flags = int(timed_out) | (2 if self.reset_flag else 0)
                             packet = STATE.pack(b'RVS1', self.seq, self.data.time,
@@ -276,7 +294,8 @@ class Simulator:
         finally:
             self.wall_end = time.perf_counter()
             self.stop.set()
-            worker.join(timeout=5)
+            if worker.is_alive():
+                worker.join(timeout=5)
             if viewer:
                 viewer.close()
             if timer_active:

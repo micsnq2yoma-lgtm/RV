@@ -94,9 +94,17 @@ base64. The returned objects are ground truth for testing, not Agent perception.
   After all board processes finish, exit chroot and `sh /mount_emmc.sh stop`;
   verify unmounted before ending the session. No forced unmount.
 
-## Validation available so far
+## Measured results (2026-11-07 local / 2026-11-08 UTC)
 
 `python -m unittest discover -s sim_agent/pc -v` tests exact offsets, lengths,
-invalid magic/mode/NaN/Inf. C compiled warning-free on an existing x86-64 WSL
-environment; this is **not** a RISC-V build or SCHED_FIFO runtime test.
-Current results and remaining hardware checks: [task 010 report](../handoff/reports/010-mujoco-panda-loopback.md).
+invalid magic/mode/NaN/Inf. The real-board executable compiled without warnings
+in eMMC Ubuntu and ran from Buildroot `/tmp/rv010-rt_ctl --sine --cpu 1`, with
+`SCHED_FIFO=80 mlockall=ok`. The Python TCP client ran in Ubuntu.
+
+The 600.002-second run had 0% sequence loss, RTT p50 0.916 ms / p99 1.169 ms /
+max 4.833 ms, but board processing max **490.236 us** exceeded the 200 us limit.
+PC watchdog activation also exceeded 100 ms during four stalls. Acceptance
+therefore **failed**. An independent stop/restart test reached the watchdog at
+99.305 ms after the last command (already holding after SIGINT mode=0).
+Both returned images show all three cubes and both trays. Actual logs, images,
+timing limits and cleanup: [task 010 report](../handoff/reports/010-mujoco-panda-loopback.md).

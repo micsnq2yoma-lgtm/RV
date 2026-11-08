@@ -1,23 +1,515 @@
-Task 010 LOCALHOST ONLY; no board connected or RISC-V timing test executed.
-Local date 2026-11-07 America/Los_Angeles; task filename 20261108.
+Task 010 real-board evidence, local 2026-11-07 America/Los_Angeles / UTC 2026-11-08.
+Host paths and identifiers redacted; complete original sources remain in ignored .venv.
 
-Final local fixture (18 seconds, deliberate 0.5s command interruption):
+===== pc-benchmark.log =====
+{"command_recovered": true, "mode": 0}
+{"command_recovered": true, "mode": 0}
 {"tcp_error": "TimeoutError"}
-{"final": false, "physics_steps": 2500, "wall_seconds": 5.002014399999098, "sent": 1250, "received": 1249, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 1, "sim_time": 4.941999999999678, "rtt_samples": 1249, "rtt_ms_p50": 0.17900000057124998, "rtt_ms_p99": 0.31342400092398737, "rtt_ms_max": 0.5037000009906478}
-{"watchdog": "hold", "age_ms": 99.80700000051002}
+{"final": false, "physics_steps": 2467, "wall_seconds": 5.001344899999822, "sent": 1233, "received": 1232, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 6, "sim_time": 4.269999999999752, "rtt_samples": 1232, "rtt_ms_p50": 0.9509000001344248, "rtt_ms_p99": 1.284876999998233, "rtt_ms_max": 4.64060000012978}
 {"tcp_error": "TimeoutError"}
-{"final": false, "physics_steps": 4995, "wall_seconds": 10.002903599999627, "sent": 2497, "received": 2372, "invalid": 0, "no_reply": 125, "pending_expired": 125, "loss_percent": 5.006007208650381, "lost": 125, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 2, "sim_time": 9.931999999999986, "rtt_samples": 2372, "rtt_ms_p50": 0.17630000002100132, "rtt_ms_p99": 0.30757400121729006, "rtt_ms_max": 0.5930999996053288}
+{"final": false, "physics_steps": 4962, "wall_seconds": 10.00294920000124, "sent": 2481, "received": 2479, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 7, "sim_time": 9.259999999999762, "rtt_samples": 2479, "rtt_ms_p50": 0.9348000003228663, "rtt_ms_p99": 1.2514720009858122, "rtt_ms_max": 4.64060000012978}
 {"tcp_error": "TimeoutError"}
-{"final": false, "physics_steps": 7496, "wall_seconds": 15.004965500000253, "sent": 3748, "received": 3622, "invalid": 0, "no_reply": 126, "pending_expired": 125, "loss_percent": 3.3360021350413662, "lost": 125, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 2, "sim_time": 14.934000000001657, "rtt_samples": 3622, "rtt_ms_p50": 0.1768000001902692, "rtt_ms_p99": 0.306800000162184, "rtt_ms_max": 0.5930999996053288}
+{"final": false, "physics_steps": 7462, "wall_seconds": 15.003165400001308, "sent": 3731, "received": 3729, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 7, "sim_time": 14.260000000001432, "rtt_samples": 3729, "rtt_ms_p50": 0.9249999984604074, "rtt_ms_p99": 1.2171039992244908, "rtt_ms_max": 4.64060000012978}
 {"tcp_error": "TimeoutError"}
-{"final": true, "physics_steps": 8994, "wall_seconds": 18.000990900000033, "sent": 4497, "received": 4371, "invalid": 0, "no_reply": 126, "pending_expired": 125, "loss_percent": 2.780249110320285, "lost": 125, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 2, "sim_time": 17.93000000000094, "rtt_samples": 4371, "rtt_ms_p50": 0.17769999976735562, "rtt_ms_p99": 0.31667000021116126, "rtt_ms_max": 0.5930999996053288}
+{"final": false, "physics_steps": 9963, "wall_seconds": 20.004983200000424, "sent": 4981, "received": 4980, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 7, "sim_time": 19.262000000000203, "rtt_samples": 4980, "rtt_ms_p50": 0.9219000003213296, "rtt_ms_p99": 1.1935569998058781, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 12463, "wall_seconds": 25.005006700001104, "sent": 6231, "received": 6230, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 7, "sim_time": 24.261999999997432, "rtt_samples": 6230, "rtt_ms_p50": 0.918699999601813, "rtt_ms_p99": 1.1838129997522628, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 14963, "wall_seconds": 30.005102500001158, "sent": 7481, "received": 7480, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 7, "sim_time": 29.26199999999466, "rtt_samples": 7480, "rtt_ms_p50": 0.9158000002571498, "rtt_ms_p99": 1.178288999672077, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 17464, "wall_seconds": 35.008363900000404, "sent": 8732, "received": 8730, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 7, "sim_time": 34.26399999999591, "rtt_samples": 8730, "rtt_ms_p50": 0.9128000001510372, "rtt_ms_p99": 1.175271000192879, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 19963, "wall_seconds": 40.00781000000097, "sent": 9981, "received": 9980, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 8, "sim_time": 39.26200000000202, "rtt_samples": 9980, "rtt_ms_p50": 0.9148000008281088, "rtt_ms_p99": 1.1769209994963603, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 22464, "wall_seconds": 45.01001290000022, "sent": 11232, "received": 11230, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 8, "sim_time": 44.26400000000813, "rtt_samples": 11230, "rtt_ms_p50": 0.913800000489573, "rtt_ms_p99": 1.1725099994691837, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 24964, "wall_seconds": 50.0099693000011, "sent": 12482, "received": 12480, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 8, "sim_time": 49.26400000001424, "rtt_samples": 12480, "rtt_ms_p50": 0.913399999262765, "rtt_ms_p99": 1.169242000669328, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 27465, "wall_seconds": 55.01208800000131, "sent": 13732, "received": 13731, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 8, "sim_time": 54.266000000020355, "rtt_samples": 13731, "rtt_ms_p50": 0.9126999993895879, "rtt_ms_p99": 1.1671399995975664, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 29965, "wall_seconds": 60.01227810000091, "sent": 14982, "received": 14981, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 0, "late_steps": 8, "sim_time": 59.266000000026466, "rtt_samples": 14981, "rtt_ms_p50": 0.912600000447128, "rtt_ms_p99": 1.164920000519487, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"watchdog": "hold", "age_ms": 1654.0643999996973, "already_holding": false}
+{"command_recovered": true, "mode": 1}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 31639, "wall_seconds": 65.01341570000113, "sent": 15819, "received": 15818, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 9, "sim_time": 62.61400000003056, "rtt_samples": 15818, "rtt_ms_p50": 0.9127000002990826, "rtt_ms_p99": 1.1639489995650365, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 34140, "wall_seconds": 70.01557150000008, "sent": 17070, "received": 17068, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 9, "sim_time": 67.61600000002382, "rtt_samples": 17068, "rtt_ms_p50": 0.913399999262765, "rtt_ms_p99": 1.1642329992901066, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 36641, "wall_seconds": 75.01736570000139, "sent": 18320, "received": 18319, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 9, "sim_time": 72.61800000001216, "rtt_samples": 18319, "rtt_ms_p50": 0.9140000001934823, "rtt_ms_p99": 1.164281999663217, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 39141, "wall_seconds": 80.01783450000039, "sent": 19570, "received": 19569, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 9, "sim_time": 77.6180000000005, "rtt_samples": 19569, "rtt_ms_p50": 0.915099999474478, "rtt_ms_p99": 1.1669319992506644, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 41642, "wall_seconds": 85.01961959999971, "sent": 20821, "received": 20819, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 9, "sim_time": 82.61999999998885, "rtt_samples": 20819, "rtt_ms_p50": 0.9164000002783723, "rtt_ms_p99": 1.168382000287238, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 44142, "wall_seconds": 90.01972370000112, "sent": 22071, "received": 22069, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 9, "sim_time": 87.6199999999772, "rtt_samples": 22069, "rtt_ms_p50": 0.9168000015051803, "rtt_ms_p99": 1.1689999992086086, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 46640, "wall_seconds": 95.0203048000003, "sent": 23320, "received": 23318, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 11, "sim_time": 92.61599999996555, "rtt_samples": 23318, "rtt_ms_p50": 0.9161999987554736, "rtt_ms_p99": 1.1682659996949947, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 49140, "wall_seconds": 100.02031510000052, "sent": 24570, "received": 24568, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 11, "sim_time": 97.6159999999539, "rtt_samples": 24568, "rtt_ms_p50": 0.9152000002359273, "rtt_ms_p99": 1.1662000003161666, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 51640, "wall_seconds": 105.02259400000003, "sent": 25820, "received": 25818, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 12, "sim_time": 102.61599999994225, "rtt_samples": 25818, "rtt_ms_p50": 0.9148999997705687, "rtt_ms_p99": 1.1649829998532366, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 54141, "wall_seconds": 110.02435049999985, "sent": 27070, "received": 27069, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 12, "sim_time": 107.61799999993059, "rtt_samples": 27069, "rtt_ms_p50": 0.9140999991359422, "rtt_ms_p99": 1.1637960002553882, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 56640, "wall_seconds": 115.02484499999991, "sent": 28320, "received": 28318, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 13, "sim_time": 112.61599999991894, "rtt_samples": 28318, "rtt_ms_p50": 0.9135000000242144, "rtt_ms_p99": 1.1627999992924742, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 59141, "wall_seconds": 120.026973, "sent": 29570, "received": 29569, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 13, "sim_time": 117.61799999990728, "rtt_samples": 29569, "rtt_ms_p50": 0.9130999987974064, "rtt_ms_p99": 1.1626000001706416, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 61642, "wall_seconds": 125.02850670000043, "sent": 30821, "received": 30819, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 13, "sim_time": 122.61999999989563, "rtt_samples": 30819, "rtt_ms_p50": 0.9134000010817545, "rtt_ms_p99": 1.1627639996731887, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 64142, "wall_seconds": 130.02900650000083, "sent": 32071, "received": 32069, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 13, "sim_time": 127.61999999988397, "rtt_samples": 32069, "rtt_ms_p50": 0.9133000003203051, "rtt_ms_p99": 1.1628320007730508, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 66642, "wall_seconds": 135.02918620000128, "sent": 33321, "received": 33319, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 13, "sim_time": 132.61999999990513, "rtt_samples": 33319, "rtt_ms_p50": 0.9127999983320478, "rtt_ms_p99": 1.1625639996418613, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 69142, "wall_seconds": 140.0316985999998, "sent": 34571, "received": 34569, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 14, "sim_time": 137.619999999929, "rtt_samples": 34569, "rtt_ms_p50": 0.9122999999817694, "rtt_ms_p99": 1.1622319998423336, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 71641, "wall_seconds": 145.03178190000108, "sent": 35820, "received": 35819, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 15, "sim_time": 142.61799999995287, "rtt_samples": 35819, "rtt_ms_p50": 0.9120999984588707, "rtt_ms_p99": 1.1625639996418613, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 74141, "wall_seconds": 150.0323524000014, "sent": 37070, "received": 37069, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 15, "sim_time": 147.61799999997675, "rtt_samples": 37069, "rtt_ms_p50": 0.9115000011661323, "rtt_ms_p99": 1.162032000720501, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 76640, "wall_seconds": 155.03273380000064, "sent": 38320, "received": 38318, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 16, "sim_time": 152.6160000000006, "rtt_samples": 38318, "rtt_ms_p50": 0.9112999996432336, "rtt_ms_p99": 1.1617000000114786, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 79138, "wall_seconds": 160.03358170000138, "sent": 39569, "received": 39567, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 18, "sim_time": 157.61200000002447, "rtt_samples": 39567, "rtt_ms_p50": 0.9109000002354151, "rtt_ms_p99": 1.1615680002068978, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 81637, "wall_seconds": 165.03386280000086, "sent": 40818, "received": 40817, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 19, "sim_time": 162.61000000004833, "rtt_samples": 40817, "rtt_ms_p50": 0.9105999997700565, "rtt_ms_p99": 1.1611999998422107, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 84136, "wall_seconds": 170.03495920000023, "sent": 42068, "received": 42066, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 20, "sim_time": 167.6080000000722, "rtt_samples": 42066, "rtt_ms_p50": 0.9104000000661472, "rtt_ms_p99": 1.160899999376852, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 86635, "wall_seconds": 175.03551730000072, "sent": 43317, "received": 43316, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 21, "sim_time": 172.60600000009606, "rtt_samples": 43316, "rtt_ms_p50": 0.9102999993046978, "rtt_ms_p99": 1.1606000004576345, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 89134, "wall_seconds": 180.03688260000126, "sent": 44567, "received": 44565, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 22, "sim_time": 177.60400000011992, "rtt_samples": 44565, "rtt_ms_p50": 0.9100999996007886, "rtt_ms_p99": 1.1600719996931732, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 91631, "wall_seconds": 185.03806040000018, "sent": 45815, "received": 45814, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 25, "sim_time": 182.59800000014377, "rtt_samples": 45814, "rtt_ms_p50": 0.9100999996007886, "rtt_ms_p99": 1.1605739991864543, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 94130, "wall_seconds": 190.0395591000015, "sent": 47065, "received": 47063, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 26, "sim_time": 187.59600000016763, "rtt_samples": 47063, "rtt_ms_p50": 0.90970000019297, "rtt_ms_p99": 1.1604000010265736, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 96629, "wall_seconds": 195.0409462000007, "sent": 48314, "received": 48313, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 27, "sim_time": 192.5940000001915, "rtt_samples": 48313, "rtt_ms_p50": 0.9099000017158687, "rtt_ms_p99": 1.160788000343018, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 99128, "wall_seconds": 200.0420735000007, "sent": 49564, "received": 49562, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 28, "sim_time": 197.59200000021536, "rtt_samples": 49562, "rtt_ms_p50": 0.9107000005315058, "rtt_ms_p99": 1.1618390003604873, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 101624, "wall_seconds": 205.04271479999989, "sent": 50812, "received": 50810, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 31, "sim_time": 202.5840000002392, "rtt_samples": 50810, "rtt_ms_p50": 0.910999999177875, "rtt_ms_p99": 1.1624910005775742, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 104123, "wall_seconds": 210.04400669999995, "sent": 52061, "received": 52060, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 32, "sim_time": 207.58200000026306, "rtt_samples": 52060, "rtt_ms_p50": 0.9107999994739657, "rtt_ms_p99": 1.1622409997471546, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 106622, "wall_seconds": 215.0455168999997, "sent": 53311, "received": 53309, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 33, "sim_time": 212.58000000028693, "rtt_samples": 53309, "rtt_ms_p50": 0.9107000005315058, "rtt_ms_p99": 1.1621000010927673, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 109121, "wall_seconds": 220.04714430000058, "sent": 54560, "received": 54559, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 34, "sim_time": 217.5780000003108, "rtt_samples": 54559, "rtt_ms_p50": 0.9106999987125164, "rtt_ms_p99": 1.161742000331287, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 111620, "wall_seconds": 225.0490077000013, "sent": 55810, "received": 55808, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 35, "sim_time": 222.57600000033466, "rtt_samples": 55808, "rtt_ms_p50": 0.9105999997700565, "rtt_ms_p99": 1.1615000003075693, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 114118, "wall_seconds": 230.04945100000077, "sent": 57059, "received": 57057, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 36, "sim_time": 227.5720000003585, "rtt_samples": 57057, "rtt_ms_p50": 0.9107000005315058, "rtt_ms_p99": 1.1619000015343772, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 116617, "wall_seconds": 235.0515507, "sent": 58308, "received": 58307, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 37, "sim_time": 232.57000000038238, "rtt_samples": 58307, "rtt_ms_p50": 0.9107000005315058, "rtt_ms_p99": 1.1618000007729279, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 119115, "wall_seconds": 240.05147140000008, "sent": 59557, "received": 59556, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 38, "sim_time": 237.56600000040623, "rtt_samples": 59556, "rtt_ms_p50": 0.9105999997700565, "rtt_ms_p99": 1.1615000003075693, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 121614, "wall_seconds": 245.05278950000138, "sent": 60807, "received": 60805, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 1, "late_steps": 39, "sim_time": 242.5640000004301, "rtt_samples": 60805, "rtt_ms_p50": 0.9104999990086071, "rtt_ms_p99": 1.1610999990807613, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"watchdog": "hold", "age_ms": 1278.0516000002535, "already_holding": false}
+{"final": false, "physics_steps": 123979, "wall_seconds": 251.06531790000008, "sent": 61989, "received": 61988, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 41, "sim_time": 247.29400000045268, "rtt_samples": 61988, "rtt_ms_p50": 0.9104000000661472, "rtt_ms_p99": 1.1610999990807613, "rtt_ms_max": 4.64060000012978}
+{"command_recovered": true, "mode": 1}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 126477, "wall_seconds": 256.0651152999999, "sent": 63238, "received": 63237, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 42, "sim_time": 252.29000000047654, "rtt_samples": 63237, "rtt_ms_p50": 0.9107999994739657, "rtt_ms_p99": 1.1611999998422107, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 128974, "wall_seconds": 261.06622590000006, "sent": 64487, "received": 64485, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 44, "sim_time": 257.2840000005004, "rtt_samples": 64485, "rtt_ms_p50": 0.9114000004046829, "rtt_ms_p99": 1.1619000000064261, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 131472, "wall_seconds": 266.067157200001, "sent": 65736, "received": 65734, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 45, "sim_time": 262.28000000052424, "rtt_samples": 65734, "rtt_ms_p50": 0.9120000013354002, "rtt_ms_p99": 1.1623999998846557, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 133970, "wall_seconds": 271.06747560000076, "sent": 66985, "received": 66983, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 46, "sim_time": 267.2760000005481, "rtt_samples": 66983, "rtt_ms_p50": 0.9124999996856786, "rtt_ms_p99": 1.162500000646105, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 136468, "wall_seconds": 276.0693787, "sent": 68234, "received": 68232, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 47, "sim_time": 272.27200000057195, "rtt_samples": 68232, "rtt_ms_p50": 0.9124000007432187, "rtt_ms_p99": 1.1623689996486066, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 138966, "wall_seconds": 281.06986470000084, "sent": 69483, "received": 69481, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 48, "sim_time": 277.2680000005958, "rtt_samples": 69481, "rtt_ms_p50": 0.9124999996856786, "rtt_ms_p99": 1.1623999998846557, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 141454, "wall_seconds": 286.0710486000007, "sent": 70727, "received": 70725, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 54, "sim_time": 282.24400000061956, "rtt_samples": 70725, "rtt_ms_p50": 0.9131999995588558, "rtt_ms_p99": 1.16379999963101, "rtt_ms_max": 4.64060000012978}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 143949, "wall_seconds": 291.0711114000005, "sent": 71974, "received": 71973, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 57, "sim_time": 287.2340000006434, "rtt_samples": 71973, "rtt_ms_p50": 0.9135000000242144, "rtt_ms_p99": 1.1660000000119908, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 146447, "wall_seconds": 296.0723188000011, "sent": 73223, "received": 73222, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 58, "sim_time": 292.23000000066725, "rtt_samples": 73222, "rtt_ms_p50": 0.913800000489573, "rtt_ms_p99": 1.1659790002340735, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 148945, "wall_seconds": 301.07381560000067, "sent": 74472, "received": 74471, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 59, "sim_time": 297.2260000006911, "rtt_samples": 74471, "rtt_ms_p50": 0.9140999991359422, "rtt_ms_p99": 1.1661999997159, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 151443, "wall_seconds": 306.0752577000003, "sent": 75721, "received": 75720, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 60, "sim_time": 302.22200000071496, "rtt_samples": 75720, "rtt_ms_p50": 0.9145000003627501, "rtt_ms_p99": 1.1666810000861003, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 153933, "wall_seconds": 311.0753487000002, "sent": 76966, "received": 76965, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 64, "sim_time": 307.20200000073874, "rtt_samples": 76965, "rtt_ms_p50": 0.9152999991783872, "rtt_ms_p99": 1.1693000003288034, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 156428, "wall_seconds": 316.0756285000007, "sent": 78214, "received": 78212, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 66, "sim_time": 312.19200000076256, "rtt_samples": 78212, "rtt_ms_p50": 0.9152000002359273, "rtt_ms_p99": 1.1694000004354166, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 158926, "wall_seconds": 321.0768810999998, "sent": 79463, "received": 79461, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 67, "sim_time": 317.1880000007864, "rtt_samples": 79461, "rtt_ms_p50": 0.9153000009973766, "rtt_ms_p99": 1.1695000001054723, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 161424, "wall_seconds": 326.07901570000104, "sent": 80712, "received": 80710, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 68, "sim_time": 322.1840000008103, "rtt_samples": 80710, "rtt_ms_p50": 0.9155999996437458, "rtt_ms_p99": 1.1697000007370661, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 163922, "wall_seconds": 331.0809036999999, "sent": 81961, "received": 81959, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 69, "sim_time": 327.1800000008341, "rtt_samples": 81959, "rtt_ms_p50": 0.9155999996437458, "rtt_ms_p99": 1.1695420007526989, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 166419, "wall_seconds": 336.08094750000055, "sent": 83209, "received": 83208, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 70, "sim_time": 332.174000000858, "rtt_samples": 83208, "rtt_ms_p50": 0.9157000004051952, "rtt_ms_p99": 1.1693930005094437, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 168915, "wall_seconds": 341.08161610000025, "sent": 84457, "received": 84456, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 72, "sim_time": 337.1660000008818, "rtt_samples": 84456, "rtt_ms_p50": 0.9157000004051952, "rtt_ms_p99": 1.1692000007315073, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 171411, "wall_seconds": 346.08218280000074, "sent": 85705, "received": 85704, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 74, "sim_time": 342.15800000090564, "rtt_samples": 85704, "rtt_ms_p50": 0.9160999998130137, "rtt_ms_p99": 1.1698970006364109, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 173908, "wall_seconds": 351.0837668000004, "sent": 86954, "received": 86952, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 75, "sim_time": 347.1520000009295, "rtt_samples": 86952, "rtt_ms_p50": 0.916299999516923, "rtt_ms_p99": 1.170399998954963, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 176193, "wall_seconds": 356.20878150000135, "sent": 88096, "received": 88095, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 2, "late_steps": 117, "sim_time": 351.7220000009513, "rtt_samples": 88095, "rtt_ms_p50": 0.9165999999822816, "rtt_ms_p99": 1.1709060008797676, "rtt_ms_max": 4.832900000110385}
+{"watchdog": "hold", "age_ms": 149.4633000002068, "already_holding": false}
+{"command_recovered": true, "mode": 1}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 178585, "wall_seconds": 361.1785643000003, "sent": 89292, "received": 89291, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 132, "sim_time": 356.50600000097415, "rtt_samples": 89291, "rtt_ms_p50": 0.9170000012090895, "rtt_ms_p99": 1.1717999988832162, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 181082, "wall_seconds": 366.1788129000015, "sent": 90541, "received": 90539, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 133, "sim_time": 361.500000000998, "rtt_samples": 90539, "rtt_ms_p50": 0.9172999998554587, "rtt_ms_p99": 1.1721000009856652, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 183577, "wall_seconds": 371.180084900001, "sent": 91788, "received": 91787, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 135, "sim_time": 366.4900000010218, "rtt_samples": 91787, "rtt_ms_p50": 0.9174000006169081, "rtt_ms_p99": 1.1723999996320345, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 186074, "wall_seconds": 376.1812607000011, "sent": 93037, "received": 93035, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 136, "sim_time": 371.4840000010457, "rtt_samples": 93035, "rtt_ms_p50": 0.9176000003208173, "rtt_ms_p99": 1.172765999399417, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 188571, "wall_seconds": 381.18245190000016, "sent": 94285, "received": 94284, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 137, "sim_time": 376.4780000010695, "rtt_samples": 94284, "rtt_ms_p50": 0.9178000000247266, "rtt_ms_p99": 1.1728000008588424, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 191061, "wall_seconds": 386.1836140000014, "sent": 95530, "received": 95529, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 142, "sim_time": 381.4580000010933, "rtt_samples": 95529, "rtt_ms_p50": 0.9181999994325452, "rtt_ms_p99": 1.1728999998013023, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 193558, "wall_seconds": 391.1846929000003, "sent": 96779, "received": 96777, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 143, "sim_time": 386.45200000111714, "rtt_samples": 96777, "rtt_ms_p50": 0.9183000001939945, "rtt_ms_p99": 1.1730240003089425, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 196055, "wall_seconds": 396.186684100001, "sent": 98027, "received": 98026, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 144, "sim_time": 391.446000001141, "rtt_samples": 98026, "rtt_ms_p50": 0.9182000012515346, "rtt_ms_p99": 1.1728999998013023, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 198549, "wall_seconds": 401.18735750000087, "sent": 99274, "received": 99273, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 147, "sim_time": 396.4340000011648, "rtt_samples": 99273, "rtt_ms_p50": 0.9179999997286359, "rtt_ms_p99": 1.1727279998012816, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 201045, "wall_seconds": 406.1887321000013, "sent": 100522, "received": 100521, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 149, "sim_time": 401.42600000118864, "rtt_samples": 100521, "rtt_ms_p50": 0.9178000000247266, "rtt_ms_p99": 1.1723999996320345, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 203542, "wall_seconds": 411.1914800000013, "sent": 101771, "received": 101769, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 150, "sim_time": 406.4200000012125, "rtt_samples": 101769, "rtt_ms_p50": 0.9178999989671865, "rtt_ms_p99": 1.1725000003934838, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 206037, "wall_seconds": 416.19153990000086, "sent": 103018, "received": 103017, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 3, "late_steps": 151, "sim_time": 411.4100000012363, "rtt_samples": 103017, "rtt_ms_p50": 0.9181999994325452, "rtt_ms_p99": 1.1729840007319576, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"watchdog": "hold", "age_ms": 672.2036999999546, "already_holding": false}
+{"command_recovered": true, "mode": 1}
+{"final": false, "physics_steps": 208198, "wall_seconds": 421.1930185000001, "sent": 104099, "received": 104097, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 153, "sim_time": 415.73200000125695, "rtt_samples": 104097, "rtt_ms_p50": 0.9183000001939945, "rtt_ms_p99": 1.1728999998013023, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 210695, "wall_seconds": 426.19475969999985, "sent": 105347, "received": 105346, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 154, "sim_time": 420.7260000012808, "rtt_samples": 105346, "rtt_ms_p50": 0.9181999994325452, "rtt_ms_p99": 1.1728000008588424, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 213191, "wall_seconds": 431.1949132999998, "sent": 106595, "received": 106594, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 155, "sim_time": 425.71800000130463, "rtt_samples": 106594, "rtt_ms_p50": 0.9183999991364544, "rtt_ms_p99": 1.1728999998013023, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 215687, "wall_seconds": 436.1949564000006, "sent": 107843, "received": 107842, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 156, "sim_time": 430.71000000132847, "rtt_samples": 107842, "rtt_ms_p50": 0.9183000001939945, "rtt_ms_p99": 1.1728000008588424, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 218184, "wall_seconds": 441.19675310000093, "sent": 109092, "received": 109090, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 157, "sim_time": 435.7040000013523, "rtt_samples": 109090, "rtt_ms_p50": 0.9182000012515346, "rtt_ms_p99": 1.1727999992399418, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 220681, "wall_seconds": 446.1991740000012, "sent": 110340, "received": 110339, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 158, "sim_time": 440.69800000137616, "rtt_samples": 110339, "rtt_ms_p50": 0.9183000001939945, "rtt_ms_p99": 1.1728000008588424, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 223177, "wall_seconds": 451.19954210000105, "sent": 111588, "received": 111587, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 159, "sim_time": 445.6900000014, "rtt_samples": 111587, "rtt_ms_p50": 0.9184999998979038, "rtt_ms_p99": 1.1729000016202917, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 225670, "wall_seconds": 456.20057700000143, "sent": 112835, "received": 112833, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 161, "sim_time": 450.6760000014238, "rtt_samples": 112833, "rtt_ms_p50": 0.9184999998979038, "rtt_ms_p99": 1.1729680009011638, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 228165, "wall_seconds": 461.20174530000077, "sent": 114082, "received": 114081, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 163, "sim_time": 455.6660000014476, "rtt_samples": 114081, "rtt_ms_p50": 0.9183000001939945, "rtt_ms_p99": 1.1728999998013023, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 230661, "wall_seconds": 466.20274560000144, "sent": 115330, "received": 115329, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 164, "sim_time": 460.65800000147146, "rtt_samples": 115329, "rtt_ms_p50": 0.9181000004900852, "rtt_ms_p99": 1.1725719996320552, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 233157, "wall_seconds": 471.203802, "sent": 116578, "received": 116577, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 165, "sim_time": 465.6500000014953, "rtt_samples": 116577, "rtt_ms_p50": 0.9178000000247266, "rtt_ms_p99": 1.1723999996320345, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 235653, "wall_seconds": 476.20554730000003, "sent": 117826, "received": 117825, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 166, "sim_time": 470.64200000151914, "rtt_samples": 117825, "rtt_ms_p50": 0.9175000013783574, "rtt_ms_p99": 1.172075999420485, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 238149, "wall_seconds": 481.20619009999973, "sent": 119074, "received": 119073, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 167, "sim_time": 475.634000001543, "rtt_samples": 119073, "rtt_ms_p50": 0.9172999998554587, "rtt_ms_p99": 1.1718000005203066, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 240645, "wall_seconds": 486.2080893000002, "sent": 120322, "received": 120321, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 168, "sim_time": 480.6260000015668, "rtt_samples": 120321, "rtt_ms_p50": 0.9171000001515495, "rtt_ms_p99": 1.1715799992089162, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 243140, "wall_seconds": 491.2082330000012, "sent": 121570, "received": 121568, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 169, "sim_time": 485.61600000159063, "rtt_samples": 121568, "rtt_ms_p50": 0.9167999996861909, "rtt_ms_p99": 1.1713330000020508, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 245636, "wall_seconds": 496.20993980000094, "sent": 122818, "received": 122816, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 170, "sim_time": 490.60800000161447, "rtt_samples": 122816, "rtt_ms_p50": 0.9165999999822816, "rtt_ms_p99": 1.171184999748221, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 248131, "wall_seconds": 501.21036210000057, "sent": 124065, "received": 124064, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 171, "sim_time": 495.5980000016383, "rtt_samples": 124064, "rtt_ms_p50": 0.9164000002783723, "rtt_ms_p99": 1.1709999998856802, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 250622, "wall_seconds": 506.2123005000012, "sent": 125311, "received": 125309, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 173, "sim_time": 500.5800000016621, "rtt_samples": 125309, "rtt_ms_p50": 0.9161000016320031, "rtt_ms_p99": 1.1705919987434752, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 253116, "wall_seconds": 511.2133646000002, "sent": 126558, "received": 126556, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 175, "sim_time": 505.5680000016859, "rtt_samples": 126556, "rtt_ms_p50": 0.9159999990515644, "rtt_ms_p99": 1.170445000298059, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 255611, "wall_seconds": 516.2134194999999, "sent": 127805, "received": 127804, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 176, "sim_time": 510.55800000170973, "rtt_samples": 127804, "rtt_ms_p50": 0.9157999993476551, "rtt_ms_p99": 1.170300000012503, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 258107, "wall_seconds": 521.2154504000009, "sent": 129053, "received": 129052, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 177, "sim_time": 515.5500000016326, "rtt_samples": 129052, "rtt_ms_p50": 0.9155999996437458, "rtt_ms_p99": 1.1699999995471444, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 260601, "wall_seconds": 526.2156861000003, "sent": 130300, "received": 130299, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 179, "sim_time": 520.5380000015147, "rtt_samples": 130299, "rtt_ms_p50": 0.9153999999398366, "rtt_ms_p99": 1.1698020016410742, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 263094, "wall_seconds": 531.2173235000009, "sent": 131547, "received": 131545, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 182, "sim_time": 525.5240000013968, "rtt_samples": 131545, "rtt_ms_p50": 0.9152000002359273, "rtt_ms_p99": 1.1696000001393259, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 265589, "wall_seconds": 536.2182654000007, "sent": 132794, "received": 132793, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 183, "sim_time": 530.5140000012788, "rtt_samples": 132793, "rtt_ms_p50": 0.9152000002359273, "rtt_ms_p99": 1.169500001196866, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 268084, "wall_seconds": 541.2192997000002, "sent": 134042, "received": 134040, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 184, "sim_time": 535.5040000011608, "rtt_samples": 134040, "rtt_ms_p50": 0.9152999991783872, "rtt_ms_p99": 1.1695610005517652, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 270576, "wall_seconds": 546.2209915000003, "sent": 135288, "received": 135286, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 187, "sim_time": 540.4880000010429, "rtt_samples": 135286, "rtt_ms_p50": 0.9154999988822965, "rtt_ms_p99": 1.1697999998432351, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 273071, "wall_seconds": 551.2229173000014, "sent": 136535, "received": 136534, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 188, "sim_time": 545.4780000009249, "rtt_samples": 136534, "rtt_ms_p50": 0.9155999996437458, "rtt_ms_p99": 1.1697000009007752, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 275566, "wall_seconds": 556.2236472000004, "sent": 137783, "received": 137781, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 189, "sim_time": 550.4680000008069, "rtt_samples": 137781, "rtt_ms_p50": 0.9157000004051952, "rtt_ms_p99": 1.169800000207033, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 278060, "wall_seconds": 561.2237322000001, "sent": 139030, "received": 139028, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 190, "sim_time": 555.456000000689, "rtt_samples": 139028, "rtt_ms_p50": 0.9159000001091044, "rtt_ms_p99": 1.1701729995365906, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 280555, "wall_seconds": 566.2255144999999, "sent": 140277, "received": 140276, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 191, "sim_time": 560.446000000571, "rtt_samples": 140276, "rtt_ms_p50": 0.9160999998130137, "rtt_ms_p99": 1.1701999992510537, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 283050, "wall_seconds": 571.2274596000007, "sent": 141525, "received": 141523, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 192, "sim_time": 565.436000000453, "rtt_samples": 141523, "rtt_ms_p50": 0.916200000574463, "rtt_ms_p99": 1.170277999844984, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 285545, "wall_seconds": 576.2290902000004, "sent": 142772, "received": 142771, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 193, "sim_time": 570.426000000335, "rtt_samples": 142771, "rtt_ms_p50": 0.916299999516923, "rtt_ms_p99": 1.1701000003085937, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 288039, "wall_seconds": 581.2292957000009, "sent": 144019, "received": 144018, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 194, "sim_time": 575.414000000217, "rtt_samples": 144018, "rtt_ms_p50": 0.9160999998130137, "rtt_ms_p99": 1.1698000013529963, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 290532, "wall_seconds": 586.2298253999998, "sent": 145266, "received": 145264, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 196, "sim_time": 580.4000000000991, "rtt_samples": 145264, "rtt_ms_p50": 0.9159000001091044, "rtt_ms_p99": 1.1696999990817858, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 293027, "wall_seconds": 591.2318086000014, "sent": 146513, "received": 146512, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 197, "sim_time": 585.3899999999811, "rtt_samples": 146512, "rtt_ms_p50": 0.9157999993476551, "rtt_ms_p99": 1.1695890002556537, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 295520, "wall_seconds": 596.232188, "sent": 147760, "received": 147758, "invalid": 1, "no_reply": 2, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 199, "sim_time": 590.3759999998632, "rtt_samples": 147758, "rtt_ms_p50": 0.9156000014627352, "rtt_ms_p99": 1.1693000004561327, "rtt_ms_max": 4.832900000110385}
+{"tcp_error": "TimeoutError"}
+{"final": true, "physics_steps": 297401, "wall_seconds": 600.0018008000006, "sent": 148700, "received": 148699, "invalid": 1, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 0, "reset_discarded": 1, "timeout_transitions": 4, "late_steps": 200, "sim_time": 594.1379999997743, "rtt_samples": 148699, "rtt_ms_p50": 0.9155000007012859, "rtt_ms_p99": 1.1692000007315073, "rtt_ms_max": 4.832900000110385}
 
-Local fake-board TCP replies and image timings:
-{"tcp_listening": 15002}
-{"request": {"op": "hello"}, "elapsed_s": 0.00026640000032784883, "reply": {"id": 0, "sim": "mujoco", "version": "4.0.0", "robot": "panda", "cameras": ["top", "wrist"], "table_z": 0.0}}
-{"request": {"op": "objects"}, "elapsed_s": 0.00041730000157258473, "reply": {"id": 1, "objects": [{"name": "red_cube", "pos": [0.68, -0.12, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "green_cube", "pos": [0.72, 0.23, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "blue_cube", "pos": [0.68, 0.12, 0.025], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}]}}
-{"request": {"op": "render", "camera": "top", "w": 640, "h": 480}, "elapsed_s": 0.05357449999974051, "reply": {"id": 2, "w": 640, "h": 480, "fovy": 48.0, "cam_pos": [0.4, 0.0, 1.65], "cam_xmat": [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], "jpeg_bytes": 19638}}
-{"request": {"op": "render", "camera": "wrist", "w": 640, "h": 480}, "elapsed_s": 0.00449060000028112, "reply": {"id": 3, "w": 640, "h": 480, "fovy": 90.0, "cam_pos": [0.4045717367593803, -1.1796624363648058e-05, 0.5225009107182894], "cam_xmat": [8.418083121591868e-05, -0.9999812964488589, 0.0061155266367329125, 0.9999999846220712, 8.512012226463694e-05, 0.00015333107847024423, -0.000153848765009608, 0.00611551363515115, 0.9999812882367014], "jpeg_bytes": 18894}}
-{"request": {"op": "reset", "seed": 1}, "elapsed_s": 0.0020459999996091938, "reply": {"id": 4, "ok": true}}
-{"request": {"op": "objects"}, "elapsed_s": 0.0002817999993567355, "reply": {"id": 5, "objects": [{"name": "red_cube", "pos": [0.6803546487410077, -0.10648608911022193, 0.024960760000000002], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "green_cube", "pos": [0.709324788381589, 0.24345948341411733, 0.024960760000000002], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "blue_cube", "pos": [0.6743549435603147, 0.11769979346917726, 0.024960760000000002], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "left_tray", "pos": [0.5, 0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}, {"name": "right_tray", "pos": [0.5, -0.3, 0.0], "quat": [1.0, 0.0, 0.0, 0.0]}]}}
-FAKE_BOARD_COMPLETE replies=4372 (local fixture only)
+===== pc-interruption.log =====
+{"command_recovered": true, "mode": 0}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 2478, "q_min": [-0.2944316186751567, 0.0, -0.0009595653585997488, -1.871627363725944, -0.006287095261673336, 1.5512485124080024, -0.7853038029072752], "q_max": [0.29660887943888675, 0.13534929844989071, 0.00025673190579778834, -1.2800380318626325, 0.0, 1.57079, -0.7852894357345297], "gripper_min": 2.6244652541341065e-06, "gripper_max": 0.0800097786621943, "wall_seconds": 5.000641000000542, "sent": 1239, "received": 1238, "invalid": 0, "no_reply": 1, "pending_expired": 0, "loss_percent": 0.0, "lost": 0, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 0, "late_steps": 2, "sim_time": 4.955999999999676, "rtt_samples": 1238, "rtt_ms_p50": 0.9184500004266738, "rtt_ms_p99": 1.1586859994895347, "rtt_ms_max": 1.706999999441905}
+{"tcp_error": "TimeoutError"}
+{"watchdog": "hold", "age_ms": 99.30489999896963, "already_holding": true}
+{"command_recovered": true, "mode": 0}
+{"final": false, "physics_steps": 4973, "q_min": [-0.2963525197441434, 0.0, -0.0009595653585997488, -1.8735459238210523, -0.006287095261673336, 1.5512485124080024, -0.7853136771943305], "q_max": [0.29660887943888675, 0.13534929844989071, 0.0007696247459941241, -1.2800380318626325, 0.0, 1.57079, -0.7852894357345297], "gripper_min": 3.1570306622839535e-09, "gripper_max": 0.0800097786621943, "wall_seconds": 10.001598200000444, "sent": 2486, "received": 1893, "invalid": 0, "no_reply": 593, "pending_expired": 593, "loss_percent": 23.853580048270313, "lost": 593, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 3, "sim_time": 9.94599999999999, "rtt_samples": 1893, "rtt_ms_p50": 0.9140000001934823, "rtt_ms_p99": 1.2136319992714524, "rtt_ms_max": 57.432199999311706}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 7473, "q_min": [-0.2963525197441434, 0.0, -0.0009595653585997488, -1.8735459238210523, -0.008518201590367366, 1.538672413385306, -0.7853166812710254], "q_max": [0.5783884147357703, 0.18433029156544042, 0.0009409023627540849, -1.0376037441862145, 0.0, 1.57079, -0.7852894357345297], "gripper_min": 3.1570306622839535e-09, "gripper_max": 0.0800097786621943, "wall_seconds": 15.00167859999965, "sent": 3736, "received": 3143, "invalid": 0, "no_reply": 593, "pending_expired": 593, "loss_percent": 15.872591006423983, "lost": 593, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 3, "sim_time": 14.94600000000166, "rtt_samples": 3143, "rtt_ms_p50": 0.9049000000231899, "rtt_ms_p99": 1.1702859997967605, "rtt_ms_max": 57.432199999311706}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 9974, "q_min": [-0.2963525197441434, 0.0, -0.0009595653585997488, -1.8735459238210523, -0.008518201590367366, 1.538672413385306, -0.7853166812710254], "q_max": [0.5783884147357703, 0.18433029156544042, 0.0009411792296893016, -1.0376029224721532, 0.0, 1.57079, -0.7852894357345297], "gripper_min": 3.413263800228216e-10, "gripper_max": 0.0800097786621943, "wall_seconds": 20.003565400000298, "sent": 4987, "received": 4393, "invalid": 0, "no_reply": 594, "pending_expired": 593, "loss_percent": 11.89330124348175, "lost": 593, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 3, "sim_time": 19.947999999999823, "rtt_samples": 4393, "rtt_ms_p50": 0.9020000015880214, "rtt_ms_p99": 1.1615039996104315, "rtt_ms_max": 57.432199999311706}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 12474, "q_min": [-0.2963525197441434, 0.0, -0.0009595653585997488, -1.8735459238210523, -0.008518201590367366, 1.538672413385306, -0.7853166858578682], "q_max": [0.5783884147357703, 0.18433029156544042, 0.0009418780472544494, -1.0376029224721532, 0.0, 1.57079, -0.7852894357345297], "gripper_min": 3.413263800228216e-10, "gripper_max": 0.0800097786621943, "wall_seconds": 25.00384800000029, "sent": 6237, "received": 5643, "invalid": 0, "no_reply": 594, "pending_expired": 593, "loss_percent": 9.509300833867863, "lost": 593, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 3, "sim_time": 24.94799999999705, "rtt_samples": 5643, "rtt_ms_p50": 0.9086999998544343, "rtt_ms_p99": 1.1709999998856802, "rtt_ms_max": 57.432199999311706}
+{"tcp_error": "TimeoutError"}
+{"final": false, "physics_steps": 14974, "q_min": [-0.2963525197441434, 0.0, -0.0009595653585997488, -1.8735459238210523, -0.008518201590367366, 1.538672413385306, -0.7853166858578682], "q_max": [0.5783884147357703, 0.18433029156544042, 0.0009418780472544494, -1.0376029224721532, 0.0, 1.57079, -0.7852894357345297], "gripper_min": 3.413263800228216e-10, "gripper_max": 0.0800097786621943, "wall_seconds": 30.003839400000288, "sent": 7487, "received": 6893, "invalid": 0, "no_reply": 594, "pending_expired": 593, "loss_percent": 7.921453379641998, "lost": 593, "inflight": 1, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 3, "sim_time": 29.94799999999428, "rtt_samples": 6893, "rtt_ms_p50": 0.9145999993052101, "rtt_ms_p99": 1.1780079986783676, "rtt_ms_max": 57.432199999311706}
+{"tcp_error": "TimeoutError"}
+{"tcp_error": "TimeoutError"}
+{"final": true, "physics_steps": 17473, "q_min": [-0.2963525197441434, 0.0, -0.0009595653585997488, -1.8735459238210523, -0.008518201590367366, 1.538672413385306, -0.7853166858578682], "q_max": [0.5783884147357703, 0.18433029156544042, 0.0009421305027054775, -1.0376029224721532, 0.0, 1.57079, -0.7852894357345297], "gripper_min": 3.413263800228216e-10, "gripper_max": 0.0800097786621943, "wall_seconds": 35.001573699999426, "sent": 8736, "received": 8143, "invalid": 0, "no_reply": 593, "pending_expired": 593, "loss_percent": 6.788003663003663, "lost": 593, "inflight": 0, "reset_discarded": 0, "timeout_transitions": 1, "late_steps": 3, "sim_time": 34.945999999996744, "rtt_samples": 8143, "rtt_ms_p50": 0.9198000007017981, "rtt_ms_p99": 1.1820999989140546, "rtt_ms_max": 57.432199999311706}
+
+===== orchestration.log =====
+{"utc": "2026-11-08T06:34:55Z", "rt_started": 4782, "log": "rt-benchmark.log"}
+{"utc": "2026-11-08T06:34:56Z", "benchmark_started": true, "seconds": 600, "pc_pid": 31852}
+{"utc": "2026-11-08T06:34:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:35:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:35:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:36:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:36:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:37:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:37:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:38:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:38:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:39:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:39:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:40:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:40:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:41:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:41:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:42:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:42:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:43:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:43:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:44:26Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:44:56Z", "benchmark_running": true}
+{"utc": "2026-11-08T06:44:58Z", "benchmark_complete": true, "pc_rc": 0}
+{"utc": "2026-11-08T06:44:58Z", "rt_stopped": 4782, "rc": 0}
+{"utc": "2026-11-08T06:44:59Z", "rt_started": 4808, "log": "rt-interruption-before.log"}
+{"utc": "2026-11-08T06:45:08Z", "rt_stopped": 4808, "rc": 0}
+{"utc": "2026-11-08T06:45:08Z", "interruption_no_controller": true}
+{"utc": "2026-11-08T06:45:10Z", "rt_started": 4813, "log": "rt-interruption-after.log"}
+{"utc": "2026-11-08T06:45:10Z", "interruption_restarted": true}
+{"utc": "2026-11-08T06:45:37Z", "rt_stopped": 4813, "rc": 0}
+{"utc": "2026-11-08T06:45:37Z", "image": "top", "bytes": 19333}
+{"utc": "2026-11-08T06:45:37Z", "image": "wrist", "bytes": 20767}
+{"utc": "2026-11-08T06:45:37Z", "all_tests_finished": true}
+
+===== summary.json =====
+{
+  "benchmark_pc": {
+    "final": true,
+    "physics_steps": 297401,
+    "wall_seconds": 600.0018008000006,
+    "sent": 148700,
+    "received": 148699,
+    "invalid": 1,
+    "no_reply": 1,
+    "pending_expired": 0,
+    "loss_percent": 0.0,
+    "lost": 0,
+    "inflight": 0,
+    "reset_discarded": 1,
+    "timeout_transitions": 4,
+    "late_steps": 200,
+    "sim_time": 594.1379999997743,
+    "rtt_samples": 148699,
+    "rtt_ms_p50": 0.9155000007012859,
+    "rtt_ms_p99": 1.1692000007315073,
+    "rtt_ms_max": 4.832900000110385
+  },
+  "benchmark_rt": {
+    "rx": 148700,
+    "lost": 0,
+    "processing_us_mean": 175.633,
+    "processing_us_max": 490.236,
+    "interval_ms_mean": 4.055488,
+    "interval_ms_max": 1665.939968,
+    "interval_ms_std": 5.763683
+  },
+  "benchmark_watchdogs": [
+    {
+      "watchdog": "hold",
+      "age_ms": 1654.0643999996973,
+      "already_holding": false
+    },
+    {
+      "watchdog": "hold",
+      "age_ms": 1278.0516000002535,
+      "already_holding": false
+    },
+    {
+      "watchdog": "hold",
+      "age_ms": 149.4633000002068,
+      "already_holding": false
+    },
+    {
+      "watchdog": "hold",
+      "age_ms": 672.2036999999546,
+      "already_holding": false
+    }
+  ],
+  "interruption_final": {
+    "final": true,
+    "physics_steps": 17473,
+    "q_min": [
+      -0.2963525197441434,
+      0.0,
+      -0.0009595653585997488,
+      -1.8735459238210523,
+      -0.008518201590367366,
+      1.538672413385306,
+      -0.7853166858578682
+    ],
+    "q_max": [
+      0.5783884147357703,
+      0.18433029156544042,
+      0.0009421305027054775,
+      -1.0376029224721532,
+      0.0,
+      1.57079,
+      -0.7852894357345297
+    ],
+    "gripper_min": 3.413263800228216e-10,
+    "gripper_max": 0.0800097786621943,
+    "wall_seconds": 35.001573699999426,
+    "sent": 8736,
+    "received": 8143,
+    "invalid": 0,
+    "no_reply": 593,
+    "pending_expired": 593,
+    "loss_percent": 6.788003663003663,
+    "lost": 593,
+    "inflight": 0,
+    "reset_discarded": 0,
+    "timeout_transitions": 1,
+    "late_steps": 3,
+    "sim_time": 34.945999999996744,
+    "rtt_samples": 8143,
+    "rtt_ms_p50": 0.9198000007017981,
+    "rtt_ms_p99": 1.1820999989140546,
+    "rtt_ms_max": 57.432199999311706
+  },
+  "interruption_watchdogs": [
+    {
+      "watchdog": "hold",
+      "age_ms": 99.30489999896963,
+      "already_holding": true
+    }
+  ],
+  "photos": [
+    {
+      "request": {
+        "op": "render",
+        "camera": "top",
+        "w": 640,
+        "h": 480
+      },
+      "elapsed_s": 0.053656721000152174,
+      "reply": {
+        "id": 2,
+        "w": 640,
+        "h": 480,
+        "fovy": 48.0,
+        "cam_pos": [
+          0.4,
+          0.0,
+          1.65
+        ],
+        "cam_xmat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "jpeg_bytes": 19333
+      }
+    },
+    {
+      "request": {
+        "op": "render",
+        "camera": "wrist",
+        "w": 640,
+        "h": 480
+      },
+      "elapsed_s": 0.011758185999497073,
+      "reply": {
+        "id": 3,
+        "w": 640,
+        "h": 480,
+        "fovy": 90.0,
+        "cam_pos": [
+          0.4050438299278786,
+          -0.0004255350471191289,
+          0.4954827634836471
+        ],
+        "cam_xmat": [
+          -5.1184214117871996e-05,
+          -0.996078636721396,
+          0.08847229423620719,
+          0.9999978074024493,
+          0.00013422972804771893,
+          0.002089778139121992,
+          -0.002093458971861903,
+          0.08847220721572341,
+          0.9960764458513753
+        ],
+        "jpeg_bytes": 20767
+      }
+    }
+  ]
+}
+===== Initial failed GLFW startup =====
+<LOCAL_PATH>
+  warnings.warn(message, GLFWError)
+ERROR: could not create window
+
