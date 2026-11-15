@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RV 导航工作台</title>
+<link rel="stylesheet" href="/static/fonts/fonts.css">
+<link rel="stylesheet" href="/static/workbench.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div><div class="brand">RV<b>·</b>Nav 工作台</div><div class="sub">感知、路径规划和行驶控制都在 RV 板上 · 移动机器人在 MuJoCo 仿真里</div></div>
+  <div class="chips">
+    <span class="chip idle" id="online"><span class="dot"></span><span>主板连接中</span></span>
+    <span class="chip idle" id="rtChip"><span class="dot"></span><span>等待实时环</span></span>
+    <span class="chip">deepseek-flash</span>
+    <button class="btn ghost" id="liveBtn" hidden>回到实时</button>
+    <button class="btn ghost" id="theme">深色 / 浅色</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <section class="card task" id="taskCard">
+    <figure class="goal" id="goalBox" title="板上地图：障碍栅格、目标区、规划路线和机器人位置"><span class="cap">板上地图</span><span id="goalEmpty" hidden></span><img id="goalImg" alt="" hidden><canvas id="navMap" class="navmap"></canvas></figure>
+    <div>
+      <div class="seg" role="tablist">
+        <button role="tab" id="modeInstr" aria-selected="true">单步指令</button>
+        <button role="tab" id="modeGoal" aria-selected="false">按图叠放</button>
+      </div>
+      <input class="instr-input" id="instr" aria-label="任务" value="去红色区域，路上不要经过黄色区域" maxlength="300">
+      <div class="picker" id="goalPicker" hidden>
+        <select id="scenario" aria-label="验收场景"><option value="">自由指令</option></select>
+        <select id="preset" aria-label="目标图片"></select>
+        <button class="btn ghost" id="randomGoal">随机目标</button>
+        <label class="btn ghost">上传图片<input type="file" id="upload" accept="image/jpeg,image/png" hidden></label>
+      </div>
+      <div class="parsed" id="parsed"></div>
+      <div class="stats">
+        <span><b id="sStep">0</b>步</span><span><b id="sTime">0.0</b>秒</span><span><b id="sCalls">0</b>次模型调用</span><span><b id="sTok">0</b>token</span><span><b id="sRe">0</b>次重新规划</span>
+      </div>
+    </div>
+    <div class="ctl">
+      <div class="row"><input id="seed" type="number" min="0" value="15000" aria-label="seed"><button class="btn primary" id="start" style="flex:1" disabled>等待智能体</button></div>
+      <button class="btn stop" id="stop" disabled>停止并回位</button>
+      <button class="btn" id="replayBtn">回放已完成的任务 ▾</button>
+      <div class="notice" id="notice" role="status"></div>
+    </div>
+    <div class="runs-list" id="runsList" hidden></div>
+  </section>
+
+  <section class="stage">
+    <div class="card">
+      <div class="main">
+        <img id="mainImg" alt="主视角">
+        <canvas class="overlay" id="overlay" width="640" height="480"></canvas>
+        <span class="tag" id="mainTag">CHASE · 车后</span>
+        <span class="live" id="liveTag"><i></i><span>实时 · 仿真端推流</span></span>
+        <label class="ovl" id="ovlToggle" hidden><input type="checkbox" id="ovl" checked>板上检测框</label>
+        <div class="caption"><div class="k" id="capK">待命</div><div class="t" id="capT">—</div><div class="call" id="capC"></div></div>
+        <div class="prog"><span id="prog"></span></div>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+    <div class="col">
+      <div class="card now" aria-live="polite">
+        <div class="kicker" id="kicker" style="color:var(--muted)">智能体 · 待命</div>
+        <h3 id="nowT">输入任务后开始</h3>
+        <blockquote id="quote">智能体先读懂指令和场地，列出计划；板子负责规划路线和驾驶，途中每走一段重新定位，遇到障碍会停下来，由智能体决定怎么办。</blockquote>
+        <ol class="plan" id="plan"></ol>
+      </div>
+      <div class="card">
+        <div class="head">智能体活动<span class="mono" style="font-weight:600">agent.log</span><span class="r">感知 · 思考 · 计划 · 调用 · 结果 · 主板</span></div>
+        <div class="feed" id="feed"></div>
+      </div>
+    </div>
+    <div class="card board-card">
+      <div class="head">主板<span class="r" id="boardHead">芯来 UX900 ×2</span></div>
+      <div class="board">
+        <div class="cpu"><div class="l"><b>CPU0</b><span>智能体 · 感知</span></div><canvas id="c0"></canvas><div class="v" id="v0">—</div></div>
+        <div class="cpu"><div class="l"><b>CPU1</b><span>导航演示不使用实时环</span></div><canvas id="c1"></canvas><div class="v" id="v1">—</div></div>
+        <div class="cpu"><div class="l"><b>实时环</b><span>每包处理峰值 · 1 ms 线</span></div><canvas id="c2"></canvas><div class="v" id="v2">—</div></div>
+        <div class="rt">
+          <div id="rtMeanBox"><b id="rtMean">—</b><span>处理均值 ms</span></div>
+          <div id="rtMaxBox"><b id="rtMax">—</b><span>处理峰值 ms（本次运行）</span></div>
+          <div id="rtGapBox"><b id="rtGap">—</b><span>到包间隔峰值 ms</span></div>
+          <div id="rtLossBox"><b id="rtLoss">—</b><span>丢包</span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:4px"><span>内存</span><span id="mem">—</span></div>
+          <div class="bar"><span id="memBar" style="width:0"></span></div>
+        </div>
+        <dl class="kv">
+          <dt>eth0</dt><dd id="net">—</dd>
+          <dt>中断</dt><dd id="irq">—</dd>
+          <dt>温度</dt><dd id="temp">—</dd>
+          <dt>内核</dt><dd id="kernel">—</dd>
+          <dt>进程</dt><dd id="procs" class="procs">—</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+  <nav class="chapters" id="chapters" hidden aria-label="回放步骤"></nav>
+  <p class="foot">仅用于仿真。视角画面由电脑上的仿真端直接推流给浏览器（127.0.0.1:8091）；RV 板负责智能体、俯视感知、A* 路径规划、里程计与行驶控制和这页的数据。</p>
+</main>
+<script>window.RV_CONFIG={nav:true,cams:["chase","top","front","side"],main:"chase",mjpeg:"http://127.0.0.1:8091",labels:{chase:"CHASE · 车后",top:"TOP · 俯视",front:"FRONT · 正面",side:"SIDE · 侧面"}};</script>
+<script src="/static/workbench.js"></script>
+</body>
+</html>
