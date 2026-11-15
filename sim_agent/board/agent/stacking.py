@@ -137,6 +137,11 @@ def run_goal(root,request,sim,rt,skills,model,emit):
                 if target==holding:raise ValueError('不能叠在自己身上')
                 if not baseline:on_top(scene,target)
                 obj=find(scene,target);x,y=obj['xy'];z=obj['z_est']+LEVEL
+                # Aim at the mean xy of the whole tower, not its top cube: aiming at the top lets release errors add up
+                # until a 3-high tower topples (report 015, G1-3 / G2-1); the base alone is partly hidden and noisy.
+                tower=next((t for t in scene['towers'] if short(target) in t),None)
+                if tower and not baseline:
+                    pts=[find(scene,c+'_cube')['xy'] for c in tower];x=sum(p[0] for p in pts)/len(pts);y=sum(p[1] for p in pts)/len(pts)
                 if 'level_hint' in args:z=.02+LEVEL*args['level_hint']
                 surface='on:'+target
             elif action=='place_on_table':
