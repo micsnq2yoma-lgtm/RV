@@ -13,6 +13,7 @@
 | 011 | 仿真卡顿排查、Panda运动学与抓放 | S3 | failed（功能指标达标，两次板级失联阻止十分钟验收） | [任务](tasks/011-panda-kinematics-pick-place.md) | [报告](reports/011-panda-kinematics-pick-place.md) | [草稿 PR #8](https://github.com/micsnq2yoma-lgtm/RV/pull/8) |
 | 012 | 整板失联隔离与取证 | S3 收尾 | failed（实验完成，准备阶段失联根因未明） | [任务](tasks/012-board-hang-isolation.md) | [报告](reports/012-board-hang-isolation.md) | [草稿 PR #9](https://github.com/micsnq2yoma-lgtm/RV/pull/9) |
 | 014 | DeepSeek闭环、多视角面板与资源监控 | S4/S5 | blocked | [任务](tasks/014-agent-dashboard.md) | [报告](reports/014-agent-dashboard.md)：用户暂停；T1 5/5、T2 4/5、T3 两次失联，余 3 次未执行；RT 超标 | [草稿 PR #10](https://github.com/micsnq2yoma-lgtm/RV/pull/10) |
+| 015 | 工作台v2、按图叠放、性能结构 | S4/S5 | blocked（维护者停止剩余批次） | [任务](tasks/015-workbench-v2-goal-stacking.md) | [报告](reports/015-workbench-v2-goal-stacking.md)：功能完成；G1 v2 3/3、G2 v3 2/2；G3/G4/基线/T3 未完成；10 次整板失联 | 见 PR |
 
 001 当前阻塞：串口和只读板级采集已完成，但卡根目录实际为 rpmsg 文件副本，不符合目标新版前置条件；U-Boot 全程与网络验证尚未完成。未写卡或推进任务 002。
 
