@@ -5,3 +5,6 @@
 2026-11-08 ~23:10 (local) board hang #5: formal trial G1-1r (seed 15151), started 23:09:32, ~1 min in. Deploy had finished ~23:06 (single-tar upload before eMMC mount). Not investigated.
 2026-11-08 ~23:24 (local) board hang #6: during redeploy demo9 (sim restart with normal window), after single-tar upload and rt_ctl build, while dashboard/worker were starting; no task running. Not investigated.
 2026-11-15 ~09:25-09:28 (local) board hang #7: navigation demo smoke-N1 (seed 16101), during the first navigate_to (~12 s into driving, 20 Hz TCP drive/odom + top renders). eMMC Ubuntu mounted. Run directory lost (archiver was not running after PC restart). Not investigated.
+2026-11-15 ~18:48-18:50 (local) board hang #8: during redeploy panda4 (after upload + rt_ctl build, dashboard starting), no task running. Not investigated.
+2026-11-15 ~19:02 (local) board hang #9: formal trial G2-v3-1 (seed 15241) shortly after start (~10 min after bring-up). Not investigated.
+2026-11-15 ~21:00 (local) board hang #10: formal trial G2-v3-3 about 40 s in (bring-up ~20:45). Not investigated.
