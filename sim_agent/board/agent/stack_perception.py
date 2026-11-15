@@ -49,7 +49,9 @@ class StackPerception:
         groups=[]
         for color,obj in objects.items():
             if obj['xy'] is None:continue
-            group=next((g for g in groups if np.linalg.norm(np.asarray(objects[g[0]]['xy'])-obj['xy'])<.045),None)
+            # Same tower only if nearly coaxial AND at a different measured level: two 4 cm cubes side by side are
+            # ~4.4 cm apart and, seen from the front camera, the farther one looks "higher" (report 015, G1-3).
+            group=next((g for g in groups if all(np.linalg.norm(np.asarray(objects[c]['xy'])-obj['xy'])<.03 and objects[c]['level']!=obj['level'] for c in g)),None)
             if group is None:groups.append([color])
             else:group.append(color)
         towers=[];loose=[]
