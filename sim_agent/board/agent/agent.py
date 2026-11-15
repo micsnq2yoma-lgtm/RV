@@ -23,16 +23,44 @@ class Model:
         self.key=path.read_text().strip()
         if not self.key:raise RuntimeError('API key file empty')
         self.http=urllib.request.build_opener(urllib.request.ProxyHandler({'https':'http://127.0.0.1:7897'}))
-    def call(self,messages):
-        body={'model':'deepseek-flash','messages':list(messages),'tools':TOOLS,'tool_choice':'required','temperature':0,'max_tokens':600,'thinking':{'type':'disabled'}}
+    def call(self,messages,tools=None,tool_choice='required',thinking=False):
+        body={'model':'deepseek-flash','messages':list(messages),'tools':tools or TOOLS,'tool_choice':tool_choice,'temperature':0,'max_tokens':600,'thinking':{'type':'disabled'},'stream':True,'stream_options':{'include_usage':True}}
+        if thinking:
+            # Report 015: thinking mode rejects tool_choice='required' with HTTP 400, so it only runs with 'auto'.
+            body.update(thinking={'type':'enabled'},tool_choice='auto',max_tokens=4000)
+            body.pop('temperature',None)
         self.last_body=body
         for attempt in range(3):
             try:
                 req=urllib.request.Request('https://api.deepseek.com/chat/completions',data=json.dumps(body).encode(),headers={'Content-Type':'application/json','Authorization':'Bearer '+self.key})
-                with self.http.open(req,timeout=45) as response:result=json.load(response)
+                message={'role':'assistant','content':''};calls={};usage={}
+                with self.http.open(req,timeout=90 if thinking else 45) as response:
+                    complete=False
+                    for line in response:
+                        if not line.startswith(b'data:'):continue
+                        data=line[5:].strip()
+                        if data==b'[DONE]':complete=True;break
+                        chunk=json.loads(data)
+                        if chunk.get('usage'):usage=chunk['usage']
+                        for choice in chunk.get('choices',[]):
+                            delta=choice.get('delta',{})
+                            for field in ('content','reasoning_content'):
+                                if delta.get(field):
+                                    message[field]=message.get(field,'')+delta[field]
+                                    if getattr(self,'emit',None):self.emit({'type':'think_delta','text':delta[field],'channel':field})
+                            for part in delta.get('tool_calls',[]):
+                                call=calls.setdefault(part['index'],{'id':'','type':'function','function':{'name':'','arguments':''}})
+                                if part.get('id'):call['id']=part['id']
+                                for field in ('name','arguments'):call['function'][field]+=part.get('function',{}).get(field,'')
+                    if not complete:raise ValueError('incomplete model stream')
+                message['tool_calls']=[calls[k] for k in sorted(calls)]
+                result={'choices':[{'message':message}],'usage':usage}
+                if getattr(self,'emit',None):self.emit({'type':'think_end','text':message.get('reasoning_content','')+message['content'],'tokens':usage})
                 return result,body,attempt
             except (OSError,ValueError) as exc:
-                if attempt==2:raise RuntimeError('api_error: '+type(exc).__name__) from None
+                if attempt==2:
+                    detail=exc.read(300).decode('utf-8','replace') if isinstance(exc,urllib.error.HTTPError) else ''
+                    raise RuntimeError('api_error: '+type(exc).__name__+(' '+detail if detail else '')) from None
                 time.sleep(1+attempt)
 
 def validate_call(call):
@@ -52,11 +80,22 @@ def tray_slot(x,occupied,reserved):
     if slot is None:raise ValueError('tray has no free slot')
     return x+slot
 
-def run(directory):
+def run(directory,context=None,emit=None):
     os.sched_setaffinity(0,{0});root=Path(directory);request=json.loads((root/'request.json').read_text())
-    sim=LocalSim();rt=RTClient();skills=Skills(sim,rt);vision=Perception(skills.table_z);holding=None;placements={}
+    if context is None:
+        sim=LocalSim();rt=RTClient();skills=Skills(sim,rt);model=Model()
+    else:sim,rt,skills,model=context
+    emit=emit or (lambda event:None);model.emit=emit
+    if request.get('kind') in ('goal_stack','baseline'):
+        from stacking import run_goal
+        try:return run_goal(root,request,sim,rt,skills,model,emit)
+        finally:
+            if context is None:rt.close()
+    from skills import Stopped
+    skills.stop_check=lambda:(root/'stop').exists()
+    vision=Perception(skills.table_z);holding=None;placements={}
     messages=[{'role':'system','content':Path(__file__).with_name('prompts').joinpath('system.txt').read_text()}, {'role':'user','content':request['task']}]
-    model=Model();started=time.monotonic();started_utc=time.time();tokens=0;last=None;status='limit';steps=0
+    started=time.monotonic();started_utc=time.time();tokens=0;last=None;status='limit';steps=0
     def state(**fields):atomic(root/'status.json',dict(status='running',step=steps,holding=holding,seconds=time.monotonic()-started,started_utc=started_utc,tokens=tokens,**fields))
     def record(row):
         row['images']={}
@@ -71,6 +110,7 @@ def run(directory):
         for steps in range(1,13):
             if (root/'stop').exists():status='stopped';break
             image=sim.call('render',camera='top',w=640,h=480);scene=vision.observe(image,holding)
+            emit({'type':'observe','scene':scene,'detections':[]})
             messages.append({'role':'user','content':json.dumps({'scene':scene,'previous_result':last},ensure_ascii=False)})
             state(action='调用 DeepSeek')
             began=time.monotonic()
@@ -80,11 +120,12 @@ def run(directory):
                 raise
             message=response['choices'][0]['message'];calls=message.get('tool_calls',[]);usage=response.get('usage',{});tokens+=usage.get('total_tokens',0)
             row={'step':steps,'scene':scene,'request':body,'response':message,'usage':usage,'api_seconds':time.monotonic()-began,'retries':retries}
-            messages.append({k:v for k,v in message.items() if k in ('role','content','tool_calls')})
+            messages.append({k:v for k,v in message.items() if k in ('role','content','reasoning_content','tool_calls')})
             last={'ok':False};action='invalid';args={}
             try:
                 if len(calls)!=1:raise ValueError('exactly one tool call required')
                 action,args=validate_call(calls[0]);state(action=action+' '+json.dumps(args,ensure_ascii=False))
+                emit({'type':'step_start','index':steps,'tool':action,'args':args,'expected_s':8})
                 if (root/'stop').exists():
                     status='stopped';row.update(tool=action,arguments=args,result={'ok':False,'error':'stopped before execution'},seconds=time.monotonic()-began);record(row);break
                 objects={x['name']:x for x in scene['objects']}
@@ -111,15 +152,19 @@ def run(directory):
                 elif action=='home':skills.home();holding=None;last={'ok':True}
                 else:
                     last={'ok':True,**args};status='finished' if args['success'] else 'model_failed'
+            except Stopped:status='stopped';last={'ok':False,'error':'stopped by operator'}
             except (ValueError,RuntimeError,TimeoutError) as exc:last={'ok':False,'error':str(exc)}
             row.update(tool=action,arguments=args,result=last,seconds=time.monotonic()-began)
+            emit({'type':'step_result','ok':last.get('ok',False),'detail':last})
             record(row)
             for call in calls:messages.append({'role':'tool','tool_call_id':call['id'],'content':json.dumps(last,ensure_ascii=False)})
-            if status in ('finished','model_failed'):break
+            if status in ('finished','model_failed','stopped'):break
     except Exception as exc:status='api_error' if 'api_error' in str(exc) else 'error';last={'ok':False,'error':str(exc)}
     finally:
-        try:skills.home()
+        skills.stop_check=None
+        try:skills.home(0. if holding else .08)
         except Exception as exc:last={**(last or {}),'home_error':str(exc)}
-        rt.close();atomic(root/'status.json',{'status':status,'step':steps,'seconds':time.monotonic()-started,'started_utc':started_utc,'finished_utc':time.time(),'tokens':tokens,'result':last,'holding':None})
+        if context is None:rt.close()
+        atomic(root/'status.json',{'status':status,'step':steps,'seconds':time.monotonic()-started,'started_utc':started_utc,'finished_utc':time.time(),'tokens':tokens,'result':last,'holding':None})
 
 if __name__=='__main__':run(sys.argv[1])

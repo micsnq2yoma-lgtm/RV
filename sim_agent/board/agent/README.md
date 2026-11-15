@@ -54,24 +54,37 @@ sh /tmp/rv014/run_demo.sh
 随后在 Windows 仓库根目录运行，保持窗口可见：
 
 ```powershell
-.venv/010/py/Scripts/python.exe sim_agent/pc/sim_server.py --seconds 7200
-python sim_agent/pc/archive_dashboard.py --out .venv/014/demo-archive
+.venv/010/py/Scripts/python.exe sim_agent/pc/sim_server.py --mjpeg 127.0.0.1:8090 --seconds 7200
+python sim_agent/pc/archive_dashboard.py --out .venv/015/demo-archive --manifest --files-every 3
 ```
 
-浏览器打开 `http://192.168.50.2:8080`。输入任务和不同 seed，点击“开始任务”。
-页面显示四个视角、简短行动说明、工具结果、token和资源。帧率可选4/2/1 fps。
-停止会等待当前技能结束，再回到 home。一次只允许运行一个任务。
-API 每次最多重试2次，最多12轮，每轮只执行一个经过名称/参数校验的工具。
+`--mjpeg` 只监听 127.0.0.1，不需要改防火墙。浏览器和仿真都在这台电脑上，所以工作台直接从
+`http://127.0.0.1:8090/stream/<视角>.mjpg` 取画面，视频不经过板子。板子的面板只提供页面、字体、SSE 事件
+（`/events`）和数据接口。电脑端仿真重启后，板上面板也要重启（面板只接受一次仿真端的 TCP 连接）。
 
-任务示例：
+浏览器打开 `http://192.168.50.2:8080`（工作台 v2，设计见 `docs/WORKBENCH_DESIGN.md`）：
+
+- **单步指令**：输入中文任务和 seed，点“开始任务”。最多 12 轮，每轮一个工具（不开 thinking，`tool_choice=required`）。
+- **按图叠放**：选验收场景 G1–G4（会设定初始布局和对应的目标图片），或者选预设目标、随机生成目标、上传图片。
+  板子用 `goal_perception.py` 识别目标结构；置信度 < 0.8 时琥珀色提示，要人工点“确认识别结果”才能开始。
+  智能体在 `stacking.py` 里运行（thinking 开启、`tool_choice=auto`，最多 20 轮），工具和规则见 `prompts/goal_system.txt`。
+  目标图片不发给模型，只发板上识别出的文字结构。
+- **基线**：`POST /task` 时用 `{"kind":"baseline","scenario":"G2",...}`，按目标顺序直接 pick 加 stack_on，不做规划、不检查状态。
+- **停止并回位**：在当前这一段关节运动里就取消（`rt_ctl` cancel，机械臂停在当前插补点），然后回到 home；
+  手里有积木时保持夹住。
+- **回放**：“回放已完成的任务”列出 `/tmp/runs` 里的记录；选中后用每一步保存的四张图和事件日志重现，
+  点下方步骤点可以跳转，顶栏“回到实时”返回。
+- 顶栏“实时环正常”：最近 10 秒每秒的处理峰值（`rt_ctl` 新增的 `window_processing_us_max`）都 < 1 ms，且没有新增丢包。
+
+单步指令的任务示例：
 
 - 把红色方块放进左边的托盘
 - 把蓝色方块叠到绿色方块上面
 - 把三个方块都放进右边的托盘
 
-这三条完整文本有独立真值验收规则。任意其他文本可运行，但不会套用模糊的成功判定。
+这三条完整文本有独立真值验收规则。任意其他文本可运行，但不会套用模糊的成功判定。按图叠放的真值判定见
+`goal_store.evaluate_goal`（任务单 015 第 16 条），目标真值单独存为 `truth_goal.json`，worker 不读它。
 模型只获得颜色感知结果；`objects` 真值只在运行结束后的独立验收中使用。
-视觉遮挡时保留旧坐标并标记 `occluded`，不把旧位置当新观测。叠放高度采用已知方块尺寸和最近放置平面估计。
 
 ## 记录与退出
 

@@ -28,6 +28,8 @@ typedef struct { unsigned long long n,lost,interval_n; double proc_sum,proc_max,
 static stats total;
 /* Diagnostic lifetime maxima survive protocol-mandated per-peer resets. */
 static double lifetime_proc_max,lifetime_dt_max;
+/* Per-report window maximum (reset after each 1 s report), for the workbench chart and health chip. */
+static double window_proc_max;
 static pthread_mutex_t stats_lock=PTHREAD_MUTEX_INITIALIZER;
 static volatile sig_atomic_t finished;
 typedef struct __attribute__((packed)) { char magic[4]; uint32_t op; double goal[7], grip, duration; } segment_request;
@@ -85,11 +87,11 @@ static void *reporter(void *arg) {
     (void)arg;
     do {
         struct timespec pause={1,0}; nanosleep(&pause,NULL);
-        pthread_mutex_lock(&stats_lock); stats s=total; double lp=lifetime_proc_max,ld=lifetime_dt_max; pthread_mutex_unlock(&stats_lock);
+        pthread_mutex_lock(&stats_lock); stats s=total; double lp=lifetime_proc_max,ld=lifetime_dt_max,wp=window_proc_max; window_proc_max=0; pthread_mutex_unlock(&stats_lock);
         double mean=s.interval_n?s.dt_sum/s.interval_n:0;
-        printf("{\"rx\":%llu,\"lost\":%llu,\"processing_us_mean\":%.3f,\"processing_us_max\":%.3f,\"interval_ms_mean\":%.6f,\"interval_ms_max\":%.6f,\"interval_ms_std\":%.6f,\"lifetime_processing_us_max\":%.3f,\"lifetime_interval_ms_max\":%.6f}\n",
+        printf("{\"rx\":%llu,\"lost\":%llu,\"processing_us_mean\":%.3f,\"processing_us_max\":%.3f,\"interval_ms_mean\":%.6f,\"interval_ms_max\":%.6f,\"interval_ms_std\":%.6f,\"lifetime_processing_us_max\":%.3f,\"lifetime_interval_ms_max\":%.6f,\"window_processing_us_max\":%.3f}\n",
             s.n,s.lost,s.n?s.proc_sum/s.n*1e6:0,s.proc_max*1e6,mean*1e3,s.dt_max*1e3,
-            sqrt(fmax(0,s.interval_n?s.dt_sq/s.interval_n-mean*mean:0))*1e3,lp*1e6,ld*1e3);
+            sqrt(fmax(0,s.interval_n?s.dt_sq/s.interval_n-mean*mean:0))*1e3,lp*1e6,ld*1e3,wp*1e6);
         fflush(stdout);
     } while(!finished);
     return NULL;
@@ -169,7 +171,7 @@ int main(int argc,char **argv) {
         cmd.seq++;
         double processing=now_s()-received;
         pthread_mutex_lock(&stats_lock);
-        lifetime_proc_max=fmax(lifetime_proc_max,processing);lifetime_dt_max=fmax(lifetime_dt_max,lifetime_dt);
+        lifetime_proc_max=fmax(lifetime_proc_max,processing);window_proc_max=fmax(window_proc_max,processing);lifetime_dt_max=fmax(lifetime_dt_max,lifetime_dt);
         total.n++;total.lost+=lost;total.proc_sum+=processing;total.proc_max=fmax(total.proc_max,processing);
         if(dt>0){total.interval_n++;total.dt_sum+=dt;total.dt_sq+=dt*dt;total.dt_max=fmax(total.dt_max,dt);}
         pthread_mutex_unlock(&stats_lock);

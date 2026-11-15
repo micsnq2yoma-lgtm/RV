@@ -47,7 +47,7 @@ class Monitor:
         for p in Path('/sys/class/thermal').glob('thermal_zone*/temp'):
             try:temps.append(float(p.read_text())/1000)
             except (OSError,ValueError):pass
-        return {'utc':time.time(),'cpus':cores,'memory':{'total_mb':mem.get('MemTotal',0)/1024,'available_mb':mem.get('MemAvailable',0)/1024,'tmp_used_mb':(fs.f_blocks-fs.f_bfree)*fs.f_frsize/1048576},
+        return {'utc':time.time(),'kernel':os.uname().release,'cpus':cores,'memory':{'total_mb':mem.get('MemTotal',0)/1024,'available_mb':mem.get('MemAvailable',0)/1024,'tmp_used_mb':(fs.f_blocks-fs.f_bfree)*fs.f_frsize/1048576},
                 'loadavg':read('/proc/loadavg').split()[:3],'irq_per_s':{k:(v-prev['irq'].get(k,v))/dt for k,v in irqs.items()},
                 'eth0_bytes_per_s':{k:(v-prev['net'].get(k,v))/dt for k,v in network.items()},'processes':procs,'rt':rt_stats(),'temperatures_c':temps}
 

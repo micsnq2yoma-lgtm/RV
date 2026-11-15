@@ -25,13 +25,14 @@ def read_snapshot(shared, lock, model):
     return values[:model.nq],values[model.nq:model.nq+model.nv],values[-1]
 
 
-def graphics_main(board_ip,headless,shared,lock,commands,replies,ready,stop):
+def graphics_main(board_ip,headless,shared,lock,commands,replies,ready,stop,mjpeg=None):
     # Only physics receives elevated process priority.
     print(json.dumps({'graphics_stage':'starting'}),flush=True)
     if os.environ.get('RV_DIAG_TRACE'):faulthandler.dump_traceback_later(20)
     set_windows_priority(0x20)
     from sim_server import Simulator,timing
     sim=Simulator(board_ip)
+    sim.mjpeg=mjpeg
     print(json.dumps({'graphics_stage':'model_ready'}),flush=True)
     sim.shared=(shared,lock);sim.remote_jobs=(commands,replies);sim.render_ready=ready
     viewer=None;worker=None

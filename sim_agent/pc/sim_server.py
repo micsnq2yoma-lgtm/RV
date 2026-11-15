@@ -16,7 +16,7 @@ import numpy as np
 from PIL import Image
 from protocol import STATE, command_values
 
-OBJECTS = ['red_cube', 'green_cube', 'blue_cube', 'left_tray', 'right_tray']
+OBJECTS = ['red_cube', 'green_cube', 'blue_cube', 'orange_cube', 'left_tray', 'right_tray']
 HOME = [0, 0, 0, -1.57079, 0, 1.57079, -0.7853]
 
 
@@ -92,7 +92,9 @@ class Simulator:
         self.q_min = self.q_max = self.data.qpos[self.qadr].copy()
         self.gripper_min = self.gripper_max = float(sum(self.data.qpos[self.fingers]))
 
-    def reset(self, seed):
+    def reset(self, seed,layout=None):
+        from layouts import towers,arrange
+        stacks=towers(layout) if layout is not None else None
         # Called only in the physics thread (initial reset precedes worker startup).
         mujoco.mj_resetData(self.model, self.data)
         self.data.qpos[self.qadr] = HOME
@@ -105,6 +107,11 @@ class Simulator:
             xy = [(.68, -.12), (.72, .23), (.68, .12)][i]
             jitter = rng.uniform(-.015, .015, 2) if seed is not None else np.zeros(2)
             self.data.qpos[adr:adr+7] = [*(np.array(xy)+jitter), .025, 1, 0, 0, 0]
+        if stacks is not None:
+            # Keep >=6 cm between a cube and the tray walls (|y|>=.212 near x=.5) so open fingers (8 cm) never touch them.
+            positions=np.array([[.60,-.13],[.71,-.05],[.59,.07],[.72,.17]])
+            rng.shuffle(positions);positions+=rng.uniform(-.01,.01,positions.shape)
+            arrange(self.model,self.data,stacks,positions)
         mujoco.mj_forward(self.model, self.data)
         self.last_rx = None
         self.holding = True
@@ -123,18 +130,24 @@ class Simulator:
         if op=='reset' and request.get('seed') is not None and (type(request['seed']) is not int or request['seed']<0):
             raise ValueError('seed must be a nonnegative integer or null')
         if op == 'hello':
-            return dict(sim='mujoco', version=mujoco.__version__, protocol='1.2', robot='panda', cameras=['top', 'front', 'side', 'wrist'], table_z=0.0)
+            return dict(sim='mujoco', version=mujoco.__version__, protocol='1.3', robot='panda', cameras=['top', 'front', 'side', 'wrist'], table_z=0.0)
         if op == 'ping':
             return {'t': time.time()}
         if op == 'kinematics':
             return export_kinematics(self.model)
+        if op=='goal_image':
+            from layouts import render_goal
+            return render_goal(self.model,renderer,request.get('goal'),request.get('style','front'))
+        if op=='reset' and request.get('layout') is not None:
+            from layouts import towers
+            towers(request['layout'])
         if op == 'reset' and self.remote_jobs is not None:
             commands,replies=self.remote_jobs
-            commands.put(request.get('seed'))
+            commands.put({'seed':request.get('seed'),'layout':request.get('layout')})
             return replies.get(timeout=10)
         if op == 'reset':
             done = queue.Queue(maxsize=1)
-            self.jobs.put((request.get('seed'), done), timeout=1)
+            self.jobs.put((request.get('seed'),request.get('layout'), done), timeout=1)
             return done.get(timeout=5)
         if self.shared is not None:
             from graphics_process import read_snapshot
@@ -201,28 +214,46 @@ class Simulator:
                 if self.render_ready is not None:
                     print(json.dumps({'graphics_stage':'renderer_ready'}),flush=True)
                     self.render_ready.set()
-                while not self.stop.is_set():
-                    try:
-                        with socket.create_connection((self.address[0], 15002), timeout=2) as conn:
-                            conn.settimeout(1)
-                            buffer = b''
-                            while not self.stop.is_set():
-                                try:
-                                    data = conn.recv(65536)
-                                except socket.timeout:
-                                    continue
-                                if not data:
-                                    break
-                                buffer += data
-                                if len(buffer) > 65536:
-                                    raise ValueError('request too large')
-                                while b'\n' in buffer:
-                                    line, buffer = buffer.split(b'\n', 1)
-                                    reply = self.request_reply(line, renderer, snapshot)
-                                    conn.sendall((json.dumps(reply)+'\n').encode())
-                    except (OSError, ValueError) as e:
-                        print(json.dumps({'tcp_error': type(e).__name__}), flush=True)
-                    self.stop.wait(2)
+                jobs=queue.Queue(maxsize=32)
+                def network():
+                    while not self.stop.is_set():
+                        try:
+                            with socket.create_connection((self.address[0], 15002), timeout=2) as conn:
+                                conn.settimeout(1)
+                                buffer = b''
+                                while not self.stop.is_set():
+                                    try:
+                                        data = conn.recv(65536)
+                                    except socket.timeout:
+                                        continue
+                                    if not data:
+                                        break
+                                    buffer += data
+                                    if len(buffer) > 65536:
+                                        raise ValueError('request too large')
+                                    while b'\n' in buffer:
+                                        line, buffer = buffer.split(b'\n', 1)
+                                        done=queue.Queue(maxsize=1)
+                                        jobs.put((line,done),timeout=2)
+                                        reply=done.get(timeout=15)
+                                        conn.sendall((json.dumps(reply)+'\n').encode())
+                        except (OSError, ValueError, queue.Empty, queue.Full) as e:
+                            print(json.dumps({'tcp_error': type(e).__name__}), flush=True)
+                        self.stop.wait(2)
+                stream=None
+                try:
+                    if getattr(self,'mjpeg',None):
+                        from mjpeg import Streams
+                        stream=Streams(self.mjpeg)
+                    connection=threading.Thread(target=network,daemon=True);connection.start()
+                    while not self.stop.is_set():
+                        try:
+                            line,done=jobs.get(timeout=.005 if stream else .1)
+                            done.put(self.request_reply(line,renderer,snapshot))
+                        except queue.Empty:pass
+                        if stream:stream.pump(self,renderer,snapshot)
+                finally:
+                    if stream:stream.close()
         except Exception as e:
             print(json.dumps({'render_worker_failed': str(e)}), flush=True)
 
@@ -283,7 +314,7 @@ class Simulator:
                         values[self.model.nq:-1]=self.data.qvel;values[-1]=self.data.time
                     finally:snapshot_lock.release()
                 publish()
-                graphics=context.Process(target=graphics_main,args=(self.address[0],headless,shared,snapshot_lock,commands,replies,ready,graphics_stop))
+                graphics=context.Process(target=graphics_main,args=(self.address[0],headless,shared,snapshot_lock,commands,replies,ready,graphics_stop,getattr(self,'mjpeg',None)))
                 graphics.start()
                 if not ready.wait(60) or not graphics.is_alive():raise RuntimeError('graphics initialization failed')
                 if __import__('os').name=='nt':
@@ -338,11 +369,11 @@ class Simulator:
                     with self.lock:
                         if isolated:
                             try:
-                                seed=commands.get_nowait();self.reset(seed);publish();replies.put({'ok':True})
+                                params=commands.get_nowait();self.reset(**params);publish();replies.put({'ok':True})
                             except queue.Empty:pass
                         while not self.jobs.empty():
-                            seed, done = self.jobs.get_nowait()
-                            self.reset(seed)
+                            seed, layout, done = self.jobs.get_nowait()
+                            self.reset(seed,layout)
                             done.put({'ok': True})
                         for _ in range(256):
                             try:
@@ -463,7 +494,12 @@ if __name__ == '__main__':
     parser.add_argument('--stop-on-stdin',action='store_true',help='supervisor EOF or STOP requests a clean shutdown')
     parser.add_argument('--in-process',action='store_true',help='diagnostic comparison only')
     parser.add_argument('--seconds', type=float, default=600)
+    parser.add_argument('--mjpeg',help='loopback stream listener, e.g. 127.0.0.1:8090')
     args = parser.parse_args()
     sim=Simulator(args.board_ip)
+    if args.mjpeg:
+        host,port=args.mjpeg.rsplit(':',1)
+        if host!='127.0.0.1' or not 1<=int(port)<=65535:parser.error('--mjpeg requires 127.0.0.1:<port>')
+    sim.mjpeg=args.mjpeg
     sim.stop_on_stdin=args.stop_on_stdin
     sim.run(args.seconds,args.headless,not args.in_process)

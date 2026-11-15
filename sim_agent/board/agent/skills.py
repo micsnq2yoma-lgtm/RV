@@ -5,14 +5,25 @@ import numpy as np
 from kin import Kinematics, HOME, down
 
 
+class Stopped(RuntimeError):
+    """The operator pressed stop; the current motion was cancelled in place."""
+
+
 class Skills:
     def __init__(self, sim, rt):
         self.sim,self.rt=sim,rt
         self.kin=Kinematics(sim.call('kinematics'))
         self.table_z=sim.call('hello')['table_z']
         self.yaw=0.
+        self.stop_check=None
+
+    def _stopping(self):
+        if self.stop_check is not None and self.stop_check():
+            self.rt.cancel()
+            raise Stopped('stopped by operator')
 
     def joints(self, q, grip=None, minimum=.5, settle=.25):
+        self._stopping()
         state=self.rt.call()
         q=np.asarray(q,dtype=float)
         if q.shape!=(7,) or not np.all(np.isfinite(q)):raise ValueError('invalid q')
@@ -21,15 +32,15 @@ class Skills:
         response=self.rt.segment(q,grip,duration)
         deadline=time.monotonic()+duration+5
         while time.monotonic()<deadline:
-            time.sleep(.05);state=self.rt.call()
+            time.sleep(.05);self._stopping();state=self.rt.call()
             if state['generation']!=response['generation']:raise RuntimeError('trajectory superseded or reset')
             if not state['active']:
                 time.sleep(settle)
                 return self.rt.call()
         raise TimeoutError('trajectory completion timeout')
 
-    def home(self):
-        return self.joints(HOME,.08)
+    def home(self, grip=.08):
+        return self.joints(HOME,grip)
 
     def gripper(self, opened):
         return self.joints(self.rt.call()['q_des'],.08 if opened else 0.,minimum=.8)

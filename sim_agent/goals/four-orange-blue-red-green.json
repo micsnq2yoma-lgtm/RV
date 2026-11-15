@@ -1,0 +1,13 @@
+{
+  "name": "four-orange-blue-red-green",
+  "goal": {
+    "towers": [
+      [
+        "orange",
+        "blue",
+        "red",
+        "green"
+      ]
+    ]
+  }
+}
