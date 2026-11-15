@@ -36,11 +36,17 @@ class Robot:
         are grasped by the rim wall on the +y side, others at the centre."""
         c=np.asarray(obj['center'],float);top=obj['top_z']
         if grasp is None:
-            grasp=c.copy();grasp[2]=max(top-.02,c[2])
+            # Grasp at most 2 cm, and at most half the height, below the top: flat objects (cream cheese, butter) must
+            # not drive the fingers into the table.
+            grasp=c.copy();grasp[2]=top-min(.02,.5*obj['height'])
             if max(obj['size_xy'])>.07:grasp[1]+=max(obj['size_xy'])/2-.012;grasp[2]=top-.015
         self.gripper(False,6)
         if not self.move_to(grasp+[0,0,.12]):return {'ok':False,'error':'could not reach above the object'}
-        if not self.move_to(grasp,tol=.008):return {'ok':False,'error':'could not reach the grasp point'}
+        if not self.move_to(grasp,tol=.008):
+            # Low, flat objects: the fingertips touch the table before the hand reaches the target height.
+            # Aligned in xy and within 3 cm in z is close enough to close the gripper.
+            e=np.asarray(grasp)-self.eef
+            if np.linalg.norm(e[:2])>.01 or abs(e[2])>.03:return {'ok':False,'error':'could not reach the grasp point'}
         self.gripper(True,14)
         held_z=self.eef[2]
         self.move_to(self.eef+[0,0,.15])
@@ -48,10 +54,19 @@ class Robot:
         # Remember where the object sits relative to the fingers, so place_on can put the object (not the hand) on target.
         self.held={'offset_xy':(grasp[:2]-c[:2]).tolist(),'eef_above_bottom':float(held_z-(top-obj['height']))} if held else None
         return {'ok':held,'gripper_width_m':round(self.width,4),**({} if held else {'error':'gripper closed on nothing'})}
-    def place_on(self,target):
+    def place_on(self,target,inside=False):
+        """inside=True for containers (basket, bowl): release with the object's bottom 4 cm above the container floor,
+        below the rim/handle, instead of above the container's top (a basket's top is its handle)."""
         h=getattr(self,'held',None) or {'offset_xy':[0,0],'eef_above_bottom':.03}
-        p=np.asarray(target['center'],float).copy();p[:2]+=h['offset_xy'];p[2]=target['top_z']+h['eef_above_bottom']+.015
-        if not self.move_to(p+[0,0,.08]):return {'ok':False,'error':'could not reach above the target'}
+        p=np.asarray(target['center'],float).copy();p[:2]+=h['offset_xy']
+        floor=target['top_z']-target['height']
+        p[2]=(floor+.04 if inside else target['top_z']+.015)+h['eef_above_bottom']
+        above=max(p[2],target['top_z']+h['eef_above_bottom'])+.08
+        if not self.move_to(np.r_[p[:2],above]):return {'ok':False,'error':'could not reach above the target'}
         self.move_to(p,tol=.008)
         self.gripper(False,10);self.move_to(self.eef+[0,0,.12]);self.held=None
         return {'ok':True,'released_at':[round(float(v),3) for v in p]}
+
+    def put_back(self,descend=.13):
+        """Lower the hand back to where it grasped and open (used when the wrong object was lifted)."""
+        self.move_to(self.eef-[0,0,descend],tol=.01);self.gripper(False,10);self.move_to(self.eef+[0,0,.12]);self.held=None

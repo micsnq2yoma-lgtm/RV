@@ -9,7 +9,7 @@ import base64,io
 import numpy as np
 from PIL import Image
 
-SKIP=('robot','mount','gripper','floor','wall','table','main_table')
+SKIP=('robot','mount','gripper','floor','wall','table','main_table','panda','ontheground')
 
 def _png(b64):return np.asarray(Image.open(io.BytesIO(base64.b64decode(b64))))
 

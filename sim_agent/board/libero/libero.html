@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RV LIBERO 工作台</title>
+<link rel="stylesheet" href="/static/fonts/fonts.css">
+<link rel="stylesheet" href="/static/workbench.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div><div class="brand">RV<b>·</b>LIBERO 工作台</div><div class="sub">LIBERO 基准任务 · 物体定位、末端闭环控制和 DeepSeek 智能体都在 RV 板上 · 仿真在电脑上（robosuite/MuJoCo）</div></div>
+  <div class="chips">
+    <span class="chip idle" id="online"><span class="dot"></span><span>主板连接中</span></span>
+    <span class="chip idle" id="rtChip"><span class="dot"></span><span>等待实时环</span></span>
+    <span class="chip">deepseek-flash</span>
+    <button class="btn ghost" id="liveBtn" hidden>回到实时</button>
+    <button class="btn ghost" id="theme">深色 / 浅色</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <section class="card task" id="taskCard">
+    <figure class="goal empty" id="goalBox" title="LIBERO 任务"><span class="cap">LIBERO</span><span id="goalEmpty">选择左侧任务<br>英文指令为 LIBERO 原文</span><img id="goalImg" alt="" hidden></figure>
+    <div>
+      <div class="seg" role="tablist">
+        <button role="tab" id="modeInstr" aria-selected="true">单步指令</button>
+        <button role="tab" id="modeGoal" aria-selected="false">按图叠放</button>
+      </div>
+      <input class="instr-input" id="instr" aria-label="任务" value="pick up the black bowl between the plate and the ramekin and place it on the plate" maxlength="300" readonly>
+      <div class="picker" id="goalPicker" hidden>
+        <select id="scenario" aria-label="验收场景"><option value="">选择 LIBERO 任务</option></select>
+        <select id="preset" aria-label="目标图片"></select>
+        <button class="btn ghost" id="randomGoal">随机目标</button>
+        <label class="btn ghost">上传图片<input type="file" id="upload" accept="image/jpeg,image/png" hidden></label>
+      </div>
+      <div class="parsed" id="parsed"></div>
+      <div class="stats">
+        <span><b id="sStep">0</b>步</span><span><b id="sTime">0.0</b>秒</span><span><b id="sCalls">0</b>次模型调用</span><span><b id="sTok">0</b>token</span><span><b id="sRe">0</b>次重新规划</span>
+      </div>
+    </div>
+    <div class="ctl">
+      <div class="row"><input id="seed" type="number" min="0" value="15000" aria-label="seed"><button class="btn primary" id="start" style="flex:1" disabled>等待智能体</button></div>
+      <button class="btn stop" id="stop" disabled>停止并回位</button>
+      <button class="btn" id="replayBtn">回放已完成的任务 ▾</button>
+      <div class="notice" id="notice" role="status"></div>
+    </div>
+    <div class="runs-list" id="runsList" hidden></div>
+  </section>
+
+  <section class="stage">
+    <div class="card">
+      <div class="main">
+        <img id="mainImg" alt="主视角">
+        <canvas class="overlay" id="overlay" width="640" height="480"></canvas>
+        <span class="tag" id="mainTag">AGENTVIEW · 第三人称</span>
+        <span class="live" id="liveTag"><i></i><span>实时 · 仿真端推流</span></span>
+        <label class="ovl" id="ovlToggle" hidden><input type="checkbox" id="ovl" checked>板上检测框</label>
+        <div class="caption"><div class="k" id="capK">待命</div><div class="t" id="capT">—</div><div class="call" id="capC"></div></div>
+        <div class="prog"><span id="prog"></span></div>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+    <div class="col">
+      <div class="card now" aria-live="polite">
+        <div class="kicker" id="kicker" style="color:var(--muted)">智能体 · 待命</div>
+        <h3 id="nowT">输入任务后开始</h3>
+        <blockquote id="quote">智能体读懂 LIBERO 的英文指令，根据板上从深度图算出的物体位置决定抓哪个、放到哪里；抓放动作由板子闭环控制，每步之后重新观察确认。</blockquote>
+        <ol class="plan" id="plan"></ol>
+      </div>
+      <div class="card">
+        <div class="head">智能体活动<span class="mono" style="font-weight:600">agent.log</span><span class="r">感知 · 思考 · 计划 · 调用 · 结果 · 主板</span></div>
+        <div class="feed" id="feed"></div>
+      </div>
+    </div>
+    <div class="card board-card">
+      <div class="head">主板<span class="r" id="boardHead">芯来 UX900 ×2</span></div>
+      <div class="board">
+        <div class="cpu"><div class="l"><b>CPU0</b><span>智能体 · 感知</span></div><canvas id="c0"></canvas><div class="v" id="v0">—</div></div>
+        <div class="cpu"><div class="l"><b>CPU1</b><span>本演示不使用实时环</span></div><canvas id="c1"></canvas><div class="v" id="v1">—</div></div>
+        <div class="cpu"><div class="l"><b>实时环</b><span>每包处理峰值 · 1 ms 线</span></div><canvas id="c2"></canvas><div class="v" id="v2">—</div></div>
+        <div class="rt">
+          <div id="rtMeanBox"><b id="rtMean">—</b><span>处理均值 ms</span></div>
+          <div id="rtMaxBox"><b id="rtMax">—</b><span>处理峰值 ms（本次运行）</span></div>
+          <div id="rtGapBox"><b id="rtGap">—</b><span>到包间隔峰值 ms</span></div>
+          <div id="rtLossBox"><b id="rtLoss">—</b><span>丢包</span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:4px"><span>内存</span><span id="mem">—</span></div>
+          <div class="bar"><span id="memBar" style="width:0"></span></div>
+        </div>
+        <dl class="kv">
+          <dt>eth0</dt><dd id="net">—</dd>
+          <dt>中断</dt><dd id="irq">—</dd>
+          <dt>温度</dt><dd id="temp">—</dd>
+          <dt>内核</dt><dd id="kernel">—</dd>
+          <dt>进程</dt><dd id="procs" class="procs">—</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+  <nav class="chapters" id="chapters" hidden aria-label="回放步骤"></nav>
+  <p class="foot">仅用于仿真。场景和任务来自 LIBERO 基准（robosuite / MuJoCo），画面由电脑上的仿真端直接推流（127.0.0.1:8093）；物体分割来自仿真器，代替真实系统中的视觉检测模型，物体位置由 RV 板从深度图计算。</p>
+</main>
+<script>window.RV_CONFIG={nav:true,cams:["agentview","robot0_eye_in_hand"],main:"agentview",mjpeg:"http://127.0.0.1:8093",labels:{agentview:"AGENTVIEW · 第三人称",robot0_eye_in_hand:"WRIST · 腕部"}};</script>
+<script src="/static/workbench.js"></script>
+</body>
+</html>

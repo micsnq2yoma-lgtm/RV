@@ -17,26 +17,29 @@ def tools(names):
                  {'goal_summary':{'type':'string'},'steps':{'type':'array','items':{'type':'string'},'minItems':1,'maxItems':8},'reason':{'type':'string'}},['goal_summary','steps','reason']),
             tool('pick','从上方抓起一个物体（手里必须是空的）。宽于 7 cm 的物体会抓边沿。',{'object':{'type':'string','enum':names},'plan_step':{'type':'integer','minimum':1,'maximum':8}},['object','plan_step']),
             tool('place_on','把手里的物体放到目标物体上（物体中心对准目标中心）。',{'target':{'type':'string','enum':names},'plan_step':{'type':'integer','minimum':1,'maximum':8}},['target','plan_step']),
+            tool('place_in','把手里的物体放进容器里（篮子、碗、托盘等），从容器口下方松手。',{'container':{'type':'string','enum':names},'plan_step':{'type':'integer','minimum':1,'maximum':8}},['container','plan_step']),
             tool('finish','结束任务。',{'success':{'type':'boolean'},'summary':{'type':'string'}},['success','summary'])]
 
 SYSTEM='''你控制仿真厨房里的一台 Franka Panda 机械臂，用 LIBERO 基准的任务来测试你。任务是一句英文指令。
 你看不到图像。每一轮你会收到场景里各物体的名称和位置（单位 m，x 朝前远离机器人基座，y 朝左，z 朝上），由视觉模块从深度图算出，误差约 1 cm；以及手里拿着什么。
 指令里的物体描述（比如 “the black bowl between the plate and the ramekin”）要根据坐标判断对应哪一个物体名。
-工具：update_plan（第一轮必须先调用）、pick(object)、place_on(target)、finish(success, summary)。每轮最多一个动作；动作后会重新观察。
-放好以后看新的位置确认物体确实到了目标上（xy 接近、高度高于目标顶面），再 finish。用简体中文思考和回答，简洁。'''
+工具：update_plan（第一轮必须先调用）、pick(object)、place_on(target)、place_in(container)、finish(success, summary)。每轮最多一个动作；动作后会重新观察。
+“put X on Y” 用 place_on；“put X in the basket/bowl” 用 place_in。
+确认：place_on 之后物体 xy 接近目标、底部在目标顶面附近；place_in 之后物体 xy 在容器范围内、中心低于容器顶面（篮子顶面是提手，物体应明显低于它）。确认后再 finish。用简体中文思考和回答，简洁。'''
 
 def describe(sc,holding):
     objs={n:{'center':v['center'],'top_z':v['top_z'],'size_xy':v['size_xy']} for n,v in sc.items()}
     return {'objects':objs,'holding':holding}
 
-def run(link,model,emit,task,max_rounds=10):
+def run(link,model,emit,task,max_rounds=10,stop=lambda:False):
     hello=link.call('reset',suite=task['suite'],task=task['task'],init=task.get('init',0))
     emit({'type':'task_start','kind':'libero','text':hello['instruction'],'scenario':'%s/%d'%(task['suite'],task['task']),'seed':task.get('init',0)})
-    model.emit=emit;robot=Robot(link);holding=None;last=None;plan_v=0;calls=0;tokens=0;status='limit';t0=time.monotonic()
+    model.emit=emit;robot=Robot(link,stop);holding=None;last=None;plan_v=0;calls=0;tokens=0;status='limit';t0=time.monotonic()
     obs=link.call('observe');robot.sync(obs);sc=P.scene(obs);names=sorted(sc)
     T=tools(names)
     messages=[{'role':'system','content':SYSTEM},{'role':'user','content':'指令：'+hello['instruction']}]
     for rnd in range(1,max_rounds+1):
+        if stop():status='stopped';break
         emit({'type':'observe','summary':'；'.join('%s (%.2f,%.2f,%.2f)'%(n,*v['center']) for n,v in sc.items()),'scene':describe(sc,holding)})
         messages.append({'role':'user','content':'第%d轮观察（请用中文思考）：'%rnd+json.dumps({**describe(sc,holding),'previous_result':last},ensure_ascii=False)})
         acted=False
@@ -60,11 +63,19 @@ def run(link,model,emit,task,max_rounds=10):
                     if name=='pick':
                         if holding:raise ValueError('手里已经有 '+holding)
                         if args['object'] not in sc:raise ValueError('看不到 '+args['object'])
-                        last=robot.pick(sc[args['object']]);holding=args['object'] if last['ok'] else None
-                    elif name=='place_on':
+                        z0=sc[args['object']]['center'][2];last=robot.pick(sc[args['object']]);holding=args['object'] if last['ok'] else None
+                        if last['ok']:
+                            # Verify that the intended object, not a neighbour, went up.
+                            o2=link.call('observe');robot.sync(o2);s2=P.scene(o2)
+                            moved=[n for n,v in s2.items() if n in sc and v['center'][2]-sc[n]['center'][2]>.05]
+                            if args['object'] not in moved or (args['object'] in s2 and s2[args['object']]['center'][2]-z0<.05):
+                                robot.put_back();holding=None
+                                last={'ok':False,'error':'目标物体没有被抬起，抬起来的是：%s；已放回原处'%('、'.join(moved) or '无')}
+                    elif name in ('place_on','place_in'):
+                        tgt=args.get('target',args.get('container'))
                         if not holding:raise ValueError('手里是空的')
-                        if args['target'] not in sc:raise ValueError('看不到 '+args['target'])
-                        last=robot.place_on(sc[args['target']]);holding=None
+                        if tgt not in sc:raise ValueError('看不到 '+str(tgt))
+                        last=robot.place_on(sc[tgt],inside=name=='place_in');holding=None
                     elif name=='finish':
                         last={'ok':True,**args};status='finished' if args.get('success') else 'model_failed'
                     else:raise ValueError('unknown tool '+name)

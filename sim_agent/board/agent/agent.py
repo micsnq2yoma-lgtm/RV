@@ -53,7 +53,8 @@ class Model:
                                 if part.get('id'):call['id']=part['id']
                                 for field in ('name','arguments'):call['function'][field]+=part.get('function',{}).get(field,'')
                     if not complete:raise ValueError('incomplete model stream')
-                message['tool_calls']=[calls[k] for k in sorted(calls)]
+                # An empty tool_calls array is rejected by the API when the message is sent back (HTTP 400): omit it.
+                if calls:message['tool_calls']=[calls[k] for k in sorted(calls)]
                 result={'choices':[{'message':message}],'usage':usage}
                 if getattr(self,'emit',None):self.emit({'type':'think_end','text':message.get('reasoning_content','')+message['content'],'tokens':usage})
                 return result,body,attempt
